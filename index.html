@@ -158,6 +158,10 @@ table.t tr.hl td{background:#fffaf0}
 pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:auto;font-size:12px;font-family:"JetBrains Mono",monospace;white-space:pre;margin:8px 0 0}
 .adj.ent{border-left:5px solid #1d7a46}.adj.sai{border-left:5px solid var(--red)}
 .ptabs button{font-size:14px;padding:9px 14px}
+.etgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.etq{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:12px;text-align:center;break-inside:avoid}
+.etq b{display:block;font-size:14px}.etq svg{max-width:100%;height:auto;margin-top:6px}
+@media print{ .top,#modebar,.noprint,.toast{display:none!important} body,html{background:#fff} main{padding:0} .etgrid{grid-template-columns:repeat(3,1fr);gap:6px} .etq{border:1px dashed #bbb;border-radius:0;page-break-inside:avoid} }
 .results{margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}
 .res{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
 .res:active{background:var(--teal-soft)}
@@ -223,7 +227,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '2.0.2';
+const APP_VERSION = '2.1.0';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -1115,6 +1119,7 @@ V.gestor_refresh = ()=>{
       <div class="card click" id="gConf"><h3>⚖ Confronto 1ª × 2ª</h3><div class="sub">Lista de divergências entre as duas contagens cegas</div></div>
       <div class="card click" id="gRes"><h3>📋 Resultado e relatório</h3><div class="sub">Contagem final × estoque, entradas e saídas, PDF e Excel</div></div>
       <div class="card click" id="gLanc"><h3>🧾 Todos os lançamentos</h3><div class="sub">Conferir e corrigir lançamentos de cada contador</div></div>
+      <div class="card click" id="gBar"><h3>🏷 Códigos de barras</h3><div class="sub">Ver e imprimir os códigos dos produtos — para testes e etiquetas</div></div>
       <div class="card click" id="gImp"><h3>⬆ Planilha de estoque</h3><div class="sub">${S.produtos.length?fmt(base)+' produtos importados':'Importar Excel ou CSV'}</div></div>
     </div>
     ${!fin?`<div class="row"><span class="spacer"></span><button class="btn red" id="gFin">Encerrar inventário e iniciar novo</button></div>`:`<div class="warnbox">Inventário encerrado em ${dtBR(i.finalizadoEm)}${i.finalizadoPor?' por '+esc(i.finalizadoPor):''}. <button class="btn ghost" id="gReab">Reabrir</button> <button class="btn ghost" id="gNovo2">Iniciar novo inventário</button></div>`}`;
@@ -1123,7 +1128,7 @@ V.gestor_refresh = ()=>{
   b.querySelectorAll('[data-close]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.close; if(await ask(`Encerrar a ${RNOME[r]}? Os contadores desta rodada não poderão mais lançar.`,{ok:'Encerrar'})) setRodada(r,'fechada'); });
   b.querySelectorAll('[data-open]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.open; if(await ask(`Reabrir a ${RNOME[r]}?`,{ok:'Reabrir'})) setRodada(r,'aberta'); });
   const l3=$('#lib3'); if(l3) l3.onclick=liberar3;
-  $('#gConf').onclick=()=>go('confronto'); $('#gRes').onclick=()=>go('resultado'); $('#gLanc').onclick=()=>go('lancamentos'); $('#gImp').onclick=()=>go('importar');
+  $('#gConf').onclick=()=>go('confronto'); $('#gRes').onclick=()=>go('resultado'); $('#gLanc').onclick=()=>go('lancamentos'); $('#gBar').onclick=()=>go('etiquetas'); $('#gImp').onclick=()=>go('importar');
   const i2=$('#gImp2'); if(i2) i2.onclick=()=>go('importar');
   const f=$('#gFin'); if(f) f.onclick=encerrarFluxo;
   const rb=$('#gReab'); if(rb) rb.onclick=async()=>{ if(await ask('Reabrir este inventário?')) Store.set('inventarios',i.id,{status:'contagem',finalizadoEm:null}); };
@@ -1147,6 +1152,37 @@ async function finalizar(){
   if(!await ask(msg,{ok:'Finalizar',danger:true,title:'Finalizar inventário'})) return;
   const RR={...R}; [1,2,3].forEach(r=>{ if(RR['r'+r]==='aberta') RR['r'+r]='fechada'; });
   await Store.set('inventarios',S.inv.id,{status:'finalizado',finalizadoEm:now(),rodadas:RR}); toast('Inventário finalizado'); go('resultado');
+}
+
+/* ---------- CÓDIGOS DE BARRAS DOS PRODUTOS (testes e etiquetas) ---------- */
+S.et={q:'',g:'',lim:120};
+async function carregaJsBarcode(){ if(window.JsBarcode) return true; try{ await loadScript('libs/jsbarcode.min.js'); }catch(e){ try{ await loadScript('https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js'); }catch(e2){} } return !!window.JsBarcode; }
+function formatoBarra(code){ const d=String(code||'').replace(/\s/g,''); if(/^\d{13}$/.test(d)&&gtinOk(d)) return 'EAN13'; if(/^\d{8}$/.test(d)&&gtinOk(d)) return 'EAN8'; if(/^\d{12}$/.test(d)&&gtinOk(d)) return 'UPC'; return 'CODE128'; }
+V.etiquetas = async ()=>{
+  header('Códigos de barras',S.inv.nome,{right:'<button class="ic" id="hPrint">🖨 Imprimir</button>'});
+  $('#hPrint').onclick=()=>window.print();
+  $('#app').innerHTML=`<div class="stack"><div class="card noprint"><div class="row">
+      <input class="in" id="etQ" placeholder="Filtrar por nome, código ou grupo" style="flex:1;min-width:200px" value="${esc(S.et.q)}">
+      <select class="in" id="etG" style="max-width:260px"><option value="">Todos os grupos</option>${grupos(S.produtos).map(x=>`<option ${S.et.g===x.g?'selected':''}>${esc(x.g)}</option>`).join('')}</select></div>
+      <div class="small muted" style="margin-top:8px">Aponte a câmera do celular para a tela do computador para testar a leitura. Produtos sem código de barras mostram o código interno em Code 128 (marcado como "interno").</div></div>
+    <div id="etL" class="etgrid"><div class="empty">Carregando…</div></div></div>`;
+  let t=null; $('#etQ').oninput=e=>{ clearTimeout(t); t=setTimeout(()=>{ S.et.q=e.target.value; S.et.lim=120; desenhaEt(); },150); };
+  $('#etG').onchange=e=>{ S.et.g=e.target.value; S.et.lim=120; desenhaEt(); };
+  if(!await carregaJsBarcode()){ $('#etL').innerHTML='<div class="warnbox">Não consegui carregar o gerador de códigos. Confira se a pasta libs foi enviada.</div>'; return; }
+  desenhaEt();
+};
+function desenhaEt(){
+  const L=$('#etL'); if(!L) return;
+  const w=norm(S.et.q).split(/\s+/).filter(Boolean);
+  const arr=S.produtos.filter(p=>(!S.et.g||(p.grupo||GSEM)===S.et.g)&&(!w.length||w.every(x=>(norm(p.descricao)+' '+norm(p.codigo)+' '+(p.ean||'')+' '+norm(p.grupo)).includes(x)))).sort(byGrupo);
+  L.innerHTML=arr.slice(0,S.et.lim).map((p,i)=>{ const ean=String(p.ean||'').split(/[;,\s]+/)[0]; const val=ean||String(p.codigo);
+    return `<div class="etq"><b>${esc(p.descricao)}</b><div class="small muted mono">${esc(p.codigo)} · ${esc(gLbl(p))}${ean?'':' · <span class="badge b-warn">interno</span>'}</div><svg id="bc${i}" data-v="${esc(val)}"></svg></div>`; }).join('')
+    + (arr.length>S.et.lim?`<button class="btn sec block noprint" id="etM" style="grid-column:1/-1">Mostrar mais (${arr.length-S.et.lim})</button>`:'')
+    || '<div class="empty">Nenhum produto.</div>';
+  L.querySelectorAll('svg[data-v]').forEach(svg=>{ const v=svg.dataset.v; const f=formatoBarra(v);
+    try{ JsBarcode(svg,f==='EAN13'||f==='EAN8'||f==='UPC'?v.replace(/\D/g,''):v,{format:f,width:2,height:70,fontSize:16,margin:8,background:'#ffffff'}); }
+    catch(e){ try{ JsBarcode(svg,v,{format:'CODE128',width:2,height:70,fontSize:16,margin:8}); }catch(e2){ svg.outerHTML='<div class="small muted">Código inválido</div>'; } } });
+  const m=$('#etM'); if(m) m.onclick=()=>{ S.et.lim+=200; desenhaEt(); };
 }
 
 /* ---------- CONFRONTO ---------- */

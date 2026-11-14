@@ -1,6 +1,6 @@
 /* Cultivve Inventário — service worker (funciona offline) */
-const CACHE = 'cvinv-v2.0.2';
-const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './libs/barcode-detector.js', './libs/zxing_reader.wasm'];
+const CACHE = 'cvinv-v2.1.0';
+const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './libs/barcode-detector.js', './libs/zxing_reader.wasm', './libs/jsbarcode.min.js'];
 const LIBS = [
   'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
