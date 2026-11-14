@@ -1,0 +1,10 @@
+rules_version = '2';
+// Regras para a fase de piloto: qualquer pessoa com o app configurado lê e grava.
+// Válidas até 01/06/2027. Antes de vender em escala, trocar por regras com login.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.time < timestamp.date(2027, 6, 1);
+    }
+  }
+}
