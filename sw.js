@@ -1,6 +1,6 @@
 /* Cultivve Inventário — service worker (funciona offline) */
-const CACHE = 'cvinv-v2.1.1';
-const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './libs/barcode-detector.js', './libs/zxing_reader.wasm', './libs/jsbarcode.min.js'];
+const CACHE = 'cvinv-v2.2.0';
+const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/apple-touch-icon.png'];
 const LIBS = [
   'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
@@ -11,9 +11,7 @@ const LIBS = [
   'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js'
 ];
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => {}))).then(() =>
-    Promise.all(LIBS.map(u => fetch(u, { mode: 'no-cors' }).then(r => c.put(u, r)).catch(() => {})))
-  )).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => {})))).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
@@ -32,8 +30,8 @@ self.addEventListener('fetch', e => {
       .catch(() => caches.match(req).then(r => r || caches.match('./index.html'))));
     return;
   }
-  e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(r => {
-    if (r.ok || r.type === 'opaque') { const cp = r.clone(); caches.open(CACHE).then(c => c.put(req, cp)); }
+  e.respondWith(caches.match(req).then(hit => (hit && !(req.mode === 'cors' && hit.type === 'opaque')) ? hit : fetch(req).then(r => {
+    if (r.ok || (r.type === 'opaque' && req.mode !== 'cors')) { const cp = r.clone(); caches.open(CACHE).then(c => c.put(req, cp)); }
     return r;
   })));
 });

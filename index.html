@@ -16,10 +16,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" defer></script>
-<script src="libs/barcode-detector.js" defer></script>
+<!-- conexão com o banco começa a baixar já, em paralelo com a página -->
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
+<link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js">
 <style>
 :root{
   --teal:#3AA094; --teal2:#00AE9C; --teal-soft:#e3f3f1; --navy:#172334; --ink:#000924;
@@ -162,6 +162,11 @@ pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:
 .etq{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:12px;text-align:center;break-inside:avoid}
 .etq b{display:block;font-size:14px}.etq svg{max-width:100%;height:auto;margin-top:6px}
 @media print{ .top,#modebar,.noprint,.toast{display:none!important} body,html{background:#fff} main{padding:0} .etgrid{grid-template-columns:repeat(3,1fr);gap:6px} .etq{border:1px dashed #bbb;border-radius:0;page-break-inside:avoid} }
+.inst{border:2px dashed var(--teal);background:#f4fbfa}
+.foot{user-select:none;-webkit-user-select:none}
+.splash{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--muted);text-align:center}
+.spin{width:38px;height:38px;border:4px solid var(--teal-soft);border-top-color:var(--teal);border-radius:50%;animation:gira .8s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
 .results{margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}
 .res{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
 .res:active{background:var(--teal-soft)}
@@ -201,7 +206,7 @@ textarea.in{width:100%;min-height:150px;border:1px solid var(--line);border-radi
 <body>
 <header class="top" id="top"></header>
 <div id="modebar"></div>
-<main id="app"><div class="empty">Carregando…</div></main>
+<main id="app"><div class="splash"><div class="spin"></div><div id="splashMsg">Abrindo o app…</div></div></main>
 
 <script>
 /* =====================================================================
@@ -227,7 +232,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '2.1.1';
+const APP_VERSION = '2.2.0';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -267,6 +272,15 @@ const eanKey = s => String(s||'').replace(/\D/g,'').replace(/^0+/,'');
 function toast(msg,err){ const t=document.createElement('div'); t.className='toast'+(err?' err':''); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2600); }
 let actx=null;
 function beep(ok=true){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); const o=actx.createOscillator(),g=actx.createGain(); o.frequency.value=ok?1100:300; o.connect(g); g.connect(actx.destination); g.gain.value=.08; o.start(); o.stop(actx.currentTime+(ok?.09:.25)); }catch(e){} try{navigator.vibrate&&navigator.vibrate(ok?40:[80,40,80])}catch(e){} }
+const LIBS_URL={xlsx:['https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'],pdf:['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js','https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js']};
+const libP={};
+/* bibliotecas pesadas (Excel e PDF) só são baixadas quando alguém usa — o app abre muito mais rápido */
+function lib(n){
+  if(n==='xlsx' && window.XLSX) return Promise.resolve();
+  if(n==='pdf' && window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API && window.jspdf.jsPDF.API.autoTable) return Promise.resolve();
+  return libP[n] || (libP[n]=(async()=>{ toast(n==='pdf'?'Preparando o gerador de PDF…':'Preparando o leitor de planilhas…'); for(const u of LIBS_URL[n]) await loadScript(u); })()
+    .catch(e=>{ delete libP[n]; toast('Sem internet para carregar o gerador. Tente de novo.',true); throw e; }));
+}
 function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>rej(new Error('Falha ao carregar '+src)); document.head.appendChild(s); }); }
 
 /* ---------------- modal ---------------- */
@@ -474,10 +488,10 @@ function render(){ modeBar(); (V[S.view]||V.empresas)(); }
 
 /* ---------- EMPRESAS ---------- */
 V.empresas = async ()=>{
-  header('Inventário cego','Escolha a empresa',{back:false,right:'<button class="ic" id="hCfg">⚙ Config.</button>'});
+  header('Inventário cego','Escolha a empresa',{back:false});
   const app=$('#app'); app.innerHTML='<div class="empty">Carregando empresas…</div>';
   const emps=(await Store.list('empresas')).sort((a,b)=>String(a.fantasia||a.razao).localeCompare(String(b.fantasia||b.razao),'pt-BR'));
-  app.innerHTML=`<div class="stack">
+  app.innerHTML=`<div class="stack">${cardInstalar()}
     <div class="row between"><h1>Qual empresa vai usar o sistema?</h1><button class="btn" id="nEmp">+ Nova empresa</button></div>
     ${emps.length?`<div class="grid">${emps.map(e=>`<div class="card click" data-id="${e.id}">
       <div class="row"><div class="round-dot" style="background:var(--navy)">${esc((e.fantasia||e.razao||'?').slice(0,1).toUpperCase())}</div>
@@ -839,8 +853,13 @@ function handleCode(code,src){
    ===================================================================== */
 const FORMATS=['ean_13','ean_8','upc_a','upc_e','code_128','code_39','itf'];
 let DET=null, DET_KIND='';
+let DET_LOG=[]; let ZX_ULTIMO='';
+(function(){ const o=console.error; console.error=function(...a){ try{ ZX_ULTIMO=String((a[0]&&a[0].message)||a[0]).slice(0,120); }catch(e){} return o.apply(console,a); }; })();
+function canvasTeste(){ const c=document.createElement('canvas'); c.width=c.height=32; const x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,32,32); return c; }
 async function getDetector(){
   if(DET) return DET;
+  DET_LOG=[];
+  // 1) leitor nativo do aparelho (Android/Chrome, macOS)
   try{
     if('BarcodeDetector' in window){
       const sup=await window.BarcodeDetector.getSupportedFormats();
@@ -848,17 +867,46 @@ async function getDetector(){
       if(f.includes('ean_13')){ DET=new window.BarcodeDetector({formats:f}); DET_KIND='nativo'; return DET; }
     }
   }catch(e){}
-  // 1º tenta o leitor que vai junto com o app (pasta libs); se não estiver no servidor, busca na internet (jsDelivr)
-  let local=!!window.BarcodeDetectionAPI;
-  if(!local){ try{ await loadScript('https://cdn.jsdelivr.net/npm/barcode-detector@3.2.3/dist/iife/ponyfill.js'); }catch(e){} }
+  // 2) ZXing em WebAssembly (rápido) — tenta a cópia da pasta libs e depois a internet
+  let jsLocal=!!window.BarcodeDetectionAPI;
+  if(!window.BarcodeDetectionAPI){ try{ await loadScript('libs/barcode-detector.js'); jsLocal=true; }catch(e){ DET_LOG.push('libs/barcode-detector.js não encontrado'); } }
+  if(!window.BarcodeDetectionAPI){ try{ await loadScript('https://cdn.jsdelivr.net/npm/barcode-detector@3.2.3/dist/iife/ponyfill.js'); }catch(e){ DET_LOG.push('sem internet para o leitor WASM'); } }
   const API=window.BarcodeDetectionAPI;
-  if(!API) throw new Error('Leitor não carregou (pasta libs ausente e sem internet)');
-  let wasmLocal=false;
-  try{ const r=await fetch(new URL('libs/zxing_reader.wasm',location.href).href,{method:'HEAD',cache:'no-store'}); wasmLocal=r.ok; }catch(e){}
-  if(wasmLocal){ try{ API.setZXingModuleOverrides({locateFile:(path,prefix)=>path.endsWith('.wasm')?new URL('libs/zxing_reader.wasm',location.href).href:prefix+path}); }catch(e){} }
-  else console.warn('libs/zxing_reader.wasm não encontrado no servidor — usando o da internet');
-  DET=new API.BarcodeDetector({formats:FORMATS}); DET_KIND='ZXing';
-  return DET;
+  if(API){
+    const fontes=[ jsLocal?['pasta libs',new URL('libs/zxing_reader.wasm',location.href).href]:null,
+      ['jsDelivr','https://fastly.jsdelivr.net/npm/zxing-wasm@3.1.6/dist/reader/zxing_reader.wasm'],
+      ['unpkg','https://unpkg.com/zxing-wasm@3.1.6/dist/reader/zxing_reader.wasm'] ].filter(Boolean);
+    for(const [nome,url] of fontes){
+      try{
+        try{ API.purgeZXingModule && API.purgeZXingModule(); }catch(e){}
+        API.setZXingModuleOverrides({locateFile:(path,prefix)=>path.endsWith('.wasm')?url:prefix+path});
+        const d=new API.BarcodeDetector({formats:FORMATS});
+        ZX_ULTIMO='';
+        await Promise.race([d.detect(canvasTeste()),new Promise((_,rej)=>setTimeout(()=>rej(new Error('tempo esgotado')),15000))]);
+        DET=d; DET_KIND='ZXing'; DET_LOG.push(nome+': OK'); return DET;
+      }catch(e){ DET_LOG.push(nome+': '+(ZX_ULTIMO||e.message||e)); }
+    }
+  }
+  // 3) ZXing em JavaScript puro (funciona em qualquer navegador, um pouco mais lento)
+  if(!window.ZXing){ try{ await loadScript('libs/zxing-js.min.js'); }catch(e){ try{ await loadScript('https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js'); }catch(e2){} } }
+  if(window.ZXing){ DET=detectorJS(); DET_KIND='ZXing JS'; DET_LOG.push('usando ZXing JavaScript'); return DET; }
+  throw new Error('Leitor não carregou. '+DET_LOG.join(' | '));
+}
+function detectorJS(){
+  const Z=window.ZXing, B=Z.BarcodeFormat;
+  const hints=new Map();
+  hints.set(Z.DecodeHintType.POSSIBLE_FORMATS,[B.EAN_13,B.EAN_8,B.UPC_A,B.UPC_E,B.CODE_128,B.CODE_39,B.ITF]);
+  hints.set(Z.DecodeHintType.TRY_HARDER,true);
+  const reader=new Z.MultiFormatReader(); reader.setHints(hints);
+  const FM={[B.EAN_13]:'ean_13',[B.EAN_8]:'ean_8',[B.UPC_A]:'upc_a',[B.UPC_E]:'upc_e',[B.CODE_128]:'code_128',[B.CODE_39]:'code_39',[B.ITF]:'itf'};
+  return { js:true, async detect(canvas){
+    try{
+      const bmp=new Z.BinaryBitmap(new Z.HybridBinarizer(new Z.HTMLCanvasElementLuminanceSource(canvas)));
+      const r=reader.decodeWithState(bmp);
+      const pts=(r.getResultPoints()||[]).map(p=>({x:p.getX(),y:p.getY()}));
+      return [{rawValue:r.getText(),format:FM[r.getBarcodeFormat()]||'unknown',cornerPoints:pts,boundingBox:null}];
+    }catch(e){ if(e instanceof Z.NotFoundException || e instanceof Z.ChecksumException || e instanceof Z.FormatException) return []; throw e; }
+  } };
 }
 let warmed=false;
 async function warmUp(d){ if(warmed) return; warmed=true; try{ const c=document.createElement('canvas'); c.width=c.height=16; await d.detect(c); }catch(e){} }
@@ -965,17 +1013,21 @@ async function scanLoop(v){
     const vw=v.videoWidth, vh=v.videoHeight, now=performance.now();
     // Estratégia: faixa central na maioria dos quadros (rápido); imagem inteira a cada 3 quadros
     // ou enquanto um código está sendo acompanhado (efeito "vai buscar o código").
-    const full = now<Cam.lockUntil || frame%3===0;
+    const full = !(DET&&DET.js) && (now<Cam.lockUntil || frame%3===0);
     let sx,sy,sw,sh,max;
     if(full){ sx=0; sy=0; sw=vw; sh=vh; max=1600; }
-    else { sw=Math.round(vw*0.92); sh=Math.round(Math.min(vh*0.45, vw*0.62)); sx=(vw-sw)/2; sy=(vh-sh)/2; max=1100; }
+    else { sw=Math.round(vw*0.92); sh=Math.round(Math.min(vh*0.45, vw*0.62)); sx=(vw-sw)/2; sy=(vh-sh)/2; max=(DET&&DET.js)?900:1100; }
     const sc=Math.min(1,max/Math.max(sw,sh));
     const cw=Math.round(sw*sc), ch=Math.round(sh*sc);
     if(Cam.cv.width!==cw) Cam.cv.width=cw; if(Cam.cv.height!==ch) Cam.cv.height=ch;
     Cam.cx.drawImage(v,sx,sy,sw,sh,0,0,cw,ch);
     const t0=performance.now();
     let res=[];
-    try{ res=await DET.detect(Cam.cv); Cam.stat.frames++; }catch(e){ Cam.stat.err++; Cam.stat.lastErr=String(e&&e.message||e).slice(0,60); continue; }
+    try{ res=await DET.detect(Cam.cv); Cam.stat.frames++; Cam.stat.seq=0; }
+    catch(e){ Cam.stat.err++; Cam.stat.seq=(Cam.stat.seq||0)+1; Cam.stat.lastErr=(ZX_ULTIMO||String(e&&e.message||e)).slice(0,80);
+      if(Cam.stat.seq>=8 && !(DET&&DET.js)){ DET_LOG.push('WASM falhou na câmera: '+Cam.stat.lastErr); DET=null; DET_KIND='';
+        try{ if(!window.ZXing){ try{ await loadScript('libs/zxing-js.min.js'); }catch(x){ await loadScript('https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js'); } } DET=detectorJS(); DET_KIND='ZXing JS'; Cam.stat.err=0; Cam.stat.seq=0; Cam.teste='trocado para ZXing JS'; }catch(x){ toast('Leitor indisponível neste aparelho',true); } }
+      continue; }
     const ms=performance.now()-t0; Cam.ms=Cam.ms?Cam.ms*.85+ms*.15:ms;
     let hit=null;
     for(const b of res){
@@ -1040,7 +1092,7 @@ function diag(soTexto){
   const agora=performance.now();
   if(!soTexto){ Cam.stat.fps=Cam.stat.frames/((agora-Cam.stat.t)/1000); Cam.stat.frames=0; Cam.stat.t=agora; }
   const fps=Cam.stat.fps||0;
-  inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(Cam.stat.ultimo)}</b><br>`:''}${DET_KIND} · ${v?v.videoWidth+'×'+v.videoHeight:''} · ${fps.toFixed(0)} leituras/s · ${Math.round(Cam.ms||0)} ms · ${esc(Cam.teste)}${Cam.stat.err?` · <span style="color:#ff9b9b">erros: ${Cam.stat.err} (${esc(Cam.stat.lastErr)})</span>`:''}`;
+  inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(Cam.stat.ultimo)}</b><br>`:''}${DET_KIND} · ${v?v.videoWidth+'×'+v.videoHeight:''} · ${fps.toFixed(0)} leituras/s · ${Math.round(Cam.ms||0)} ms · ${esc(Cam.teste)}${Cam.stat.err?` · <span style="color:#ff9b9b">erros: ${Cam.stat.err} (${esc(Cam.stat.lastErr)})</span>`:''}${(Cam.stat.err||/FALHOU|ERRO/.test(Cam.teste))&&DET_LOG.length?`<br><span style="color:#ffd27a">${esc(DET_LOG.join(' | '))}</span>`:''}`;
 }
 /* autoteste: desenha um EAN-13 conhecido e verifica se o leitor deste aparelho decodifica */
 async function autoteste(){
@@ -1221,7 +1273,7 @@ V.confronto_refresh = ()=>{
       ${d.map(r=>`<tr><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td><td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(r.c[1])}</td><td class="n">${fmtS(r3(r.c[1]-r.c[0]))}</td><td class="n">${r.n[2]?fmt(r.c[2]):'<span class="badge b-warn">pendente</span>'}</td></tr>`).join('')}
     </tbody></table></div>`:`<div class="card empty"><h2>Nenhuma divergência</h2><p>A 1ª e a 2ª contagens bateram em todos os itens contados.</p></div>`}`;
   const l=$('#cLib'); if(l) l.onclick=liberar3;
-  $('#cXls').onclick=()=>{ const aoa=[['Código','Descrição','Grupo','Subgrupo','Unidade','1ª contagem','2ª contagem','Diferença','3ª contagem']].concat(d.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.unidade,r.c[0],r.c[1],r3(r.c[1]-r.c[0]),r.n[2]?r.c[2]:''])); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Divergências 1x2'); XLSX.writeFile(wb,fileBase()+'_divergencias_1x2.xlsx'); };
+  $('#cXls').onclick=async()=>{ await lib('xlsx'); const aoa=[['Código','Descrição','Grupo','Subgrupo','Unidade','1ª contagem','2ª contagem','Diferença','3ª contagem']].concat(d.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.unidade,r.c[0],r.c[1],r3(r.c[1]-r.c[0]),r.n[2]?r.c[2]:''])); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Divergências 1x2'); XLSX.writeFile(wb,fileBase()+'_divergencias_1x2.xlsx'); };
 };
 
 /* ---------- LANÇAMENTOS (gestor) ---------- */
@@ -1257,10 +1309,11 @@ V.importar = ()=>{
       <div class="row" style="margin-top:10px"><button class="btn ghost" id="bMod">⬇ Baixar planilha modelo</button></div>
     </div>
     <div id="map"></div></div>`;
-  $('#bMod').onclick=()=>{ const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet([['Código','Descrição','Código de barras','Estoque','Unidade','Grupo','Subgrupo','Custo'],['1001','ARROZ TIPO 1 5KG','7896006711155',48,'UN','MERCEARIA','GRÃOS',24.9],['1002','FEIJAO CARIOCA 1KG','7896006741114',120,'UN','MERCEARIA','GRÃOS',7.49],['2001','TOMATE','',35.5,'KG','HORTIFRUTI','LEGUMES',6.9]]),'Estoque'); XLSX.writeFile(wb,'modelo_estoque_inventario.xlsx'); };
+  $('#bMod').onclick=async()=>{ await lib('xlsx'); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet([['Código','Descrição','Código de barras','Estoque','Unidade','Grupo','Subgrupo','Custo'],['1001','ARROZ TIPO 1 5KG','7896006711155',48,'UN','MERCEARIA','GRÃOS',24.9],['1002','FEIJAO CARIOCA 1KG','7896006741114',120,'UN','MERCEARIA','GRÃOS',7.49],['2001','TOMATE','',35.5,'KG','HORTIFRUTI','LEGUMES',6.9]]),'Estoque'); XLSX.writeFile(wb,'modelo_estoque_inventario.xlsx'); };
   $('#fx').onchange=async e=>{
     const f=e.target.files[0]; if(!f) return;
     try{
+      await lib('xlsx');
       const wb=XLSX.read(await f.arrayBuffer(),{type:'array'});
       const ws=wb.Sheets[wb.SheetNames[0]];
       const rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''}).filter(r=>r.some(c=>String(c).trim()!==''));
@@ -1366,7 +1419,7 @@ function resumoGrupos(rows){
 }
 function fileBase(){ return ('inventario_'+(S.empresa.fantasia||'empresa')+'_'+(S.inv.data||'')).replace(/[^\w\-]+/g,'_'); }
 function sheet(aoa,widths){ const ws=XLSX.utils.aoa_to_sheet(aoa); ws['!cols']=(widths||aoa[0].map((h,i)=>({wch:i===1?44:Math.max(12,String(h).length+2)}))); return ws; }
-function gerarExcel(){
+async function gerarExcel(){ await lib('xlsx');
   const {rows,t}=calc(); const e=S.empresa,i=S.inv;
   const wb=XLSX.utils.book_new();
   const head=['Código','Descrição','Grupo','Subgrupo','Cód. barras','Unidade','1ª contagem','2ª contagem','3ª contagem','Contagem final','Estoque sistema','Diferença','Ação'];
@@ -1382,7 +1435,7 @@ function gerarExcel(){
 }
 function svgToPng(svg,w,h){ return new Promise(res=>{ const img=new Image(); img.onload=()=>{ const c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h); res(c.toDataURL('image/png')); }; img.onerror=()=>res(null); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg); }); }
 async function gerarPDF(){
-  if(!window.jspdf) return toast('Gerador de PDF carregando, tente novamente',true);
+  await lib('pdf');
   const {rows,t}=calc(); const e=S.empresa,i=S.inv;
   const {jsPDF}=window.jspdf; const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
   const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
@@ -1593,7 +1646,7 @@ function drawInicio(){
   const tk=tarefas(atual,me);
   const cardTarefa=t=>`<div class="card task"><div class="row"><div class="round-dot big">${t.r}ª</div><div style="flex:1"><div class="l small muted">${t.escalado?'SUA CONTAGEM AGORA':'CONTAGEM LIBERADA'}</div><h2>${RNOME[t.r]}${t.r===3?' (desempate)':''}</h2><div class="sub">${esc(atual.nome)}${t.r===3?' · só os itens divergentes':''}</div></div></div>
       <button class="btn block big" style="margin-top:12px" data-go="${t.r}">Começar a contar</button></div>`;
-  let html='';
+  let html=cardInstalar();
   if(!me){
     html+=`<div class="card" style="text-align:center;padding:26px 18px"><h1>Olá! 👋</h1><p class="muted">Entre com o seu PIN para ver o que você precisa contar.</p>
       <button class="btn block big" id="bLogin">Entrar com meu PIN</button></div>`;
@@ -1773,7 +1826,7 @@ P.hist = async ()=>{
     ${I.map(i=>{ const k=i.kpis||{}; return `<tr><td>${dBR(i.data)}</td><td><b>${esc(i.nome)}</b></td><td class="n">${fmt(k.itens)}</td><td class="n">${fmt(k.acuracia)}%</td><td class="n pos">${fmt(k.nEnt)} (${fmt(k.qEnt)})</td><td class="n neg">${fmt(k.nSai)} (${fmt(k.qSai)})</td><td class="n">${brl(k.vEnt)}</td><td class="n">${brl(k.vSai)}</td><td>${esc(i.finalizadoPor||'')}</td><td><button class="btn ghost" data-open="${i.id}">Abrir</button></td></tr>`; }).join('')||'<tr><td colspan="10" class="empty">Nenhum inventário encerrado</td></tr>'}
     </tbody></table></div><div class="small muted">Entre parênteses: quantidade total ajustada.</div>`;
   b.querySelectorAll('[data-open]').forEach(x=>x.onclick=()=>{ const inv=I.find(i=>i.id===x.dataset.open); openInv(inv,'resultado'); setTimeout(useGestorLanc,0); });
-  $('#hX').onclick=()=>{ const aoa=[['Data','Inventário','Itens','Acurácia %','Itens entrada','Qtd entrada','Valor entrada','Itens saída','Qtd saída','Valor saída','Divergências 1x2','Encerrado por']].concat(I.map(i=>{const k=i.kpis||{};return [dBR(i.data),i.nome,k.itens,k.acuracia,k.nEnt,k.qEnt,k.vEnt,k.nSai,k.qSai,k.vSai,k.div12,i.finalizadoPor||'']}));
+  $('#hX').onclick=async()=>{ await lib('xlsx'); const aoa=[['Data','Inventário','Itens','Acurácia %','Itens entrada','Qtd entrada','Valor entrada','Itens saída','Qtd saída','Valor saída','Divergências 1x2','Encerrado por']].concat(I.map(i=>{const k=i.kpis||{};return [dBR(i.data),i.nome,k.itens,k.acuracia,k.nEnt,k.qEnt,k.vEnt,k.nSai,k.qSai,k.vSai,k.div12,i.finalizadoPor||'']}));
     const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Histórico'); XLSX.writeFile(wb,'historico_inventarios_'+(S.empresa.fantasia||'').replace(/\W+/g,'_')+'.xlsx'); };
 };
 P.prod = async ()=>{
@@ -1819,7 +1872,7 @@ P.geral = async ()=>{
     </tbody></table></div>`;
   $('#gG').onchange=e=>{ S.pG=e.target.value; P.geral(); };
   $('#gSo').onchange=e=>{ S.pSo=e.target.checked; P.geral(); };
-  $('#gX').onclick=()=>{ const all=h.invs; const aoa=[['Código','Descrição','Grupo','Subgrupo',...all.map(i=>dBR(i.data)+' '+i.nome),'Inventários com ajuste','Saídas acumuladas','Entradas acumuladas']];
+  $('#gX').onclick=async()=>{ await lib('xlsx'); const all=h.invs; const aoa=[['Código','Descrição','Grupo','Subgrupo',...all.map(i=>dBR(i.data)+' '+i.nome),'Inventários com ajuste','Saídas acumuladas','Entradas acumuladas']];
     [...cat.values()].forEach(p=>{ const vals=all.map(i=>{ const x=i.itens.find(z=>z.k===p.k); return x?(x.x==null?'pend.':x.x):''; }); const nums=vals.filter(v=>typeof v==='number');
       aoa.push([p.k,p.d,p.g,p.s,...vals,nums.filter(v=>!eq(v,0)).length,r3(nums.reduce((s,v)=>s+(v<0?-v:0),0)),r3(nums.reduce((s,v)=>s+(v>0?v:0),0))]); });
     const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Produtos x inventários'); XLSX.writeFile(wb,'relatorio_geral_produtos.xlsx'); };
@@ -1841,9 +1894,8 @@ P.emp = async ()=>{
   const e=S.empresa; const b=$('#pBody');
   b.innerHTML=`<div class="card"><div class="row between"><h2>${esc(e.fantasia||e.razao)}</h2><button class="btn" id="eEd">Editar dados</button></div>
     <div class="fgrid small" style="margin-top:10px">${[['Razão social',e.razao],['CNPJ',e.cnpj],['Endereço',[e.endereco,e.bairro].filter(Boolean).join(' · ')],['Cidade/UF',[e.cidade,e.uf].filter(Boolean).join('/')],['CEP',e.cep],['Telefone',e.telefone],['E-mail',e.email],['Responsável',e.responsavel]].map(([l,v])=>`<div><div class="muted">${l}</div><b>${esc(v||'—')}</b></div>`).join('')}</div></div>
-    <div class="card"><h3>Este aparelho</h3><div class="small muted">Conexão: ${Store.mode==='cloud'?'nuvem (vários aparelhos)':'modo local'} · <a href="#" id="eCfg">Configurações de conexão</a></div></div>`;
+    <div class="card"><h3>Este aparelho</h3><div class="small muted">Conexão: ${Store.mode==='cloud'?'nuvem (vários aparelhos)':'modo local'}</div></div>`;
   $('#eEd').onclick=()=>empresaForm(e,async()=>{ S.empresa=await Store.get('empresas',e.id)||S.empresa; V.painel(); });
-  $('#eCfg').onclick=ev=>{ ev.preventDefault(); go('config'); };
 };
 
 /* =====================================================================
@@ -1892,7 +1944,7 @@ function baixar(nome,conteudo,mime){
   setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },2000);
 }
 function nomeArquivoErp(cfg,tipo,ext){ const n=(cfg.arquivo||'ajuste_{tipo}_{data}').replace('{tipo}',tipo==='E'?'entrada':'saida').replace('{data}',dataFmt(S.inv.data,'aaaammdd')).replace('{empresa}',S.empresa.fantasia||'').replace(/[^\w\-]+/g,'_'); return n+'.'+ext; }
-function exportarErp(tipo){
+async function exportarErp(tipo){ if(erpCfg().formato==='xlsx') await lib('xlsx');
   const {t}=calc(); const lista=tipo==='E'?t.ent:t.sai; const cfg=erpCfg();
   if(!lista.length) return toast(`Não há itens para ${tipo==='E'?'entrada':'saída'}`,true);
   if(cfg.formato==='xlsx'){
@@ -1907,7 +1959,7 @@ function exportarErp(tipo){
   toast(`Arquivo de ${tipo==='E'?'entrada':'saída'} gerado (${lista.length} itens)`);
 }
 async function pdfMov(tipo){
-  if(!window.jspdf) return toast('Gerador de PDF carregando, tente novamente',true);
+  await lib('pdf');
   const {t}=calc(); const lista=tipo==='E'?t.ent:t.sai; const e=S.empresa,i=S.inv;
   const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:'mm',format:'a4'});
   const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
@@ -1985,7 +2037,7 @@ P.erp = async ()=>{
 
 /* ---------- CONFIGURAÇÕES ---------- */
 V.config = ()=>{
-  header('Configurações','Conexão entre aparelhos');
+  header('Suporte técnico','Uso exclusivo da Cultivve');
   const cfg=Store.cfg();
   const link = cfg ? location.origin+location.pathname+'#cfg='+btoa(unescape(encodeURIComponent(JSON.stringify(cfg)))) : '';
   $('#app').innerHTML=`<div class="stack">
@@ -2009,6 +2061,30 @@ function parseCfg(txt){
   return o.apiKey&&o.projectId?o:null;
 }
 
+/* ---------- acesso de suporte: 5 toques seguidos no rodapé ---------- */
+let toques=[];
+document.addEventListener('click',async e=>{
+  if(!e.target.closest || !e.target.closest('.foot')) return;
+  const t=Date.now(); toques=toques.filter(x=>t-x<3000); toques.push(t);
+  if(toques.length>=5){ toques=[]; if(await ask('Abrir a área de <b>suporte técnico</b> (conexão com o banco de dados)? Ela é para uso da Cultivve — alterar algo aqui pode desconectar este aparelho.',{ok:'Abrir',title:'Suporte técnico'})) go('config'); }
+});
+/* ---------- instalar o app ---------- */
+let promptInstalar=null;
+window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); promptInstalar=e; if(S.view==='inicio'||S.view==='empresas') render(); });
+function instalado(){ return window.navigator.standalone===true || matchMedia('(display-mode: standalone)').matches; }
+function cardInstalar(){
+  if(instalado() || LS.get('cvinv_inst_off')) return '';
+  const {ios}=camEnv(); const mobile=ios || /Android/i.test(navigator.userAgent);
+  if(!mobile && !promptInstalar) return '';
+  return `<div class="card inst"><div class="row"><div style="font-size:30px">📲</div><div style="flex:1;min-width:0"><h3>Instale o app na tela inicial</h3>
+    <div class="small muted">${promptInstalar?'Abre mais rápido, em tela cheia, e funciona sem internet.':ios?'No Safari, toque em <b>Compartilhar ⬆</b> e depois em <b>Adicionar à Tela de Início</b>.':'No Chrome, toque no menu <b>⋮</b> e depois em <b>Instalar app</b> (ou <b>Adicionar à tela inicial</b>).'}</div></div></div>
+    <div class="row" style="margin-top:10px">${promptInstalar?'<button class="btn" id="bInst">Instalar agora</button>':''}<button class="btn ghost" id="bInstX">Agora não</button></div></div>`;
+}
+document.addEventListener('click',async e=>{
+  if(e.target.id==='bInst' && promptInstalar){ promptInstalar.prompt(); try{ await promptInstalar.userChoice; }catch(x){} promptInstalar=null; render(); }
+  if(e.target.id==='bInstX'){ LS.set('cvinv_inst_off',true); const c=e.target.closest('.inst'); if(c) c.remove(); }
+});
+
 /* =====================================================================
    INÍCIO
    ===================================================================== */
@@ -2017,9 +2093,14 @@ function parseCfg(txt){
     try{ const c=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(5))))); if(c.apiKey&&c.projectId){ LS.set('cvinv_fbcfg',c); } }catch(e){ console.warn(e); }
     history.replaceState(null,'',location.pathname);
   }
+  const sm=t=>{ const el=$('#splashMsg'); if(el) el.textContent=t; };
+  const lento=setTimeout(()=>sm('Conectando ao servidor… (a primeira vez demora um pouco mais)'),2500);
+  if(Store.cfg()) sm('Conectando ao servidor…');
   await Store.init();
+  sm('Carregando seus dados…');
   const last=LS.get('cvinv_emp');
   if(last){ const e=await Store.get('empresas',last).catch(()=>null); if(e){ S.empresa=e; S.stack=['empresas']; S.view='inicio'; } }
+  clearTimeout(lento);
   render();
   if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW',e)); }
 })();
