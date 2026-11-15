@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
 <link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
 <link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js">
+<link rel="preload" as="script" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js">
 <style>
 :root{
   --teal:#3AA094; --teal2:#00AE9C; --teal-soft:#e3f3f1; --navy:#172334; --ink:#000924;
@@ -167,6 +168,11 @@ pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:
 .splash{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--muted);text-align:center}
 .spin{width:38px;height:38px;border:4px solid var(--teal-soft);border-top-color:var(--teal);border-radius:50%;animation:gira .8s linear infinite}
 @keyframes gira{to{transform:rotate(360deg)}}
+.thumb{flex:none;border-radius:8px;object-fit:contain;background:#fff;border:1px solid #e6e9ec}
+.thumb.ph{display:flex;align-items:center;justify-content:center;font-size:16px;background:#f4f6f7;opacity:.55}
+.cam .marca{position:absolute;right:10px;bottom:8px;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.3px;pointer-events:none}
+.cam:not(.live) .marca{display:none}
+.x.ed{color:var(--navy)}
 .results{margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}
 .res{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
 .res:active{background:var(--teal-soft)}
@@ -232,7 +238,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '2.3.0';
+const APP_VERSION = '3.2.0';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -330,7 +336,14 @@ const Store = {
       try{
         await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
         await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js');
+        try{ await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js'); }catch(e){ console.warn('auth não carregou'); }
         if(!firebase.apps.length) firebase.initializeApp(cfg);
+        if(firebase.auth){ try{
+          this.auth=firebase.auth();
+          const u=await new Promise(res=>{ const un=this.auth.onAuthStateChanged(x=>{ un(); res(x); }); });
+          if(!u) await this.auth.signInAnonymously();
+          this.authOk=true;
+        }catch(e){ this.authErr=e.code||String(e); console.warn('auth',e); } }
         this.fs=firebase.firestore();
         try{ await this.fs.enablePersistence({synchronizeTabs:true}); }catch(e){ console.warn('persistência offline',e.code); }
         this.mode='cloud';
@@ -347,6 +360,21 @@ const Store = {
   async list(col,field,val){
     if(this.mode==='cloud'){ let q=this.fs.collection(col); if(field) q=q.where(field,'==',val); const s=await q.get(); return s.docs.map(d=>({id:d.id,...d.data()})); }
     return this._rows(col,field,val);
+  },
+  async listIn(col,ids){
+    if(!ids.length) return [];
+    if(this.mode==='cloud'){ const out=[]; const F=firebase.firestore.FieldPath.documentId();
+      for(let i=0;i<ids.length;i+=30){ const s=await this.fs.collection(col).where(F,'in',ids.slice(i,i+30)).get(); s.docs.forEach(d=>out.push({id:d.id,...d.data()})); }
+      return out; }
+    const set=new Set(ids); return this._rows(col).filter(r=>set.has(r.id));
+  },
+  async updateMany(col,items){
+    if(this.mode==='cloud'){ for(let i=0;i<items.length;i+=400){ const b=this.fs.batch(); items.slice(i,i+400).forEach(x=>b.set(this.fs.collection(col).doc(x.id),x.data,{merge:true})); await b.commit(); } return; }
+    const db=this._db(); db[col]=db[col]||{}; items.forEach(x=>db[col][x.id]={...(db[col][x.id]||{}),...x.data}); this._save(); this._emit(col);
+  },
+  async setMany(col,docs){
+    if(this.mode==='cloud'){ for(let i=0;i<docs.length;i+=400){ const b=this.fs.batch(); docs.slice(i,i+400).forEach(({id,...d})=>b.set(this.fs.collection(col).doc(id),d)); await b.commit(); } return; }
+    const db=this._db(); db[col]=db[col]||{}; docs.forEach(({id,...d})=>db[col][id]=d); this._save(); this._emit(col);
   },
   async get(col,id){
     if(this.mode==='cloud'){ const d=await this.fs.collection(col).doc(id).get(); return d.exists?{id:d.id,...d.data()}:null; }
@@ -378,7 +406,7 @@ const Store = {
   watch(col,cb,field,val){
     if(this.mode==='cloud'){
       let q=this.fs.collection(col); if(field) q=q.where(field,'==',val);
-      return q.onSnapshot(s=>cb(s.docs.map(d=>({id:d.id,...d.data()}))), e=>{ console.error(e); toast('Erro de sincronização: '+e.code,true); });
+      return q.onSnapshot({includeMetadataChanges:true},s=>cb(s.docs.map(d=>({id:d.id,...d.data()})),s.docs.filter(d=>d.metadata.hasPendingWrites).length), e=>{ console.error(e); toast('Erro de sincronização'+(ehMaster()?': '+e.code:''),true); });
     }
     const s={cb,field,val}; (this.subs[col]=this.subs[col]||[]).push(s);
     setTimeout(()=>cb(this._rows(col,field,val)),0);
@@ -397,7 +425,7 @@ const Store = {
    ===================================================================== */
 const S = {
   view:'empresas', stack:[], empresa:null, inv:null, produtos:[], lanc:[], idxEan:new Map(), idxCod:new Map(),
-  unsub:[], contador:LS.get('cvinv_nome',''), rodada:null, gestorOk:{}, scanner:null, scanning:false, lastScan:{c:'',t:0},
+  unsub:[], contador:LS.get('cvinv_nome',''), rodada:null, scanning:false, img:new Map(), imgReq:new Set(), imgTent:new Set(), pendWrites:0,
   tabRes:'todos', tabLanc:'todas'
 };
 function clearSubs(){ S.unsub.forEach(u=>{try{u()}catch(e){}}); S.unsub=[]; }
@@ -431,8 +459,8 @@ const gLbl=p=>(p.grupo||GSEM)+(p.subgrupo?' › '+p.subgrupo:'');
 const byGrupo=(a,b)=>((a.grupo?0:1)-(b.grupo?0:1))||String(a.grupo||'').localeCompare(String(b.grupo||''),'pt-BR')||String(a.subgrupo||'').localeCompare(String(b.subgrupo||''),'pt-BR')||String(a.descricao).localeCompare(String(b.descricao),'pt-BR');
 function grupos(list){ const m=new Map(); list.forEach(p=>{ const g=p.grupo||GSEM; if(!m.has(g)) m.set(g,new Map()); const sm=m.get(g); const sg=p.subgrupo||''; sm.set(sg,(sm.get(sg)||0)+1); });
   return [...m.entries()].sort((a,b)=>(a[0]===GSEM)-(b[0]===GSEM)||a[0].localeCompare(b[0],'pt-BR')).map(([g,sm])=>({g,n:[...sm.values()].reduce((x,y)=>x+y,0),subs:[...sm.keys()].filter(Boolean).sort((a,b)=>a.localeCompare(b,'pt-BR'))})); }
-function calc(){ return calcFrom(S.produtos,S.lanc); }
-function calcFrom(produtos,lanc){
+function calc(){ return calcFrom(S.produtos,S.lanc,modoDe(S.inv)); }
+function calcFrom(produtos,lanc,modo='duas'){
   const map=new Map();
   produtos.forEach(p=>map.set(String(p.codigo),{codigo:String(p.codigo),descricao:p.descricao,ean:p.ean||'',unidade:p.unidade||'',grupo:p.grupo||'',subgrupo:p.subgrupo||'',custo:Number(p.custo)||0,estoque:Number(p.estoque)||0,novo:!!p.novo,c:[0,0,0],n:[0,0,0]}));
   lanc.forEach(l=>{
@@ -441,7 +469,7 @@ function calcFrom(produtos,lanc){
     const i=(l.rodada||1)-1; r.c[i]=r3(r.c[i]+Number(l.qtd||0)); r.n[i]++;
   });
   const rows=[...map.values()].map(r=>{
-    const d12=!eq(r.c[0],r.c[1]);
+    const d12= modo==='uma' ? false : modo==='uma_conf' ? !eq(r.c[0],r.estoque) : !eq(r.c[0],r.c[1]);
     let final=null,status;
     if(!d12){ final=r.c[0]; status='ok'; }
     else if(r.n[2]>0){ final=r.c[2]; status='3a'; }
@@ -465,8 +493,8 @@ function roundStats(rod){
   L.forEach(l=>{ pessoas[l.contador||'?']=(pessoas[l.contador||'?']||0)+1; });
   return {lanc:L.length,itens:itens.size,pessoas};
 }
-const RLBL={aberta:['Aberta','b-ok'],fechada:['Fechada','b-gray'],bloqueada:['Aguardando','b-warn']};
-const RNOME={1:'1ª contagem',2:'2ª contagem',3:'3ª contagem'};
+const RLBL={aberta:['Aberta','b-ok'],fechada:['Fechada','b-gray'],bloqueada:['Aguardando','b-warn'],nao:['Não usada','b-gray']};
+
 
 /* =====================================================================
    RENDER
@@ -479,31 +507,25 @@ function header(title,sub,{back:hasBack=true,right=''}={}){
   const c=$('#hCfg'); if(c) c.onclick=()=>go('config');
 }
 function modeBar(){
-  $('#modebar').innerHTML = Store.mode==='cloud'
-    ? `<div class="modebar cloud">● Sincronizado na nuvem — vários celulares</div>`
-    : `<div class="modebar local">Modo local: os dados ficam só neste aparelho. Configure o Firebase para usar vários celulares.</div>`;
+  const off=!navigator.onLine, pend=S.pendWrites||0;
+  let h='';
+  if(Store.mode!=='cloud') h=`<div class="modebar local">${ehMaster()?'Modo local: os dados ficam só neste aparelho (Firebase não conectado).':'⚠ Sem conexão com o servidor — os dados ficam só neste aparelho.'}</div>`;
+  else if(off||pend) h=`<div class="modebar local">${off?'📴 Sem internet':'⏳ Enviando'}${pend?` · ${pend} lançamento(s) guardado(s) no aparelho, enviando quando a conexão voltar`:' · pode continuar contando, nada se perde'}</div>`;
+  else if(ehMaster()) h=`<div class="modebar cloud">● Sincronizado na nuvem</div>`;
+  $('#modebar').innerHTML=h;
 }
+window.addEventListener('online',()=>modeBar()); window.addEventListener('offline',()=>modeBar());
+/* tela sempre acesa durante a contagem */
+let wakeL=null;
+async function telaAcesa(on){ try{ if(on){ if(!wakeL && navigator.wakeLock && document.visibilityState==='visible'){ wakeL=await navigator.wakeLock.request('screen'); wakeL.addEventListener('release',()=>{ wakeL=null; }); } } else if(wakeL){ const w=wakeL; wakeL=null; await w.release(); } }catch(e){} }
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') telaAcesa(S.view==='contar'); });
 const V={};
-function render(){ modeBar(); (V[S.view]||V.empresas)(); }
+const ehMaster=()=>adminOk();
+const MARCA='Tecnologia by Cultivve';
+function render(){ modeBar(); telaAcesa(S.view==='contar'); (V[S.view]||V.empresas)(); }
 
 /* ---------- EMPRESAS ---------- */
-V.empresas = async ()=>{
-  header('Inventário cego','Escolha a empresa',{back:false});
-  const app=$('#app'); app.innerHTML='<div class="empty">Carregando empresas…</div>';
-  const emps=(await Store.list('empresas')).sort((a,b)=>String(a.fantasia||a.razao).localeCompare(String(b.fantasia||b.razao),'pt-BR'));
-  app.innerHTML=`<div class="stack">${cardInstalar()}
-    <div class="row between"><h1>Qual empresa vai usar o sistema?</h1><button class="btn" id="nEmp">+ Nova empresa</button></div>
-    ${emps.length?`<div class="grid">${emps.map(e=>`<div class="card click" data-id="${e.id}">
-      <div class="row"><div class="round-dot" style="background:var(--navy)">${esc((e.fantasia||e.razao||'?').slice(0,1).toUpperCase())}</div>
-      <div style="flex:1;min-width:0"><h3>${esc(e.fantasia||e.razao)}</h3><div class="sub">${esc(e.razao||'')}${e.cnpj?' · '+esc(e.cnpj):''}</div></div></div>
-      <div class="sub" style="margin-top:8px">${esc([e.cidade,e.uf].filter(Boolean).join(' - '))}${e.responsavel?' · Resp.: '+esc(e.responsavel):''}</div>
-      <div class="row" style="margin-top:10px"><span class="spacer"></span><button class="btn ghost" data-edit="${e.id}">Editar</button></div></div>`).join('')}</div>`
-      :`<div class="card empty"><h2>Nenhuma empresa cadastrada</h2><p>Cadastre o mercado que vai fazer o inventário.</p><button class="btn" id="nEmp2">Cadastrar empresa</button></div>`}
-    <div class="foot">Cultivve Gestão de Projetos · Simplicidade, eficácia e resultado · v${APP_VERSION}</div></div>`;
-  $('#nEmp').onclick=()=>empresaForm(); const n2=$('#nEmp2'); if(n2) n2.onclick=()=>empresaForm();
-  app.querySelectorAll('[data-edit]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); empresaForm(emps.find(x=>x.id===b.dataset.edit)); });
-  app.querySelectorAll('.card[data-id]').forEach(c=>c.onclick=()=>{ S.empresa=emps.find(x=>x.id===c.dataset.id); LS.set('cvinv_emp',S.empresa.id); go('inicio'); });
-};
+V.empresas = async ()=>{ S.view=adminOk()?'admin':(S.empresa?'inicio':'acesso'); return render(); };
 function empresaForm(e={},depois){
   const f=(k,l,t='text',ph='',extra='')=>`<label class="f">${l}<input class="in" name="${k}" type="${t}" value="${esc(e[k]||'')}" placeholder="${ph}" ${extra}></label>`;
   modal(`<h2>${e.id?'Editar empresa':'Nova empresa'}</h2>
@@ -515,9 +537,10 @@ function empresaForm(e={},depois){
     <form id="fEmp" class="fgrid" style="margin-top:12px">
     ${f('fantasia','Nome fantasia *','text','Mercado Exemplo','required')}${f('razao','Razão social')}
     ${f('endereco','Endereço')}${f('bairro','Bairro')}${f('cidade','Cidade')}${f('uf','UF','text','PB','maxlength="2"')}${f('cep','CEP','text','','inputmode="numeric"')}
-    ${f('telefone','Telefone','tel')}${f('email','E-mail','email')}${f('responsavel','Responsável')}
-    ${e.id?'':f('pin','Seu PIN de gestor (4 a 6 números) *','password','••••','inputmode="numeric" pattern="\\d{4,6}" required')}
-    ${e.id?'':'<div class="hint" style="grid-column:1/-1">Você será o primeiro gestor. Depois, no Painel → Usuários, cadastre os outros gestores e os contadores, cada um com o seu PIN.</div>'}
+    ${f('telefone','Telefone','tel')}${f('email','E-mail','email')}${f('responsavel','Responsável (gestor)')}
+    <label class="f" style="grid-column:1/-1">Modo de contagem padrão<select class="in" name="modoPadrao">${Object.entries(MODOS).map(([k,m])=>`<option value="${k}" ${(e.modoPadrao||'duas')===k?'selected':''}>${m.nome} — ${m.desc}</option>`).join('')}</select></label>
+    ${e.id?'':f('pin','PIN do gestor (4 a 6 números) *','password','••••','inputmode="numeric" pattern="\\d{4,6}" required')}
+    ${e.id?'':'<div class="hint" style="grid-column:1/-1">Esse será o primeiro gestor da empresa. Com o link de acesso e esse PIN, ele entra, cadastra os colaboradores (Painel → Usuários) e sobe a planilha do sistema.</div>'}
     <div class="row" style="grid-column:1/-1;justify-content:flex-end"><button type="button" class="btn sec" id="cEmp">Cancelar</button><button class="btn">Salvar</button></div></form>`,
   {onOpen:o=>{
     const msg=(t,err)=>{ const m=$('#eMsg',o); m.innerHTML=t; m.style.color=err?'var(--red)':''; };
@@ -543,8 +566,9 @@ function empresaForm(e={},depois){
       if(d.cnpj && !cnpjValido(d.cnpj)) return toast('CNPJ inválido',true);
       const id=e.id||uid();
       if(!e.id){ if(!/^\d{4,6}$/.test(d.pin)) return toast('PIN deve ter de 4 a 6 números',true);
-        const u={id:uid(),nome:d.responsavel||'Gestor',pin:d.pin,perfil:'gestor',podeEncerrar:true,criadoEm:now()}; delete d.pin;
-        d.usuarios=[u]; d.criadoEm=now(); LS.set('cvinv_me_'+id,u.id); }
+        const u={id:uid(),nome:d.responsavel||'Gestor',pinH:await pinHash(id,d.pin),perfil:'gestor',podeEncerrar:true,criadoEm:now()}; delete d.pin;
+        d.usuarios=[u]; d.criadoEm=now(); d.codigo=codigoNovo(); d.status='ativa'; if(!adminOk()) LS.set('cvinv_me_'+id,u.id);
+        await Store.set('codigos',d.codigo,{empresaId:id}); }
       d.atualizadoEm=now();
       await Store.set('empresas',id,d); closeModal(); toast('Empresa salva'); if(depois) depois(); else render(); }; }});
 }
@@ -560,7 +584,7 @@ V.inventarios = async ()=>{
     ${invs.length?`<div class="grid">${invs.map(i=>`<div class="card click" data-id="${i.id}">
       <div class="row between"><h3>${esc(i.nome)}</h3>${i.status==='finalizado'?'<span class="badge b-gray">Finalizado</span>':'<span class="badge b-ok">Em contagem</span>'}</div>
       <div class="sub">${dBR(i.data)} · ${fmt(i.totalProdutos||0)} produtos na base</div>
-      <div class="row small" style="margin-top:8px;gap:6px">${[1,2,3].map(r=>{const st=(i.rodadas||{})['r'+r]||'bloqueada';return `<span class="badge ${RLBL[st][1]}">${r}ª ${RLBL[st][0].toLowerCase()}</span>`}).join('')}</div></div>`).join('')}</div>`
+      <div class="row small" style="margin-top:8px;gap:6px">${rodadasDe(i).map(r=>{const st=(i.rodadas||{})['r'+r]||'bloqueada';return `<span class="badge ${RLBL[st][1]}">${r===3&&modoDe(i)==='uma_conf'?'Conf.':r+'ª'} ${RLBL[st][0].toLowerCase()}</span>`}).join('')}</div></div>`).join('')}</div>`
       :`<div class="card empty"><h2>Nenhum inventário ainda</h2><p>Crie um inventário e importe a planilha de estoque.</p></div>`}</div>`;
   $('#nInv').onclick=async ()=>{ const u=await exigir(ehGestor,'Novo inventário','Só gestores criam inventários'); if(u) novoInventario(); };
   app.querySelectorAll('.card[data-id]').forEach(c=>c.onclick=()=>openInv(invs.find(x=>x.id===c.dataset.id)));
@@ -569,18 +593,20 @@ function openInv(inv,next='invhome'){
   clearSubs(); S.inv=inv; S.produtos=[]; S.lanc=[]; indexProdutos();
   const P='inventarios/'+inv.id;
   S.unsub.push(Store.watchDoc('inventarios',inv.id,d=>{ if(!d) return; const old=S.inv; S.inv=d;
-    if(S.view==='contar' && S.rodada && d.rodadas['r'+S.rodada]!=='aberta'){ toast('O gestor encerrou a '+RNOME[S.rodada]); stopScanner(); S.view='invhome'; S.stack=S.stack.filter(v=>v!=='contar'); render(); return; }
+    if(S.view==='contar' && S.rodada && d.rodadas['r'+S.rodada]!=='aberta'){ toast('O gestor encerrou a '+rn(S.rodada)); stopScanner(); S.view='invhome'; S.stack=S.stack.filter(v=>v!=='contar'); render(); return; }
     if(['gestor','confronto','resultado','invhome'].includes(S.view) && JSON.stringify(old)!==JSON.stringify(d)) render(); }));
-  S.unsub.push(Store.watch(P+'/produtos',rows=>{ S.produtos=rows; indexProdutos(); refreshLive(); }));
+  S.unsub.push(Store.watch(P+'/produtos',rows=>{ S.produtos=rows; indexProdutos(); refreshLive(); agendaImagens(); }));
   S.unsub.push(startLancWatch());
   go(next);
 }
 let lancMode=null;
+const euId=()=>(S.me&&S.me.id&&S.me.id!=='cultivve')?S.me.id:'';
+const meu=l=>euId()? (l.contadorId===euId() || (!l.contadorId && l.device===DEV)) : l.device===DEV;
 function startLancWatch(gestor=false){
   const P='inventarios/'+S.inv.id+'/lancamentos';
   lancMode=gestor?'all':'dev';
-  return gestor ? Store.watch(P,rows=>{ S.lanc=rows; refreshLive(); })
-                : Store.watch(P,rows=>{ S.lanc=rows; refreshLive(); },'device',DEV);
+  const cb=(rows,pend)=>{ S.lanc=rows; const old=S.pendWrites; S.pendWrites=pend||0; if(old!==S.pendWrites) modeBar(); refreshLive(); };
+  return gestor||!euId() ? (gestor?Store.watch(P,cb):Store.watch(P,cb,'device',DEV)) : Store.watch(P,cb,'contadorId',euId());
 }
 function useGestorLanc(){
   if(lancMode==='all') return;
@@ -598,8 +624,8 @@ V.invhome = ()=>{
   $('#app').innerHTML=`<div class="stack">
     ${fin?'<div class="warnbox">Este inventário foi finalizado. A contagem está encerrada; o relatório continua disponível na área do gestor.</div>':''}
     <div class="grid">
-      ${[1,2,3].map(r=>{ const st=R['r'+r]||'bloqueada'; const ok=st==='aberta'&&!fin;
-        return `<div class="card"><div class="row"><div class="round-dot" style="background:${ok?'var(--teal)':'#9aa6b2'}">${r}ª</div><div style="flex:1"><h3>${RNOME[r]}</h3><div class="sub">${r<3?'Contagem cega da loja inteira':'Recontagem só dos itens divergentes'}${nomesEscala(i,r).length?' · Escala: '+esc(nomesEscala(i,r).join(', ')):''}</div></div><span class="badge ${RLBL[st][1]}">${RLBL[st][0]}</span></div>
+      ${rodadasDe(i).map(r=>{ const st=R['r'+r]||'bloqueada'; const ok=st==='aberta'&&!fin;
+        return `<div class="card"><div class="row"><div class="round-dot" style="background:${ok?'var(--teal)':'#9aa6b2'}">${r===3&&modoDe(i)==='uma_conf'?'C':r+'ª'}</div><div style="flex:1"><h3>${rn(r)}</h3><div class="sub">${r<3?'Contagem cega da loja inteira':modoDe(i)==='uma_conf'?'Recontagem dos itens que divergiram do estoque':'Recontagem só dos itens divergentes'}${nomesEscala(i,r).length?' · Escala: '+esc(nomesEscala(i,r).join(', ')):''}</div></div><span class="badge ${RLBL[st][1]}">${RLBL[st][0]}</span></div>
         <button class="btn block big" style="margin-top:12px" data-r="${r}" ${ok?'':'disabled'}>${ok?'Começar a contar':'Indisponível'}</button></div>`; }).join('')}
       <div class="card"><div class="row"><div class="round-dot" style="background:var(--navy)">G</div><div style="flex:1"><h3>Área do gestor</h3><div class="sub">Importar planilha, abrir/fechar contagens, confronto, divergências e relatório</div></div></div>
         <button class="btn dark block big" style="margin-top:12px" id="bGest">Entrar com PIN</button></div>
@@ -613,13 +639,13 @@ V.invhome = ()=>{
 async function startCount(r){
   if(!S.produtos.length && r<3){ const ok=await ask('A planilha de estoque ainda não foi importada. Sem ela, todo produto bipado terá que ser cadastrado na hora. Continuar mesmo assim?',{ok:'Continuar'}); if(!ok) return; }
   const esc_=escalaDe(S.inv,r);
-  if(esc_.length && !(S.me && esc_.includes(S.me.id))){ if(!await ask(`A ${RNOME[r]} foi escalada para <b>${esc(nomesEscala(S.inv,r).join(', '))}</b>. Contar mesmo assim?`,{ok:'Contar mesmo assim'})) return; }
+  if(esc_.length && !(S.me && esc_.includes(S.me.id))){ if(!await ask(`A ${rn(r)} foi escalada para <b>${esc(nomesEscala(S.inv,r).join(', '))}</b>. Contar mesmo assim?`,{ok:'Contar mesmo assim'})) return; }
   if(S.me){ S.contador=S.me.nome; }
   else { const nome=await askText('Quem está contando?',{label:'Seu nome',value:S.contador,placeholder:'Ex.: Maria'});
     if(!nome||!nome.trim()) return;
     S.contador=nome.trim(); LS.set('cvinv_nome',S.contador); }
-  if(r<=2){ const outra=S.lanc.some(l=>l.device===DEV && l.rodada===(r===1?2:1));
-    if(outra){ const ok=await ask(`Este aparelho já tem lançamentos na ${RNOME[r===1?2:1]}. Para a contagem ser cega, a ${RNOME[r]} deve ser feita por outra pessoa. Continuar?`,{ok:'Continuar'}); if(!ok) return; } }
+  if(r<=2){ const outra=S.lanc.some(l=>meu(l) && l.rodada===(r===1?2:1));
+    if(outra){ const ok=await ask(`Este aparelho já tem lançamentos na ${rn(r===1?2:1)}. Para a contagem ser cega, a ${rn(r)} deve ser feita por outra pessoa. Continuar?`,{ok:'Continuar'}); if(!ok) return; } }
   S.rodada=r; S.pend=null; S.lastUm=null; go('contar');
 }
 async function gestorLogin(){
@@ -630,7 +656,7 @@ async function gestorLogin(){
 /* ---------- TELA DE CONTAGEM (contador) ---------- */
 V.contar = ()=>{
   const r=S.rodada;
-  header(RNOME[r],'Contador: '+S.contador);
+  header(rn(r),'Contador: '+S.contador);
   const modo=LS.get('cvinv_modo','qtd'), auto=LS.get('cvinv_auto',true);
   const lista3 = r===3 ? `<div class="card"><div class="sec-title"><h2>Itens para recontar</h2><span class="badge b-warn" id="c3n"></span></div>
     <div class="sub">Conte a quantidade total de cada item na loja inteira. Se não encontrar, registre zero.</div><div id="l3" style="margin-top:8px"></div></div>`:'';
@@ -643,7 +669,7 @@ V.contar = ()=>{
       <video id="vid" playsinline muted autoplay></video>
       <div class="guide" id="guide"><i></i><i></i><i></i><i></i><div class="laser"></div></div>
       <div class="camtools"><button id="bTorch" hidden aria-label="Lanterna">🔦</button><button id="bZoom" hidden>1x</button><button id="bCamOff" aria-label="Desligar câmera">✕</button></div>
-      <div class="caminfo" id="camInfo"></div>
+      <div class="caminfo" id="camInfo"></div><div class="marca">${MARCA}</div>
       <div class="camoff" id="camOff"><button class="btn" id="bCam">📷 Ligar leitor de código de barras</button><button class="btn ghost" id="bFoto" style="color:#BACAD3;margin-top:6px">📸 ou ler por foto</button><div class="small" style="margin-top:4px">Leitor Bluetooth ou coletor de dados também funcionam: é só bipar.</div></div>
       <input type="file" id="fotoIn" accept="image/*" capture="environment" hidden>
     </div>
@@ -662,7 +688,9 @@ V.contar = ()=>{
     $('#seg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); $('#autoW').hidden=b.dataset.m==='um'; renderFast(); });
   $('#auto').onchange=e=>LS.set('cvinv_auto',e.target.checked);
   $('#azoom').onchange=e=>LS.set('cvinv_autozoom',e.target.checked);
-  $('#bCam').onclick=startScanner; $('#bCamOff').onclick=stopScanner;
+  $('#bCam').onclick=startScanner; $('#bCamOff').onclick=()=>stopScanner(true);
+  // liga o leitor sozinho se a pessoa já usou a câmera antes (e não desligou no ✕)
+  if(LS.get('cvinv_cam_auto',false)) setTimeout(()=>{ if(S.view==='contar' && !Cam.on && !$('#ov')) startScanner(); },150);
   $('#bFoto').onclick=()=>$('#fotoIn').click();
   $('#fotoIn').onchange=e=>{ const f=e.target.files[0]; e.target.value=''; lerFoto(f); };
   if(camEnv().inApp) setTimeout(()=>camHelp({name:'INAPP'}),300);
@@ -683,21 +711,24 @@ function showResults(v){
   const box=$('#res'); if(!box) return;
   if(!v.trim()){ box.innerHTML=''; return; }
   const rs=search(v,30);
-  box.innerHTML = rs.length ? rs.map(p=>`<div class="res" data-c="${esc(p.codigo)}"><div class="d"><b>${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span><span class="gtag">${esc(gLbl(p))}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')
+  box.innerHTML = rs.length ? rs.map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}<div class="d"><b>${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span><span class="gtag">${esc(gLbl(p))}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')
     : `<div class="empty small">Nada encontrado para “${esc(v)}”.</div>`;
   box.querySelectorAll('.res').forEach(el=>el.onclick=()=>{ const p=S.idxCod.get(norm(el.dataset.c)); $('#q').value=''; box.innerHTML=''; setPending(p,'tecl'); });
 }
 V.contar_refresh = ()=>{
   const my=$('#my'); if(!my) return;
   const r=S.rodada;
-  const mine=S.lanc.filter(l=>l.rodada===r && l.device===DEV).sort((a,b)=>String(b.ts).localeCompare(String(a.ts)));
+  const mine=S.lanc.filter(l=>l.rodada===r && meu(l)).sort((a,b)=>String(b.ts).localeCompare(String(a.ts)));
   $('#myN').textContent=mine.length+' lançamento(s)';
-  my.innerHTML = mine.length ? mine.slice(0,200).map(l=>`<div class="lanc"><div class="d"><b>${esc(l.descricao)}</b><span class="small muted mono">${esc(l.codigo)} · ${new Date(l.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</span></div><div class="q">${fmt(l.qtd)} <small class="muted">${esc(l.unidade||'')}</small></div><button class="x" data-del="${l.id}" aria-label="Excluir">✕</button></div>`).join('')
+  const nItens=new Set(mine.map(l=>String(l.codigo))).size;
+  const sub=$('.top .ttl small'); if(sub){ const tot=r===3?(S.inv.divergentes||[]).length:S.produtos.filter(p=>!p.novo).length; sub.textContent=`${S.contador} · ${fmt(nItens)}${tot?'/'+fmt(tot):''} itens${tot?' · '+Math.round(nItens/tot*100)+'%':''}`; }
+  my.innerHTML = mine.length ? mine.slice(0,200).map(l=>`<div class="lanc"><div class="d"><b>${esc(l.descricao)}</b><span class="small muted mono">${esc(l.codigo)} · ${new Date(l.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</span></div><div class="q">${fmt(l.qtd)} <small class="muted">${esc(l.unidade||'')}</small></div><button class="x ed" data-ed="${l.id}" aria-label="Corrigir">✎</button><button class="x" data-del="${l.id}" aria-label="Excluir">✕</button></div>`).join('')
     : '<div class="empty small">Nenhum lançamento ainda. Bipe ou busque um produto.</div>';
-  my.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{ const l=mine.find(x=>x.id===b.dataset.del); if(await ask(`Excluir o lançamento de ${fmt(l.qtd)} ${esc(l.unidade||'')} de <b>${esc(l.descricao)}</b>?`,{ok:'Excluir',danger:true,title:'Excluir lançamento'})){ Store.del('inventarios/'+S.inv.id+'/lancamentos',l.id); toast('Lançamento excluído'); } });
+  my.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>excluirLanc(mine.find(x=>x.id===b.dataset.del)));
+  my.querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>editarLanc(mine.find(x=>x.id===b.dataset.ed)));
   if(r===3){
     const l3=$('#l3'); const div=S.inv.divergentes||[];
-    const done=new Set(S.lanc.filter(l=>l.rodada===3 && l.device===DEV).map(l=>String(l.codigo)));
+    const done=new Set(S.lanc.filter(l=>l.rodada===3 && meu(l)).map(l=>String(l.codigo)));
     $('#c3n').textContent=`${div.filter(c=>done.has(String(c))).length} de ${div.length}`;
     l3.innerHTML = div.map(c=>{ const p=S.idxCod.get(norm(c))||{codigo:c,descricao:'(produto)'}; const ok=done.has(String(c));
       return `<div class="res" data-c3="${esc(c)}" style="${ok?'opacity:.55':''}"><div class="d"><b>${ok?'✓ ':''}${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span></div><button class="btn sec" style="min-height:36px;padding:6px 10px" data-zero="${esc(c)}">Zero</button></div>`; }).join('') || '<div class="empty small">Nenhum item para recontar.</div>';
@@ -725,7 +756,7 @@ function abrirLista(){
 function drawLista(){
   const L=$('#lsL'); if(!L) return;
   const base=baseLista();
-  const mine=new Set(S.lanc.filter(l=>l.rodada===S.rodada && l.device===DEV).map(l=>String(l.codigo)));
+  const mine=new Set(S.lanc.filter(l=>l.rodada===S.rodada && meu(l)).map(l=>String(l.codigo)));
   const gs=grupos(base);
   if(S.ls.g && !gs.some(x=>x.g===S.ls.g)){ S.ls.g=''; S.ls.s=''; }
   const cnt=g=>{ const arr=base.filter(p=>(p.grupo||GSEM)===g); return `${arr.filter(p=>mine.has(String(p.codigo))).length}/${arr.length}`; };
@@ -744,7 +775,7 @@ function drawLista(){
     const gl=gLbl(p);
     if(gl!==last){ html+=`<div class="lsh">${esc(gl)}</div>`; last=gl; }
     const ok=mine.has(String(p.codigo));
-    html+=`<div class="res${ok?' done':''}" data-c="${esc(p.codigo)}"><div class="d"><b>${ok?'✓ ':''}${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`;
+    html+=`<div class="res${ok?' done':''}" data-c="${esc(p.codigo)}">${thumb(p)}<div class="d"><b>${ok?'✓ ':''}${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`;
   });
   if(arr.length>S.ls.lim) html+=`<button class="btn sec block" id="lsMore" style="margin:10px 0">Mostrar mais (${arr.length-S.ls.lim} restantes)</button>`;
   L.innerHTML = html || '<div class="empty">Nenhum produto com esses filtros.</div>';
@@ -753,20 +784,20 @@ function drawLista(){
 }
 
 /* ---------- lançamento rápido (sem janela, câmera continua ligada) ---------- */
-function jaLancado(p){ return r3(S.lanc.filter(l=>l.rodada===S.rodada && l.device===DEV && String(l.codigo)===String(p.codigo)).reduce((s,l)=>s+Number(l.qtd||0),0)); }
+function jaLancado(p){ return r3(S.lanc.filter(l=>l.rodada===S.rodada && meu(l) && String(l.codigo)===String(p.codigo)).reduce((s,l)=>s+Number(l.qtd||0),0)); }
 function setPending(p,src='tecl'){
   if(!p) return;
-  if(S.rodada===3 && !(S.inv.divergentes||[]).map(String).includes(String(p.codigo))){ beep(false); toast('Este item não está na lista da 3ª contagem',true); return; }
+  if(S.rodada===3 && !(S.inv.divergentes||[]).map(String).includes(String(p.codigo))){ beep(false); toast('Este item não está na lista da '+rn(3).toLowerCase(),true); return; }
   beep(true);
   if(LS.get('cvinv_modo','qtd')==='um'){
     const tot=jaLancado(p)+1;
-    Promise.resolve(lancar(p,1,true)).then(id=>{ S.lastUm={p,id,tot}; renderFast(); });
+    Promise.resolve(lancar(p,1,true)).then(id=>{ S.lastUm={p,id,tot}; renderFast(); }); enriquecerAgora(p).then(()=>{ if(S.lastUm&&S.lastUm.p===p) renderFast(); });
     return;
   }
   if(S.pend && String(S.pend.p.codigo)===String(p.codigo)){ S.pend.q=r3(S.pend.q+1); renderFast(); flashQty(); return; }
   if(S.pend){ if(LS.get('cvinv_auto',true)) confirmPending(); else { S.pend=null; } }
   S.pend={p,q:1,ja:jaLancado(p)};
-  renderFast();
+  renderFast(); enriquecerAgora(p);
   if(src!=='cam'){ const f=$('#fQ'); if(f){ f.focus(); f.select(); } }
   else { const el=$('#fast'); if(el && el.getBoundingClientRect().bottom>innerHeight) el.scrollIntoView({block:'nearest'}); }
 }
@@ -785,7 +816,7 @@ function renderFast(){
   if(S.pend){
     const p=S.pend.p, un=(p.unidade||'UN').toUpperCase();
     el.hidden=false; el.className='card fast';
-    el.innerHTML=`<div class="row" style="align-items:flex-start"><div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</div><span class="gtag">${esc(gLbl(p))}</span></div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
+    el.innerHTML=`<div class="row" style="align-items:flex-start">${thumb(p,64)}<div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</div><span class="gtag">${esc(gLbl(p))}</span></div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
       ${S.pend.ja?`<div class="small muted" style="margin-top:4px">Você já lançou ${fmt(S.pend.ja)} ${esc(un)} deste item nesta contagem — será somado.</div>`:''}
       <div class="qrow"><button class="stp" data-s="-1">−</button><input class="in qty" id="fQ" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="${S.pend.ed||S.pend.q!==1?esc(fmt(S.pend.q).replace(/\./g,'')):''}"><button class="stp" data-s="1">+</button></div>
       <div class="quick"><button data-a="6">+6</button><button data-a="12">+12</button><button data-a="24">+24</button><button data-a="0">Zerar</button></div>
@@ -802,10 +833,20 @@ function renderFast(){
   } else if(S.lastUm && LS.get('cvinv_modo','qtd')==='um'){
     const {p,tot}=S.lastUm;
     el.hidden=false; el.className='card fast ok';
-    el.innerHTML=`<div class="row"><div class="round-dot">+1</div><div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted">Seu total deste item: <b>${fmt(tot)} ${esc(p.unidade||'UN')}</b></div></div><button class="btn sec" id="fU">Desfazer</button></div>`;
+    el.innerHTML=`<div class="row">${thumb(p,48)}<div class="round-dot">+1</div><div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted">Seu total deste item: <b>${fmt(tot)} ${esc(p.unidade||'UN')}</b></div></div><button class="btn sec" id="fU">Desfazer</button></div>`;
     $('#fU',el).onclick=()=>{ if(S.lastUm && S.lastUm.id){ Store.del('inventarios/'+S.inv.id+'/lancamentos',S.lastUm.id); toast('Último bipe desfeito'); } S.lastUm=null; renderFast(); };
   } else { el.hidden=true; el.innerHTML=''; }
 }
+function quem(){ return (S.sess&&S.sess.nome)||(S.me&&S.me.nome)||S.contador||'?'; }
+function logAcao(acao,detalhe){ if(!S.inv) return; Store.add('inventarios/'+S.inv.id+'/log',{acao,detalhe:detalhe||'',quem:quem(),ts:now(),device:DEV}); }
+async function excluirLanc(l){ if(!l) return;
+  if(!await ask(`Excluir o lançamento de ${fmt(l.qtd)} ${esc(l.unidade||'')} de <b>${esc(l.descricao)}</b> (${rn(l.rodada)}, ${esc(l.contador)})?`,{ok:'Excluir',danger:true,title:'Excluir lançamento'})) return;
+  Store.del('inventarios/'+S.inv.id+'/lancamentos',l.id); logAcao('Excluiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} ${l.unidade||''} · ${rn(l.rodada)} · contador ${l.contador}`); toast('Lançamento excluído'); }
+async function editarLanc(l){ if(!l) return;
+  const v=await askText('Corrigir quantidade',{label:`${l.descricao} — lançado: ${fmt(l.qtd)} ${l.unidade||''}`,value:fmt(l.qtd).replace(/\./g,''),inputmode:'decimal'}); if(v==null||v.trim()==='') return;
+  const q=parseNum(v); if(!(q>=0)) return toast('Quantidade inválida',true); if(eq(q,l.qtd)) return;
+  Store.set('inventarios/'+S.inv.id+'/lancamentos',l.id,{qtd:r3(q),qtdAnterior:l.qtd,editadoPor:quem(),editadoEm:now()});
+  logAcao('Corrigiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} → ${fmt(q)} · ${rn(l.rodada)} · contador ${l.contador}`); toast('Quantidade corrigida'); }
 function lancar(p,qtd,silent){
   const id=Store.add('inventarios/'+S.inv.id+'/lancamentos',{rodada:S.rodada,codigo:String(p.codigo),descricao:p.descricao,unidade:p.unidade||'',qtd:r3(qtd),contador:S.contador,contadorId:(S.me&&S.me.nome===S.contador)?S.me.id:'',device:DEV,ts:now()});
   if(!silent) toast(`✓ ${fmt(qtd)} ${p.unidade||''} — ${String(p.descricao).slice(0,32)}`);
@@ -830,9 +871,9 @@ function novoProduto(pre){
       d.codigo=(d.codigo||'').trim()||sug; d.descricao=d.descricao.trim(); d.ean=(d.ean||'').trim(); d.grupo=(d.grupo||'').trim().toUpperCase(); d.subgrupo=(d.subgrupo||'').trim().toUpperCase();
       if(S.idxCod.has(norm(d.codigo))) return toast('Já existe produto com esse código',true);
       if(d.ean && S.idxEan.has(eanKey(d.ean))) return toast('Esse código de barras já está cadastrado: '+S.idxEan.get(eanKey(d.ean)).descricao,true);
-      const p={...d,estoque:0,novo:true,criadoPor:S.contador,criadoEm:now()};
+      const p={...d,estoque:0,novo:true,criadoPor:S.contador,criadoEm:now(),imagem:pre.imagem||'',marca:pre.marca||''};
       if(d.ean && gtinKey(d.ean).length>=8) Store.get('catalogo',gtinKey(d.ean)).then(c=>{ if(!c) Store.set('catalogo',gtinKey(d.ean),{gtin:gtinKey(d.ean),descricao:d.descricao,categoria:d.grupo||'',origem:'cadastro na contagem',empresaId:S.empresa.id,criadoEm:now()}); }).catch(()=>{});
-      Store.add('inventarios/'+S.inv.id+'/produtos',p);
+      Store.add('inventarios/'+S.inv.id+'/produtos',p); logAcao('Cadastrou produto na contagem',`${p.descricao} (${p.codigo}${p.ean?' · '+p.ean:''})`);
       if(!S.idxCod.has(norm(p.codigo))){ S.produtos.push(p); indexProdutos(); }
       closeModal(); setPending(p,'tecl'); }; }});
 }
@@ -847,37 +888,21 @@ function handleCode(code,src){
 /* =====================================================================
    CONSULTA DE PRODUTOS PELO CÓDIGO DE BARRAS
    1) catálogo da Cultivve (Firestore, compartilhado entre todos os clientes)
-   2) SI5 Global (API externa, 100 consultas/dia no plano grátis) — o resultado vai para o catálogo,
+   2) SI5 Global (API externa, 30 consultas/dia no plano grátis) — o resultado vai para o catálogo,
       então cada código é consultado na internet uma única vez
    ===================================================================== */
 const gtinKey=c=>String(c||'').replace(/\D/g,'').replace(/^0+/,'');
-async function consultaGtin(code){
-  const k=gtinKey(code); if(k.length<8) return null;
-  try{ const c=await Promise.race([Store.get('catalogo',k),new Promise(r=>setTimeout(()=>r(null),3000))]); if(c&&c.descricao) return {...c,fonte:'catálogo Cultivve'}; }catch(e){}
-  const tok=S.empresa&&S.empresa.si5Token; if(!tok) return null;
-  try{
-    const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),6000);
-    const r=await fetch('https://global.si5.com.br/api/produtos/'+encodeURIComponent(String(code).replace(/\D/g,'')),{headers:{Authorization:'Bearer '+tok,Accept:'application/json'},signal:ctl.signal});
-    clearTimeout(t);
-    if(r.status===429){ toast('Limite diário da consulta SI5 atingido',true); return null; }
-    if(!r.ok) return null;
-    const j=await r.json(); if(!j||!j.produto) return null;
-    const d={gtin:k,descricao:String(j.produto).toUpperCase(),marca:j.marca||'',categoria:j.categoria||'',ncm:j.ncm||'',imagem:j.imagem_url||'',origem:'SI5',criadoEm:now()};
-    Store.set('catalogo',k,d);
-    return {...d,fonte:'SI5 Global'};
-  }catch(e){ console.warn('SI5',e); return null; }
-}
 async function naoEncontrado(code){
   const m=modal(`<h2>Produto não está na planilha</h2><div class="row" style="margin-top:8px"><div class="spin" style="width:22px;height:22px;border-width:3px"></div><span class="muted">Procurando o código <b class="mono">${esc(code)}</b> no catálogo…</span></div>`,{dismiss:false});
   const info=await consultaGtin(code);
   if(!$('#ov')) return;
   const pre={ean:code};
   let corpo;
-  if(info){ pre.descricao=info.descricao; pre.grupo=(info.categoria||'').toUpperCase();
+  if(info){ pre.descricao=info.descricao; pre.grupo=(info.categoria||'').toUpperCase(); pre.imagem=info.imagem||''; pre.marca=info.marca||'';
     corpo=`<div class="row" style="align-items:flex-start;margin-top:10px">${info.imagem?`<img src="${esc(info.imagem)}" alt="" style="width:64px;height:64px;object-fit:contain;border-radius:8px;background:#fff;border:1px solid var(--line)" onerror="this.remove()">`:''}
-      <div style="flex:1;min-width:0"><b>${esc(info.descricao)}</b><div class="small muted">${esc([info.marca,info.categoria].filter(Boolean).join(' · '))}</div><div class="small muted mono">${esc(code)} · fonte: ${esc(info.fonte)}</div></div></div>
+      <div style="flex:1;min-width:0"><b>${esc(info.descricao)}</b><div class="small muted">${esc([info.marca,info.categoria].filter(Boolean).join(' · '))}</div><div class="small muted mono">${esc(code)}${ehMaster()?' · fonte: '+esc(info.fonte):''}</div></div></div>
       <p class="small muted">Esse produto não está na planilha do estoque. Se cadastrar, ele entra com estoque zero e aparece como entrada no final.</p>`; }
-  else corpo=`<p class="muted">O código <b class="mono">${esc(code)}</b> não está na relação de produtos${S.empresa&&S.empresa.si5Token?' nem no catálogo':''}. Deseja cadastrar agora?</p>`;
+  else corpo=`<p class="muted">O código <b class="mono">${esc(code)}</b> não está na relação de produtos. Deseja cadastrar agora?</p>`;
   m.querySelector('.md').innerHTML=`<h2>Produto não está na planilha</h2>${corpo}<div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn sec" id="nfN">Cancelar</button><button class="btn" id="nfS">${info?'Cadastrar e contar':'Cadastrar'}</button></div>`;
   $('#nfN').onclick=closeModal; $('#nfS').onclick=()=>{ closeModal(); novoProduto(pre); };
 }
@@ -963,7 +988,7 @@ function camHelp(err){
   let motivo='', passos='';
   if(!window.isSecureContext){ motivo='O app não está aberto num endereço seguro (https).'; passos='Abra pelo link https:// do GitHub Pages, não pelo arquivo baixado.'; }
   else if(inApp){ motivo='O app foi aberto dentro do WhatsApp, Instagram ou outro app, que bloqueiam a câmera.'; passos='Toque nos três pontinhos ou no ícone de compartilhar e escolha <b>Abrir no Safari</b> (ou no Chrome).'; }
-  else if(name==='LEITOR'){ motivo='O leitor de código de barras não carregou.'; passos='Confira se a pasta <b>libs</b> foi enviada ao GitHub junto com os outros arquivos e recarregue a página.'; }
+  else if(name==='LEITOR'){ motivo='O leitor de código de barras não carregou.'; passos=ehMaster()?'Confira se a pasta <b>libs</b> foi enviada ao GitHub junto com os outros arquivos e recarregue a página.':'Feche o app e abra de novo. Se continuar, use <b>Ler por foto</b> e fale com o suporte da Cultivve.'; }
   else if(name==='NotAllowedError'||name==='SecurityError'){
     motivo='A permissão da câmera foi negada.';
     passos= ios ? `<ol style="padding-left:18px;margin:6px 0">
@@ -978,7 +1003,7 @@ function camHelp(err){
   else if(name==='SEM_API'){ motivo='Este navegador não libera a câmera para páginas.'; passos= ios?'Abra no <b>Safari</b> (iOS 14.3 ou mais novo).':'Abra no <b>Chrome</b>.'; }
   else { motivo='Não foi possível abrir a câmera.'; passos='Tente de novo ou use a leitura por foto.'; }
   modal(`<h2>Câmera indisponível</h2><p>${motivo}</p><div class="hint" style="margin-top:8px">${passos}</div>
-    <p class="small muted" style="margin-top:10px">Código técnico: <span class="mono">${esc(name||'?')}</span>${err&&err.message?' · '+esc(err.message):''}</p>
+    ${ehMaster()?`<p class="small muted" style="margin-top:10px">Código técnico: <span class="mono">${esc(name||'?')}</span>${err&&err.message?' · '+esc(err.message):''}</p>`:''}
     <div class="row" style="margin-top:12px"><button class="btn sec" id="hcF" style="flex:1">📸 Ler por foto</button><button class="btn" id="hcT" style="flex:1">Tentar de novo</button></div>`,
   {onOpen:o=>{ $('#hcT',o).onclick=()=>{ closeModal(); startScanner(); }; $('#hcF',o).onclick=()=>{ closeModal(); $('#fotoIn').click(); }; }});
 }
@@ -989,8 +1014,10 @@ async function startScanner(){
   if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return camHelp({name:'SEM_API'});
   if(btn){ btn.disabled=true; btn.textContent='Abrindo câmera…'; }
   // 1) pede a câmera primeiro (no iPhone o pedido precisa sair logo após o toque)
-  let st=null;
-  const tries=[
+  // reaproveita a câmera já liberada (o iPhone pede autorização de novo a cada novo pedido)
+  let st=(Cam.stream && Cam.stream.getVideoTracks().some(t=>t.readyState==='live')) ? Cam.stream : null;
+  clearTimeout(Cam.desligaT);
+  const tries=st?[]:[
     {audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}}},
     {audio:false,video:{facingMode:'environment'}},
     {audio:false,video:true}
@@ -1001,7 +1028,8 @@ async function startScanner(){
     catch(e){ lastErr=e; if(e.name==='NotAllowedError'||e.name==='SecurityError') break; }
   }
   if(!st){ reset(); console.error(lastErr); return camHelp(lastErr); }
-  if(S.view!=='contar' || !$('#vid')){ st.getTracks().forEach(t=>t.stop()); return; }
+  LS.set('cvinv_cam_auto',true);
+  if(S.view!=='contar' || !$('#vid')){ Cam.stream=st; desligaDepois(); return; }
   // 2) depois carrega o leitor
   try{ const det=await getDetector(); warmUp(det); }
   catch(e){ st.getTracks().forEach(t=>t.stop()); reset(); return camHelp({name:'LEITOR',message:e.message}); }
@@ -1016,7 +1044,7 @@ async function startScanner(){
   Cam.cv=document.createElement('canvas'); Cam.cx=Cam.cv.getContext('2d',{willReadFrequently:true});
   Cam.on=true; S.scanning=true; $('#cam').classList.add('live');
   Cam.stat={frames:0,err:0,lastErr:'',t:performance.now(),fps:0,ultimo:''}; Cam.teste='autoteste…';
-  $('#camInfo').innerHTML='Leitor '+DET_KIND+' · iniciando…';
+  $('#camInfo').innerHTML=ehMaster()?'Leitor '+DET_KIND+' · iniciando…':'';
   autoteste(); clearInterval(Cam.diagT); Cam.diagT=setInterval(diag,1000);
   renderFast(); scanLoop(v);
 }
@@ -1130,6 +1158,7 @@ function diag(soTexto){
   const agora=performance.now();
   if(!soTexto){ Cam.stat.fps=Cam.stat.frames/((agora-Cam.stat.t)/1000); Cam.stat.frames=0; Cam.stat.t=agora; }
   const fps=Cam.stat.fps||0;
+  if(!ehMaster()){ inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(Cam.stat.ultimo)}</b>`:''}${Cam.stat.err>20&&!Cam.stat.ultimo?'<br>⚠ Leitor instável — desligue e ligue a câmera':''}`; return; }
   inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(Cam.stat.ultimo)}</b><br>`:''}${DET_KIND} · ${v?v.videoWidth+'×'+v.videoHeight:''} · ${fps.toFixed(0)} leituras/s · ${Math.round(Cam.ms||0)} ms · ${esc(Cam.teste)}${Cam.stat.err?` · <span style="color:#ff9b9b">erros: ${Cam.stat.err} (${esc(Cam.stat.lastErr)})</span>`:''}${(Cam.stat.err||/FALHOU|ERRO/.test(Cam.teste))&&DET_LOG.length?`<br><span style="color:#ffd27a">${esc(DET_LOG.join(' | '))}</span>`:''}`;
 }
 /* autoteste: desenha um EAN-13 conhecido e verifica se o leitor deste aparelho decodifica */
@@ -1151,11 +1180,16 @@ function onScan(code){
 }
 async function toggleTorch(){ if(!Cam.track) return; Cam.torch=!Cam.torch; try{ await Cam.track.applyConstraints({advanced:[{torch:Cam.torch}]}); $('#bTorch').classList.toggle('on',Cam.torch); }catch(e){ toast('Lanterna indisponível',true); } }
 async function cycleZoom(){ if(!Cam.track||!Cam.caps.zoom) return; const max=Cam.caps.zoom.max; const opts=[1,2,3].filter(z=>z<=max); const i=opts.indexOf(Math.round(Cam.zoom)); Cam.zoom=opts[(i+1)%opts.length]; try{ await Cam.track.applyConstraints({advanced:[{zoom:Math.max(Cam.caps.zoom.min||1,Cam.zoom)}]}); $('#bZoom').textContent=Cam.zoom+'x'; }catch(e){} }
-function pauseScanner(){} function resumeScanner(){}
-function stopScanner(){
+/* Ao sair da tela, a câmera fica "em espera" por 5 minutos em vez de ser desligada:
+   assim, voltando a contar, o iPhone não pede autorização de novo. O botão ✕ desliga de verdade. */
+function desligaDepois(){ clearTimeout(Cam.desligaT); Cam.desligaT=setTimeout(()=>desligaCamera(),5*60*1000); }
+function desligaCamera(){ clearTimeout(Cam.desligaT); if(Cam.stream){ Cam.stream.getTracks().forEach(t=>{ try{t.stop()}catch(e){} }); } Cam.stream=null; Cam.track=null; }
+document.addEventListener('visibilitychange',()=>{ if(document.hidden && !Cam.on) desligaCamera(); });
+function stopScanner(definitivo){
+  const ativo=Cam.on;
   Cam.on=false; S.scanning=false;
-  if(Cam.stream){ Cam.stream.getTracks().forEach(t=>{ try{t.stop()}catch(e){} }); }
-  Cam.stream=null; Cam.track=null;
+  if(definitivo===true){ desligaCamera(); LS.set('cvinv_cam_auto',false); }
+  else if(Cam.stream && ativo) desligaDepois();
   const v=$('#vid'); if(v) v.srcObject=null;
   const cam=$('#cam'); if(cam) cam.classList.remove('live');
   const b=$('#bCam'); if(b){ b.disabled=false; b.textContent='📷 Ligar leitor de código de barras'; }
@@ -1198,70 +1232,64 @@ V.gestor_refresh = ()=>{
   const {t}=calc();
   const st=[1,2,3].map(roundStats);
   const base=S.produtos.filter(p=>!p.novo).length;
-  const pode3 = R.r1==='fechada' && R.r2==='fechada' && R.r3==='bloqueada';
+  const pode3 = modoDe(i)==='uma_conf' ? (R.r1==='fechada' && R.r3==='bloqueada') : (R.r1==='fechada' && R.r2==='fechada' && R.r3==='bloqueada');
   b.innerHTML=`
     <div class="grid kpi">
       <div class="card"><div class="l">Produtos na base</div><div class="v">${fmt(base)}</div></div>
       <div class="card"><div class="l">Cadastrados na contagem</div><div class="v">${fmt(t.novos)}</div></div>
-      <div class="card"><div class="l">Divergências 1ª × 2ª</div><div class="v">${fmt(t.div12)}</div></div>
-      <div class="card"><div class="l">Pendentes de 3ª</div><div class="v">${fmt(t.pend)}</div></div>
+      <div class="card"><div class="l">${lblDiv(i)}</div><div class="v">${fmt(t.div12)}</div></div>
+      <div class="card"><div class="l">Pendentes de ${modoDe(i)==='uma_conf'?'conferência':'3ª'}</div><div class="v">${fmt(t.pend)}</div></div>
       <div class="card"><div class="l">Precisam de entrada</div><div class="v pos">${fmt(t.ent.length)}</div></div>
       <div class="card"><div class="l">Precisam de saída</div><div class="v neg">${fmt(t.sai.length)}</div></div>
     </div>
     ${!S.produtos.length?`<div class="warnbox">Nenhum produto importado. <button class="btn ghost" id="gImp2">Importar planilha agora</button></div>`:''}
-    <div class="grid">${[1,2,3].map(r=>{ const s=R['r'+r]||'bloqueada', x=st[r-1];
+    <div class="grid">${rodadasDe(i).map(r=>{ const s=R['r'+r]||'bloqueada', x=st[r-1];
       const pct= r<3 && base ? Math.round(x.itens/Math.max(base,1)*100) : null;
       let acts='';
       if(!fin){
         if(s==='aberta') acts=`<button class="btn sec" data-close="${r}">Encerrar contagem</button>`;
         else if(s==='fechada') acts=`<button class="btn ghost" data-open="${r}">Reabrir</button>`;
-        else if(r===3) acts=`<button class="btn" id="lib3" ${pode3?'':'disabled'}>Liberar 3ª contagem</button>`;
+        else if(r===3) acts=`<button class="btn" id="lib3" ${pode3?'':'disabled'}>Liberar ${modoDe(i)==='uma_conf'?'conferência':'3ª contagem'}</button>`;
       }
-      return `<div class="card"><div class="row"><div class="round-dot">${r}ª</div><div style="flex:1"><h3>${RNOME[r]}</h3><div class="sub">${fmt(x.itens)} itens · ${fmt(x.lanc)} lançamentos${pct!=null?' · '+pct+'% da base':''}</div></div><span class="badge ${RLBL[s][1]}">${RLBL[s][0]}</span></div>
+      return `<div class="card"><div class="row"><div class="round-dot">${r===3&&modoDe(i)==='uma_conf'?'C':r+'ª'}</div><div style="flex:1"><h3>${rn(r)}</h3><div class="sub">${fmt(x.itens)} itens · ${fmt(x.lanc)} lançamentos${pct!=null?' · '+pct+'% da base':''}</div></div><span class="badge ${RLBL[s][1]}">${RLBL[s][0]}</span></div>
         <div class="small" style="margin-top:8px">👥 Escala: ${nomesEscala(i,r).length?'<b>'+esc(nomesEscala(i,r).join(', '))+'</b>':'<span class="muted">livre (qualquer pessoa)</span>'} ${!fin?`<button class="btn ghost" data-esc="${r}">Escalar</button>`:''}</div>
         <div class="small muted">${Object.keys(x.pessoas).length?'Contaram: '+Object.entries(x.pessoas).map(([n,q])=>esc(n)+' ('+q+')').join(', '):'Ninguém contou ainda'}</div>
         ${r===3&&s!=='bloqueada'?`<div class="small muted">${(i.divergentes||[]).length} itens na lista de recontagem</div>`:''}
-        ${r===3&&s==='bloqueada'&&!pode3?'<div class="small muted" style="margin-top:4px">Encerre a 1ª e a 2ª contagens para liberar.</div>':''}
+        ${r===3&&s==='bloqueada'&&!pode3?`<div class="small muted" style="margin-top:4px">Encerre ${modoDe(i)==='uma_conf'?'a contagem':'a 1ª e a 2ª contagens'} para liberar.</div>`:''}
         <div class="row" style="margin-top:10px">${acts}</div></div>`; }).join('')}</div>
     <div class="grid">
-      <div class="card click" id="gConf"><h3>⚖ Confronto 1ª × 2ª</h3><div class="sub">Lista de divergências entre as duas contagens cegas</div></div>
+      ${modoDe(i)==='uma'?'':`<div class="card click" id="gConf"><h3>⚖ ${modoDe(i)==='uma_conf'?'Contagem × estoque':'Confronto 1ª × 2ª'}</h3><div class="sub">${modoDe(i)==='uma_conf'?'Itens em que a contagem não bateu com o sistema (vão para a conferência)':'Lista de divergências entre as duas contagens cegas'}</div></div>`}
       <div class="card click" id="gRes"><h3>📋 Resultado e relatório</h3><div class="sub">Contagem final × estoque, entradas e saídas, PDF e Excel</div></div>
       <div class="card click" id="gLanc"><h3>🧾 Todos os lançamentos</h3><div class="sub">Conferir e corrigir lançamentos de cada contador</div></div>
+      <div class="card"><h3>🖼 Imagens dos produtos</h3><div class="sub" id="gImg">${(()=>{ const x=statusImagens(); return x.total?`${fmt(x.comImg)} de ${fmt(x.total)} produtos com imagem`:'Sem produtos com código de barras'; })()}</div>
+        <div class="small muted" style="margin-top:4px">As imagens aparecem aos poucos, conforme os produtos são bipados. ${MARCA}</div></div>
+      <div class="card click" id="gProd"><h3>📦 Produtos</h3><div class="sub">Corrigir descrição, código de barras, unidade, grupo ou estoque</div></div>
+      <div class="card click" id="gLog"><h3>📜 Registro de atividades</h3><div class="sub">Quem encerrou, liberou, corrigiu ou excluiu, e quando</div></div>
       <div class="card click" id="gBar"><h3>🏷 Códigos de barras</h3><div class="sub">Ver e imprimir os códigos dos produtos — para testes e etiquetas</div></div>
       <div class="card click" id="gImp"><h3>⬆ Planilha de estoque</h3><div class="sub">${S.produtos.length?fmt(base)+' produtos importados':'Importar Excel ou CSV'}</div></div>
     </div>
     ${!fin?`<div class="row"><span class="spacer"></span><button class="btn red" id="gFin">Encerrar inventário e iniciar novo</button></div>`:`<div class="warnbox">Inventário encerrado em ${dtBR(i.finalizadoEm)}${i.finalizadoPor?' por '+esc(i.finalizadoPor):''}. <button class="btn ghost" id="gReab">Reabrir</button> <button class="btn ghost" id="gNovo2">Iniciar novo inventário</button></div>`}`;
   b.querySelectorAll('[data-esc]').forEach(x=>x.onclick=()=>escalaModal(+x.dataset.esc));
   const gn2=$('#gNovo2'); if(gn2) gn2.onclick=encerrarFluxo;
-  b.querySelectorAll('[data-close]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.close; if(await ask(`Encerrar a ${RNOME[r]}? Os contadores desta rodada não poderão mais lançar.`,{ok:'Encerrar'})) setRodada(r,'fechada'); });
-  b.querySelectorAll('[data-open]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.open; if(await ask(`Reabrir a ${RNOME[r]}?`,{ok:'Reabrir'})) setRodada(r,'aberta'); });
+  b.querySelectorAll('[data-close]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.close; if(await ask(`Encerrar a ${rn(r)}? Os contadores desta rodada não poderão mais lançar.`,{ok:'Encerrar'})) setRodada(r,'fechada'); });
+  b.querySelectorAll('[data-open]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.open; if(await ask(`Reabrir a ${rn(r)}?`,{ok:'Reabrir'})) setRodada(r,'aberta'); });
   const l3=$('#lib3'); if(l3) l3.onclick=liberar3;
-  $('#gConf').onclick=()=>go('confronto'); $('#gRes').onclick=()=>go('resultado'); $('#gLanc').onclick=()=>go('lancamentos'); $('#gBar').onclick=()=>go('etiquetas'); $('#gImp').onclick=()=>go('importar');
+  const gcf=$('#gConf'); if(gcf) gcf.onclick=()=>go('confronto'); $('#gRes').onclick=()=>go('resultado'); $('#gLanc').onclick=()=>go('lancamentos'); $('#gBar').onclick=()=>go('etiquetas'); $('#gProd').onclick=()=>go('produtos'); $('#gLog').onclick=()=>go('log');
+  $('#gImp').onclick=()=>go('importar');
   const i2=$('#gImp2'); if(i2) i2.onclick=()=>go('importar');
   const f=$('#gFin'); if(f) f.onclick=encerrarFluxo;
-  const rb=$('#gReab'); if(rb) rb.onclick=async()=>{ if(await ask('Reabrir este inventário?')) Store.set('inventarios',i.id,{status:'contagem',finalizadoEm:null}); };
+  const rb=$('#gReab'); if(rb) rb.onclick=async()=>{ if(await ask('Reabrir este inventário?')){ Store.set('inventarios',i.id,{status:'contagem',finalizadoEm:null}); logAcao('Reabriu o inventário',''); } };
 };
-function setRodada(r,st){ const R={...(S.inv.rodadas||{})}; R['r'+r]=st; Store.set('inventarios',S.inv.id,{rodadas:R}); toast(RNOME[r]+': '+RLBL[st][0].toLowerCase()); }
+function setRodada(r,st){ const R={...(S.inv.rodadas||{})}; R['r'+r]=st; Store.set('inventarios',S.inv.id,{rodadas:R}); logAcao(st==='fechada'?'Encerrou contagem':'Reabriu contagem',rn(r)); toast(rn(r)+': '+RLBL[st][0].toLowerCase()); }
 async function liberar3(){
   const {rows}=calc(); const div=rows.filter(r=>r.d12).map(r=>r.codigo);
-  if(!div.length){ return ask('A 1ª e a 2ª contagens bateram em todos os itens. Não há o que recontar — vá direto ao resultado.',{ok:'Ver resultado',title:'Sem divergências'}).then(ok=>ok&&go('resultado')); }
-  if(!await ask(`Liberar a 3ª contagem com <b>${div.length}</b> item(ns) divergente(s)? Os contadores verão só a lista desses itens, sem quantidades.`,{ok:'Liberar'})) return;
+  const nm=modoDe(S.inv)==='uma_conf'?'conferência':'3ª contagem';
+  if(!div.length){ return ask(modoDe(S.inv)==='uma_conf'?'A contagem bateu com o estoque em todos os itens. Não há o que conferir — vá direto ao resultado.':'A 1ª e a 2ª contagens bateram em todos os itens. Não há o que recontar — vá direto ao resultado.',{ok:'Ver resultado',title:'Sem divergências'}).then(ok=>ok&&go('resultado')); }
+  if(!await ask(`Liberar a ${nm} com <b>${div.length}</b> item(ns) divergente(s)? Os contadores verão só a lista desses itens, sem quantidades.`,{ok:'Liberar'})) return;
   const R={...(S.inv.rodadas||{}),r3:'aberta'};
-  await Store.set('inventarios',S.inv.id,{rodadas:R,divergentes:div,liberado3Em:now()}); S.inv={...S.inv,rodadas:R,divergentes:div}; toast('3ª contagem liberada');
+  await Store.set('inventarios',S.inv.id,{rodadas:R,divergentes:div,liberado3Em:now()}); S.inv={...S.inv,rodadas:R,divergentes:div}; logAcao('Liberou '+nm,div.length+' item(ns)'); toast(nm.charAt(0).toUpperCase()+nm.slice(1)+' liberada');
   setTimeout(()=>escalaModal(3),300);
 }
-async function finalizar(){
-  const {t}=calc();
-  const R=S.inv.rodadas||{};
-  const abertas=[1,2,3].filter(r=>R['r'+r]==='aberta');
-  let msg=`Finalizar o inventário?`;
-  if(abertas.length) msg+=`<br><br>⚠ Ainda há contagem aberta (${abertas.map(r=>r+'ª').join(', ')}). Ela será encerrada.`;
-  if(t.pend) msg+=`<br><br>⚠ Há <b>${t.pend}</b> item(ns) divergente(s) sem 3ª contagem. Eles ficarão sem quantidade final no relatório.`;
-  if(!await ask(msg,{ok:'Finalizar',danger:true,title:'Finalizar inventário'})) return;
-  const RR={...R}; [1,2,3].forEach(r=>{ if(RR['r'+r]==='aberta') RR['r'+r]='fechada'; });
-  await Store.set('inventarios',S.inv.id,{status:'finalizado',finalizadoEm:now(),rodadas:RR}); toast('Inventário finalizado'); go('resultado');
-}
-
 /* ---------- CÓDIGOS DE BARRAS DOS PRODUTOS (testes e etiquetas) ---------- */
 S.et={q:'',g:'',lim:120};
 async function carregaJsBarcode(){ if(window.JsBarcode) return true; try{ await loadScript('libs/jsbarcode.min.js'); }catch(e){ try{ await loadScript('https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js'); }catch(e2){} } return !!window.JsBarcode; }
@@ -1276,7 +1304,7 @@ V.etiquetas = async ()=>{
     <div id="etL" class="etgrid"><div class="empty">Carregando…</div></div></div>`;
   let t=null; $('#etQ').oninput=e=>{ clearTimeout(t); t=setTimeout(()=>{ S.et.q=e.target.value; S.et.lim=120; desenhaEt(); },150); };
   $('#etG').onchange=e=>{ S.et.g=e.target.value; S.et.lim=120; desenhaEt(); };
-  if(!await carregaJsBarcode()){ $('#etL').innerHTML='<div class="warnbox">Não consegui carregar o gerador de códigos. Confira se a pasta libs foi enviada.</div>'; return; }
+  if(!await carregaJsBarcode()){ $('#etL').innerHTML='<div class="warnbox">Não consegui carregar o gerador de códigos. Feche o app e abra de novo.</div>'; return; }
   desenhaEt();
 };
 function desenhaEt(){
@@ -1293,9 +1321,50 @@ function desenhaEt(){
   const m=$('#etM'); if(m) m.onclick=()=>{ S.et.lim+=200; desenhaEt(); };
 }
 
+/* ---------- PRODUTOS (gestor corrige cadastro) ---------- */
+S.pq='';
+V.produtos = ()=>{
+  header('Produtos',S.inv.nome);
+  $('#app').innerHTML=`<div class="stack"><input class="in" id="pqQ" placeholder="Buscar por nome, código, código de barras ou grupo" value="${esc(S.pq)}"><div id="pqL"></div></div>`;
+  let t=null; $('#pqQ').oninput=e=>{ clearTimeout(t); t=setTimeout(()=>{ S.pq=e.target.value; V.produtos_refresh(); },150); };
+  V.produtos_refresh();
+};
+V.produtos_refresh = ()=>{
+  const L=$('#pqL'); if(!L) return;
+  const arr=(S.pq.trim()?search(S.pq,300):[...S.produtos].sort(byGrupo).slice(0,300));
+  L.innerHTML=`<div class="small muted" style="margin-bottom:6px">${fmt(S.produtos.length)} produtos${arr.length>=300?' · mostrando 300, use a busca':''}</div>
+    <div class="tbl-wrap"><table class="t"><thead><tr><th></th><th>Código</th><th>Descrição</th><th>Cód. barras</th><th>Un</th><th>Grupo</th><th class="n">Estoque</th><th></th></tr></thead><tbody>
+    ${arr.map(p=>`<tr><td>${thumb(p,32)}</td><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}${p.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="mono small">${esc(p.ean||'')}</td><td>${esc(p.unidade||'')}</td><td class="small">${esc(gLbl(p))}</td><td class="n">${fmt(p.estoque)}</td><td><button class="x ed" data-pe="${esc(p.id)}">✎</button></td></tr>`).join('')||'<tr><td colspan="8" class="empty">Nenhum produto</td></tr>'}</tbody></table></div>`;
+  L.querySelectorAll('[data-pe]').forEach(b=>b.onclick=()=>editarProduto(S.produtos.find(p=>p.id===b.dataset.pe)));
+};
+function editarProduto(p){ if(!p) return;
+  const f=(k,l,ex='')=>`<label class="f">${l}<input class="in" name="${k}" value="${esc(p[k]??'')}" ${ex}></label>`;
+  modal(`<h2>Corrigir produto</h2><div class="small muted mono">${esc(p.codigo)}</div><form id="fPe" class="fgrid" style="margin-top:10px">
+    ${f('descricao','Descrição','required')}${f('ean','Código de barras','inputmode="numeric"')}${f('unidade','Unidade')}${f('grupo','Grupo')}${f('subgrupo','Subgrupo')}${f('estoque','Estoque do sistema','inputmode="decimal"')}${f('custo','Custo unitário','inputmode="decimal"')}
+    <div class="row" style="grid-column:1/-1;justify-content:flex-end"><button type="button" class="btn sec" id="peC">Cancelar</button><button class="btn">Salvar</button></div></form>`,
+  {onOpen:o=>{ $('#peC',o).onclick=closeModal; $('#fPe',o).onsubmit=ev=>{ ev.preventDefault();
+    const d=Object.fromEntries(new FormData(ev.target).entries());
+    const novo={descricao:d.descricao.trim(),ean:d.ean.trim(),unidade:d.unidade.trim().toUpperCase(),grupo:d.grupo.trim().toUpperCase(),subgrupo:d.subgrupo.trim().toUpperCase(),estoque:r3(parseNum(d.estoque)),custo:r3(parseNum(d.custo))};
+    if(novo.ean && S.idxEan.has(eanKey(novo.ean)) && S.idxEan.get(eanKey(novo.ean)).id!==p.id) return toast('Esse código de barras já é de: '+S.idxEan.get(eanKey(novo.ean)).descricao,true);
+    const mud=Object.keys(novo).filter(k=>String(novo[k]??'')!==String(p[k]??(k==='estoque'||k==='custo'?0:'')));
+    if(!mud.length){ closeModal(); return; }
+    Store.set('inventarios/'+S.inv.id+'/produtos',p.id,novo);
+    logAcao('Corrigiu produto',`${p.codigo} · `+mud.map(k=>`${k}: ${p[k]??''} → ${novo[k]}`).join(' · '));
+    closeModal(); toast('Produto atualizado'); }; }});
+}
+/* ---------- REGISTRO DE ATIVIDADES ---------- */
+V.log = async ()=>{
+  header('Registro de atividades',S.inv.nome);
+  $('#app').innerHTML='<div class="empty">Carregando…</div>';
+  const L=(await Store.list('inventarios/'+S.inv.id+'/log')).sort((a,b)=>String(b.ts).localeCompare(String(a.ts)));
+  $('#app').innerHTML=`<div class="stack"><div class="tbl-wrap"><table class="t"><thead><tr><th>Data/hora</th><th>Quem</th><th>Ação</th><th>Detalhe</th></tr></thead><tbody>
+    ${L.map(x=>`<tr><td class="small" style="white-space:nowrap">${dtBR(x.ts)}</td><td>${esc(x.quem)}</td><td><b>${esc(x.acao)}</b></td><td class="small">${esc(x.detalhe)}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Nenhuma atividade registrada ainda</td></tr>'}
+    </tbody></table></div></div>`;
+};
+
 /* ---------- CONFRONTO ---------- */
 V.confronto = ()=>{
-  header('Confronto 1ª × 2ª',S.inv.nome);
+  header(modoDe(S.inv)==='uma_conf'?'Contagem × estoque':'Confronto 1ª × 2ª',S.inv.nome);
   $('#app').innerHTML='<div id="cBody" class="stack"></div>';
   V.confronto_refresh();
 };
@@ -1303,12 +1372,12 @@ V.confronto_refresh = ()=>{
   const b=$('#cBody'); if(!b) return;
   const R=S.inv.rodadas||{};
   const {rows}=calc(); const d=rows.filter(r=>r.d12);
-  const aberta = R.r1==='aberta'||R.r2==='aberta';
+  const aberta = R.r1==='aberta'||R.r2==='aberta'; const mC=modoDe(S.inv)==='uma_conf';
   b.innerHTML=`${aberta?'<div class="warnbox">A 1ª ou a 2ª contagem ainda está aberta. Esta lista é parcial e pode mudar.</div>':''}
     <div class="row between"><h1>${d.length} divergência(s)</h1>
-      <div class="row">${R.r3==='bloqueada'&&!aberta&&d.length?'<button class="btn" id="cLib">Liberar 3ª contagem</button>':''}<button class="btn sec" id="cXls">Excel</button></div></div>
-    ${d.length?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">Diferença</th><th class="n">3ª</th></tr></thead><tbody>
-      ${d.map(r=>`<tr><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td><td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(r.c[1])}</td><td class="n">${fmtS(r3(r.c[1]-r.c[0]))}</td><td class="n">${r.n[2]?fmt(r.c[2]):'<span class="badge b-warn">pendente</span>'}</td></tr>`).join('')}
+      <div class="row">${R.r3==='bloqueada'&&!aberta&&d.length?`<button class="btn" id="cLib">Liberar ${mC?'conferência':'3ª contagem'}</button>`:''}<button class="btn sec" id="cXls">Excel</button></div></div>
+    ${d.length?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">${mC?'Contagem':'1ª'}</th><th class="n">${mC?'Estoque':'2ª'}</th><th class="n">Diferença</th><th class="n">${mC?'Conferência':'3ª'}</th></tr></thead><tbody>
+      ${d.map(r=>`<tr><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td><td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(mC?r.estoque:r.c[1])}</td><td class="n">${fmtS(r3((mC?r.estoque:r.c[1])-r.c[0]))}</td><td class="n">${r.n[2]?fmt(r.c[2]):'<span class="badge b-warn">pendente</span>'}</td></tr>`).join('')}
     </tbody></table></div>`:`<div class="card empty"><h2>Nenhuma divergência</h2><p>A 1ª e a 2ª contagens bateram em todos os itens contados.</p></div>`}`;
   const l=$('#cLib'); if(l) l.onclick=liberar3;
   $('#cXls').onclick=async()=>{ await lib('xlsx'); const aoa=[['Código','Descrição','Grupo','Subgrupo','Unidade','1ª contagem','2ª contagem','Diferença','3ª contagem']].concat(d.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.unidade,r.c[0],r.c[1],r3(r.c[1]-r.c[0]),r.n[2]?r.c[2]:''])); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Divergências 1x2'); XLSX.writeFile(wb,fileBase()+'_divergencias_1x2.xlsx'); };
@@ -1325,12 +1394,13 @@ V.lancamentos_refresh = ()=>{
   const f=S.tabLanc;
   let L=[...S.lanc].sort((a,b)=>String(b.ts).localeCompare(String(a.ts)));
   if(f!=='todas') L=L.filter(l=>String(l.rodada)===f);
-  b.innerHTML=`<div class="tabs">${[['todas','Todas'],['1','1ª'],['2','2ª'],['3','3ª']].map(([k,l])=>`<button data-t="${k}" class="${f===k?'on':''}">${l}</button>`).join('')}</div>
+  b.innerHTML=`<div class="tabs">${[['todas','Todas'],...rodadasDe(S.inv).map(r=>[String(r),rn(r)])].map(([k,l])=>`<button data-t="${k}" class="${f===k?'on':''}">${l}</button>`).join('')}</div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th>Hora</th><th>Cont.</th><th>Contador</th><th>Código</th><th>Descrição</th><th class="n">Qtd</th><th></th></tr></thead><tbody>
-    ${L.slice(0,1500).map(l=>`<tr><td class="small">${dtBR(l.ts)}</td><td>${l.rodada}ª</td><td>${esc(l.contador)}</td><td class="mono">${esc(l.codigo)}</td><td>${esc(l.descricao)}</td><td class="n">${fmt(l.qtd)} ${esc(l.unidade||'')}</td><td><button class="x" data-del="${l.id}">✕</button></td></tr>`).join('')||'<tr><td colspan="7" class="empty">Sem lançamentos</td></tr>'}
+    ${L.slice(0,1500).map(l=>`<tr><td class="small">${dtBR(l.ts)}</td><td class="small">${rn(l.rodada)}</td><td>${esc(l.contador)}</td><td class="mono">${esc(l.codigo)}</td><td>${esc(l.descricao)}</td><td class="n">${fmt(l.qtd)} ${esc(l.unidade||'')}${l.editadoEm?` <span class="badge b-warn" title="Corrigido por ${esc(l.editadoPor)} (antes: ${fmt(l.qtdAnterior)})">corrigido</span>`:''}</td><td style="white-space:nowrap"><button class="x ed" data-ed="${l.id}">✎</button> <button class="x" data-del="${l.id}">✕</button></td></tr>`).join('')||'<tr><td colspan="7" class="empty">Sem lançamentos</td></tr>'}
     </tbody></table></div>`;
   b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{ S.tabLanc=x.dataset.t; V.lancamentos_refresh(); });
-  b.querySelectorAll('[data-del]').forEach(x=>x.onclick=async()=>{ const l=S.lanc.find(z=>z.id===x.dataset.del); if(await ask(`Excluir ${fmt(l.qtd)} de <b>${esc(l.descricao)}</b> (${l.rodada}ª, ${esc(l.contador)})?`,{ok:'Excluir',danger:true})) Store.del('inventarios/'+S.inv.id+'/lancamentos',l.id); });
+  b.querySelectorAll('[data-del]').forEach(x=>x.onclick=()=>excluirLanc(S.lanc.find(z=>z.id===x.dataset.del)));
+  b.querySelectorAll('[data-ed]').forEach(x=>x.onclick=()=>editarLanc(S.lanc.find(z=>z.id===x.dataset.ed)));
 };
 
 /* ---------- IMPORTAR PLANILHA ---------- */
@@ -1342,8 +1412,8 @@ V.importar = ()=>{
   $('#app').innerHTML=`<div class="stack">
     <div class="card"><h2>Importar Excel ou CSV</h2>
       <p class="muted small">A planilha deve ter as colunas: código do produto, descrição, código de barras, quantidade em estoque e unidade. Grupo, subgrupo e custo unitário são opcionais: grupos organizam a contagem e o custo mostra o valor das perdas. A primeira linha precisa ser o cabeçalho.</p>
-      ${S.produtos.length?`<div class="warnbox">Já existem ${fmt(S.produtos.length)} produtos neste inventário. Importar de novo substitui a lista.${tem?' <b>Como já há lançamentos de contagem, a substituição está bloqueada.</b>':''}</div>`:''}
-      <input type="file" id="fx" accept=".xlsx,.xls,.csv,.ods" class="in" style="margin-top:10px" ${tem?'disabled':''}>
+      ${S.produtos.length?`<div class="hint">Já existem ${fmt(S.produtos.length)} produtos neste inventário. ${tem?'Como já há contagens, a nova planilha vai <b>atualizar</b> os produtos (estoque, descrição, código de barras, unidade, grupo e custo, pelo código do produto) e <b>acrescentar</b> os que não existiam. Nenhuma contagem é apagada.':'Você poderá <b>atualizar</b> a lista atual ou <b>substituir</b> tudo.'}</div>`:''}
+      <input type="file" id="fx" accept=".xlsx,.xls,.csv,.ods" class="in" style="margin-top:10px">
       <div class="row" style="margin-top:10px"><button class="btn ghost" id="bMod">⬇ Baixar planilha modelo</button></div>
     </div>
     <div id="map"></div></div>`;
@@ -1368,7 +1438,11 @@ function mapping(rows,fname){
   const box=$('#map');
   box.innerHTML=`<div class="card stack"><h2>Conferir colunas — ${esc(fname)}</h2><div class="small muted">${fmt(rows.length-1)} linhas encontradas. Confirme qual coluna é cada informação.</div>
     <div class="fgrid">${['codigo','descricao','ean','estoque','unidade','grupo','subgrupo','custo'].map(k=>COLS.find(c=>c[0]===k)).map(([k,l])=>`<label class="f">${l}${k==='codigo'||k==='descricao'?' *':''}<select class="in" data-k="${k}">${opts(auto[k])}</select></label>`).join('')}</div>
-    <div id="prev"></div><div class="row"><span class="spacer"></span><button class="btn" id="bImp">Importar produtos</button></div></div>`;
+    <div id="prev"></div>
+    ${S.produtos.length?`<div class="stack" style="gap:6px"><label class="chk"><input type="radio" name="modoImp" value="atualizar" checked> Atualizar os produtos existentes e acrescentar os novos</label>
+      ${S.lanc.length?'':'<label class="chk"><input type="radio" name="modoImp" value="substituir"> Substituir a lista inteira</label>'}
+      <label class="chk small"><input type="checkbox" id="zeraFora"> Zerar o estoque dos produtos que não estão na nova planilha</label></div>`:''}
+    <div class="row"><span class="spacer"></span><button class="btn" id="bImp">${S.produtos.length?'Aplicar planilha':'Importar produtos'}</button></div></div>`;
   const get=()=>{ const m={}; box.querySelectorAll('[data-k]').forEach(s=>m[s.dataset.k]=s.value===''?null:+s.value); return m; };
   const build=()=>{ const m=get(); const out=[]; const seen=new Set(); let dup=0, vaz=0;
     rows.slice(1).forEach(r=>{ const cod=m.codigo!=null?codeStr(r[m.codigo]):''; const desc=m.descricao!=null?String(r[m.descricao]).trim():'';
@@ -1382,13 +1456,32 @@ function mapping(rows,fname){
   $('#bImp').onclick=async()=>{
     const m=get(); if(m.codigo==null||m.descricao==null) return toast('Escolha as colunas de código e descrição',true);
     const {out}=build(); if(!out.length) return toast('Nenhum produto válido',true);
-    if(S.lanc.length) return toast('Já existem lançamentos — não é possível substituir',true);
+    const modoImp=(box.querySelector('[name=modoImp]:checked')||{}).value||'substituir';
+    if(modoImp==='substituir' && S.lanc.length) return toast('Já existem lançamentos — use Atualizar',true);
     const btn=$('#bImp'); btn.disabled=true; btn.textContent='Importando…';
     try{
       const col='inventarios/'+S.inv.id+'/produtos';
+      if(modoImp==='atualizar' && S.produtos.length){
+        const ex=new Map(S.produtos.map(p=>[norm(p.codigo),p])); const upd=[], add=[]; const vistos=new Set();
+        const CAMPOS=['descricao','ean','estoque','unidade','grupo','subgrupo','custo'];
+        out.forEach(n=>{ const k=norm(n.codigo); vistos.add(k); const p=ex.get(k);
+          if(!p){ add.push(n); return; }
+          const d={}; CAMPOS.forEach(c=>{ if(c==='custo'&&!n.custo) return; if(String(n[c]??'')!==String(p[c]??'')) d[c]=n[c]; });
+          if(Object.keys(d).length) upd.push({id:p.id,data:d}); });
+        if($('#zeraFora')&&$('#zeraFora').checked) S.produtos.forEach(p=>{ if(!vistos.has(norm(p.codigo)) && !p.novo && Number(p.estoque)) upd.push({id:p.id,data:{estoque:0}}); });
+        if(upd.length>3000 && !await ask(`Vão ser atualizados <b>${fmt(upd.length)}</b> produtos. Isso usa bastante da cota diária do banco de dados. Continuar?`,{ok:'Continuar'})){ btn.disabled=false; btn.textContent='Aplicar planilha'; return; }
+        btn.textContent=`Atualizando ${fmt(upd.length)} produto(s)…`; await Store.updateMany(col,upd);
+        if(add.length) await Store.addMany(col,add);
+        await Store.set('inventarios',S.inv.id,{totalProdutos:S.produtos.length+add.length,importadoEm:now(),arquivo:fname});
+        logAcao('Atualizou a planilha',`${fname} · ${upd.length} atualizado(s) · ${add.length} novo(s)`);
+        toast(`${fmt(upd.length)} atualizado(s), ${fmt(add.length)} novo(s)`);
+        if(S.stack[S.stack.length-1]==='gestor') back(); else { S.view='invhome'; render(); }
+        return;
+      }
       if(S.produtos.length){ const ids=(await Store.list(col)).map(p=>p.id); await Store.delMany(col,ids); }
       await Store.addMany(col,out,n=>btn.textContent=`Importando… ${n}/${out.length}`);
       await Store.set('inventarios',S.inv.id,{totalProdutos:out.length,importadoEm:now(),arquivo:fname});
+      logAcao('Importou a planilha',`${fname} · ${out.length} produtos`);
       toast(fmt(out.length)+' produtos importados');
       if(S.stack[S.stack.length-1]==='gestor') back(); else { S.view='invhome'; render(); }
     }catch(err){ console.error(err); toast('Erro ao importar: '+(err.message||err),true); btn.disabled=false; btn.textContent='Importar produtos'; }
@@ -1410,13 +1503,13 @@ V.resultado_refresh = ()=>{
   const flt=(f==='grupos'?[]:({todos:rows,div:rows.filter(r=>r.d12),ent:t.ent,sai:t.sai,pend:rows.filter(r=>r.status==='pendente'),novos:rows.filter(r=>r.novo)}[f]||rows)).filter(inG);
   const resumo=resumoGrupos(rows);
   b.innerHTML=`
-    ${t.pend?`<div class="warnbox">${t.pend} item(ns) com divergência entre 1ª e 2ª ainda sem 3ª contagem — ficam sem quantidade final.</div>`:''}
+    ${t.pend?`<div class="warnbox">${t.pend} item(ns) com divergência ainda sem ${rn(3).toLowerCase()} — ficam sem quantidade final.</div>`:''}
     <div class="grid kpi">
       <div class="card"><div class="l">Itens no inventário</div><div class="v">${fmt(t.itens)}</div></div>
       <div class="card"><div class="l">Batem com o estoque</div><div class="v">${fmt(t.semDif)}</div></div>
       <div class="card"><div class="l">Entradas (itens)</div><div class="v pos">${fmt(t.ent.length)}</div></div>
       <div class="card"><div class="l">Saídas (itens)</div><div class="v neg">${fmt(t.sai.length)}</div></div>
-      <div class="card"><div class="l">Divergências 1ª×2ª</div><div class="v">${fmt(t.div12)}</div></div>
+      <div class="card"><div class="l">${lblDiv(S.inv)}</div><div class="v">${fmt(t.div12)}</div></div>
       <div class="card"><div class="l">Pendentes</div><div class="v">${fmt(t.pend)}</div></div>
     </div>
     <div class="grid">
@@ -1430,7 +1523,7 @@ V.resultado_refresh = ()=>{
         <div class="row" style="margin-top:10px"><button class="btn dark" id="rPdf">PDF</button><button class="btn sec" id="rXls">Excel</button></div></div>
     </div>
     <div class="small muted">Layout do arquivo do ERP: <b>${esc({csv:'texto delimitado',fixo:'TXT posicional',xlsx:'Excel'}[erpCfg().formato])}</b> · <a href="#" id="rCfgErp">configurar para o ERP do cliente</a>${t.pend?' · ⚠ itens pendentes ficam fora dos ajustes':''}</div>
-    <div class="tabs">${[['todos','Todos',rows.length],['ent','Entradas',t.ent.length],['sai','Saídas',t.sai.length],['div','Divergentes 1×2',t.div12],['pend','Pendentes',t.pend],['novos','Novos',t.novos],['grupos','Por grupo',resumo.length]].map(([k,l,n])=>`<button data-t="${k}" class="${f===k?'on':''}">${l} (${n})</button>`).join('')}</div>
+    <div class="tabs">${[['todos','Todos',rows.length],['ent','Entradas',t.ent.length],['sai','Saídas',t.sai.length],['div',modoDe(S.inv)==='uma_conf'?'Divergentes × estoque':'Divergentes 1×2',t.div12],['pend','Pendentes',t.pend],['novos','Novos',t.novos],['grupos','Por grupo',resumo.length]].map(([k,l,n])=>`<button data-t="${k}" class="${f===k?'on':''}">${l} (${n})</button>`).join('')}</div>
     ${f==='grupos'?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Grupo</th><th>Subgrupo</th><th class="n">Itens</th><th class="n">Batem</th><th class="n">Diverg. 1×2</th><th class="n">Pendentes</th><th class="n">Entradas</th><th class="n">Saídas</th></tr></thead><tbody>
       ${resumo.map(x=>`<tr class="${x.sub?'':'hl'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td></tr>`).join('')}</tbody></table></div>`:`
     <div class="row"><select class="in" id="rG" style="max-width:340px"><option value="">Todos os grupos</option>${grupos(rows).map(x=>`<option ${G===x.g?'selected':''}>${esc(x.g)}</option>`).join('')}</select></div>
@@ -1473,8 +1566,11 @@ async function gerarExcel(){ await lib('xlsx');
 }
 function svgToPng(svg,w,h){ return new Promise(res=>{ const img=new Image(); img.onload=()=>{ const c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h); res(c.toDataURL('image/png')); }; img.onerror=()=>res(null); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg); }); }
 async function gerarPDF(){
+  let resumo=false;
+  if(calc().rows.length>1500){ resumo=await ask(`O inventário tem ${fmt(calc().rows.length)} itens. O relatório completo fica muito grande para o celular.<br><br><b>Resumido:</b> só os itens com divergência, ajuste ou cadastrados na contagem.<br><b>Completo:</b> todos os itens (melhor gerar no computador).`,{ok:'Gerar resumido',title:'Tamanho do relatório'}); }
   await lib('pdf');
-  const {rows,t}=calc(); const e=S.empresa,i=S.inv;
+  const {rows:todos,t}=calc(); const e=S.empresa,i=S.inv;
+  const rows=resumo?todos.filter(r=>r.d12||r.novo||r.status==='pendente'||(r.dif!=null&&!eq(r.dif,0))):todos;
   const {jsPDF}=window.jspdf; const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
   const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
   const logo=await svgToPng(LOGO_SVG('#000924'),884,128);
@@ -1484,7 +1580,7 @@ async function gerarPDF(){
     doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(90);
     doc.text(`${e.fantasia||''}${e.razao&&e.razao!==e.fantasia?' · '+e.razao:''}${e.cnpj?' · CNPJ '+e.cnpj:''}${e.cidade?' · '+e.cidade+(e.uf?'/'+e.uf:''):''}`,14,17.5);
     doc.text(`${i.nome} · Data: ${dBR(i.data)} · Emitido em ${new Date().toLocaleString('pt-BR')}${i.status==='finalizado'?' · FINALIZADO':' · EM ANDAMENTO'}`,14,22); };
-  const rodape=()=>{ const n=doc.internal.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(8); doc.setTextColor(120); doc.text('Cultivve Gestão de Projetos · Simplicidade, eficácia e resultado',14,H-7); doc.text(`Página ${p} de ${n}`,W-14,H-7,{align:'right'}); } };
+  const rodape=()=>{ const n=doc.internal.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(8); doc.setTextColor(120); doc.text(MARCA,14,H-7); doc.text(`Página ${p} de ${n}`,W-14,H-7,{align:'right'}); } };
   const num=n=>n==null?'—':fmt(n);
   topo();
   // resumo
@@ -1506,7 +1602,7 @@ async function gerarPDF(){
   rows.forEach(r=>{ const gl=gLbl(r); if(gl!==lastG){ pdfBody.push([{content:gl,colSpan:10,styles:{fillColor:[227,243,241],textColor:[29,107,98],fontStyle:'bold'}}]); pdfMeta.push(null); lastG=gl; }
     pdfBody.push([r.codigo,r.descricao+(r.novo?' (novo)':''),r.unidade,num(r.c[0]),num(r.c[1]),r.n[2]?num(r.c[2]):'—',num(r.final),num(r.estoque),r.dif==null?'—':fmtS(r.dif),r.status==='pendente'?'PENDENTE':r.dif>0.0004?'ENTRADA':r.dif<-0.0004?'SAÍDA':'OK']); pdfMeta.push(r); });
   if(doc.lastAutoTable.finalY>H-50){ doc.addPage(); topo(); doc.lastAutoTable.finalY=24; }
-  doc.setFontSize(11); doc.setTextColor(...NAVY); doc.setFont('helvetica','bold'); doc.text('1. Contagem completa',14,doc.lastAutoTable.finalY+12); doc.setFont('helvetica','normal');
+  doc.setFontSize(11); doc.setTextColor(...NAVY); doc.setFont('helvetica','bold'); doc.text(resumo?'1. Itens com divergência ou ajuste (relatório resumido)':'1. Contagem completa',14,doc.lastAutoTable.finalY+12); doc.setFont('helvetica','normal');
   doc.autoTable({startY:doc.lastAutoTable.finalY+14,theme:'striped',styles:{fontSize:7.5,cellPadding:1.4},headStyles:{fillColor:NAVY,fontSize:7.5},margin:{left:14,right:14,top:28},
     head:[['Código','Descrição','Un','1ª','2ª','3ª','Final','Estoque','Diferença','Ação']],
     body:pdfBody,
@@ -1547,11 +1643,18 @@ function usuarios(e=S.empresa){
 const podeEnc=u=>!!u && (u.perfil==='gestor'||u.podeEncerrar);
 const ehGestor=u=>!!u && u.perfil==='gestor';
 function meKey(){ return 'cvinv_me_'+(S.empresa&&S.empresa.id); }
-function carregarMe(){ const id=LS.get(meKey()); S.me = id ? (usuarios().find(u=>u.id===id)||null) : null; }
+function carregarMe(){ const id=LS.get(meKey()); S.me = id ? (usuarios().find(u=>u.id===id)||null) : null; if(!S.me && S.sess && S.sess.id==='cultivve' && adminOk()) S.me=S.sess; }
+const pinHash=(empId,pin)=>sha(empId+':'+String(pin).trim());
+async function migrarPins(){
+  const us=usuarios(); if(!S.empresa || !Array.isArray(S.empresa.usuarios) || !us.some(u=>u.pin)) return;
+  const lista=[]; for(const u of us){ const x={...u}; if(x.pin){ x.pinH=await pinHash(S.empresa.id,x.pin); delete x.pin; } lista.push(x); }
+  await salvarUsuarios(lista);
+}
 async function pedirPin(titulo,teste,msgSem){
   const pin=await askText(titulo,{label:'Digite seu PIN',type:'password',inputmode:'numeric'});
   if(pin==null) return null;
-  const u=usuarios().find(x=>String(x.pin)===String(pin).trim());
+  const h=await pinHash(S.empresa.id,pin);
+  const u=usuarios().find(x=>(x.pinH&&x.pinH===h)||(x.pin&&String(x.pin)===String(pin).trim()));
   if(!u){ toast('PIN não encontrado',true); return null; }
   if(teste && !teste(u)){ toast(msgSem||(u.nome+' não tem permissão para isso'),true); return null; }
   return u;
@@ -1571,7 +1674,7 @@ function nomesEscala(inv,r){ const us=usuarios(); return escalaDe(inv,r).map(id=
 function escalaModal(r){
   const us=usuarios(); const E=S.inv.escala||{}; const sel=new Set(E['r'+r]||[]);
   const em=x=>new Set(E['r'+x]||[]);
-  modal(`<h2>Escala da ${RNOME[r]}</h2>
+  modal(`<h2>Escala da ${rn(r)}</h2>
     <p class="small muted">Marque quem vai fazer esta contagem. Essas pessoas recebem a tarefa direto no app. Sem ninguém marcado, qualquer pessoa pode contar.</p>
     <div id="escL" class="stack" style="margin-top:10px">${us.map(u=>{
       const outras=[1,2,3].filter(x=>x!==r && em(x).has(u.id)).map(x=>x+'ª');
@@ -1589,7 +1692,7 @@ function escalaModal(r){
     $('#escC',o).onclick=closeModal;
     $('#escU',o).onclick=()=>usuarioForm({},()=>escalaModal(r));
     $('#escS',o).onclick=async()=>{ const ids=[...o.querySelectorAll('#escL input:checked')].map(i=>i.value);
-      await Store.set('inventarios',S.inv.id,{escala:{...(S.inv.escala||{}),['r'+r]:ids}}); S.inv={...S.inv,escala:{...(S.inv.escala||{}),['r'+r]:ids}};
+      await Store.set('inventarios',S.inv.id,{escala:{...(S.inv.escala||{}),['r'+r]:ids}}); logAcao('Alterou escala',rn(r)+': '+(ids.map(id=>(us.find(u=>u.id===id)||{}).nome).join(', ')||'livre')); S.inv={...S.inv,escala:{...(S.inv.escala||{}),['r'+r]:ids}};
       closeModal(); toast('Escala salva'); render(); };
   }});
 }
@@ -1597,7 +1700,7 @@ function usuarioForm(u={},depois){
   const us=usuarios();
   modal(`<h2>${u.id?'Editar usuário':'Novo usuário'}</h2><form id="fUs" class="fgrid" style="margin-top:12px">
     <label class="f">Nome *<input class="in" name="nome" required value="${esc(u.nome||'')}"></label>
-    <label class="f">PIN (4 a 6 números) *<input class="in" name="pin" type="password" inputmode="numeric" required value="${esc(u.pin||'')}"></label>
+    <label class="f">PIN (4 a 6 números)${u.id?'':' *'}<input class="in" name="pin" type="password" inputmode="numeric" autocomplete="new-password" ${u.id?'placeholder="deixe em branco para manter"':'required'}></label>
     <label class="f">Perfil<select class="in" name="perfil"><option value="contador" ${u.perfil!=='gestor'?'selected':''}>Contador</option><option value="gestor" ${u.perfil==='gestor'?'selected':''}>Gestor</option></select></label>
     <label class="chk small" style="grid-column:1/-1"><input type="checkbox" name="podeEncerrar" ${u.podeEncerrar?'checked':''}> Pode encerrar o inventário e iniciar um novo (gestores sempre podem)</label>
     <div class="hint" style="grid-column:1/-1"><b>Contador:</b> só conta o que for liberado para ele. <b>Gestor:</b> vê estoque, confronto, resultado, relatórios, painel e configurações.</div>
@@ -1605,10 +1708,13 @@ function usuarioForm(u={},depois){
   {onOpen:o=>{ $('#cUs',o).onclick=()=>{ closeModal(); depois&&depois(); };
     $('#fUs',o).onsubmit=async ev=>{ ev.preventDefault();
       const d=Object.fromEntries(new FormData(ev.target).entries());
-      d.nome=d.nome.trim(); d.pin=String(d.pin).trim(); d.podeEncerrar=!!d.podeEncerrar;
-      if(!/^\d{4,6}$/.test(d.pin)) return toast('PIN deve ter de 4 a 6 números',true);
-      if(us.some(x=>x.id!==u.id && String(x.pin)===d.pin)) return toast('Esse PIN já é de outro usuário',true);
-      let lista=us.map(x=>x.id===u.id?{...x,...d}:x);
+      d.nome=d.nome.trim(); d.pin=String(d.pin||'').trim(); d.podeEncerrar=!!d.podeEncerrar;
+      if(!u.id && !d.pin) return toast('Defina o PIN',true);
+      if(d.pin){ if(!/^\d{4,6}$/.test(d.pin)) return toast('PIN deve ter de 4 a 6 números',true);
+        d.pinH=await pinHash(S.empresa.id,d.pin);
+        for(const x of us){ if(x.id===u.id) continue; if((x.pinH&&x.pinH===d.pinH)||(x.pin&&String(x.pin)===d.pin)) return toast('Esse PIN já é de outro usuário',true); } }
+      delete d.pin;
+      let lista=us.map(x=>{ if(x.id!==u.id) return x; const y={...x,...d}; if(d.pinH) delete y.pin; return y; });
       if(!u.id) lista.push({id:uid(),...d,criadoEm:now()});
       if(!lista.some(x=>x.perfil==='gestor')) return toast('A empresa precisa ter pelo menos um gestor',true);
       await salvarUsuarios(lista); closeModal(); toast('Usuário salvo'); if(depois) depois(); else render(); }; }});
@@ -1662,9 +1768,11 @@ let homeUnsub=null;
 V.inicio = ()=>{
   const e=S.empresa; carregarMe();
   const me=S.me;
-  header(e.fantasia||e.razao, me?`${me.nome} · ${PERF[me.perfil]}`:'Inventário com contagem cega',{right: me?'<button class="ic" id="hSair">Sair</button>':'<button class="ic" id="hEmp">Empresas</button>'});
+  header(e.fantasia||e.razao, me?`${me.nome} · ${PERF[me.perfil]}`:'Inventário com contagem cega',{back:false,right:(adminOk()?'<button class="ic" id="hEmp">Cultivve</button> ':'')+(me?'<button class="ic" id="hSair">Sair</button>':'')});
   const bS=$('#hSair'); if(bS) bS.onclick=async()=>{ if(await ask(`Sair do usuário ${esc(me.nome)} neste aparelho?`,{ok:'Sair'})){ LS.del(meKey()); S.me=null; S.sess=null; render(); } };
-  const bE=$('#hEmp'); if(bE) bE.onclick=()=>{ LS.del('cvinv_emp'); S.stack=[]; go('empresas',false); };
+  const bE=$('#hEmp'); if(bE) bE.onclick=()=>{ S.stack=[]; go('admin',false); };
+  if(Store.mode==='cloud' && !adminOk()){ const hj=new Date().toISOString().slice(0,10); if(LS.get('cvinv_ac_'+e.id)!==hj){ LS.set('cvinv_ac_'+e.id,hj); Store.set('empresas',e.id,{ultimoAcesso:now()}); } }
+  migrarPins();
   $('#app').innerHTML='<div id="iBody" class="stack"><div class="empty">Carregando…</div></div>';
   if(homeUnsub){ try{homeUnsub()}catch(x){} }
   homeUnsub=Store.watch('inventarios',rows=>{ S.homeInvs=rows; if(S.view==='inicio') drawInicio(); },'empresaId',e.id);
@@ -1682,14 +1790,14 @@ function drawInicio(){
   const b=$('#iBody'); if(!b) return;
   const me=S.me, atual=invAtual();
   const tk=tarefas(atual,me);
-  const cardTarefa=t=>`<div class="card task"><div class="row"><div class="round-dot big">${t.r}ª</div><div style="flex:1"><div class="l small muted">${t.escalado?'SUA CONTAGEM AGORA':'CONTAGEM LIBERADA'}</div><h2>${RNOME[t.r]}${t.r===3?' (desempate)':''}</h2><div class="sub">${esc(atual.nome)}${t.r===3?' · só os itens divergentes':''}</div></div></div>
+  const cardTarefa=t=>`<div class="card task"><div class="row"><div class="round-dot big">${t.r}ª</div><div style="flex:1"><div class="l small muted">${t.escalado?'SUA CONTAGEM AGORA':'CONTAGEM LIBERADA'}</div><h2>${rn(t.r,atual)}${t.r===3&&modoDe(atual)==='duas'?' (desempate)':''}</h2><div class="sub">${esc(atual.nome)}${t.r===3?' · só os itens divergentes':''}</div></div></div>
       <button class="btn block big" style="margin-top:12px" data-go="${t.r}">Começar a contar</button></div>`;
   let html=cardInstalar();
   if(!me){
     html+=`<div class="card" style="text-align:center;padding:26px 18px"><h1>Olá! 👋</h1><p class="muted">Entre com o seu PIN para ver o que você precisa contar.</p>
       <button class="btn block big" id="bLogin">Entrar com meu PIN</button></div>`;
     const livres=tk.filter(t=>!t.escalado);
-    if(livres.length) html+=`<div class="card"><h3>Contar sem cadastro</h3><div class="sub">Contagens abertas para qualquer pessoa</div><div class="row" style="margin-top:10px">${livres.map(t=>`<button class="btn sec" data-livre="${t.r}">${RNOME[t.r]}</button>`).join('')}</div></div>`;
+    if(livres.length) html+=`<div class="card"><h3>Contar sem cadastro</h3><div class="sub">Contagens abertas para qualquer pessoa</div><div class="row" style="margin-top:10px">${livres.map(t=>`<button class="btn sec" data-livre="${t.r}">${rn(t.r,atual)}</button>`).join('')}</div></div>`;
   } else {
     if(tk.length) html+=`<div class="grid">${tk.map(cardTarefa).join('')}</div>`;
     else html+=`<div class="card empty"><div style="font-size:40px">☕</div><h2>Nenhuma contagem liberada para você agora</h2><p>Quando o gestor liberar, ela aparece aqui sozinha.</p></div>`;
@@ -1697,7 +1805,7 @@ function drawInicio(){
   if(ehGestor(me)){
     html+=`<div class="sec-title"><h2>Gestão</h2></div><div class="grid">
       ${atual?`<div class="card click" id="gAtual"><div class="row between"><h3>${esc(atual.nome)}</h3><span class="badge b-ok">Inventário atual</span></div>
-        <div class="row small" style="margin-top:8px;gap:6px">${[1,2,3].map(r=>{const st=(atual.rodadas||{})['r'+r]||'bloqueada';const n=nomesEscala(atual,r);return `<span class="badge ${RLBL[st][1]}">${r}ª ${RLBL[st][0].toLowerCase()}${n.length?' · '+esc(n.join(', ')):''}</span>`}).join('')}</div>
+        <div class="row small" style="margin-top:8px;gap:6px">${rodadasDe(atual).map(r=>{const st=(atual.rodadas||{})['r'+r]||'bloqueada';const n=nomesEscala(atual,r);return `<span class="badge ${RLBL[st][1]}">${rn(r,atual)} ${RLBL[st][0].toLowerCase()}${n.length?' · '+esc(n.join(', ')):''}</span>`}).join('')}</div>
         <div class="sub" style="margin-top:8px">Gerenciar contagens, escala, confronto e resultado →</div></div>`
        :`<div class="card"><h3>Nenhum inventário em andamento</h3><button class="btn" id="gNovo" style="margin-top:10px">+ Iniciar novo inventário</button></div>`}
       <div class="card click" id="gPainel"><h3>📊 Painel e relatórios</h3><div class="sub">Indicadores, histórico, produto ao longo dos inventários, usuários e layout do ERP</div></div>
@@ -1707,7 +1815,7 @@ function drawInicio(){
     html+=`<div class="card"><h3>Encerrar inventário</h3><div class="sub">Você tem permissão para encerrar o inventário atual e iniciar um novo.</div><button class="btn red" id="bEnc" style="margin-top:10px">Encerrar e iniciar novo</button></div>`;
   }
   if(!ehGestor(me)) html+=`<div class="row"><span class="spacer"></span><button class="btn ghost" id="bGestor">Acesso do gestor</button></div>`;
-  html+=`<div class="foot">Cultivve Gestão de Projetos · Simplicidade, eficácia e resultado · v${APP_VERSION}</div>`;
+  html+=`<div class="foot">${MARCA} · v${APP_VERSION}</div>`;
   b.innerHTML=html;
   const L=$('#bLogin'); if(L) L.onclick=async()=>{ const u=await pedirPin('Entrar'); if(u){ S.me=u; LS.set(meKey(),u.id); toast('Olá, '+u.nome+'!'); render(); } };
   b.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>irContar(atual,+x.dataset.go));
@@ -1733,13 +1841,16 @@ function novoInventario(copiar){
   modal(`<h2>Novo inventário</h2><form id="fInv" class="stack" style="margin-top:12px">
     <label class="f">Nome<input class="in" name="nome" value="Inventário ${new Date().toLocaleDateString('pt-BR')}" required></label>
     <label class="f">Data<input class="in" name="data" type="date" value="${hoje}" required></label>
+    <label class="f">Como vai ser a contagem<select class="in" name="modo">${Object.entries(MODOS).map(([k,m])=>`<option value="${k}" ${(S.empresa.modoPadrao||'duas')===k?'selected':''}>${m.nome}</option>`).join('')}</select></label>
+    <div class="small muted" id="modoDesc">${MODOS[S.empresa.modoPadrao||'duas'].desc}</div>
     <div class="f small muted">Lista de produtos e estoque</div>
     <label class="res" style="cursor:pointer"><input type="radio" name="origem" value="planilha" checked style="width:20px;height:20px"><div class="d"><b>Importar nova planilha do ERP</b><span>Recomendado: estoque atualizado do sistema do cliente</span></div></label>
     ${copiar?`<label class="res" style="cursor:pointer"><input type="radio" name="origem" value="copiar" style="width:20px;height:20px"><div class="d"><b>Usar a contagem final do inventário encerrado como estoque</b><span>Só se os ajustes de entrada e saída já foram lançados no ERP</span></div></label>`:''}
     <div class="row" style="justify-content:flex-end"><button type="button" class="btn sec" id="cInv">Agora não</button><button class="btn">Criar inventário</button></div></form>`,
-  {onOpen:o=>{ $('#cInv',o).onclick=closeModal; $('#fInv',o).onsubmit=async ev=>{ ev.preventDefault();
+  {onOpen:o=>{ $('#cInv',o).onclick=closeModal; o.querySelector('[name=modo]').onchange=e=>{ $('#modoDesc',o).textContent=MODOS[e.target.value].desc; };
+    $('#fInv',o).onsubmit=async ev=>{ ev.preventDefault();
     const d=Object.fromEntries(new FormData(ev.target).entries()); const origem=d.origem; delete d.origem;
-    const id=uid(); const inv={...d,empresaId:S.empresa.id,status:'contagem',rodadas:{r1:'aberta',r2:'aberta',r3:'bloqueada'},divergentes:[],escala:{},totalProdutos:0,criadoEm:now(),criadoPor:(S.sess||S.me||{}).nome||''};
+    const id=uid(); const inv={...d,empresaId:S.empresa.id,status:'contagem',rodadas:rodadasIniciais(d.modo),divergentes:[],escala:{},totalProdutos:0,criadoEm:now(),criadoPor:(S.sess||S.me||{}).nome||''};
     await Store.set('inventarios',id,inv); closeModal();
     if(origem==='copiar' && copiar){
       const prods=copiar.filter(r=>!(r.final===0 && r.novo)).map(r=>({codigo:r.codigo,descricao:r.descricao,ean:r.ean||'',unidade:r.unidade||'UN',grupo:r.grupo||'',subgrupo:r.subgrupo||'',custo:r.custo||0,estoque:r.final!=null?r.final:r.estoque,novo:false}));
@@ -1751,9 +1862,9 @@ function novoInventario(copiar){
 async function encerrarFluxo(){
   const u=await exigir(podeEnc,'Encerrar inventário','Você não tem permissão para encerrar o inventário'); if(!u) return;
   const inv=S.inv;
-  if(inv.status==='finalizado'){ const {rows}=calcFrom(S.produtos,await Store.list('inventarios/'+inv.id+'/lancamentos')); return novoInventario(rows); }
+  if(inv.status==='finalizado'){ const {rows}=calcFrom(S.produtos,await Store.list('inventarios/'+inv.id+'/lancamentos'),modoDe(inv)); return novoInventario(rows); }
   const L=await Store.list('inventarios/'+inv.id+'/lancamentos');
-  const {rows,t}=calcFrom(S.produtos,L);
+  const {rows,t}=calcFrom(S.produtos,L,modoDe(inv));
   const R=inv.rodadas||{}; const abertas=[1,2,3].filter(r=>R['r'+r]==='aberta');
   let msg=`<b>${esc(inv.nome)}</b> — ${t.itens} itens · ${t.ent.length} para entrada · ${t.sai.length} para saída.`;
   if(abertas.length) msg+=`<br><br>⚠ Ainda há contagem aberta (${abertas.map(r=>r+'ª').join(', ')}). Ela será encerrada.`;
@@ -1768,6 +1879,7 @@ async function finalizarInv(inv,rows,t,L,u){
   const R={...(inv.rodadas||{})}; [1,2,3].forEach(r=>{ if(R['r'+r]==='aberta') R['r'+r]='fechada'; });
   const k=await salvarHistorico(inv,rows,t,L);
   await Store.set('inventarios',inv.id,{status:'finalizado',finalizadoEm:now(),finalizadoPor:u?u.nome:'',rodadas:R,kpis:k});
+  Store.add('inventarios/'+inv.id+'/log',{acao:'Encerrou o inventário',detalhe:`${t.ent.length} entrada(s), ${t.sai.length} saída(s)`,quem:u?u.nome:quem(),ts:now(),device:DEV});
   S.hist=null;
 }
 function rowsToItens(rows){ return rows.map(r=>({k:r.codigo,d:r.descricao,g:r.grupo,s:r.subgrupo,u:r.unidade,b:r.ean,e:r.estoque,c1:r.c[0],c2:r.c[1],c3:r.n[2]?r.c[2]:null,f:r.final,x:r.dif,v:r.custo||0,nv:r.novo?1:0})); }
@@ -1793,7 +1905,7 @@ async function carregarHist(force){
     const ps=(by[inv.id]||[]).filter(p=>np==null||p.parte<np).sort((a,b)=>a.parte-b.parte);
     if(!ps.length || !inv.kpis){
       const prods=await Store.list('inventarios/'+inv.id+'/produtos'); const L=await Store.list('inventarios/'+inv.id+'/lancamentos');
-      const {rows,t}=calcFrom(prods,L); inv.kpis=await salvarHistorico(inv,rows,t,L); await Store.set('inventarios',inv.id,{kpis:inv.kpis}); inv.itens=rowsToItens(rows);
+      const {rows,t}=calcFrom(prods,L,modoDe(inv)); inv.kpis=await salvarHistorico(inv,rows,t,L); await Store.set('inventarios',inv.id,{kpis:inv.kpis}); inv.itens=rowsToItens(rows);
     } else inv.itens=ps.flatMap(p=>{ try{ return JSON.parse(p.dados); }catch(e){ return []; } });
   }
   S.hist={emp:S.empresa.id,invs}; return S.hist;
@@ -1811,7 +1923,7 @@ S.pTab='ind';
 V.painel = async ()=>{
   const u=await exigir(ehGestor,'Painel do gestor','Esse PIN não é de um gestor'); if(!u){ back(); return; }
   header('Painel · '+(S.empresa.fantasia||S.empresa.razao),'Indicadores, relatórios e configurações');
-  const tabs=[['ind','📈 Indicadores'],['hist','🗂 Histórico'],['prod','🔎 Produto'],['geral','📑 Relatório geral'],['users','👥 Usuários'],['erp','⚙ Exportação ERP'],['int','🔌 Consulta de produtos'],['emp','🏢 Empresa']];
+  const tabs=[['ind','📈 Indicadores'],['hist','🗂 Histórico'],['prod','🔎 Produto'],['geral','📑 Relatório geral'],['users','👥 Usuários'],['erp','⚙ Exportação ERP'],['emp','🏢 Empresa']];
   $('#app').innerHTML=`<div class="stack"><div class="tabs ptabs">${tabs.map(([k,l])=>`<button data-p="${k}" class="${S.pTab===k?'on':''}">${l}</button>`).join('')}</div><div id="pBody" class="stack"><div class="empty">Carregando…</div></div></div>`;
   $('#app').querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{ S.pTab=b.dataset.p; V.painel(); });
   try{ await P[S.pTab](); }catch(e){ console.error(e); $('#pBody').innerHTML='<div class="warnbox">Erro ao carregar: '+esc(e.message||e)+'</div>'; }
@@ -1936,25 +2048,6 @@ P.emp = async ()=>{
   $('#eEd').onclick=()=>empresaForm(e,async()=>{ S.empresa=await Store.get('empresas',e.id)||S.empresa; V.painel(); });
 };
 
-P.int = async ()=>{
-  const b=$('#pBody'); const tok=S.empresa.si5Token||'';
-  b.innerHTML=`<div class="card stack"><h2>Consulta automática pelo código de barras</h2>
-    <div class="small muted">Quando um código bipado não está na planilha, o app procura primeiro no <b>catálogo da Cultivve</b> (produtos já identificados em qualquer cliente) e depois na <b>SI5 Global</b>. A tela de cadastro já abre com a descrição preenchida. Cada código é consultado na internet uma única vez.</div>
-    <label class="f">Token da SI5 Global<input class="in mono" id="siT" type="password" value="${esc(tok)}" placeholder="cole aqui o token"></label>
-    <div class="small muted">Como obter: entre em <b>global.si5.com.br/login</b> (login com o Google) → <b>Minha conta</b> → gerar token. Plano grátis: 100 consultas por dia.</div>
-    <div class="row"><button class="btn" id="siS">Salvar</button><button class="btn sec" id="siX">Testar com um código</button><span class="spacer"></span>${tok?'<span class="badge b-ok">Ativo</span>':'<span class="badge b-gray">Desligado</span>'}</div>
-    <div id="siR"></div></div>`;
-  $('#siS').onclick=async()=>{ const t=$('#siT').value.trim(); await Store.set('empresas',S.empresa.id,{si5Token:t}); S.empresa={...S.empresa,si5Token:t}; toast(t?'Consulta automática ligada':'Consulta automática desligada'); V.painel(); };
-  $('#siX').onclick=async()=>{ const t=$('#siT').value.trim(); if(!t) return toast('Cole o token primeiro',true);
-    const code=await askText('Testar consulta',{label:'Código de barras',value:'7891000002186',inputmode:'numeric'}); if(!code) return;
-    const out=$('#siR'); out.innerHTML='<div class="small muted">Consultando…</div>';
-    try{ const r=await fetch('https://global.si5.com.br/api/produtos/'+code.replace(/\D/g,''),{headers:{Authorization:'Bearer '+t,Accept:'application/json'}});
-      const txt=await r.text(); let j=null; try{ j=JSON.parse(txt); }catch(e){}
-      out.innerHTML= r.ok&&j ? `<div class="hint">✓ Funcionou: <b>${esc(j.produto||'')}</b> ${esc(j.marca||'')} · ${esc(j.categoria||'')}</div>`
-        : `<div class="warnbox">Resposta ${r.status}: ${r.status===401?'token inválido':r.status===404?'código não está no catálogo da SI5':r.status===429?'limite diário atingido':esc(txt.slice(0,120))}</div>`;
-    }catch(e){ out.innerHTML=`<div class="warnbox">Não consegui chamar a SI5 direto do navegador (${esc(e.message)}). Provavelmente o serviço bloqueia chamadas feitas por páginas (CORS). Nesse caso a consulta precisa passar por um pequeno servidor — fale com o suporte Cultivve.</div>`; } };
-};
-
 /* =====================================================================
    EXPORTAÇÃO DOS AJUSTES PARA O ERP
    ===================================================================== */
@@ -2038,7 +2131,7 @@ async function pdfMov(tipo){
   let y=doc.lastAutoTable.finalY+24; if(y>H-25){ doc.addPage(); topo(); y=50; }
   doc.setDrawColor(150); doc.setTextColor(70); doc.setFontSize(8.5);
   [['Responsável pelo estoque',14],['Gestor do inventário',110]].forEach(([l,x])=>{ doc.line(x,y,x+80,y); doc.text(l,x+40,y+5,{align:'center'}); });
-  const n=doc.internal.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(7.5); doc.setTextColor(120); doc.text('Cultivve Gestão de Projetos · Simplicidade, eficácia e resultado',14,H-7); doc.text(`Página ${p} de ${n}`,W-14,H-7,{align:'right'}); }
+  const n=doc.internal.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(7.5); doc.setTextColor(120); doc.text(MARCA,14,H-7); doc.text(`Página ${p} de ${n}`,W-14,H-7,{align:'right'}); }
   doc.save(fileBase()+(tipo==='E'?'_ajuste_entrada':'_ajuste_saida')+'.pdf');
 }
 P.erp = async ()=>{
@@ -2092,6 +2185,311 @@ P.erp = async ()=>{
   rewire();
 };
 
+/* =====================================================================
+   MODOS DE CONTAGEM (cada empresa escolhe o seu)
+   ===================================================================== */
+const MODOS={
+  duas:{nome:'Duas contagens cegas + desempate',desc:'1ª e 2ª contagens cegas; o que divergir entre elas vai para a 3ª contagem (desempate).',rod:[1,2,3]},
+  uma_conf:{nome:'Uma contagem + conferência',desc:'Uma contagem cega; o que divergir do estoque do sistema vai para uma conferência.',rod:[1,3]},
+  uma:{nome:'Uma contagem, sem conferência',desc:'Uma contagem só. O resultado vai direto para os ajustes.',rod:[1]}
+};
+const modoDe=inv=>(inv&&MODOS[inv.modo])?inv.modo:'duas';
+const rodadasDe=inv=>MODOS[modoDe(inv)].rod;
+function rn(r,inv=S.inv){ if(r===3 && modoDe(inv)==='uma_conf') return 'Conferência'; if(r===1 && modoDe(inv)!=='duas') return 'Contagem'; return ({1:'1ª contagem',2:'2ª contagem',3:'3ª contagem'})[r]; }
+function rodadasIniciais(modo){ return modo==='uma'?{r1:'aberta',r2:'nao',r3:'nao'}:modo==='uma_conf'?{r1:'aberta',r2:'nao',r3:'bloqueada'}:{r1:'aberta',r2:'aberta',r3:'bloqueada'}; }
+const lblDiv=inv=>({duas:'Divergências 1ª × 2ª',uma_conf:'Divergências contagem × estoque',uma:'Divergências'})[modoDe(inv)];
+
+/* =====================================================================
+   ÁREA DA CULTIVVE — controle de todas as empresas (web e app)
+   ===================================================================== */
+async function sha(t){ try{ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('cultivve:'+t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }catch(e){ return 'x'+btoa(t); } }
+async function cfgCultivve(){ if(S.cfgC) return S.cfgC; S.cfgC=(await Store.get('config','cultivve').catch(()=>null))||{}; return S.cfgC; }
+function adminOk(){
+  if(LS.get('cvinv_admin_ate',0)<=Date.now()) return false;
+  if(LS.get('cvinv_admin_tipo')==='email') return !!(Store.auth && Store.auth.currentUser && !Store.auth.currentUser.isAnonymous);
+  return true;
+}
+function loginEmail(){
+  return new Promise(res=>{
+    let fim=false; const done=v=>{ if(!fim){ fim=true; res(v); } };
+    modal(`<h2>Área da Cultivve</h2><p class="small muted">Entre com o e-mail e a senha de administrador da Cultivve.</p>
+      <form id="fAd" class="stack"><label class="f">E-mail<input class="in" name="email" type="email" autocomplete="username" required value="${esc(LS.get('cvinv_admin_email','')||'')}"></label>
+      <label class="f">Senha<input class="in" name="senha" type="password" autocomplete="current-password" required></label>
+      <div id="adMsg" class="small" style="color:var(--red)"></div>
+      <div class="row"><button type="button" class="btn ghost" id="adEsq">Esqueci a senha</button><span class="spacer"></span><button type="button" class="btn sec" id="adC">Cancelar</button><button class="btn" id="adOk">Entrar</button></div></form>`,
+    {onOpen:o=>{
+      const msg=t=>{ $('#adMsg',o).textContent=t; };
+      $('#adC',o).onclick=()=>{ closeModal(); done(false); };
+      $('#adEsq',o).onclick=async()=>{ const em=o.querySelector('[name=email]').value.trim(); if(!em) return msg('Digite o e-mail primeiro');
+        try{ await Store.auth.sendPasswordResetEmail(em); msg(''); toast('Enviamos um e-mail para redefinir a senha'); }catch(e){ msg('Não foi possível enviar: '+(e.code||e.message)); } };
+      $('#fAd',o).onsubmit=async ev=>{ ev.preventDefault(); const d=Object.fromEntries(new FormData(ev.target).entries()); const b=$('#adOk',o); b.disabled=true; msg('');
+        try{
+          await Store.auth.signInWithEmailAndPassword(d.email.trim(),d.senha);
+          try{ await Store.fs.collection('config').doc('ping_admin').set({email:d.email.trim(),ts:now()}); }
+          catch(e){ await Store.auth.signOut(); await Store.auth.signInAnonymously().catch(()=>{}); b.disabled=false; return msg('Este e-mail não tem acesso de administrador.'); }
+          LS.set('cvinv_admin_email',d.email.trim()); closeModal(); done(true);
+        }catch(e){ b.disabled=false;
+          if(e.code==='auth/operation-not-allowed'||e.code==='auth/admin-restricted-operation'){ closeModal(); done('sem-auth'); return; }
+          msg({'auth/invalid-credential':'E-mail ou senha incorretos','auth/wrong-password':'E-mail ou senha incorretos','auth/user-not-found':'E-mail ou senha incorretos','auth/too-many-requests':'Muitas tentativas. Aguarde alguns minutos.','auth/network-request-failed':'Sem internet'}[e.code]||('Não foi possível entrar ('+(e.code||e.message)+')')); }
+      };
+      setTimeout(()=>{ const i=o.querySelector('[name=email]'); (i.value?o.querySelector('[name=senha]'):i).focus(); },80);
+    }});
+    modalCloseCb=()=>done(false);
+  });
+}
+async function sairAdmin(){
+  LS.del('cvinv_admin_ate');
+  if(LS.get('cvinv_admin_tipo')==='email' && Store.auth){ try{ await Store.auth.signOut(); await Store.auth.signInAnonymously(); }catch(e){} }
+  LS.del('cvinv_admin_tipo'); S.sess=null; S.cfgC=null;
+  if(S.empresa) await garantirMembro(S.empresa.id,LS.get('cvinv_emp_cod')||S.empresa.codigo);
+}
+async function entrarAdmin(){
+  if(adminOk()) return true;
+  if(Store.mode==='cloud' && Store.auth){
+    const r=await loginEmail();
+    if(r===true){ LS.set('cvinv_admin_tipo','email'); LS.set('cvinv_admin_ate',Date.now()+12*3600*1000); S.cfgC=null; return true; }
+    if(r!=='sem-auth') return false;
+    toast('Login por e-mail ainda não está ativado no Firebase — usando o PIN mestre',true);
+  }
+  LS.set('cvinv_admin_tipo','pin');
+  const c=await cfgCultivve();
+  if(!c.pinHash){
+    const p1=await askText('Criar PIN da Cultivve',{label:'Defina o PIN mestre da Cultivve (6 a 10 números). Ele dá acesso a todas as empresas.',type:'password',inputmode:'numeric'}); if(!p1) return false;
+    if(!/^\d{6,10}$/.test(p1)) { toast('O PIN mestre deve ter de 6 a 10 números',true); return false; }
+    const p2=await askText('Confirme o PIN',{label:'Digite de novo',type:'password',inputmode:'numeric'}); if(p1!==p2){ toast('Os PINs não conferem',true); return false; }
+    const h=await sha(p1); await Store.set('config','cultivve',{pinHash:h,criadoEm:now()}); S.cfgC={...c,pinHash:h};
+  } else {
+    const p=await askText('Área da Cultivve',{label:'PIN mestre da Cultivve',type:'password',inputmode:'numeric'}); if(p==null) return false;
+    if(await sha(p)!==c.pinHash){ toast('PIN incorreto',true); return false; }
+  }
+  LS.set('cvinv_admin_ate',Date.now()+12*3600*1000); return true;
+}
+function codigoNovo(){ const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<6;i++) s+=A[Math.floor(Math.random()*A.length)]; return s; }
+function linkEmpresa(e){ return location.origin+location.pathname+'#e='+e.codigo; }
+
+/* tela para quem ainda não tem empresa neste aparelho */
+V.acesso = ()=>{
+  header('Inventário cego','Cultivve Gestão',{back:false});
+  $('#app').innerHTML=`<div class="stack">${cardInstalar()}
+    <div class="card" style="max-width:520px;margin:4vh auto 0;text-align:center;padding:28px 20px">
+      <h1>Bem-vindo! 👋</h1><p class="muted">Digite o <b>código da sua empresa</b>, enviado pela Cultivve, ou abra o link de acesso que você recebeu.</p>
+      <input class="in mono" id="acC" maxlength="6" autocapitalize="characters" autocomplete="off" placeholder="Ex.: K7M2QX" style="text-align:center;font-size:24px;letter-spacing:4px;text-transform:uppercase">
+      <button class="btn block big" id="acOk" style="margin-top:12px">Entrar</button>
+    </div>
+    <div class="foot">${MARCA} · v${APP_VERSION}<br><a href="#" id="acAdm">Sou da Cultivve</a></div></div>`;
+  const ir=async()=>{ const c=$('#acC').value.trim().toUpperCase(); if(c.length<4) return toast('Digite o código',true); await entrarCodigo(c); };
+  $('#acOk').onclick=ir; $('#acC').onkeydown=e=>{ if(e.key==='Enter') ir(); };
+  $('#acAdm').onclick=async e=>{ e.preventDefault(); if(await entrarAdmin()){ S.stack=[]; go('admin',false); } };
+};
+/* liga este aparelho (usuário anônimo do Firebase) à empresa — as regras do banco só liberam os dados da empresa vinculada */
+async function garantirMembro(empresaId,codigo){
+  if(Store.mode!=='cloud' || !Store.auth || !Store.auth.currentUser || !codigo) return true;
+  const id=Store.auth.currentUser.uid;
+  try{ const m=await Store.get('membros',id); if(m && m.empresaId===empresaId && m.codigo===codigo) return true; }catch(e){}
+  try{ await Store.fs.collection('membros').doc(id).set({empresaId,codigo,ts:now()}); return true; }catch(e){ console.warn('membro',e); return false; }
+}
+async function resolverCodigo(c){
+  c=String(c||'').trim().toUpperCase(); if(!c) return {erro:'Digite o código'};
+  let empId=null;
+  const cd=await Store.get('codigos',c).catch(()=>null);
+  if(cd && cd.empresaId) empId=cd.empresaId;
+  else { const r=(await Store.list('empresas','codigo',c).catch(()=>[]))[0]; if(r) empId=r.id; }
+  if(!empId) return {erro:'Código não encontrado. Confira com a Cultivve.'};
+  await garantirMembro(empId,c);
+  const r=await Store.get('empresas',empId).catch(()=>null);
+  if(!r) return {erro:'Não foi possível entrar nesta empresa. Fale com a Cultivve.'};
+  if(r.status==='bloqueada') return {erro:'O acesso desta empresa está suspenso. Fale com a Cultivve.'};
+  LS.set('cvinv_emp',r.id); LS.set('cvinv_emp_cod',c);
+  return {empresa:r};
+}
+async function entrarCodigo(c){
+  const x=await resolverCodigo(c);
+  if(x.erro){ toast(x.erro,true); return false; }
+  S.empresa=x.empresa; S.stack=[]; go('inicio',false); return true;
+}
+
+S.aTab='emp';
+V.admin = async ()=>{
+  if(!adminOk()){ if(!await entrarAdmin()){ S.view=S.empresa?'inicio':'acesso'; render(); return; } }
+  header('Cultivve · Administração','Todas as empresas',{back:!!S.stack.length,right:'<button class="ic" id="aSair">Sair</button>'});
+  $('#aSair').onclick=async()=>{ await sairAdmin(); S.stack=[]; S.view=S.empresa?'inicio':'acesso'; render(); };
+  const tabs=[['emp','🏢 Empresas'],['cat','🖼 Catálogo e imagens'],['limpa','🧹 Limpar dados'],['con','🔌 Conexão']];
+  $('#app').innerHTML=`<div class="stack"><div class="tabs ptabs">${tabs.map(([k,l])=>`<button data-a="${k}" class="${S.aTab===k?'on':''}">${l}</button>`).join('')}</div><div id="aBody" class="stack"><div class="empty">Carregando…</div></div></div>`;
+  $('#app').querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ S.aTab=b.dataset.a; V.admin(); });
+  try{ await A[S.aTab](); }catch(e){ console.error(e); $('#aBody').innerHTML='<div class="warnbox">Erro: '+esc(e.message||e)+'</div>'; }
+};
+const A={};
+A.emp = async ()=>{
+  const b=$('#aBody');
+  const emps=(await Store.list('empresas')).sort((a,b)=>String(a.fantasia||a.razao).localeCompare(String(b.fantasia||b.razao),'pt-BR'));
+  const invs=await Store.list('inventarios');
+  // dá código às empresas antigas
+  for(const e of emps){ if(!e.codigo){ e.codigo=codigoNovo(); Store.set('empresas',e.id,{codigo:e.codigo,status:e.status||'ativa'}); } }
+  const tem=new Set((await Store.listIn('codigos',emps.map(e=>e.codigo)).catch(()=>[])).map(c=>c.id));
+  emps.forEach(e=>{ if(!tem.has(e.codigo)) Store.set('codigos',e.codigo,{empresaId:e.id}); });
+  const ultimo=id=>invs.filter(i=>i.empresaId===id&&i.status==='finalizado').sort((a,b)=>String(b.data).localeCompare(String(a.data)))[0];
+  b.innerHTML=`<div class="row between"><h2>Empresas (${emps.length})</h2><button class="btn" id="aNova">+ Nova empresa</button></div>
+    <div class="hint">Crie a empresa com o gestor dela e envie o <b>link de acesso</b>. O gestor entra com o PIN, cadastra os colaboradores e sobe a planilha do sistema.</div>
+    <div class="row"><span class="spacer"></span><button class="btn ghost" id="aRest">⬆ Restaurar backup</button><input type="file" id="aRestF" accept=".json,application/json" hidden></div>
+    <div class="grid">${emps.map(e=>{ const n=invs.filter(i=>i.empresaId===e.id); const ab=n.filter(i=>i.status!=='finalizado').length; const bl=e.status==='bloqueada';
+      return `<div class="card"><div class="row between"><h3>${esc(e.fantasia||e.razao)}</h3><span class="badge ${bl?'b-red':'b-ok'}">${bl?'Bloqueada':'Ativa'}</span></div>
+        <div class="sub">${esc(e.cnpj||'sem CNPJ')} · ${esc([e.cidade,e.uf].filter(Boolean).join('/'))}</div>
+        <div class="small" style="margin-top:6px">Código: <b class="mono">${esc(e.codigo)}</b> · ${usuarios(e).length} usuário(s) · ${n.length} inventário(s)${ab?` · <b>${ab} em andamento</b>`:''} · ${esc(MODOS[e.modoPadrao||'duas'].nome)}</div>
+        <div class="small muted" style="margin-top:4px">${(()=>{ const u=ultimo(e.id); return u?`Último inventário: ${dBR(u.data)} · acurácia ${fmt((u.kpis||{}).acuracia||0)}%${(u.kpis||{}).vSai?' · perdas '+brl(u.kpis.vSai):''}`:'Nenhum inventário encerrado'; })()} · ${e.ultimoAcesso?'último acesso '+dtBR(e.ultimoAcesso):'nunca acessou'}</div>
+        <div class="row" style="margin-top:10px;gap:6px">
+          <button class="btn" data-abrir="${e.id}">Abrir</button>
+          <button class="btn sec" data-link="${e.id}">🔗 Link de acesso</button>
+          <button class="btn sec" data-ed="${e.id}">Editar</button>
+          <button class="btn sec" data-bk="${e.id}">⬇ Backup</button>
+          <button class="btn ghost" data-bl="${e.id}" style="color:${bl?'var(--teal)':'var(--red)'}">${bl?'Ativar':'Bloquear'}</button></div></div>`; }).join('')||'<div class="card empty">Nenhuma empresa ainda.</div>'}</div>`;
+  $('#aNova').onclick=()=>empresaForm({},()=>V.admin());
+  b.querySelectorAll('[data-bk]').forEach(x=>x.onclick=()=>exportarEmpresa(emps.find(e=>e.id===x.dataset.bk)));
+  $('#aRest').onclick=()=>$('#aRestF').click();
+  $('#aRestF').onchange=async ev=>{ const f=ev.target.files[0]; ev.target.value=''; if(f) restaurarBackup(f); };
+  b.querySelectorAll('[data-ed]').forEach(x=>x.onclick=()=>empresaForm(emps.find(e=>e.id===x.dataset.ed),()=>V.admin()));
+  b.querySelectorAll('[data-abrir]').forEach(x=>x.onclick=()=>{ const e=emps.find(z=>z.id===x.dataset.abrir); S.empresa=e; LS.set('cvinv_emp',e.id);
+    LS.set('cvinv_emp_cod',e.codigo); S.sess={id:'cultivve',nome:'Cultivve (suporte)',perfil:'gestor',podeEncerrar:true}; S.stack=['admin']; go('inicio',false); });
+  b.querySelectorAll('[data-bl]').forEach(x=>x.onclick=async()=>{ const e=emps.find(z=>z.id===x.dataset.bl); const bl=e.status==='bloqueada';
+    if(await ask(`${bl?'Ativar':'Bloquear'} o acesso de <b>${esc(e.fantasia)}</b>?${bl?'':' Os usuários dela não conseguirão entrar até você ativar de novo. Os dados ficam guardados.'}`,{ok:bl?'Ativar':'Bloquear',danger:!bl})){ await Store.set('empresas',e.id,{status:bl?'ativa':'bloqueada'}); V.admin(); } });
+  b.querySelectorAll('[data-link]').forEach(x=>x.onclick=()=>{ const e=emps.find(z=>z.id===x.dataset.link); const l=linkEmpresa(e);
+    const msg=`Olá! Este é o acesso ao *Inventário Cultivve* da ${e.fantasia}.\n\n1) Abra: ${l}\n2) Entre com o seu PIN de gestor.\n3) Instale na tela inicial do celular.\n\nCódigo da empresa: ${e.codigo}`;
+    modal(`<h2>Link de acesso — ${esc(e.fantasia)}</h2><p class="small muted">Envie para o gestor da empresa. Quem abrir o link já entra na empresa certa (depois precisa do PIN).</p>
+      <input class="in mono" readonly value="${esc(l)}" id="lkI"><div class="small" style="margin-top:6px">Código da empresa: <b class="mono">${esc(e.codigo)}</b></div>
+      <div class="row" style="margin-top:12px"><button class="btn sec" id="lkC">Copiar link</button><a class="btn" style="text-decoration:none" target="_blank" href="https://wa.me/?text=${encodeURIComponent(msg)}">Enviar pelo WhatsApp</a><button class="btn ghost" id="lkF">Fechar</button></div>`,
+    {onOpen:o=>{ $('#lkF',o).onclick=closeModal; $('#lkC',o).onclick=async()=>{ try{ await navigator.clipboard.writeText(l); toast('Link copiado'); }catch(err){ $('#lkI',o).select(); } }; }}); });
+};
+async function exportarEmpresa(e){
+  toast('Gerando backup…');
+  try{
+    const invs=await Store.list('inventarios','empresaId',e.id);
+    const out={tipo:'cultivve-inventario-backup',versao:APP_VERSION,geradoEm:now(),empresa:e,inventarios:[],historico:await Store.list('historico','empresaId',e.id)};
+    for(const inv of invs){ out.inventarios.push({...inv,_produtos:await Store.list('inventarios/'+inv.id+'/produtos'),_lancamentos:await Store.list('inventarios/'+inv.id+'/lancamentos'),_log:await Store.list('inventarios/'+inv.id+'/log')}); }
+    baixar(`backup_${String(e.fantasia||'empresa').replace(/[^\w]+/g,'_')}_${new Date().toISOString().slice(0,10)}.json`,JSON.stringify(out),'application/json');
+    toast('Backup gerado');
+  }catch(err){ console.error(err); toast('Erro ao gerar backup: '+(err.message||err),true); }
+}
+async function restaurarBackup(file){
+  let j; try{ j=JSON.parse(await file.text()); }catch(e){ return toast('Arquivo inválido',true); }
+  if(!j||j.tipo!=='cultivve-inventario-backup'||!j.empresa) return toast('Este arquivo não é um backup do Inventário Cultivve',true);
+  const nl=j.inventarios.reduce((s,i)=>s+(i._lancamentos||[]).length,0);
+  if(!await ask(`Restaurar <b>${esc(j.empresa.fantasia)}</b> (backup de ${dtBR(j.geradoEm)}): ${j.inventarios.length} inventário(s), ${fmt(nl)} lançamento(s).<br><br>Os registros com o mesmo identificador serão sobrescritos.`,{ok:'Restaurar',danger:true,title:'Restaurar backup'})) return;
+  try{
+    toast('Restaurando…');
+    await Store.setMany('empresas',[j.empresa]);
+    if(j.empresa.codigo) await Store.set('codigos',j.empresa.codigo,{empresaId:j.empresa.id});
+    for(const inv of j.inventarios){ const {_produtos,_lancamentos,_log,...d}=inv; await Store.setMany('inventarios',[d]);
+      await Store.setMany('inventarios/'+inv.id+'/produtos',_produtos||[]); await Store.setMany('inventarios/'+inv.id+'/lancamentos',_lancamentos||[]); await Store.setMany('inventarios/'+inv.id+'/log',_log||[]); }
+    if(j.historico&&j.historico.length) await Store.setMany('historico',j.historico);
+    S.hist=null; toast('Backup restaurado'); V.admin();
+  }catch(err){ console.error(err); toast('Erro ao restaurar: '+(err.message||err),true); }
+}
+A.cat = async ()=>{
+  const b=$('#aBody'); const c=await cfgCultivve(); const uso=await usoHoje();
+  const cat=await Store.list('catalogo'); const comImg=cat.filter(x=>x.imagem).length, nao=cat.filter(x=>x.naoEncontrado).length;
+  b.innerHTML=`<div class="grid kpi"><div class="card"><div class="l">Códigos no catálogo</div><div class="v">${fmt(cat.length-nao)}</div></div><div class="card"><div class="l">Com imagem</div><div class="v">${fmt(comImg)}</div></div>
+    <div class="card"><div class="l">Não achados na SI5</div><div class="v">${fmt(nao)}</div></div><div class="card"><div class="l">Consultas SI5 hoje</div><div class="v">${uso} / ${c.si5Limite||25}</div></div></div>
+    <div class="card stack"><h2>SI5 Global — token da Cultivve</h2>
+      <div class="small muted">Um único token serve a todas as empresas. Tudo o que é consultado fica guardado no catálogo da Cultivve, então cada código só é consultado uma vez. O plano grátis da SI5 tem 30 consultas por dia; o app para em ${c.si5Limite||25} para sobrar margem.</div>
+      <label class="f">Token<input class="in mono" id="cT" type="password" value="${esc(c.si5Token||'')}"></label>
+      <label class="f">Limite de consultas por dia<input class="in" id="cL" type="number" min="0" value="${c.si5Limite||25}" style="max-width:160px"></label>
+      <div class="row"><button class="btn" id="cS">Salvar</button></div></div>`;
+  $('#cS').onclick=async()=>{ const d={si5Token:$('#cT').value.trim(),si5Limite:+$('#cL').value||25}; await Store.set('config','cultivve',d); S.cfgC={...c,...d}; toast('Salvo'); };
+};
+A.con = async ()=>{ $('#aBody').innerHTML='<div class="card"><p>Configuração técnica da conexão com o banco de dados (Firebase).</p><button class="btn sec" id="cCfg">Abrir configuração de conexão</button></div>'; $('#cCfg').onclick=()=>go('config'); };
+A.limpa = async ()=>{
+  const b=$('#aBody'); const emps=await Store.list('empresas');
+  b.innerHTML=`<div class="card stack"><h2>Limpar dados de teste</h2>
+    <div class="warnbox">Apaga os dados <b>de verdade</b>, no banco de dados, para todos os aparelhos. Não tem como desfazer.</div>
+    <label class="f">De qual empresa?<select class="in" id="lE"><option value="">Todas as empresas</option>${emps.map(e=>`<option value="${e.id}">${esc(e.fantasia||e.razao)}</option>`).join('')}</select></label>
+    <label class="chk"><input type="checkbox" id="lI" checked> Inventários (com produtos, lançamentos e histórico)</label>
+    <label class="chk"><input type="checkbox" id="lU"> Empresas e usuários (apaga a empresa inteira)</label>
+    <label class="chk"><input type="checkbox" id="lC"> Catálogo de produtos e imagens (normalmente vale manter)</label>
+    <label class="chk"><input type="checkbox" id="lA" checked> Dados guardados neste aparelho (login, empresa escolhida, preferências)</label>
+    <label class="f">Para confirmar, digite <b>APAGAR</b><input class="in" id="lX" autocomplete="off"></label>
+    <button class="btn red" id="lGo">Apagar agora</button><div id="lP" class="small muted"></div></div>`;
+  $('#lGo').onclick=async()=>{
+    if($('#lX').value.trim().toUpperCase()!=='APAGAR') return toast('Digite APAGAR para confirmar',true);
+    const emp=$('#lE').value, fI=$('#lI').checked, fU=$('#lU').checked, fC=$('#lC').checked, fA=$('#lA').checked;
+    const P=t=>{ $('#lP').textContent=t; };
+    const btn=$('#lGo'); btn.disabled=true;
+    try{
+      let invs=await Store.list('inventarios'); if(emp) invs=invs.filter(i=>i.empresaId===emp);
+      if(fI||fU){
+        for(const [k,inv] of invs.entries()){ P(`Apagando inventário ${k+1} de ${invs.length}…`);
+          for(const sub of ['produtos','lancamentos','log']){ const col='inventarios/'+inv.id+'/'+sub; const ids=(await Store.list(col)).map(x=>x.id); if(ids.length) await Store.delMany(col,ids); }
+          await Store.delMany('inventarios',[inv.id]); }
+        let h=await Store.list('historico'); if(emp) h=h.filter(x=>x.empresaId===emp); if(h.length) await Store.delMany('historico',h.map(x=>x.id));
+      }
+      if(fU){ let es=await Store.list('empresas'); if(emp) es=es.filter(e=>e.id===emp); if(es.length){ await Store.delMany('empresas',es.map(e=>e.id)); const cs=es.map(e=>e.codigo).filter(Boolean); if(cs.length) await Store.delMany('codigos',cs); } }
+      if(fC){ P('Apagando catálogo…'); const cs=await Store.list('catalogo'); if(cs.length) await Store.delMany('catalogo',cs.map(x=>x.id)); }
+      if(fA){ try{ Object.keys(localStorage).filter(k=>k.startsWith('cvinv_')&&!['cvinv_fbcfg','cvinv_dev','cvinv_admin_ate','cvinv_admin_tipo','cvinv_admin_email'].includes(k)).forEach(k=>localStorage.removeItem(k)); }catch(e){} }
+      S.hist=null; P('✓ Pronto. Dados apagados.'); toast('Dados apagados');
+      if(fU && (!emp || (S.empresa&&S.empresa.id===emp))){ S.empresa=null; }
+      setTimeout(()=>V.admin(),900);
+    }catch(e){ console.error(e); P('Erro: '+(e.message||e)); btn.disabled=false; }
+  };
+};
+
+/* =====================================================================
+   IMAGENS E DADOS DOS PRODUTOS (catálogo Cultivve + SI5), aos poucos
+   ===================================================================== */
+const hojeKey=()=>new Date().toLocaleDateString('sv-SE').replace(/-/g,'');
+async function usoHoje(){ const d=await Store.get('config','uso_'+hojeKey()).catch(()=>null); return (d&&d.si5)||0; }
+async function somaUso(){ const id='uso_'+hojeKey();
+  if(Store.mode==='cloud'){ try{ await Store.fs.collection('config').doc(id).set({si5:firebase.firestore.FieldValue.increment(1)},{merge:true}); }catch(e){} }
+  else { const n=await usoHoje(); await Store.set('config',id,{si5:n+1}); } }
+async function tokenSi5(){ const c=await cfgCultivve(); return c.si5Token||''; }
+async function podeConsultar(){ const c=await cfgCultivve(); return (await usoHoje()) < (c.si5Limite||25); }
+/* busca um código: catálogo → SI5 (dentro do limite do dia). Guarda tudo no catálogo, inclusive "não achado". */
+async function consultaGtin(code,{usarApi=true}={}){
+  const k=gtinKey(code); if(k.length<8) return null;
+  let c=null; try{ c=await Promise.race([Store.get('catalogo',k),new Promise(r=>setTimeout(()=>r(null),3000))]); }catch(e){}
+  if(c && c.descricao && !c.naoEncontrado) return {...c,fonte:'catálogo Cultivve'};
+  if(c && c.naoEncontrado && (Date.now()-new Date(c.criadoEm||0).getTime())<30*864e5) return null;
+  if(!usarApi) return null;
+  const tok=await tokenSi5(); if(!tok || !(await podeConsultar())) return null;
+  try{
+    const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),6000);
+    const r=await fetch('https://global.si5.com.br/api/produtos/'+encodeURIComponent(String(code).replace(/\D/g,'')),{headers:{Authorization:'Bearer '+tok,Accept:'application/json'},signal:ctl.signal});
+    clearTimeout(t); somaUso();
+    if(r.status===404){ Store.set('catalogo',k,{gtin:k,naoEncontrado:true,criadoEm:now()}); return null; }
+    if(r.status===429){ if(ehMaster()) toast('Limite diário da consulta SI5 atingido',true); return null; }
+    if(!r.ok) return null;
+    const j=await r.json(); if(!j||!j.produto) return null;
+    const d={gtin:k,descricao:String(j.produto).toUpperCase(),marca:j.marca||'',categoria:j.categoria||'',ncm:j.ncm||'',imagem:j.imagem_url||'',origem:'SI5',criadoEm:now(),naoEncontrado:false};
+    Store.set('catalogo',k,d);
+    return {...d,fonte:'SI5 Global'};
+  }catch(e){ console.warn('SI5',e); return null; }
+}
+/* As imagens NÃO são gravadas em cada produto (economiza a cota do banco):
+   ficam no catálogo da Cultivve e em memória neste aparelho. */
+const gtinDe=p=>gtinKey(String((p&&p.ean)||'').split(/[;,\s]+/)[0]);
+const imgDe=p=>(p&&p.imagem)||((S.img.get(gtinDe(p))||{}).imagem)||'';
+let imgT=null;
+function agendaImagens(){ clearTimeout(imgT); imgT=setTimeout(carregarImagens,800); }
+/* associa os produtos do inventário ao catálogo (consulta em lotes de 30 códigos) */
+async function carregarImagens(){
+  if(!S.inv) return;
+  const ks=[...new Set(S.produtos.map(gtinDe).filter(k=>k.length>=8 && !S.imgReq.has(k)))];
+  if(!ks.length) return;
+  ks.forEach(k=>S.imgReq.add(k));
+  try{
+    const docs=await Store.listIn('catalogo',ks);
+    docs.forEach(d=>{ if(!d.naoEncontrado && d.descricao) S.img.set(d.id,d); });
+    if(docs.some(d=>d.imagem)){ if(S.view==='contar') renderFast(); if(S.view==='gestor') V.gestor_refresh(); const L=$('#lsL'); if(L) drawLista(); }
+  }catch(e){ ks.forEach(k=>S.imgReq.delete(k)); console.warn('catálogo',e); }
+}
+const enriquecerInventario=carregarImagens;
+/* ao bipar: se o produto ainda não tem imagem, busca agora (catálogo e, se preciso, consulta externa) — a cota diária vai para o que está sendo contado */
+async function enriquecerAgora(p){
+  const k=gtinDe(p); if(!p || k.length<8 || imgDe(p) || S.imgTent.has(k)) return;
+  S.imgTent.add(k);
+  const info=await consultaGtin(k);
+  if(info){ S.img.set(k,info); if(S.pend && S.pend.p===p) renderFast(); }
+}
+function statusImagens(){ const c=S.produtos.filter(p=>gtinDe(p).length>=8); return {total:c.length,comImg:c.filter(p=>imgDe(p)).length}; }
+const thumb=(p,sz=40)=>imgDe(p)?`<img class="thumb" loading="lazy" src="${esc(imgDe(p))}" alt="" style="width:${sz}px;height:${sz}px" onerror="this.style.visibility='hidden'">`:`<div class="thumb ph" style="width:${sz}px;height:${sz}px">📦</div>`;
+
 /* ---------- CONFIGURAÇÕES ---------- */
 V.config = ()=>{
   header('Suporte técnico','Uso exclusivo da Cultivve');
@@ -2123,7 +2521,7 @@ let toques=[];
 document.addEventListener('click',async e=>{
   if(!e.target.closest || !e.target.closest('.foot')) return;
   const t=Date.now(); toques=toques.filter(x=>t-x<3000); toques.push(t);
-  if(toques.length>=5){ toques=[]; if(await ask('Abrir a área de <b>suporte técnico</b> (conexão com o banco de dados)? Ela é para uso da Cultivve — alterar algo aqui pode desconectar este aparelho.',{ok:'Abrir',title:'Suporte técnico'})) go('config'); }
+  if(toques.length>=5){ toques=[]; if(await entrarAdmin()) go('admin'); }
 });
 /* ---------- instalar o app ---------- */
 let promptInstalar=null;
@@ -2145,6 +2543,7 @@ document.addEventListener('click',async e=>{
 /* =====================================================================
    INÍCIO
    ===================================================================== */
+window.addEventListener('hashchange',()=>{ const m=location.hash.match(/^#e=([A-Za-z0-9]+)/); if(m){ history.replaceState(null,'',location.pathname); entrarCodigo(m[1].toUpperCase()); } });
 (async function boot(){
   if(location.hash.startsWith('#cfg=')){
     try{ const c=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(5))))); if(c.apiKey&&c.projectId){ LS.set('cvinv_fbcfg',c); } }catch(e){ console.warn(e); }
@@ -2155,8 +2554,15 @@ document.addEventListener('click',async e=>{
   if(Store.cfg()) sm('Conectando ao servidor…');
   await Store.init();
   sm('Carregando seus dados…');
+  const hc=(location.hash.match(/^#e=([A-Za-z0-9]+)/)||[])[1];
+  if(hc){ history.replaceState(null,'',location.pathname); const x=await resolverCodigo(hc); if(x.erro) toast(x.erro,true); }
   const last=LS.get('cvinv_emp');
-  if(last){ const e=await Store.get('empresas',last).catch(()=>null); if(e){ S.empresa=e; S.stack=['empresas']; S.view='inicio'; } }
+  S.view='acesso';
+  if(last && !adminOk()) await garantirMembro(last,LS.get('cvinv_emp_cod'));
+  if(last){ const e=await Store.get('empresas',last).catch(()=>null);
+    if(e && e.status==='bloqueada' && !adminOk()){ toast('O acesso desta empresa está suspenso. Fale com a Cultivve.',true); }
+    else if(e){ S.empresa=e; S.view='inicio'; } }
+  if(S.view==='acesso' && adminOk()) S.view='admin';
   clearTimeout(lento);
   render();
   if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW',e)); }

@@ -33,19 +33,33 @@ A câmera só funciona em HTTPS, e o GitHub Pages já é HTTPS.
 - **iPhone (Safari):** Compartilhar → "Adicionar à Tela de Início".
 - **Android (Chrome):** menu ⋮ → "Instalar app".
 
-## 4. Usuários e escala
+## 4. Área da Cultivve (administração)
+- Na tela inicial, toque em **"Sou da Cultivve"** (ou 5 toques no rodapé) e entre com o **e-mail e senha de administrador** (Firebase Authentication). Enquanto o login por e-mail não estiver ativado no Firebase, o app usa o PIN mestre.
+- Só o Master vê dados técnicos (leitor, fontes externas, diagnóstico). Para os demais aparece "Tecnologia by Cultivve".
+- Lá você cadastra as empresas, gera o **link de acesso** de cada uma (ou o código de 6 letras), bloqueia/ativa empresas, configura o token da SI5 e limpa dados de teste.
+- O gestor da empresa recebe o link, entra com o PIN dele, cadastra os colaboradores e sobe a planilha.
+
+## 5. Modos de contagem (por empresa, pode mudar a cada inventário)
+- **Duas contagens cegas + desempate** (padrão): 1ª e 2ª cegas; divergências entre elas vão para a 3ª.
+- **Uma contagem + conferência:** uma contagem; o que divergir do estoque do sistema vai para a conferência.
+- **Uma contagem, sem conferência:** resultado direto para os ajustes.
+
+## 6. Imagens dos produtos
+Ao subir a planilha, o app associa os códigos de barras ao **catálogo da Cultivve** e, aos poucos (dentro do limite diário da SI5), busca os que faltam. Ao bipar um produto sem imagem, ele busca na hora. As imagens aparecem no painel de contagem, na lista de produtos e na busca, e ficam guardadas para todos os clientes.
+
+## 7. Usuários e escala
 - **Gestor:** vê tudo (estoque, confronto, resultado, painel, configurações). Pode haver vários.
 - **Contador:** entra com o PIN e vê só a contagem liberada para ele. Pode receber a permissão de encerrar o inventário.
 - Em cada contagem o gestor marca **quem conta** (1ª, 2ª e desempate). Se a mesma pessoa estiver na 1ª e na 2ª, o app avisa, mas deixa salvar.
 - Contagem sem ninguém escalado fica livre para qualquer pessoa.
 
-## 5. Painel do gestor (celular ou computador)
+## 8. Painel do gestor (celular ou computador)
 Abra o mesmo link no computador para ter tela larga. O painel tem indicadores (acurácia, itens ajustados, valor das perdas), o histórico de inventários, o histórico de um produto, o relatório geral (produtos × inventários), os usuários, o layout de exportação para o ERP e os dados da empresa.
 
-## 6. Ajustes para o ERP
+## 9. Ajustes para o ERP
 No Resultado, há dois arquivos separados: **Ajuste de ENTRADA** e **Ajuste de SAÍDA**, cada um também em PDF. O formato do arquivo (CSV, TXT posicional ou Excel), as colunas, o separador, as casas decimais, a codificação e os códigos de movimento são configurados em Painel → Exportação ERP.
 
-## 7. Fluxo de uso
+## 10. Fluxo de uso
 1. Cadastre a **empresa**: digite o CNPJ e toque em Buscar (ou envie o cartão CNPJ em PDF) que os dados são preenchidos sozinhos. Defina seu PIN de gestor.
 2. Crie o **inventário** e importe a planilha (código, descrição, código de barras, estoque, unidade e, opcionalmente, **grupo** e **subgrupo**). Há um botão para baixar a planilha modelo.
 3. Na contagem, o botão **📋 Ver lista de produtos por grupo** mostra todos os itens filtrados por grupo e subgrupo, com o que você já contou marcado com ✓ (sem mostrar o estoque).
@@ -67,3 +81,12 @@ No Resultado, há dois arquivos separados: **Ajuste de ENTRADA** e **Ajuste de S
 
 ## Atualizações
 Ao mudar o app, altere `CACHE` em `sw.js` (ex.: `cvinv-v1.0.1`) para os celulares buscarem a versão nova.
+
+## Segurança (v3.2) — como ativar
+1. Firebase → **Authentication** → Começar → em **Método de login** ative **Anônimo** e **E-mail/senha**.
+2. Em **Authentication → Usuários → Adicionar usuário**, crie o seu e-mail de administrador e uma senha forte.
+3. O e-mail de administrador nas regras é `lupercerocha@gmail.com`. Para adicionar outro, inclua-o na lista em `firestore.rules`.
+4. Suba a versão nova no GitHub, entre como Cultivve (e-mail e senha) e abra a aba **Empresas** uma vez (isso cria os códigos de acesso no formato novo).
+5. Em cada celular, abra o **link de acesso** da empresa uma vez (vincula o aparelho à empresa).
+6. Por último, cole o conteúdo de `firestore.rules` em Firestore → Regras → **Publicar**.
+7. Se algo bloquear, volte publicando `firestore.rules.piloto` (regras abertas) e fale com o suporte.

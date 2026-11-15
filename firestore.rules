@@ -1,10 +1,78 @@
 rules_version = '2';
-// Regras para a fase de piloto: qualquer pessoa com o app configurado lê e grava.
-// Válidas até 01/06/2027. Antes de vender em escala, trocar por regras com login.
+// Cultivve Inventário — regras de segurança (v3.2)
+// Cada aparelho entra com um usuário anônimo e se vincula a UMA empresa pelo código de acesso.
+// Só enxerga e altera os dados da empresa vinculada. A Cultivve (e-mail abaixo) vê tudo.
+// >>> Troque/adicione o(s) e-mail(s) de administrador da Cultivve na lista abaixo. <<<
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2027, 6, 1);
+
+    function logado() { return request.auth != null; }
+    function isAdmin() {
+      return logado() && request.auth.token.email != null
+        && request.auth.token.email.lower() in ['lupercerocha@gmail.com'];
+    }
+    function ehMembro(emp) {
+      return logado()
+        && exists(/databases/$(database)/documents/membros/$(request.auth.uid))
+        && get(/databases/$(database)/documents/membros/$(request.auth.uid)).data.empresaId == emp
+        && get(/databases/$(database)/documents/empresas/$(emp)).data.get('status', 'ativa') != 'bloqueada';
+    }
+    function empDoInv(inv) {
+      return get(/databases/$(database)/documents/inventarios/$(inv)).data.empresaId;
+    }
+
+    // Empresas: o membro lê e atualiza a própria (usuários, layout do ERP...), mas não muda código nem status
+    match /empresas/{emp} {
+      allow read: if isAdmin() || ehMembro(emp);
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || (ehMembro(emp)
+        && request.resource.data.get('codigo', '') == resource.data.get('codigo', '')
+        && request.resource.data.get('status', 'ativa') == resource.data.get('status', 'ativa'));
+    }
+
+    // Códigos de acesso: qualquer aparelho logado consulta UM código (não lista)
+    match /codigos/{cod} {
+      allow get: if logado();
+      allow list, write: if isAdmin();
+    }
+
+    // Vínculo aparelho → empresa: só com um código válido de empresa ativa
+    match /membros/{uid} {
+      allow read: if isAdmin() || (logado() && request.auth.uid == uid);
+      allow create, update: if logado() && request.auth.uid == uid
+        && get(/databases/$(database)/documents/codigos/$(request.resource.data.codigo)).data.empresaId == request.resource.data.empresaId
+        && get(/databases/$(database)/documents/empresas/$(request.resource.data.empresaId)).data.get('status', 'ativa') != 'bloqueada';
+      allow delete: if isAdmin() || (logado() && request.auth.uid == uid);
+    }
+
+    // Inventários e tudo dentro deles (produtos, lançamentos, registro de atividades)
+    match /inventarios/{inv} {
+      allow read: if isAdmin() || ehMembro(resource.data.empresaId);
+      allow create: if isAdmin() || ehMembro(request.resource.data.empresaId);
+      allow update: if isAdmin() || (ehMembro(resource.data.empresaId)
+        && request.resource.data.empresaId == resource.data.empresaId);
+      allow delete: if isAdmin();
+      match /{sub}/{item} {
+        allow read, write: if isAdmin() || ehMembro(empDoInv(inv));
+      }
+    }
+
+    match /historico/{h} {
+      allow read: if isAdmin() || ehMembro(resource.data.empresaId);
+      allow create, update: if isAdmin() || ehMembro(request.resource.data.empresaId);
+      allow delete: if isAdmin();
+    }
+
+    // Catálogo de produtos/imagens da Cultivve: compartilhado entre todas as empresas
+    match /catalogo/{gtin} {
+      allow read, create, update: if logado();
+      allow delete: if isAdmin();
+    }
+
+    // Configurações da Cultivve: só o admin altera; contador de uso diário pode ser incrementado
+    match /config/{id} {
+      allow read: if logado();
+      allow write: if isAdmin() || (logado() && id.matches('uso_[0-9]+'));
     }
   }
 }

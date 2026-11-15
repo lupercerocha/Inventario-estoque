@@ -1,0 +1,9 @@
+rules_version = '2';
+// REGRAS ABERTAS DE PILOTO — use só para voltar atrás se as regras novas bloquearem algo.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.time < timestamp.date(2027, 6, 1);
+    }
+  }
+}
