@@ -177,6 +177,13 @@ pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:
 .pw .in{padding-right:48px}
 .pw .olho{position:absolute;right:4px;top:50%;transform:translateY(-50%);border:0;background:transparent;font-size:20px;width:40px;height:40px;cursor:pointer;line-height:1}
 .top .logo{cursor:default;-webkit-user-select:none;user-select:none}
+@media(min-width:700px){ .ov.wide .md{max-width:1100px;width:94vw} }
+.ov.wide .md{max-height:94vh}
+h3.fsec{font-size:14px;color:var(--teal);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
+h3.fsec:first-child{border-top:0;padding-top:0;margin-top:4px}
+h4.rsec{font-family:"Chakra Petch";font-size:13px;color:var(--navy);margin:14px 0 6px}
+.rlist{max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;background:#fff}
+.mfoot{position:sticky;bottom:-18px;background:#fff;padding:12px 0 4px;margin-top:14px;border-top:1px solid var(--line)}
 .results{margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}
 .res{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
 .res:active{background:var(--teal-soft)}
@@ -242,7 +249,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.2.4';
+const APP_VERSION = '3.2.6';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -540,35 +547,54 @@ function render(){ modeBar(); telaAcesa(S.view==='contar'); (V[S.view]||V.empres
 
 /* ---------- EMPRESAS ---------- */
 V.empresas = async ()=>{ S.view=adminOk()?'admin':(S.empresa?'inicio':'acesso'); return render(); };
+function blocoReceita(r){
+  if(!r) return '<div class="small muted">Digite o CNPJ para trazer os dados da Receita Federal.</div>';
+  const it=(l,v)=>`<div><div class="muted small">${l}</div><b>${esc(v||'—')}</b></div>`;
+  return `<div class="fgrid small">${it('Abertura',r.abertura)}${it('Situação',[r.situacao,r.situacaoData&&'desde '+r.situacaoData].filter(Boolean).join(' '))}${it('Matriz/filial',r.tipo)}${it('Natureza jurídica',r.natureza)}${it('Porte',r.porte)}${it('Capital social',r.capital?brl(r.capital):'')}${it('Simples Nacional',r.simples)}${it('MEI',r.mei)}${r.regime?it('Regime tributário',r.regime):''}</div>
+    ${r.ies&&r.ies.length?`<div class="small" style="margin-top:10px"><span class="muted">Inscrições estaduais:</span> ${r.ies.map(i=>`<b class="mono">${esc(i.ie)}</b> ${esc(i.uf)}${i.ativo?'':' (inativa)'}`).join(' · ')}</div>`:''}
+    <h4 class="rsec">Atividade principal (CNAE)</h4>${r.cnae?`<div class="small"><b class="mono">${esc(r.cnae.codigo)}</b> — ${esc(r.cnae.descricao)}</div>`:'<div class="small muted">—</div>'}
+    <h4 class="rsec">Atividades secundárias (${(r.cnaes||[]).length})</h4>${(r.cnaes||[]).length?`<div class="rlist small">${r.cnaes.map(c=>`<div><b class="mono">${esc(c.codigo)}</b> — ${esc(c.descricao)}</div>`).join('')}</div>`:'<div class="small muted">Nenhuma</div>'}
+    <h4 class="rsec">Quadro de sócios (${(r.socios||[]).length})</h4>${(r.socios||[]).length?`<div class="tbl-wrap"><table class="t" style="min-width:0"><thead><tr><th>Nome</th><th>Qualificação</th><th>Desde</th></tr></thead><tbody>${r.socios.map(x=>`<tr><td>${esc(x.nome)}</td><td class="small">${esc(x.qualificacao)}</td><td class="small">${esc(x.desde)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="small muted">Não informado</div>'}
+    ${r.consultadoEm?`<div class="small muted" style="margin-top:8px">Dados públicos da Receita Federal · consultados em ${dtBR(r.consultadoEm)}</div>`:''}`;
+}
 function empresaForm(e={},depois){
+  let receita=e.receita||null;
   const f=(k,l,t='text',ph='',extra='')=>`<label class="f">${l}<input class="in" name="${k}" type="${t}" value="${esc(e[k]||'')}" placeholder="${ph}" ${extra}></label>`;
   modal(`<h2>${e.id?'Editar empresa':'Nova empresa'}</h2>
     <div class="card" style="margin-top:10px;background:var(--gray)"><div class="row" style="align-items:flex-end">
-      <label class="f" style="flex:1;min-width:200px">CNPJ<input class="in" id="eCnpj" inputmode="numeric" maxlength="18" autocomplete="off" placeholder="00.000.000/0000-00" value="${esc(mascaraCnpj(e.cnpj||''))}"></label>
+      <label class="f" style="flex:1;min-width:220px">CNPJ<input class="in" id="eCnpj" inputmode="numeric" maxlength="18" autocomplete="off" placeholder="00.000.000/0000-00" value="${esc(mascaraCnpj(e.cnpj||''))}"></label>
       <button type="button" class="btn" id="eBusca">🔎 Buscar dados</button>
       <button type="button" class="btn sec" id="eCart">📄 Ler cartão CNPJ (PDF)</button><input type="file" id="eCartF" accept="application/pdf,.pdf" hidden></div>
-      <div class="small muted" id="eMsg" style="margin-top:6px">Digite o CNPJ: ao completar os 14 números, razão social, nome fantasia, endereço e contato são preenchidos sozinhos.</div></div>
-    <form id="fEmp" class="fgrid" style="margin-top:12px">
-    ${f('fantasia','Nome fantasia *','text','Mercado Exemplo','required')}${f('razao','Razão social')}
-    ${f('endereco','Endereço')}${f('bairro','Bairro')}${f('cidade','Cidade')}${f('uf','UF','text','PB','maxlength="2"')}${f('cep','CEP','text','','inputmode="numeric"')}
-    ${f('telefone','Telefone','tel')}${f('email','E-mail','email')}${f('responsavel','Responsável (gestor)')}
-    <label class="f" style="grid-column:1/-1">Modo de contagem padrão<select class="in" name="modoPadrao">${Object.entries(MODOS).map(([k,m])=>`<option value="${k}" ${(e.modoPadrao||'duas')===k?'selected':''}>${m.nome} — ${m.desc}</option>`).join('')}</select></label>
-    ${e.id?'':f('pin','PIN do gestor (4 a 6 números) *','password','••••','inputmode="numeric" pattern="\\d{4,6}" required')}
-    ${e.id?'':'<div class="hint" style="grid-column:1/-1">Esse será o primeiro gestor da empresa. Com o link de acesso e esse PIN, ele entra, cadastra os colaboradores (Painel → Usuários) e sobe a planilha do sistema.</div>'}
-    <div class="row" style="grid-column:1/-1;justify-content:flex-end"><button type="button" class="btn sec" id="cEmp">Cancelar</button><button class="btn">Salvar</button></div></form>`,
-  {onOpen:o=>{
+      <div class="small muted" id="eMsg" style="margin-top:6px">Digite o CNPJ: ao completar os 14 números, os dados da Receita Federal são preenchidos sozinhos.</div></div>
+    <form id="fEmp" style="margin-top:12px">
+      <h3 class="fsec">Identificação</h3>
+      <div class="fgrid">${f('fantasia','Nome fantasia *','text','Mercado Exemplo','required')}${f('razao','Razão social')}${f('ie','Inscrição estadual')}${f('im','Inscrição municipal','text','preencher à mão')}</div>
+      <h3 class="fsec">Endereço e contato</h3>
+      <div class="fgrid">${f('endereco','Endereço')}${f('complemento','Complemento')}${f('bairro','Bairro')}${f('cidade','Cidade')}${f('uf','UF','text','PB','maxlength="2"')}${f('cep','CEP','text','','inputmode="numeric"')}
+      ${f('telefone','Telefone','tel')}${f('telefone2','Telefone 2','tel')}${f('email','E-mail','email')}</div>
+      <h3 class="fsec">Dados da Receita Federal</h3>
+      <div id="eRec">${blocoReceita(receita)}</div>
+      <h3 class="fsec">Uso do sistema</h3>
+      <div class="fgrid">${f('responsavel','Responsável (gestor)')}
+      <label class="f" style="grid-column:span 2">Modo de contagem padrão<select class="in" name="modoPadrao">${Object.entries(MODOS).map(([k,m])=>`<option value="${k}" ${(e.modoPadrao||'duas')===k?'selected':''}>${m.nome} — ${m.desc}</option>`).join('')}</select></label>
+      ${e.id?'':f('pin','PIN do gestor (6 números) *','password','••••••','inputmode="numeric" maxlength="6" pattern="\\d{6}" required')}</div>
+      ${e.id?'':'<div class="hint" style="margin-top:10px">Esse será o primeiro gestor da empresa. Com o link de acesso e esse PIN, ele entra, cadastra os colaboradores e sobe a planilha do sistema.</div>'}
+      <div class="row mfoot"><span class="spacer"></span><button type="button" class="btn sec" id="cEmp">Cancelar</button><button class="btn">Salvar</button></div></form>`,
+  {cls:'wide',onOpen:o=>{
     const msg=(t,err)=>{ const m=$('#eMsg',o); m.innerHTML=t; m.style.color=err?'var(--red)':''; };
-    const preenche=d=>{ const F=$('#fEmp',o); Object.entries(d).forEach(([k,v])=>{ const i=F.querySelector(`[name=${k}]`); if(i && v && (!i.value||k!=='responsavel')) i.value=v; }); if(!F.querySelector('[name=fantasia]').value && d.razao) F.querySelector('[name=fantasia]').value=tit(d.razao); };
+    const preenche=(d,forcar)=>{ const F=$('#fEmp',o); Object.entries(d).forEach(([k,v])=>{ const i=F.querySelector(`[name=${k}]`); if(i && v && typeof v!=='object' && (forcar?k!=='responsavel'||!i.value:!i.value)) i.value=v; }); if(!F.querySelector('[name=fantasia]').value && d.razao) F.querySelector('[name=fantasia]').value=tit(d.razao); };
     const busca=async(cnpj)=>{ const c=String(cnpj||$('#eCnpj',o).value).replace(/\D/g,'');
       if(!cnpjValido(c)) return msg('CNPJ inválido — confira os números.',true);
-      $('#eCnpj',o).value=cnpjFmt(c); msg('Buscando dados na Receita…');
+      $('#eCnpj',o).value=cnpjFmt(c); msg('Buscando dados na Receita Federal…');
       const d=await buscarCnpj(c);
       if(!d) return msg('Não consegui buscar agora (sem internet ou serviço fora do ar). Preencha à mão.',true);
-      preenche({...d,cep:mascaraCep(d.cep),telefone:mascaraFone(d.telefone)}); msg(`✓ Dados preenchidos${d.situacao?' · situação: <b>'+esc(d.situacao)+'</b>':''}. Confira antes de salvar.`); };
+      preenche({...d,cep:mascaraCep(d.cep)},true); receita=d.receita; $('#eRec',o).innerHTML=blocoReceita(receita);
+      const sit=d.situacao&&!/ativa/i.test(d.situacao);
+      msg(`${sit?'⚠':'✓'} Dados preenchidos${d.situacao?' · situação: <b>'+esc(d.situacao)+'</b>':''}${d.ie?'':' · inscrição estadual não encontrada, preencha à mão'}. A inscrição municipal não é pública: preencha à mão.`,sit); };
     $('#eBusca',o).onclick=()=>busca();
     let ultimo='';
     aplicaMascara($('#eCnpj',o),mascaraCnpj,v=>{ const d=v.replace(/\D/g,''); if(d.length===14 && d!==ultimo){ ultimo=d; if(cnpjValido(d)) busca(d); else msg('CNPJ inválido — confira os números.',true); } });
-    const fT=$('#fEmp [name=telefone]',o); if(fT){ aplicaMascara(fT,mascaraFone); fT.value=mascaraFone(fT.value); }
+    ['telefone','telefone2'].forEach(k=>{ const fT=$('#fEmp [name='+k+']',o); if(fT){ aplicaMascara(fT,mascaraFone); fT.value=mascaraFone(fT.value); } });
     const fC=$('#fEmp [name=cep]',o); if(fC){ aplicaMascara(fC,mascaraCep); fC.value=mascaraCep(fC.value); }
     $('#eCnpj',o).onkeydown=ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); busca(); } };
     $('#eCart',o).onclick=()=>$('#eCartF',o).click();
@@ -578,8 +604,9 @@ function empresaForm(e={},depois){
     $('#fEmp',o).onsubmit=async ev=>{ ev.preventDefault();
       const d=Object.fromEntries(new FormData(ev.target).entries()); d.uf=(d.uf||'').toUpperCase(); d.cnpj=cnpjFmt($('#eCnpj',o).value);
       if(d.cnpj && !cnpjValido(d.cnpj)) return toast('CNPJ inválido',true);
+      if(receita) d.receita=receita;
       const id=e.id||uid();
-      if(!e.id){ if(!/^\d{4,6}$/.test(d.pin)) return toast('PIN deve ter de 4 a 6 números',true);
+      if(!e.id){ if(!/^\d{6}$/.test(d.pin)) return toast('O PIN precisa ter exatamente 6 números',true);
         const u={id:uid(),nome:d.responsavel||'Gestor',pinH:await pinHash(id,d.pin),perfil:'gestor',podeEncerrar:true,criadoEm:now()}; delete d.pin;
         d.usuarios=[u]; d.criadoEm=now(); d.codigo=codigoNovo(); d.status='ativa'; if(!adminOk()) LS.set('cvinv_me_'+id,u.id);
         await Store.set('codigos',d.codigo,{empresaId:id}); }
@@ -641,14 +668,14 @@ V.invhome = ()=>{
       ${rodadasDe(i).map(r=>{ const st=R['r'+r]||'bloqueada'; const ok=st==='aberta'&&!fin;
         return `<div class="card"><div class="row"><div class="round-dot" style="background:${ok?'var(--teal)':'#9aa6b2'}">${r===3&&modoDe(i)==='uma_conf'?'C':r+'ª'}</div><div style="flex:1"><h3>${rn(r)}</h3><div class="sub">${r<3?'Contagem cega da loja inteira':modoDe(i)==='uma_conf'?'Recontagem dos itens que divergiram do estoque':'Recontagem só dos itens divergentes'}${nomesEscala(i,r).length?' · Escala: '+esc(nomesEscala(i,r).join(', ')):''}</div></div><span class="badge ${RLBL[st][1]}">${RLBL[st][0]}</span></div>
         <button class="btn block big" style="margin-top:12px" data-r="${r}" ${ok?'':'disabled'}>${ok?'Começar a contar':'Indisponível'}</button></div>`; }).join('')}
-      <div class="card"><div class="row"><div class="round-dot" style="background:var(--navy)">G</div><div style="flex:1"><h3>Área do gestor</h3><div class="sub">Importar planilha, abrir/fechar contagens, confronto, divergências e relatório</div></div></div>
-        <button class="btn dark block big" style="margin-top:12px" id="bGest">Entrar com PIN</button></div>
+      ${ehGestor(S.me)||adminOk()?`<div class="card"><div class="row"><div class="round-dot" style="background:var(--navy)">G</div><div style="flex:1"><h3>Área do gestor</h3><div class="sub">Importar planilha, abrir/fechar contagens, confronto, divergências e relatório</div></div></div>
+        <button class="btn dark block big" style="margin-top:12px" id="bGest">Abrir área do gestor</button></div>`:''}
     </div>
     <div class="hint">Contagem cega: quem conta não vê o estoque do sistema nem o que outra pessoa contou. A 1ª e a 2ª contagens devem ser feitas por pessoas diferentes.</div>
-    <div class="row"><span class="spacer"></span><button class="btn ${fin?'':'red'}" id="bEncH">${fin?'Iniciar novo inventário':'Encerrar inventário e iniciar novo'}</button></div></div>`;
-  $('#bEncH').onclick=encerrarFluxo;
+    ${podeEnc(S.me)||adminOk()?`<div class="row"><span class="spacer"></span><button class="btn ${fin?'':'red'}" id="bEncH">${fin?'Iniciar novo inventário':'Encerrar inventário e iniciar novo'}</button></div>`:''}</div>`;
+  const bEH=$('#bEncH'); if(bEH) bEH.onclick=encerrarFluxo;
   $('#app').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>startCount(+b.dataset.r));
-  $('#bGest').onclick=gestorLogin;
+  const bG=$('#bGest'); if(bG) bG.onclick=gestorLogin;
 };
 async function startCount(r){
   if(!S.produtos.length && r<3){ const ok=await ask('A planilha de estoque ainda não foi importada. Sem ela, todo produto bipado terá que ser cadastrado na hora. Continuar mesmo assim?',{ok:'Continuar'}); if(!ok) return; }
@@ -1658,7 +1685,8 @@ function usuarios(e=S.empresa){
 const podeEnc=u=>!!u && (u.perfil==='gestor'||u.podeEncerrar);
 const ehGestor=u=>!!u && u.perfil==='gestor';
 function meKey(){ return 'cvinv_me_'+(S.empresa&&S.empresa.id); }
-function carregarMe(){ const id=LS.get(meKey()); S.me = id ? (usuarios().find(u=>u.id===id)||null) : null; if(!S.me && S.sess && S.sess.id==='cultivve' && adminOk()) S.me=S.sess; }
+const USER_CULTIVVE={id:'cultivve',nome:'Cultivve (suporte)',perfil:'gestor',podeEncerrar:true};
+function carregarMe(){ const id=LS.get(meKey()); S.me = id ? (usuarios().find(u=>u.id===id)||null) : null; if(adminOk() && (!S.me || !ehGestor(S.me))){ S.me=USER_CULTIVVE; S.sess=USER_CULTIVVE; } }
 const pinHash=(empId,pin)=>sha(empId+':'+String(pin).trim());
 async function migrarPins(){
   const us=usuarios(); if(!S.empresa || !Array.isArray(S.empresa.usuarios) || !us.some(u=>u.pin)) return;
@@ -1666,6 +1694,7 @@ async function migrarPins(){
   await salvarUsuarios(lista);
 }
 async function pedirPin(titulo,teste,msgSem){
+  setTimeout(()=>{ const i=$('#mTx'); if(i) i.maxLength=6; },20);
   const kb='cvinv_pinerr_'+S.empresa.id; const st=LS.get(kb,{n:0,ate:0});
   if(st.ate>Date.now()){ const m=Math.ceil((st.ate-Date.now())/60000); toast(`Muitas tentativas erradas. Tente de novo em ${m} minuto(s).`,true); return null; }
   const pin=await askText(titulo,{label:'Digite seu PIN',type:'password',inputmode:'numeric'});
@@ -1677,10 +1706,21 @@ async function pedirPin(titulo,teste,msgSem){
     else { LS.set(kb,{n,ate:0}); toast(`PIN não encontrado (${n} de 5 tentativas)`,true); }
     return null; }
   LS.del(kb);
+  if(String(pin).trim().length!==6){
+    toast('Seu PIN agora precisa ter 6 números. Crie um novo.');
+    let novo=null;
+    for(;;){ novo=await askText('Crie um novo PIN',{label:`${u.nome}, defina um PIN de 6 números`,type:'password',inputmode:'numeric'}); if(novo==null) return null;
+      novo=novo.trim(); if(!/^\d{6}$/.test(novo)){ toast('O PIN precisa ter exatamente 6 números',true); continue; }
+      const nh=await pinHash(S.empresa.id,novo); if(usuarios().some(x=>x.id!==u.id && x.pinH===nh)){ toast('Esse PIN já é de outro usuário',true); continue; }
+      const c=await askText('Confirme o novo PIN',{label:'Digite de novo',type:'password',inputmode:'numeric'}); if(c==null) return null;
+      if(c.trim()!==novo){ toast('Os PINs não conferem',true); continue; }
+      await salvarUsuarios(usuarios().map(x=>{ if(x.id!==u.id) return x; const y={...x,pinH:nh}; delete y.pin; return y; })); toast('PIN atualizado'); break; }
+  }
   if(teste && !teste(u)){ toast(msgSem||(u.nome+' não tem permissão para isso'),true); return null; }
   return u;
 }
 async function exigir(teste,titulo,msgSem){
+  if(adminOk()){ S.sess=USER_CULTIVVE; return USER_CULTIVVE; }
   if(S.me && teste(S.me)) return S.me;
   if(S.sess && teste(S.sess)) return S.sess;
   const u=await pedirPin(titulo,teste,msgSem); if(u) S.sess=u; return u;
@@ -1721,7 +1761,7 @@ function usuarioForm(u={},depois){
   const us=usuarios();
   modal(`<h2>${u.id?'Editar usuário':'Novo usuário'}</h2><form id="fUs" class="fgrid" style="margin-top:12px">
     <label class="f">Nome *<input class="in" name="nome" required value="${esc(u.nome||'')}"></label>
-    <label class="f">PIN (4 a 6 números)${u.id?'':' *'}<input class="in" name="pin" type="password" inputmode="numeric" autocomplete="new-password" ${u.id?'placeholder="deixe em branco para manter"':'required'}></label>
+    <label class="f">PIN (6 números)${u.id?'':' *'}<input class="in" name="pin" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password" ${u.id?'placeholder="deixe em branco para manter"':'required'}></label>
     <label class="f">Perfil<select class="in" name="perfil"><option value="contador" ${u.perfil!=='gestor'?'selected':''}>Contador</option><option value="gestor" ${u.perfil==='gestor'?'selected':''}>Gestor</option></select></label>
     <label class="chk small" style="grid-column:1/-1"><input type="checkbox" name="podeEncerrar" ${u.podeEncerrar?'checked':''}> Pode encerrar o inventário e iniciar um novo (gestores sempre podem)</label>
     <div class="hint" style="grid-column:1/-1"><b>Contador:</b> só conta o que for liberado para ele. <b>Gestor:</b> vê estoque, confronto, resultado, relatórios, painel e configurações.</div>
@@ -1731,7 +1771,7 @@ function usuarioForm(u={},depois){
       const d=Object.fromEntries(new FormData(ev.target).entries());
       d.nome=d.nome.trim(); d.pin=String(d.pin||'').trim(); d.podeEncerrar=!!d.podeEncerrar;
       if(!u.id && !d.pin) return toast('Defina o PIN',true);
-      if(d.pin){ if(!/^\d{4,6}$/.test(d.pin)) return toast('PIN deve ter de 4 a 6 números',true);
+      if(d.pin){ if(!/^\d{6}$/.test(d.pin)) return toast('O PIN precisa ter exatamente 6 números',true);
         d.pinH=await pinHash(S.empresa.id,d.pin);
         for(const x of us){ if(x.id===u.id) continue; if((x.pinH&&x.pinH===d.pinH)||(x.pin&&String(x.pin)===d.pin)) return toast('Esse PIN já é de outro usuário',true); } }
       delete d.pin;
@@ -1755,19 +1795,55 @@ function mascaraFone(v){ const d=String(v||'').replace(/\D/g,'').slice(0,11); if
 function mascaraCep(v){ const d=String(v||'').replace(/\D/g,'').slice(0,8); return d.length>5?d.slice(0,5)+'-'+d.slice(5):d; }
 function aplicaMascara(inp,fn,onDone){ inp.addEventListener('input',()=>{ const pos=inp.selectionStart, antes=inp.value.length; inp.value=fn(inp.value); const dif=inp.value.length-antes; try{ inp.setSelectionRange(pos+dif,pos+dif); }catch(e){} onDone&&onDone(inp.value); }); }
 const tit=s=>String(s||'').toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase());
+const dataBR=v=>{ const m=String(v||'').match(/^(\d{4})-(\d{2})-(\d{2})/); return m?`${m[3]}/${m[2]}/${m[1]}`:(v||''); };
+const cnaeFmt=c=>{ const d=String(c||'').replace(/\D/g,'').padStart(7,'0'); return d.length===7?`${d.slice(0,4)}-${d.slice(4,5)}/${d.slice(5)}`:String(c||''); };
+async function getJson(url,ms=9000){ try{ const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),ms); const r=await fetch(url,{signal:ctl.signal}); clearTimeout(t); return r.ok?await r.json():null; }catch(e){ return null; } }
+/* busca os dados públicos do CNPJ em duas fontes ao mesmo tempo e junta o que cada uma tem */
 async function buscarCnpj(cnpj){
   const c=String(cnpj).replace(/\D/g,'');
-  try{
-    const r=await fetch('https://brasilapi.com.br/api/cnpj/v1/'+c); if(r.ok){ const j=await r.json();
-      return {razao:j.razao_social||'',fantasia:j.nome_fantasia||'',cidade:tit(j.municipio),uf:j.uf||'',telefone:j.ddd_telefone_1||'',email:(j.email||'').toLowerCase(),
-        endereco:[[j.descricao_tipo_de_logradouro,j.logradouro].filter(Boolean).join(' '),j.numero].filter(Boolean).join(', '),bairro:tit(j.bairro),cep:j.cep||'',situacao:j.descricao_situacao_cadastral||''}; }
-  }catch(e){}
-  try{
-    const r=await fetch('https://publica.cnpj.ws/cnpj/'+c); if(r.ok){ const j=await r.json(); const e=j.estabelecimento||{};
-      return {razao:j.razao_social||'',fantasia:e.nome_fantasia||'',cidade:(e.cidade&&e.cidade.nome)||'',uf:(e.estado&&e.estado.sigla)||'',telefone:(e.ddd1||'')+(e.telefone1||''),email:(e.email||'').toLowerCase(),
-        endereco:[[e.tipo_logradouro,e.logradouro].filter(Boolean).join(' '),e.numero].filter(Boolean).join(', '),bairro:e.bairro||'',cep:e.cep||'',situacao:e.situacao_cadastral||''}; }
-  }catch(e){}
-  return null;
+  const [a,w]=await Promise.all([getJson('https://brasilapi.com.br/api/cnpj/v1/'+c),getJson('https://publica.cnpj.ws/cnpj/'+c)]);
+  if(!a && !w) return null;
+  const e=(w&&w.estabelecimento)||{};
+  const pick=(...v)=>{ for(const x of v){ if(x!=null && String(x).trim()!=='') return x; } return ''; };
+  const fone=(d,n)=>{ const x=String(pick(d,'')).replace(/\D/g,''); return x?mascaraFone(x):''; };
+  const ies=(e.inscricoes_estaduais||[]).map(i=>({ie:i.inscricao_estadual,uf:(i.estado&&i.estado.sigla)||'',ativo:i.ativo!==false}));
+  const ieUF=ies.find(i=>i.ativo&&i.uf===(pick(a&&a.uf,e.estado&&e.estado.sigla)))||ies.find(i=>i.ativo)||ies[0];
+  const cnaeP=a&&a.cnae_fiscal?{codigo:cnaeFmt(a.cnae_fiscal),descricao:a.cnae_fiscal_descricao||''}:(e.atividade_principal?{codigo:cnaeFmt(e.atividade_principal.subclasse||e.atividade_principal.id),descricao:e.atividade_principal.descricao||''}:null);
+  let cnaesS=(a&&a.cnaes_secundarios||[]).filter(x=>x&&x.codigo).map(x=>({codigo:cnaeFmt(x.codigo),descricao:x.descricao||''}));
+  if(!cnaesS.length) cnaesS=(e.atividades_secundarias||[]).map(x=>({codigo:cnaeFmt(x.subclasse||x.id),descricao:x.descricao||''}));
+  let socios=(a&&a.qsa||[]).map(x=>({nome:x.nome_socio||'',qualificacao:x.qualificacao_socio||'',desde:dataBR(x.data_entrada_sociedade),faixa:x.faixa_etaria||''}));
+  if(!socios.length) socios=((w&&w.socios)||[]).map(x=>({nome:x.nome||'',qualificacao:(x.qualificacao_socio&&x.qualificacao_socio.descricao)||'',desde:dataBR(x.data_entrada),faixa:x.faixa_etaria||''}));
+  const simples=w&&w.simples, mei=a&&a.opcao_pelo_mei;
+  const regime=(a&&Array.isArray(a.regime_tributario)&&a.regime_tributario.length)?a.regime_tributario.slice().sort((x,y)=>(y.ano||0)-(x.ano||0))[0]:null;
+  return {
+    razao:pick(a&&a.razao_social,w&&w.razao_social),
+    fantasia:pick(a&&a.nome_fantasia,e.nome_fantasia),
+    endereco:[[pick(a&&a.descricao_tipo_de_logradouro,e.tipo_logradouro),pick(a&&a.logradouro,e.logradouro)].filter(Boolean).join(' '),pick(a&&a.numero,e.numero)].filter(Boolean).join(', '),
+    complemento:pick(a&&a.complemento,e.complemento),
+    bairro:tit(pick(a&&a.bairro,e.bairro)),
+    cidade:tit(pick(a&&a.municipio,e.cidade&&e.cidade.nome)),
+    uf:pick(a&&a.uf,e.estado&&e.estado.sigla),
+    cep:pick(a&&a.cep,e.cep),
+    telefone:fone(pick(a&&a.ddd_telefone_1,(e.ddd1||'')+(e.telefone1||''))),
+    telefone2:fone(pick(a&&a.ddd_telefone_2,(e.ddd2||'')+(e.telefone2||''))),
+    email:String(pick(a&&a.email,e.email)).toLowerCase(),
+    ie:ieUF?ieUF.ie:'',
+    situacao:pick(a&&a.descricao_situacao_cadastral,e.situacao_cadastral),
+    receita:{
+      abertura:dataBR(pick(a&&a.data_inicio_atividade,e.data_inicio_atividade)),
+      situacao:pick(a&&a.descricao_situacao_cadastral,e.situacao_cadastral),
+      situacaoData:dataBR(pick(a&&a.data_situacao_cadastral,e.data_situacao_cadastral)),
+      tipo:pick(a&&a.descricao_identificador_matriz_filial,e.tipo),
+      natureza:pick(a&&a.natureza_juridica,w&&w.natureza_juridica&&w.natureza_juridica.descricao),
+      porte:pick(a&&a.porte,a&&a.descricao_porte,w&&w.porte&&w.porte.descricao),
+      capital:Number(pick(a&&a.capital_social,w&&w.capital_social,0))||0,
+      simples:simples?(simples.simples==='Sim'?'Sim'+(simples.data_opcao_simples?' (desde '+dataBR(simples.data_opcao_simples)+')':''):'Não'):(a&&a.opcao_pelo_simples!=null?(a.opcao_pelo_simples?'Sim':'Não'):''),
+      mei:simples?(simples.mei==='Sim'?'Sim':'Não'):(mei!=null?(mei?'Sim':'Não'):''),
+      regime:regime?`${regime.forma_de_tributacao||''} (${regime.ano||''})`:'',
+      cnae:cnaeP, cnaes:cnaesS, socios, ies,
+      consultadoEm:now()
+    }
+  };
 }
 async function lerCartaoCnpj(file){
   if(!/pdf/i.test(file.type) && !/\.pdf$/i.test(file.name)) { toast('Envie o cartão CNPJ em PDF (o que a Receita gera). Foto não dá para ler — digite o CNPJ.',true); return null; }
@@ -1789,7 +1865,7 @@ let homeUnsub=null;
 V.inicio = ()=>{
   const e=S.empresa; carregarMe();
   const me=S.me;
-  header(e.fantasia||e.razao, me?`${me.nome} · ${PERF[me.perfil]}`:'Inventário com contagem cega',{back:false,right:(adminOk()?'<button class="ic" id="hEmp">Cultivve</button> ':'')+(me?'<button class="ic" id="hSair">Sair</button>':'')});
+  header(e.fantasia||e.razao, me?`${me.nome} · ${PERF[me.perfil]}`:'Inventário com contagem cega',{back:false,right:(adminOk()?'<button class="ic" id="hEmp">Cultivve</button> ':'')+(me&&me.id!=='cultivve'?'<button class="ic" id="hSair">Sair</button>':'')});
   const bS=$('#hSair'); if(bS) bS.onclick=async()=>{ if(await ask(`Sair do usuário ${esc(me.nome)} neste aparelho?`,{ok:'Sair'})){ LS.del(meKey()); S.me=null; S.sess=null; render(); } };
   const bE=$('#hEmp'); if(bE) bE.onclick=()=>{ S.stack=[]; go('admin',false); };
   if(Store.mode==='cloud' && !adminOk()){ const hj=new Date().toISOString().slice(0,10); if(LS.get('cvinv_ac_'+e.id)!==hj){ LS.set('cvinv_ac_'+e.id,hj); Store.set('empresas',e.id,{ultimoAcesso:now()}); } }
@@ -1802,6 +1878,7 @@ function invAtual(){ return (S.homeInvs||[]).filter(i=>i.status!=='finalizado').
 function tarefas(inv,u){
   if(!inv) return [];
   const R=inv.rodadas||{}; const out=[];
+  if(u && u.id==='cultivve'){ [1,2,3].forEach(r=>{ if(R['r'+r]==='aberta') out.push({r,escalado:false}); }); return out; }
   [1,2,3].forEach(r=>{ if(R['r'+r]!=='aberta') return; const esc_=escalaDe(inv,r);
     if(esc_.length){ if(u && esc_.includes(u.id)) out.push({r,escalado:true}); }
     else out.push({r,escalado:false}); });
@@ -1815,7 +1892,7 @@ function drawInicio(){
       <button class="btn block big" style="margin-top:12px" data-go="${t.r}">Começar a contar</button></div>`;
   let html=cardInstalar();
   if(!me){
-    html+=`<div class="card" style="text-align:center;padding:26px 18px"><h1>Olá! 👋</h1><p class="muted">Entre com o seu PIN para ver o que você precisa contar.</p>
+    html+=`<div class="card" style="text-align:center;padding:26px 18px"><h1>Olá! 👋</h1><p class="muted">Entre com o seu PIN de 6 números. Gestores e contadores usam o mesmo botão.</p>
       <button class="btn block big" id="bLogin">Entrar com meu PIN</button></div>`;
     const livres=tk.filter(t=>!t.escalado);
     if(livres.length) html+=`<div class="card"><h3>Contar sem cadastro</h3><div class="sub">Contagens abertas para qualquer pessoa</div><div class="row" style="margin-top:10px">${livres.map(t=>`<button class="btn sec" data-livre="${t.r}">${rn(t.r,atual)}</button>`).join('')}</div></div>`;
@@ -1836,10 +1913,8 @@ function drawInicio(){
   } else if(me && podeEnc(me) && atual){
     html+=`<div class="card"><h3>Encerrar inventário</h3><div class="sub">Você tem permissão para encerrar o inventário atual e iniciar um novo.</div><button class="btn red" id="bEnc" style="margin-top:10px">Encerrar e iniciar novo</button></div>`;
   }
-  if(!ehGestor(me)) html+=`<div class="row"><span class="spacer"></span><button class="btn ghost" id="bGestor">Acesso do gestor</button></div>`;
-  html+=`<div class="foot">${MARCA} · v${APP_VERSION}${adminOk()?'':'<br><a href="#" id="iAdm">Sou da Cultivve</a>'}</div>`;
+  html+=`<div class="foot">${MARCA} · v${APP_VERSION}</div>`;
   b.innerHTML=html;
-  const ia=$('#iAdm'); if(ia) ia.onclick=async e=>{ e.preventDefault(); e.stopPropagation(); if(await entrarAdmin()){ S.stack=[]; go('admin',false); } };
   const L=$('#bLogin'); if(L) L.onclick=async()=>{ const u=await pedirPin('Entrar'); if(u){ S.me=u; LS.set(meKey(),u.id); toast('Olá, '+u.nome+'!'); render(); } };
   b.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>irContar(atual,+x.dataset.go));
   b.querySelectorAll('[data-livre]').forEach(x=>x.onclick=async()=>{ const nome=await askText('Quem está contando?',{label:'Seu nome',value:S.contador}); if(nome&&nome.trim()){ S.contador=nome.trim(); LS.set('cvinv_nome',S.contador); irContar(atual,+x.dataset.livre,true); } });
@@ -1849,7 +1924,6 @@ function drawInicio(){
   const gu=$('#gUsers'); if(gu) gu.onclick=()=>{ S.pTab='users'; go('painel'); };
   const gt=$('#gTodos'); if(gt) gt.onclick=()=>go('inventarios');
   const be=$('#bEnc'); if(be) be.onclick=()=>{ openInv(atual,'invhome'); setTimeout(encerrarFluxo,50); };
-  const bg=$('#bGestor'); if(bg) bg.onclick=async()=>{ const u=await pedirPin('Acesso do gestor',ehGestor,'Esse PIN não é de um gestor'); if(u){ S.sess=u; if(!S.me){ S.me=u; LS.set(meKey(),u.id); } render(); } };
 }
 function irContar(inv,r,livre){
   if(S.me && !livre) S.contador=S.me.nome;
@@ -2067,7 +2141,8 @@ P.users = async ()=>{
 P.emp = async ()=>{
   const e=S.empresa; const b=$('#pBody');
   b.innerHTML=`<div class="card"><div class="row between"><h2>${esc(e.fantasia||e.razao)}</h2><button class="btn" id="eEd">Editar dados</button></div>
-    <div class="fgrid small" style="margin-top:10px">${[['Razão social',e.razao],['CNPJ',e.cnpj],['Endereço',[e.endereco,e.bairro].filter(Boolean).join(' · ')],['Cidade/UF',[e.cidade,e.uf].filter(Boolean).join('/')],['CEP',e.cep],['Telefone',e.telefone],['E-mail',e.email],['Responsável',e.responsavel]].map(([l,v])=>`<div><div class="muted">${l}</div><b>${esc(v||'—')}</b></div>`).join('')}</div></div>
+    <div class="fgrid small" style="margin-top:10px">${[['Razão social',e.razao],['CNPJ',e.cnpj],['Inscrição estadual',e.ie],['Inscrição municipal',e.im],['Endereço',[e.endereco,e.complemento,e.bairro].filter(Boolean).join(' · ')],['Cidade/UF',[e.cidade,e.uf].filter(Boolean).join('/')],['CEP',e.cep],['Telefones',[e.telefone,e.telefone2].filter(Boolean).join(' · ')],['E-mail',e.email],['Responsável',e.responsavel]].map(([l,v])=>`<div><div class="muted">${l}</div><b>${esc(v||'—')}</b></div>`).join('')}</div></div>
+    <div class="card"><h3>Dados da Receita Federal</h3><div style="margin-top:8px">${blocoReceita(e.receita)}</div></div>
     <div class="card"><h3>Este aparelho</h3><div class="small muted">Conexão: ${Store.mode==='cloud'?'nuvem (vários aparelhos)':'modo local'}</div></div>`;
   $('#eEd').onclick=()=>empresaForm(e,async()=>{ S.empresa=await Store.get('empresas',e.id)||S.empresa; V.painel(); });
 };
@@ -2278,8 +2353,8 @@ async function entrarAdmin(){
   LS.set('cvinv_admin_tipo','pin');
   const c=await cfgCultivve();
   if(!c.pinHash){
-    const p1=await askText('Criar PIN da Cultivve',{label:'Defina o PIN mestre da Cultivve (6 a 10 números). Ele dá acesso a todas as empresas.',type:'password',inputmode:'numeric'}); if(!p1) return false;
-    if(!/^\d{6,10}$/.test(p1)) { toast('O PIN mestre deve ter de 6 a 10 números',true); return false; }
+    const p1=await askText('Criar PIN da Cultivve',{label:'Defina o PIN mestre da Cultivve (6 números). Ele dá acesso a todas as empresas.',type:'password',inputmode:'numeric'}); if(!p1) return false;
+    if(!/^\d{6}$/.test(p1)) { toast('O PIN mestre precisa ter exatamente 6 números',true); return false; }
     const p2=await askText('Confirme o PIN',{label:'Digite de novo',type:'password',inputmode:'numeric'}); if(p1!==p2){ toast('Os PINs não conferem',true); return false; }
     const h=await sha(p1); await Store.set('config','cultivve',{pinHash:h,criadoEm:now()}); S.cfgC={...c,pinHash:h};
   } else {
@@ -2372,7 +2447,7 @@ A.emp = async ()=>{
   $('#aRestF').onchange=async ev=>{ const f=ev.target.files[0]; ev.target.value=''; if(f) restaurarBackup(f); };
   b.querySelectorAll('[data-ed]').forEach(x=>x.onclick=()=>empresaForm(emps.find(e=>e.id===x.dataset.ed),()=>V.admin()));
   b.querySelectorAll('[data-abrir]').forEach(x=>x.onclick=()=>{ const e=emps.find(z=>z.id===x.dataset.abrir); S.empresa=e; LS.set('cvinv_emp',e.id);
-    LS.set('cvinv_emp_cod',e.codigo); S.sess={id:'cultivve',nome:'Cultivve (suporte)',perfil:'gestor',podeEncerrar:true}; S.stack=['admin']; go('inicio',false); });
+    LS.set('cvinv_emp_cod',e.codigo); S.sess=USER_CULTIVVE; S.stack=['admin']; go('inicio',false); });
   b.querySelectorAll('[data-bl]').forEach(x=>x.onclick=async()=>{ const e=emps.find(z=>z.id===x.dataset.bl); const bl=e.status==='bloqueada';
     if(await ask(`${bl?'Ativar':'Bloquear'} o acesso de <b>${esc(e.fantasia)}</b>?${bl?'':' Os usuários dela não conseguirão entrar até você ativar de novo. Os dados ficam guardados.'}`,{ok:bl?'Ativar':'Bloquear',danger:!bl})){ await Store.set('empresas',e.id,{status:bl?'ativa':'bloqueada'}); V.admin(); } });
   b.querySelectorAll('[data-link]').forEach(x=>x.onclick=()=>{ const e=emps.find(z=>z.id===x.dataset.link); const l=linkEmpresa(e);

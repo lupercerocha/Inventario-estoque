@@ -1,5 +1,5 @@
 /* Cultivve Inventário — service worker (funciona offline) */
-const CACHE = 'cvinv-v3.2.4';
+const CACHE = 'cvinv-v3.2.6';
 const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/apple-touch-icon.png'];
 const LIBS = [
   'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
