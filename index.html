@@ -204,8 +204,13 @@ pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:
 .ehead .muted{color:#BACAD3}
 .ehead .x{background:rgba(255,255,255,.12);color:#fff!important}
 .ebusca{margin:14px 0}
-.ecols{display:grid;gap:14px;grid-template-columns:1fr}
-@media(min-width:1100px){ .ecols{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start} .ecol-r{position:sticky;top:96px;max-height:calc(94vh - 190px);overflow:auto} }
+.ecols{display:flex;flex-direction:column;gap:14px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))} .g12{grid-template-columns:repeat(12,minmax(0,1fr))}
+.s5{grid-column:span 5}.s2x{grid-column:span 2}
+.rcols{display:grid;gap:18px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.rcols>div>.rsec:first-child{margin-top:16px}
+.rhist{margin-bottom:12px}.rhist-d{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px}
+@media(max-width:1000px){ .g4{grid-template-columns:repeat(2,minmax(0,1fr))} .g12{grid-template-columns:repeat(6,minmax(0,1fr))} .g12 .s5,.g12 .s3{grid-column:span 3} .g12 .s1,.g12 .s2{grid-column:span 2} .rcols{grid-template-columns:1fr} }
 .ecol-l{display:flex;flex-direction:column;gap:14px}
 .ecols>*,.ecol-l>*{min-width:0}
 .rsec{overflow-x:auto}
@@ -214,7 +219,7 @@ pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:
 .g{display:grid;gap:10px}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))} .g6{grid-template-columns:repeat(6,minmax(0,1fr))}
 .s1{grid-column:span 1}.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.s2c{grid-column:1/-1}
-@media(max-width:600px){ .g2,.g6{grid-template-columns:1fr} .s1,.s2,.s3,.s4{grid-column:1/-1} }
+@media(max-width:600px){ .g2,.g4,.g6,.g12{grid-template-columns:1fr!important} .g .s1,.g .s2,.g .s3,.g .s4,.g .s5,.g .s2x{grid-column:1/-1!important} }
 .rgrid{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
 .rtile{background:var(--gray);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:2px;min-width:0}
 .rtile span{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
@@ -326,7 +331,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.4.0';
+const APP_VERSION = '3.4.1';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -626,22 +631,42 @@ function render(){ if(S.view!=='acesso') document.body.classList.remove('hero-on
 /* ---------- EMPRESAS ---------- */
 V.empresas = async ()=>{ S.view=adminOk()?'admin':(S.empresa?'inicio':'acesso'); return render(); };
 function blocoReceita(r){
-  if(!r) return '<div class="rvazio">Digite o CNPJ para trazer os dados da Receita Federal: situação, porte, capital, CNAEs, inscrições estaduais e quadro de sócios.</div>';
+  if(!r) return '<div class="rvazio"><span class="spin" style="width:18px;height:18px;border-width:3px;display:inline-block;vertical-align:middle;margin-right:8px"></span>Aguardando o CNPJ para consultar.</div>';
   const ok=/ativa/i.test(r.situacao||'');
   const tile=(l,v,cls='')=>`<div class="rtile ${cls}"><span>${l}</span><b>${esc(v||'—')}</b></div>`;
   const ativ=[...(r.cnae?[{...r.cnae,tipo:'Principal'}]:[]),...(r.cnaes||[]).map(c=>({...c,tipo:'Secundária'}))];
   return `<div class="rgrid">
       ${tile('Situação cadastral',r.situacao,ok?'ok':'bad')}${tile('Situação desde',r.situacaoData)}${tile('Motivo da situação',r.motivo)}${tile('Abertura',r.abertura)}
       ${tile('Tipo',r.tipo)}${tile('Porte',r.porte)}${tile('Capital social',r.capital?brl(r.capital):'')}${tile('Natureza jurídica',r.natureza)}
-      ${tile('Simples Nacional',r.simples)}${tile('MEI',r.mei)}${tile('Regime tributário',r.regime)}${tile('Última consulta',r.consultadoEm?dtBR(r.consultadoEm):'')}
+      ${tile('Simples Nacional',r.simples)}${tile('MEI',r.mei)}${tile('Regime tributário',r.regime)}${tile('Código IBGE do município',r.municipioIbge)}
     </div>
+    <div class="rcols"><div>
     <div class="rsec"><h4>Inscrições estaduais <span>${(r.ies||[]).length}</span></h4>
       ${(r.ies||[]).length?`<table class="rt"><thead><tr><th>Inscrição estadual</th><th>UF</th><th>Situação</th><th>Atualizado em</th></tr></thead><tbody>${r.ies.map(i=>`<tr><td class="mono">${esc(i.ie)}</td><td>${esc(i.uf)}</td><td><span class="badge ${i.ativo?'b-ok':'b-red'}">${i.ativo?'Ativa':'Inativa'}</span></td><td>${esc(i.atualizado||'—')}</td></tr>`).join('')}</tbody></table>`:'<div class="rvazio">Não encontrada nas fontes públicas — preencha à mão no campo Inscrição estadual.</div>'}</div>
-    <div class="rsec"><h4>Atividades econômicas (CNAE) <span>${ativ.length}</span></h4>
-      ${ativ.length?`<table class="rt"><thead><tr><th style="width:120px">CNAE</th><th>Descrição</th><th style="width:110px">Tipo</th></tr></thead><tbody>${ativ.map(c=>`<tr class="${c.tipo==='Principal'?'prin':''}"><td class="mono">${esc(c.codigo)}</td><td>${esc(c.descricao)}</td><td><span class="badge ${c.tipo==='Principal'?'b-blue':'b-gray'}">${c.tipo}</span></td></tr>`).join('')}</tbody></table>`:'<div class="rvazio">—</div>'}</div>
     <div class="rsec"><h4>Quadro de sócios e administradores <span>${(r.socios||[]).length}</span></h4>
       ${(r.socios||[]).length?`<table class="rt"><thead><tr><th>Nome</th><th>Qualificação</th><th>Entrada</th><th>País</th></tr></thead><tbody>${r.socios.map(x=>`<tr><td><b>${esc(x.nome)}</b>${x.representante?`<div class="small muted">Representante: ${esc(x.representante)}</div>`:''}</td><td>${esc(x.qualificacao)}</td><td>${esc(x.desde||'—')}</td><td>${esc(x.pais||'BRASIL')}</td></tr>`).join('')}</tbody></table>`:'<div class="rvazio">Não informado</div>'}</div>
-    <div class="small muted" style="margin-top:6px">Dados públicos da Receita Federal e das Secretarias da Fazenda.</div>`;
+    </div><div>
+    <div class="rsec"><h4>Atividades econômicas (CNAE) <span>${ativ.length}</span></h4>
+      ${ativ.length?`<table class="rt"><thead><tr><th style="width:120px">CNAE</th><th>Descrição</th><th style="width:110px">Tipo</th></tr></thead><tbody>${ativ.map(c=>`<tr class="${c.tipo==='Principal'?'prin':''}"><td class="mono">${esc(c.codigo)}</td><td>${esc(c.descricao)}</td><td><span class="badge ${c.tipo==='Principal'?'b-blue':'b-gray'}">${c.tipo}</span></td></tr>`).join('')}</tbody></table>`:'<div class="rvazio">—</div>'}</div>
+    </div></div>
+    <div class="small muted" style="margin-top:8px">Dados públicos da Receita Federal e das Secretarias da Fazenda.</div>`;
+}
+/* foto do que a Receita diz, para comparar entre consultas */
+function snapReceita(d){ const r=d.receita||{};
+  return {'Razão social':d.razao,'Nome fantasia':d.fantasia,'Situação cadastral':r.situacao,'Motivo da situação':r.motivo,'Tipo':r.tipo,'Natureza jurídica':r.natureza,'Porte':r.porte,'Capital social':r.capital?brl(r.capital):'',
+    'Simples Nacional':r.simples,'MEI':r.mei,'Regime tributário':r.regime,
+    'Endereço':[[d.endereco,d.numero].filter(Boolean).join(', '),d.complemento,d.bairro,[d.cidade,d.uf].filter(Boolean).join('/'),d.cep].filter(Boolean).join(' · '),
+    'Telefones':[d.telefone,d.telefone2].filter(Boolean).join(' · '),'E-mail':d.email,
+    'Inscrições estaduais':(r.ies||[]).map(i=>`${i.ie} ${i.uf}${i.ativo?'':' (inativa)'}`).sort().join(' · '),
+    'CNAE principal':r.cnae?`${r.cnae.codigo} ${r.cnae.descricao}`:'',
+    'CNAEs secundários':(r.cnaes||[]).map(c=>c.codigo).sort().join(', '),
+    'Sócios':(r.socios||[]).map(x=>`${x.nome} (${x.qualificacao})`).sort().join(' · ')};
+}
+function difReceita(a,b){ const out=[]; Object.keys(b).forEach(k=>{ const x=String((a||{})[k]??'').trim(), y=String(b[k]??'').trim(); if(x!==y) out.push({campo:k,antes:x,depois:y}); }); return out; }
+function blocoHist(h){
+  h=(h||[]).slice().reverse();
+  if(!h.length) return '';
+  return `<div class="rsec"><h4>Histórico de alterações na Receita <span>${h.length}</span></h4>${h.map(v=>`<div class="rhist"><div class="rhist-d">${dtBR(v.em)}</div><table class="rt"><thead><tr><th style="width:190px">O que mudou</th><th>Antes</th><th>Depois</th></tr></thead><tbody>${v.mudancas.map(m=>`<tr><td><b>${esc(m.campo)}</b></td><td class="muted">${esc(m.antes||'—')}</td><td>${esc(m.depois||'—')}</td></tr>`).join('')}</tbody></table></div>`).join('')}</div>`;
 }
 function subEmp(e){ const r=e.receita||{}; const ok=/ativa/i.test(r.situacao||'');
   return [e.cnpj?`<span class="badge b-gray mono">${esc(e.cnpj)}</span>`:'', e.fantasia&&e.fantasia!==e.razao?`<span class="badge b-blue">${esc(e.fantasia)}</span>`:'', r.situacao?`<span class="badge ${ok?'b-ok':'b-red'}">${esc(r.situacao)}</span>`:'', r.tipo?`<span class="badge b-gray">${esc(r.tipo)}</span>`:'', r.porte?`<span class="badge b-gray">${esc(r.porte)}</span>`:''].join(''); }
@@ -653,40 +678,53 @@ function empresaForm(e={},depois){
       <label class="f" style="flex:1;min-width:220px">CNPJ<input class="in" id="eCnpj" inputmode="numeric" maxlength="18" autocomplete="off" placeholder="00.000.000/0000-00" value="${esc(mascaraCnpj(e.cnpj||''))}"></label>
       <button type="button" class="btn" id="eBusca">🔎 Buscar dados</button>
       <button type="button" class="btn sec" id="eCart">📄 Ler cartão CNPJ (PDF)</button><input type="file" id="eCartF" accept="application/pdf,.pdf" hidden></div>
-      <div class="small muted" id="eMsg" style="margin-top:6px">Digite o CNPJ: ao completar os 14 números, os dados da Receita Federal são preenchidos sozinhos.</div></div>
+      <div class="small muted" id="eMsg" style="margin-top:6px">${receita?'Dados guardados da última consulta. Use <b>Atualizar consulta</b> para ver se algo mudou na Receita.':'Digite o CNPJ: ao completar os 14 números, os dados da Receita Federal são consultados e guardados.'}</div></div>
     <form id="fEmp" style="margin-top:12px">
       <div class="ecols">
-      <div class="ecol-l">
       <div class="epanel"><h3 class="fsec">Identificação</h3>
-      <div class="g g2">${f('fantasia','Nome fantasia *','text','Mercado Exemplo','required')}${f('razao','Razão social')}${f('ie','Inscrição estadual')}${f('im','Inscrição municipal','text','preencher à mão')}</div></div>
+      <div class="g g4">${f('fantasia','Nome fantasia *','text','Mercado Exemplo','required')}${f('razao','Razão social')}${f('ie','Inscrição estadual')}${f('im','Inscrição municipal','text','preencher à mão')}</div></div>
       <div class="epanel"><h3 class="fsec">Endereço</h3>
-      <div class="g g6"><div class="s4">${f('endereco','Logradouro')}</div><div class="s2">${f('numero','Número')}</div>
-      <div class="s3">${f('complemento','Complemento')}</div><div class="s3">${f('bairro','Bairro')}</div>
-      <div class="s3">${f('cidade','Cidade')}</div><div class="s1">${f('uf','UF','text','PB','maxlength="2"')}</div><div class="s2">${f('cep','CEP','text','','inputmode="numeric"')}</div></div></div>
-      <div class="epanel"><h3 class="fsec">Contato</h3>
-      <div class="g g2">${f('telefone','Telefone','tel')}${f('telefone2','Telefone 2','tel')}<div class="s2c">${f('email','E-mail','email')}</div></div></div>
-      <div class="epanel"><h3 class="fsec">Uso do sistema</h3>
-      <div class="g g2">${f('responsavel','Responsável (gestor)')}${e.id?'':f('pin','PIN do gestor (6 números) *','password','••••••','inputmode="numeric" maxlength="6" pattern="\\d{6}" required')}
-      <label class="f s2c">Modo de contagem padrão<select class="in" name="modoPadrao">${Object.entries(MODOS).map(([k,m])=>`<option value="${k}" ${(e.modoPadrao||'duas')===k?'selected':''}>${m.nome} — ${m.desc}</option>`).join('')}</select></label></div>
+      <div class="g g12"><div class="s5">${f('endereco','Logradouro')}</div><div class="s1">${f('numero','Número')}</div><div class="s3">${f('complemento','Complemento')}</div><div class="s3">${f('bairro','Bairro')}</div>
+      <div class="s5">${f('cidade','Cidade')}</div><div class="s1">${f('uf','UF','text','PB','maxlength="2"')}</div><div class="s2">${f('cep','CEP','text','','inputmode="numeric"')}</div></div></div>
+      <div class="epanel"><h3 class="fsec">Contato e uso do sistema</h3>
+      <div class="g g4">${f('telefone','Telefone','tel')}${f('telefone2','Telefone 2','tel')}<div class="s2x">${f('email','E-mail','email')}</div>
+      ${f('responsavel','Responsável (gestor)')}${e.id?'':f('pin','PIN do gestor (6 números) *','password','••••••','inputmode="numeric" maxlength="6" pattern="\\d{6}" required')}
+      <label class="f s2x">Modo de contagem padrão<select class="in" name="modoPadrao">${Object.entries(MODOS).map(([k,m])=>`<option value="${k}" ${(e.modoPadrao||'duas')===k?'selected':''}>${m.nome} — ${m.desc}</option>`).join('')}</select></label></div>
       ${e.id?'':'<div class="hint" style="margin-top:10px">Esse será o primeiro gestor da empresa. Com o link de acesso e esse PIN, ele entra, cadastra os colaboradores e sobe a planilha do sistema.</div>'}</div>
-      </div>
-      <div class="ecol-r epanel"><h3 class="fsec">Receita Federal</h3><div id="eRec">${blocoReceita(receita)}</div></div>
+      <div class="epanel" id="ePanRec"><div class="row between"><h3 class="fsec" style="margin:0">Receita Federal</h3><div class="row" style="gap:8px"><span class="small muted" id="eQuando">${receita&&receita.consultadoEm?'Consultado em '+dtBR(receita.consultadoEm):''}</span><button type="button" class="btn sec" id="eAtual" ${receita?'':'hidden'}>🔄 Atualizar consulta</button></div></div>
+      <div id="eRec" style="margin-top:10px">${blocoReceita(receita)}</div><div id="eHist">${blocoHist(e.receitaHist)}</div></div>
       </div>
       <div class="row mfoot"><span class="spacer"></span><button type="button" class="btn sec" id="cEmp">Cancelar</button><button class="btn">Salvar</button></div></form>`,
   {cls:'wide',onOpen:o=>{
     const msg=(t,err)=>{ const m=$('#eMsg',o); m.innerHTML=t; m.style.color=err?'var(--red)':''; };
     const preenche=(d,forcar)=>{ const F=$('#fEmp',o); Object.entries(d).forEach(([k,v])=>{ const i=F.querySelector(`[name=${k}]`); if(i && v && typeof v!=='object' && (forcar?k!=='responsavel'||!i.value:!i.value)) i.value=v; }); if(!F.querySelector('[name=fantasia]').value && d.razao) F.querySelector('[name=fantasia]').value=tit(d.razao); };
-    const busca=async(cnpj)=>{ const c=String(cnpj||$('#eCnpj',o).value).replace(/\D/g,'');
+    let hist=(e.receitaHist||[]).slice();
+    const busca=async(cnpj,{auto}={})=>{ const c=String(cnpj||$('#eCnpj',o).value).replace(/\D/g,'');
       if(!cnpjValido(c)) return msg('CNPJ inválido — confira os números.',true);
-      $('#eCnpj',o).value=cnpjFmt(c); msg('Buscando dados na Receita Federal…');
+      $('#eCnpj',o).value=cnpjFmt(c); msg('Consultando a Receita Federal…'); const bA=$('#eAtual',o); if(bA){ bA.disabled=true; bA.textContent='Consultando…'; }
       const d=await buscarCnpj(c);
-      if(!d) return msg('Não consegui buscar agora (sem internet ou serviço fora do ar). Preencha à mão.',true);
+      if(bA){ bA.disabled=false; bA.textContent='🔄 Atualizar consulta'; }
+      if(!d) return msg('Não consegui consultar agora (sem internet ou serviço fora do ar). Preencha à mão.',true);
+      const mesmoCnpj=e.id && cnpjFmt(e.cnpj||'')===cnpjFmt(c);
+      const ant=mesmoCnpj && receita ? receita.snap : null;
+      d.receita.snap=snapReceita(d);
+      const muds=ant?difReceita(ant,d.receita.snap):[];
       preenche({...d,cep:mascaraCep(d.cep)},true); receita=d.receita; $('#eRec',o).innerHTML=blocoReceita(receita);
+      $('#eQuando',o).textContent='Consultado em '+dtBR(receita.consultadoEm); $('#eAtual',o).hidden=false;
+      if(muds.length){ hist.push({em:now(),mudancas:muds}); hist=hist.slice(-30); }
+      $('#eHist',o).innerHTML=blocoHist(hist);
+      if(mesmoCnpj){ const salvar={receita}; if(muds.length) salvar.receitaHist=hist; await Store.set('empresas',e.id,salvar); e.receita=receita; e.receitaHist=hist; }
       $('#eTit',o).textContent=d.razao||d.fantasia||'Cadastro da empresa'; $('#eSub',o).innerHTML=subEmp({cnpj:cnpjFmt(c),fantasia:d.fantasia,receita});
       const sit=d.situacao&&!/ativa/i.test(d.situacao);
-      msg(`${sit?'⚠':'✓'} Dados preenchidos${d.situacao?' · situação: <b>'+esc(d.situacao)+'</b>':''}${d.ie?'':' · inscrição estadual não encontrada, preencha à mão'}. A inscrição municipal não é pública: preencha à mão.`,sit); };
+      const extra=ant?(muds.length?` · <b>${muds.length} alteração(ões)</b> desde a última consulta (veja o histórico abaixo)`:' · nenhuma alteração desde a última consulta'):'';
+      msg(`${sit||muds.length?'⚠':'✓'} Consulta ${mesmoCnpj?'guardada':'feita'}${d.situacao?' · situação: <b>'+esc(d.situacao)+'</b>':''}${extra}${d.ie?'':' · inscrição estadual não encontrada, preencha à mão'}. Confira os campos e salve.`,sit||muds.length>0);
+      if(muds.length) setTimeout(()=>{ const h=$('#eHist',o); if(h) h.scrollIntoView({behavior:'smooth',block:'start'}); },300); };
+    $('#eAtual',o).onclick=()=>busca();
+    // primeira vez: consulta sozinho e guarda; depois só quando pedir "Atualizar consulta"
+    if(e.id && e.cnpj && cnpjValido(e.cnpj) && !receita) setTimeout(()=>busca(e.cnpj,{auto:true}),200);
     $('#eBusca',o).onclick=()=>busca();
     let ultimo='';
+    ultimo=String(e.cnpj||'').replace(/\D/g,'');
     aplicaMascara($('#eCnpj',o),mascaraCnpj,v=>{ const d=v.replace(/\D/g,''); if(d.length===14 && d!==ultimo){ ultimo=d; if(cnpjValido(d)) busca(d); else msg('CNPJ inválido — confira os números.',true); } });
     ['telefone','telefone2'].forEach(k=>{ const fT=$('#fEmp [name='+k+']',o); if(fT){ aplicaMascara(fT,mascaraFone); fT.value=mascaraFone(fT.value); } });
     const fC=$('#fEmp [name=cep]',o); if(fC){ aplicaMascara(fC,mascaraCep); fC.value=mascaraCep(fC.value); }
@@ -698,7 +736,7 @@ function empresaForm(e={},depois){
     $('#fEmp',o).onsubmit=async ev=>{ ev.preventDefault();
       const d=Object.fromEntries(new FormData(ev.target).entries()); d.uf=(d.uf||'').toUpperCase(); d.cnpj=cnpjFmt($('#eCnpj',o).value);
       if(d.cnpj && !cnpjValido(d.cnpj)) return toast('CNPJ inválido',true);
-      if(receita) d.receita=receita;
+      if(receita){ if(!receita.snap) receita.snap=snapReceita({...d,receita}); d.receita=receita; } d.receitaHist=hist;
       const id=e.id||uid();
       if(!e.id){ if(!/^\d{6}$/.test(d.pin)) return toast('O PIN precisa ter exatamente 6 números',true);
         const u={id:uid(),nome:d.responsavel||'Gestor',pinH:await pinHash(id,d.pin),perfil:'gestor',podeEncerrar:true,criadoEm:now()}; delete d.pin;
@@ -2243,7 +2281,7 @@ P.emp = async ()=>{
   const e=S.empresa; const b=$('#pBody');
   b.innerHTML=`<div class="card"><div class="row between"><h2>${esc(e.fantasia||e.razao)}</h2><button class="btn" id="eEd">Editar dados</button></div>
     <div class="fgrid small" style="margin-top:10px">${[['Razão social',e.razao],['CNPJ',e.cnpj],['Inscrição estadual',e.ie],['Inscrição municipal',e.im],['Endereço',[[e.endereco,e.numero].filter(Boolean).join(', '),e.complemento,e.bairro].filter(Boolean).join(' · ')],['Cidade/UF',[e.cidade,e.uf].filter(Boolean).join('/')],['CEP',e.cep],['Telefones',[e.telefone,e.telefone2].filter(Boolean).join(' · ')],['E-mail',e.email],['Responsável',e.responsavel]].map(([l,v])=>`<div><div class="muted">${l}</div><b>${esc(v||'—')}</b></div>`).join('')}</div></div>
-    <div class="card"><h3>Dados da Receita Federal</h3><div style="margin-top:8px">${blocoReceita(e.receita)}</div></div>
+    <div class="card"><h3>Dados da Receita Federal</h3><div style="margin-top:8px">${e.receita?blocoReceita(e.receita):'<div class="rvazio">Ainda não consultado. Abra <b>Editar dados</b> para consultar.</div>'}${blocoHist(e.receitaHist)}</div></div>
     <div class="card"><h3>Este aparelho</h3><div class="small muted">Conexão: ${Store.mode==='cloud'?'nuvem (vários aparelhos)':'modo local'}</div></div>`;
   $('#eEd').onclick=()=>empresaForm(e,async()=>{ S.empresa=await Store.get('empresas',e.id)||S.empresa; V.painel(); });
 };
