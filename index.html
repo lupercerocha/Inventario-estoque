@@ -5,9 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cultivve Inventário</title>
 <meta name="theme-color" content="#172334">
-<meta name="description" content="Inventário com contagem cega para mercados — Cultivve Gestão">
+<meta name="description" content="Inventário com contagem cega: conte o estoque pelo celular, confronte as contagens e gere os ajustes de entrada e saída para o ERP. Tecnologia by Cultivve.">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<!-- prévia do link no WhatsApp, Instagram, LinkedIn etc. (precisa de endereço completo) -->
+<link rel="canonical" href="https://lupercerocha.github.io/Inventario-estoque/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cultivve Inventário">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://lupercerocha.github.io/Inventario-estoque/">
+<meta property="og:title" content="Cultivve Inventário — contagem cega de estoque">
+<meta property="og:description" content="Sua empresa foi convidada para o inventário Cultivve. Conte o estoque pelo celular com leitor de código de barras, confronte as contagens e gere os ajustes de entrada e saída para o ERP.">
+<meta property="og:image" content="https://lupercerocha.github.io/Inventario-estoque/og-image.jpg">
+<meta property="og:image:secure_url" content="https://lupercerocha.github.io/Inventario-estoque/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cultivve Inventário — inventário com contagem cega">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cultivve Inventário — contagem cega de estoque">
+<meta name="twitter:description" content="Conte o estoque pelo celular, confronte as contagens e gere os ajustes para o ERP.">
+<meta name="twitter:image" content="https://lupercerocha.github.io/Inventario-estoque/og-image.jpg">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -214,6 +234,33 @@ h3.fsec:first-child{border-top:0;padding-top:0;margin-top:4px}
 h4.rsec{font-family:"Chakra Petch";font-size:13px;color:var(--navy);margin:14px 0 6px}
 .rlist{max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;background:#fff}
 .mfoot{position:sticky;bottom:0;z-index:5;background:var(--gray);padding:12px 0 14px;margin-top:14px;border-top:1px solid var(--line)}
+.hero-on #top,.hero-on #modebar{display:none}
+.hero-on main{padding:0}
+.hero{position:relative;min-height:100vh;min-height:100dvh;background:#172334;color:#F2F1F1;overflow:hidden;display:flex;flex-direction:column}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(circle at 85% 15%,rgba(0,174,156,.28),transparent 45%),radial-gradient(circle at 5% 105%,rgba(58,160,148,.22),transparent 40%)}
+.hero-tri{position:absolute;right:-80px;bottom:-110px;width:560px;height:560px;opacity:.09;fill:none;stroke:#00AE9C;stroke-width:1.2;pointer-events:none}
+.hero-in{position:relative;flex:1;display:grid;gap:36px;align-items:center;padding:calc(48px + var(--safe-t)) 6vw 24px;grid-template-columns:minmax(0,1.25fr) minmax(320px,440px)}
+.hero-logo{height:44px;width:auto;display:block}
+.hero-tag{color:#00AE9C;font-weight:500;font-size:19px;margin-top:6px}
+.hero h1{color:#F2F1F1;font-family:"DM Sans",sans-serif;font-weight:700;font-size:clamp(38px,5.4vw,72px);line-height:1.05;letter-spacing:-1px;margin-top:44px}
+.hero h1 b{color:#00AE9C}
+.hero-txt p{margin-top:20px;font-size:clamp(17px,1.7vw,24px);line-height:1.45;color:#BACAD3;max-width:720px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.hero-chips span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:99px;padding:9px 16px;font-size:15px;font-weight:500}
+.hero-card{background:#fff;color:var(--ink);border-radius:22px;padding:26px 24px;box-shadow:0 30px 70px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:12px}
+.hero-ico{width:84px;height:84px;margin:-62px auto 0;border-radius:22px;box-shadow:0 14px 30px rgba(0,0,0,.35);overflow:hidden}
+.hero-ico svg{width:100%;height:100%;display:block}
+.hero-card h3{text-align:center;font-size:20px;margin-top:4px}
+.hero-sub{color:var(--muted);text-align:center;font-size:14px;margin:0}
+.hero-cod{text-align:center;font-size:26px!important;letter-spacing:6px;text-transform:uppercase;height:58px}
+.hero-emps{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto}
+.hero-emp{display:grid;grid-template-columns:1fr auto;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer}
+.hero-emp b{font-size:16px;color:var(--navy)} .hero-emp span{grid-column:1;font-size:13px;color:var(--muted)} .hero-emp i{grid-row:1/3;grid-column:2;align-self:center;font-style:normal;font-size:24px;color:var(--teal)}
+.hero-emp:hover{border-color:var(--teal);background:var(--teal-soft)}
+.hero-ou{text-align:center;color:var(--muted);font-size:13px;margin-top:4px}
+.hero-card .inst{margin-top:6px}
+.hero-foot{position:relative;color:rgba(242,241,241,.55)!important;padding:14px 0 calc(16px + var(--safe-b))}
+@media(max-width:860px){ .hero-logo{height:32px} .hero-in{grid-template-columns:1fr;gap:56px;padding-top:calc(34px + var(--safe-t))} .hero h1{margin-top:26px} .hero-chips{display:none} .hero-tri{width:360px;height:360px} }
 .results{margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}
 .res{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
 .res:active{background:var(--teal-soft)}
@@ -279,7 +326,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.2.7';
+const APP_VERSION = '3.3.0';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -573,7 +620,7 @@ document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==
 const V={};
 const ehMaster=()=>adminOk();
 const MARCA='Tecnologia by Cultivve';
-function render(){ modeBar(); telaAcesa(S.view==='contar'); (V[S.view]||V.empresas)(); }
+function render(){ if(S.view!=='acesso') document.body.classList.remove('hero-on'); modeBar(); telaAcesa(S.view==='contar'); (V[S.view]||V.empresas)(); }
 
 /* ---------- EMPRESAS ---------- */
 V.empresas = async ()=>{ S.view=adminOk()?'admin':(S.empresa?'inicio':'acesso'); return render(); };
@@ -1917,7 +1964,8 @@ let homeUnsub=null;
 V.inicio = ()=>{
   const e=S.empresa; carregarMe();
   const me=S.me;
-  header(e.fantasia||e.razao, me?`${me.nome} · ${PERF[me.perfil]}`:'Inventário com contagem cega',{back:false,right:(adminOk()?'<button class="ic" id="hEmp">Cultivve</button> ':'')+(me&&me.id!=='cultivve'?'<button class="ic" id="hSair">Sair</button>':'')});
+  header(e.fantasia||e.razao, me?`${me.nome} · ${PERF[me.perfil]}`:'Inventário com contagem cega',{back:false,right:(adminOk()?'<button class="ic" id="hEmp">Cultivve</button> ':'')+((LS.get('cvinv_emps',[])||[]).length>1&&!adminOk()?'<button class="ic" id="hTroca">⇄ Empresa</button> ':'')+(me&&me.id!=='cultivve'?'<button class="ic" id="hSair">Sair</button>':'')});
+  const bT=$('#hTroca'); if(bT) bT.onclick=()=>{ clearSubs(); S.empresa=null; S.me=null; S.sess=null; LS.del('cvinv_emp'); S.stack=[]; go('acesso',false); };
   const bS=$('#hSair'); if(bS) bS.onclick=async()=>{ if(await ask(`Sair do usuário ${esc(me.nome)} neste aparelho?`,{ok:'Sair'})){ LS.del(meKey()); S.me=null; S.sess=null; render(); } };
   const bE=$('#hEmp'); if(bE) bE.onclick=()=>{ S.stack=[]; go('admin',false); };
   if(Store.mode==='cloud' && !adminOk()){ const hj=new Date().toISOString().slice(0,10); if(LS.get('cvinv_ac_'+e.id)!==hj){ LS.set('cvinv_ac_'+e.id,hj); Store.set('empresas',e.id,{ultimoAcesso:now()}); } }
@@ -2419,18 +2467,35 @@ function codigoNovo(){ const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(
 function linkEmpresa(e){ return location.origin+location.pathname+'#e='+e.codigo; }
 
 /* tela para quem ainda não tem empresa neste aparelho */
+const ICONE_APP=`<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#172334"/><g fill="#F2F1F1">${[[22,5],[30,2],[35,4],[42,2],[47,6],[56,2],[61,4],[68,2],[73,5],[81,2],[86,4],[93,3]].map(([x,w],i)=>`<rect x="${x}" y="24" width="${w}" height="56" ${i%3===0?'fill="#3AA094"':''}/>`).join('')}</g><circle cx="90" cy="86" r="17" fill="#3AA094" stroke="#172334" stroke-width="4"/><path d="M82 86l6 6 11-12" stroke="#F2F1F1" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 V.acesso = ()=>{
-  header('Inventário cego','Cultivve Gestão',{back:false});
-  $('#app').innerHTML=`<div class="stack">${cardInstalar()}
-    <div class="card" style="max-width:520px;margin:4vh auto 0;text-align:center;padding:28px 20px">
-      <h1>Bem-vindo! 👋</h1><p class="muted">Digite o <b>código da sua empresa</b>, enviado pela Cultivve, ou abra o link de acesso que você recebeu.</p>
-      <input class="in mono" id="acC" maxlength="6" autocapitalize="characters" autocomplete="off" placeholder="Ex.: K7M2QX" style="text-align:center;font-size:24px;letter-spacing:4px;text-transform:uppercase">
-      <button class="btn block big" id="acOk" style="margin-top:12px">Entrar</button>
+  document.body.classList.add('hero-on');
+  $('#top').innerHTML='';
+  const salvas=(LS.get('cvinv_emps',[])||[]);
+  $('#app').innerHTML=`<section class="hero">
+    <div class="hero-bg"></div>
+    <svg class="hero-tri" viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90"/><polygon points="50,25 80,80 20,80"/></svg>
+    <div class="hero-in">
+      <div class="hero-txt">
+        <img class="hero-logo logo" alt="Cultivve" src="data:image/svg+xml;utf8,${encodeURIComponent(LOGO_SVG('#F2F1F1'))}">
+        <div class="hero-tag">Simplicidade, eficácia e resultado</div>
+        <h1>Inventário com<br><b>contagem cega</b></h1>
+        <p>Conte o estoque pelo celular, confronte as contagens e gere os ajustes de entrada e saída para o seu ERP.</p>
+        <div class="hero-chips"><span>📷 Leitor de código de barras</span><span>⚖ Divergências automáticas</span><span>📊 Relatórios</span></div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-ico">${ICONE_APP}</div>
+        ${salvas.length?`<h3>Suas empresas</h3><div class="hero-emps">${salvas.map(x=>`<button class="hero-emp" data-cod="${esc(x.codigo)}"><b>${esc(x.nome)}</b><span>${esc(x.cidade||'')}</span><i>›</i></button>`).join('')}</div><div class="hero-ou">ou entre em outra empresa</div>`:'<h3>Entrar na empresa</h3><p class="hero-sub">Digite o código enviado pela Cultivve ou abra o link de acesso que você recebeu.</p>'}
+        <input class="in mono hero-cod" id="acC" maxlength="6" autocapitalize="characters" autocomplete="off" placeholder="CÓDIGO" aria-label="Código da empresa">
+        <button class="btn block big" id="acOk">Entrar</button>
+        ${cardInstalar()}
+      </div>
     </div>
-    <div class="foot">${MARCA} · v${APP_VERSION}<br><a href="#" id="acAdm">Sou da Cultivve</a></div></div>`;
-  const ir=async()=>{ const c=$('#acC').value.trim().toUpperCase(); if(c.length<4) return toast('Digite o código',true); await entrarCodigo(c); };
+    <div class="hero-foot foot">${MARCA} · v${APP_VERSION}</div>
+  </section>`;
+  const ir=async()=>{ const c=$('#acC').value.trim().toUpperCase(); if(c.length<4) return toast('Digite o código da empresa',true); $('#acOk').disabled=true; const ok=await entrarCodigo(c); const b=$('#acOk'); if(b) b.disabled=false; };
   $('#acOk').onclick=ir; $('#acC').onkeydown=e=>{ if(e.key==='Enter') ir(); };
-  $('#acAdm').onclick=async e=>{ e.preventDefault(); if(await entrarAdmin()){ S.stack=[]; go('admin',false); } };
+  $('#app').querySelectorAll('[data-cod]').forEach(b=>b.onclick=async()=>{ b.disabled=true; if(!await entrarCodigo(b.dataset.cod)) b.disabled=false; });
 };
 /* liga este aparelho (usuário anônimo do Firebase) à empresa — as regras do banco só liberam os dados da empresa vinculada */
 async function garantirMembro(empresaId,codigo){
@@ -2451,6 +2516,7 @@ async function resolverCodigo(c){
   if(!r) return {erro:'Não foi possível entrar nesta empresa. Fale com a Cultivve.'};
   if(r.status==='bloqueada') return {erro:'O acesso desta empresa está suspenso. Fale com a Cultivve.'};
   LS.set('cvinv_emp',r.id); LS.set('cvinv_emp_cod',c);
+  const lista=(LS.get('cvinv_emps',[])||[]).filter(x=>x.id!==r.id); lista.unshift({id:r.id,codigo:c,nome:r.fantasia||r.razao||c,cidade:[r.cidade,r.uf].filter(Boolean).join('/')}); LS.set('cvinv_emps',lista.slice(0,12));
   return {empresa:r};
 }
 async function entrarCodigo(c){
@@ -2670,7 +2736,7 @@ function parseCfg(txt){
 /* ---------- acesso de suporte: 5 toques seguidos no rodapé ---------- */
 let toques=[];
 document.addEventListener('click',async e=>{
-  if(!e.target.closest || !(e.target.closest('.foot')||e.target.closest('.top .logo'))) return;
+  if(!e.target.closest || !(e.target.closest('.foot')||e.target.closest('.top .logo')||e.target.closest('.hero-logo'))) return;
   if(e.target.closest('a,button')) return;
   const t=Date.now(); toques=toques.filter(x=>t-x<3000); toques.push(t);
   if(toques.length>=5){ toques=[]; if(await entrarAdmin()) go('admin'); }
