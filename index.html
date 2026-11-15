@@ -53,7 +53,7 @@
 html,body{margin:0;background:var(--gray);color:var(--ink);font:15px/1.45 "DM Sans",system-ui,sans-serif;min-height:100%}
 h1,h2,h3{font-family:"Chakra Petch","DM Sans",sans-serif;margin:0;color:var(--navy);letter-spacing:.2px}
 h1{font-size:22px} h2{font-size:18px} h3{font-size:15px}
-.mono{font-family:"JetBrains Mono",monospace;font-size:.92em}
+.mono{font-family:inherit;font-variant-numeric:tabular-nums;letter-spacing:.03em;font-size:.95em}
 button,input,select{font:inherit;color:inherit}
 a{color:var(--teal)}
 
@@ -147,7 +147,7 @@ table.t tr.hl td{background:#fffaf0}
 .cam.live .camtools{display:flex}
 .camtools button{width:42px;height:42px;border-radius:12px;border:0;background:rgba(0,0,0,.45);color:#fff;font-weight:700;font-size:15px;cursor:pointer;backdrop-filter:blur(4px)}
 .camtools button.on{background:var(--teal)}
-.caminfo{position:absolute;left:10px;bottom:8px;right:10px;color:#e8f1f4;font-size:12px;font-family:"JetBrains Mono",monospace;text-shadow:0 1px 2px #000;display:none}
+.caminfo{position:absolute;left:10px;bottom:8px;right:10px;color:#e8f1f4;font-size:13px;font-variant-numeric:tabular-nums;letter-spacing:.03em;text-shadow:0 1px 2px #000;display:none}
 .cam.live .caminfo{display:block}
 .camoff{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#BACAD3;text-align:center;padding:18px}
 .cam.live .camoff{display:none}
@@ -331,7 +331,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.4.1';
+const APP_VERSION = '3.4.4';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -1064,20 +1064,27 @@ function handleCode(code,src){
    2) SI5 Global (API externa, 30 consultas/dia no plano grátis) — o resultado vai para o catálogo,
       então cada código é consultado na internet uma única vez
    ===================================================================== */
+/* mostra o código separado em blocos, igual vem impresso na embalagem: 7 898636 190782 */
+function codFmt(c){ const d=String(c||'').trim(); if(/^\d{13}$/.test(d)) return d[0]+' '+d.slice(1,7)+' '+d.slice(7); if(/^\d{8}$/.test(d)) return d.slice(0,4)+' '+d.slice(4); if(/^\d{12}$/.test(d)) return d[0]+' '+d.slice(1,6)+' '+d.slice(6,11)+' '+d[11]; return d; }
 const gtinKey=c=>String(c||'').replace(/\D/g,'').replace(/^0+/,'');
-async function naoEncontrado(code){
-  const m=modal(`<h2>Produto não está na planilha</h2><div class="row" style="margin-top:8px"><div class="spin" style="width:22px;height:22px;border-width:3px"></div><span class="muted">Procurando o código <b class="mono">${esc(code)}</b> no catálogo…</span></div>`,{dismiss:false});
-  const info=await consultaGtin(code);
+async function naoEncontrado(code,forcar=false){
+  const m=$('#ov')&&forcar?{querySelector:()=>$('#ov .md')}:modal(`<h2>Produto não está na planilha</h2><div class="row" style="margin-top:8px"><div class="spin" style="width:22px;height:22px;border-width:3px"></div><span class="muted">Procurando o código <b class="mono">${esc(codFmt(code))}</b> no catálogo…</span></div>`,{dismiss:false});
+  if(forcar) m.querySelector('.md').innerHTML=`<h2>Produto não está na planilha</h2><div class="row" style="margin-top:8px"><div class="spin" style="width:22px;height:22px;border-width:3px"></div><span class="muted">Consultando a SI5 de novo…</span></div>`;
+  const info=await consultaGtin(code,{forcar});
   if(!$('#ov')) return;
   const pre={ean:code};
+  const google=`<a class="btn sec" style="text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/search?q=${encodeURIComponent(String(code).replace(/\D/g,'')||code)}">🔎 Pesquisar o código no Google</a>`;
   let corpo;
   if(info){ pre.descricao=info.descricao; pre.grupo=(info.categoria||'').toUpperCase(); pre.imagem=info.imagem||''; pre.marca=info.marca||'';
     corpo=`<div class="row" style="align-items:flex-start;margin-top:10px">${info.imagem?`<img src="${esc(info.imagem)}" alt="" style="width:64px;height:64px;object-fit:contain;border-radius:8px;background:#fff;border:1px solid var(--line)" onerror="this.remove()">`:''}
-      <div style="flex:1;min-width:0"><b>${esc(info.descricao)}</b><div class="small muted">${esc([info.marca,info.categoria].filter(Boolean).join(' · '))}</div><div class="small muted mono">${esc(code)}${ehMaster()?' · fonte: '+esc(info.fonte):''}</div></div></div>
+      <div style="flex:1;min-width:0"><b>${esc(info.descricao)}</b><div class="small muted">${esc([info.marca,info.categoria].filter(Boolean).join(' · '))}</div><div class="small muted mono">${esc(codFmt(code))}${ehMaster()?' · fonte: '+esc(info.fonte):''}</div></div></div>
       <p class="small muted">Esse produto não está na planilha do estoque. Se cadastrar, ele entra com estoque zero e aparece como entrada no final.</p>`; }
-  else corpo=`<p class="muted">O código <b class="mono">${esc(code)}</b> não está na relação de produtos. Deseja cadastrar agora?</p>`;
+  else corpo=`<p class="muted">O código <b class="mono">${esc(codFmt(code))}</b> não está na relação de produtos e não foi encontrado no catálogo. Deseja cadastrar agora?</p>
+    ${ehMaster()&&SI5_ULT.motivo?`<div class="warnbox small" style="margin-top:8px"><b>Consulta SI5:</b> ${esc(SI5_ULT.motivo)}</div>`:''}
+    <div class="row" style="flex-wrap:wrap;gap:8px;margin-top:10px">${google}${ehMaster()?'<button class="btn sec" id="nfR">🔄 Consultar SI5 de novo</button>':''}</div>`;
   m.querySelector('.md').innerHTML=`<h2>Produto não está na planilha</h2>${corpo}<div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn sec" id="nfN">Cancelar</button><button class="btn" id="nfS">${info?'Cadastrar e contar':'Cadastrar'}</button></div>`;
   $('#nfN').onclick=closeModal; $('#nfS').onclick=()=>{ closeModal(); novoProduto(pre); };
+  const R=$('#nfR'); if(R) R.onclick=()=>naoEncontrado(code,true);
 }
 
 /* =====================================================================
@@ -1217,7 +1224,7 @@ async function startScanner(){
   Cam.cv=document.createElement('canvas'); Cam.cx=Cam.cv.getContext('2d',{willReadFrequently:true});
   Cam.on=true; S.scanning=true; $('#cam').classList.add('live');
   Cam.stat={frames:0,err:0,lastErr:'',t:performance.now(),fps:0,ultimo:''}; Cam.teste='autoteste…';
-  $('#camInfo').innerHTML=ehMaster()?'Leitor '+DET_KIND+' · iniciando…':'';
+  $('#camInfo').innerHTML=diagTec()?'Leitor '+DET_KIND+' · iniciando…':'';
   autoteste(); clearInterval(Cam.diagT); Cam.diagT=setInterval(diag,1000);
   renderFast(); scanLoop(v);
 }
@@ -1326,13 +1333,15 @@ async function autoZoom(frac){
   try{ await Cam.track.applyConstraints({advanced:[{zoom:z}]}); Cam.zoom=z; const b=$('#bZoom'); if(b) b.textContent=(Math.round(z*10)/10)+'x'; }catch(e){}
   setTimeout(()=>zoomBusy=false,600);
 }
+/* dados técnicos do leitor só aparecem se o Master ligar em Cultivve › Conexão; na tela normal é só "Tecnologia by Cultivve" */
+const diagTec=()=>ehMaster() && !!LS.get('cvinv_diag',false);
 function diag(soTexto){
   const inf=$('#camInfo'); const v=$('#vid'); if(!inf||!Cam.on){ clearInterval(Cam.diagT); return; }
   const agora=performance.now();
   if(!soTexto){ Cam.stat.fps=Cam.stat.frames/((agora-Cam.stat.t)/1000); Cam.stat.frames=0; Cam.stat.t=agora; }
   const fps=Cam.stat.fps||0;
-  if(!ehMaster()){ inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(Cam.stat.ultimo)}</b>`:''}${Cam.stat.err>20&&!Cam.stat.ultimo?'<br>⚠ Leitor instável — desligue e ligue a câmera':''}`; return; }
-  inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(Cam.stat.ultimo)}</b><br>`:''}${DET_KIND} · ${v?v.videoWidth+'×'+v.videoHeight:''} · ${fps.toFixed(0)} leituras/s · ${Math.round(Cam.ms||0)} ms · ${esc(Cam.teste)}${Cam.stat.err?` · <span style="color:#ff9b9b">erros: ${Cam.stat.err} (${esc(Cam.stat.lastErr)})</span>`:''}${(Cam.stat.err||/FALHOU|ERRO/.test(Cam.teste))&&DET_LOG.length?`<br><span style="color:#ffd27a">${esc(DET_LOG.join(' | '))}</span>`:''}`;
+  if(!diagTec()){ inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(codFmt(Cam.stat.ultimo))}</b>`:''}${Cam.stat.err>20&&!Cam.stat.ultimo?'<br>⚠ Leitor instável — desligue e ligue a câmera':''}`; return; }
+  inf.innerHTML=`${Cam.stat.ultimo?`<b>✓ ${esc(codFmt(Cam.stat.ultimo))}</b><br>`:''}${DET_KIND} · ${v?v.videoWidth+'×'+v.videoHeight:''} · ${fps.toFixed(0)} leituras/s · ${Math.round(Cam.ms||0)} ms · ${esc(Cam.teste)}${Cam.stat.err?` · <span style="color:#ff9b9b">erros: ${Cam.stat.err} (${esc(Cam.stat.lastErr)})</span>`:''}${(Cam.stat.err||/FALHOU|ERRO/.test(Cam.teste))&&DET_LOG.length?`<br><span style="color:#ffd27a">${esc(DET_LOG.join(' | '))}</span>`:''}`;
 }
 /* autoteste: desenha um EAN-13 conhecido e verifica se o leitor deste aparelho decodifica */
 async function autoteste(){
@@ -2647,13 +2656,25 @@ A.cat = async ()=>{
   b.innerHTML=`<div class="grid kpi"><div class="card"><div class="l">Códigos no catálogo</div><div class="v">${fmt(cat.length-nao)}</div></div><div class="card"><div class="l">Com imagem</div><div class="v">${fmt(comImg)}</div></div>
     <div class="card"><div class="l">Não achados na SI5</div><div class="v">${fmt(nao)}</div></div><div class="card"><div class="l">Consultas SI5 hoje</div><div class="v">${uso} / ${c.si5Limite||25}</div></div></div>
     <div class="card stack"><h2>SI5 Global — token da Cultivve</h2>
-      <div class="small muted">Um único token serve a todas as empresas. Tudo o que é consultado fica guardado no catálogo da Cultivve, então cada código só é consultado uma vez. O plano grátis da SI5 tem 30 consultas por dia; o app para em ${c.si5Limite||25} para sobrar margem.</div>
+      <div class="small muted">Um único token serve a todas as empresas. Tudo o que é consultado fica guardado no catálogo da Cultivve, então cada código só é consultado uma vez. O plano grátis da SI5 tem 100 consultas por dia; o app para em ${c.si5Limite||25} para sobrar margem.</div>
       <label class="f">Token<input class="in mono" id="cT" type="password" value="${esc(c.si5Token||'')}"></label>
       <label class="f">Limite de consultas por dia<input class="in" id="cL" type="number" min="0" value="${c.si5Limite||25}" style="max-width:160px"></label>
-      <div class="row"><button class="btn" id="cS">Salvar</button></div></div>`;
+      <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn" id="cS">Salvar</button><input class="in mono" id="cTc" placeholder="código para testar" value="7891000002186" style="max-width:200px"><button class="btn sec" id="cTt">Testar consulta</button></div>
+      <div id="cTr" class="small"></div></div>`;
+  $('#cTt').onclick=async()=>{ const tok=$('#cT').value.trim(); const cod=$('#cTc').value.trim(); const o=$('#cTr');
+    if(!tok){ o.innerHTML='<span style="color:var(--red)">Informe o token.</span>'; return; }
+    o.textContent='Consultando…'; const r=await chamaSi5(cod,tok); if(r.status) somaUso();
+    const nome=r.j&&(r.j.produto||r.j.descricao||r.j.nome);
+    o.innerHTML=r.status===200&&nome?`<span style="color:var(--teal)">✓ Funcionando: <b>${esc(nome)}</b>${r.j.marca?' · '+esc(r.j.marca):''}</span>`
+      :r.status===404?'Token OK, mas a SI5 não tem esse código (404).'
+      :r.status===401||r.status===403?`<span style="color:var(--red)">Token inválido ou vencido (${r.status}).</span>`
+      :r.status===429?'<span style="color:var(--red)">Limite diário do plano SI5 atingido (429).</span>'
+      :!r.status?`<span style="color:var(--red)">Sem resposta: ${esc(r.erro)}</span>`:`<span style="color:var(--red)">Erro ${r.status}</span>`; };
   $('#cS').onclick=async()=>{ const d={si5Token:$('#cT').value.trim(),si5Limite:+$('#cL').value||25}; await Store.set('config','cultivve',d); S.cfgC={...c,...d}; toast('Salvo'); };
 };
-A.con = async ()=>{ $('#aBody').innerHTML='<div class="card"><p>Configuração técnica da conexão com o banco de dados (Firebase).</p><button class="btn sec" id="cCfg">Abrir configuração de conexão</button></div>'; $('#cCfg').onclick=()=>go('config'); };
+A.con = async ()=>{ $('#aBody').innerHTML=`<div class="card stack"><p>Configuração técnica da conexão com o banco de dados (Firebase).</p><div><button class="btn sec" id="cCfg">Abrir configuração de conexão</button></div>
+    <label class="row" style="gap:8px;align-items:center"><input type="checkbox" id="cDiag" ${LS.get('cvinv_diag',false)?'checked':''}> Mostrar dados técnicos do leitor na câmera (só neste aparelho, para suporte)</label></div>`;
+  $('#cCfg').onclick=()=>go('config'); $('#cDiag').onchange=e=>{ LS.set('cvinv_diag',e.target.checked); toast(e.target.checked?'Dados técnicos ligados neste aparelho':'Dados técnicos desligados'); }; };
 A.limpa = async ()=>{
   const b=$('#aBody'); const emps=await Store.list('empresas');
   b.innerHTML=`<div class="card stack"><h2>Limpar dados de teste</h2>
@@ -2698,26 +2719,40 @@ async function somaUso(){ const id='uso_'+hojeKey();
   else { const n=await usoHoje(); await Store.set('config',id,{si5:n+1}); } }
 async function tokenSi5(){ const c=await cfgCultivve(); return c.si5Token||''; }
 async function podeConsultar(){ const c=await cfgCultivve(); return (await usoHoje()) < (c.si5Limite||25); }
-/* busca um código: catálogo → SI5 (dentro do limite do dia). Guarda tudo no catálogo, inclusive "não achado". */
-async function consultaGtin(code,{usarApi=true}={}){
-  const k=gtinKey(code); if(k.length<8) return null;
+let SI5_ULT={motivo:'',ok:false};
+async function chamaSi5(code,tok){
+  const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),8000);
+  try{
+    const r=await fetch('https://global.si5.com.br/api/produtos/'+encodeURIComponent(String(code).replace(/\D/g,'')),{headers:{Authorization:'Bearer '+tok,Accept:'application/json'},signal:ctl.signal});
+    clearTimeout(t);
+    let j=null; try{ j=await r.json(); }catch(e){}
+    return {status:r.status,j};
+  }catch(e){ clearTimeout(t); return {status:0,erro:e&&e.name==='AbortError'?'tempo esgotado (8 s)':'a internet ou o navegador bloqueou a chamada ('+((e&&e.message)||e)+')'}; }
+}
+/* busca um código: catálogo → SI5 (dentro do limite do dia). Guarda tudo no catálogo, inclusive "não achado".
+   forcar=true ignora o "não achado" guardado e consulta a SI5 de novo. */
+async function consultaGtin(code,{usarApi=true,forcar=false}={}){
+  SI5_ULT={motivo:'',ok:false};
+  const k=gtinKey(code); if(k.length<8){ SI5_ULT.motivo='código curto demais para consulta'; return null; }
   let c=null; try{ c=await Promise.race([Store.get('catalogo',k),new Promise(r=>setTimeout(()=>r(null),3000))]); }catch(e){}
   if(c && c.descricao && !c.naoEncontrado) return {...c,fonte:'catálogo Cultivve'};
-  if(c && c.naoEncontrado && (Date.now()-new Date(c.criadoEm||0).getTime())<30*864e5) return null;
-  if(!usarApi) return null;
-  const tok=await tokenSi5(); if(!tok || !(await podeConsultar())) return null;
-  try{
-    const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),6000);
-    const r=await fetch('https://global.si5.com.br/api/produtos/'+encodeURIComponent(String(code).replace(/\D/g,'')),{headers:{Authorization:'Bearer '+tok,Accept:'application/json'},signal:ctl.signal});
-    clearTimeout(t); somaUso();
-    if(r.status===404){ Store.set('catalogo',k,{gtin:k,naoEncontrado:true,criadoEm:now()}); return null; }
-    if(r.status===429){ if(ehMaster()) toast('Limite diário da consulta SI5 atingido',true); return null; }
-    if(!r.ok) return null;
-    const j=await r.json(); if(!j||!j.produto) return null;
-    const d={gtin:k,descricao:String(j.produto).toUpperCase(),marca:j.marca||'',categoria:j.categoria||'',ncm:j.ncm||'',imagem:j.imagem_url||'',origem:'SI5',criadoEm:now(),naoEncontrado:false};
-    Store.set('catalogo',k,d);
-    return {...d,fonte:'SI5 Global'};
-  }catch(e){ console.warn('SI5',e); return null; }
+  if(!forcar && c && c.naoEncontrado && (Date.now()-new Date(c.criadoEm||0).getTime())<7*864e5){ SI5_ULT.motivo='a SI5 já respondeu "não encontrado" em '+new Date(c.criadoEm).toLocaleDateString('pt-BR'); return null; }
+  if(!usarApi){ SI5_ULT.motivo='consulta externa desligada'; return null; }
+  const tok=await tokenSi5(); if(!tok){ SI5_ULT.motivo='token da SI5 não configurado (Cultivve › Catálogo)'; return null; }
+  const cfg=await cfgCultivve(); const uso=await usoHoje();
+  if(uso>=(cfg.si5Limite||25)){ SI5_ULT.motivo='limite do app atingido hoje ('+uso+'/'+(cfg.si5Limite||25)+')'; return null; }
+  const r=await chamaSi5(code,tok);
+  if(r.status) somaUso();
+  if(r.status===404){ Store.set('catalogo',k,{gtin:k,naoEncontrado:true,criadoEm:now()}); SI5_ULT.motivo='a SI5 não tem esse código no catálogo dela (404)'; return null; }
+  if(r.status===401||r.status===403){ SI5_ULT.motivo='token da SI5 inválido ou vencido ('+r.status+')'; return null; }
+  if(r.status===429){ SI5_ULT.motivo='a SI5 recusou: limite diário do plano atingido (429)'; return null; }
+  if(!r.status){ SI5_ULT.motivo='sem resposta da SI5: '+r.erro; return null; }
+  if(r.status<200||r.status>=300){ SI5_ULT.motivo='a SI5 respondeu erro '+r.status; return null; }
+  const j=r.j; const nome=j&&(j.produto||j.descricao||j.nome);
+  if(!nome){ SI5_ULT.motivo='a SI5 respondeu sem nome de produto'; return null; }
+  const d={gtin:k,descricao:String(nome).toUpperCase(),marca:j.marca||'',categoria:j.categoria||'',ncm:j.ncm||'',imagem:j.imagem_url||'',origem:'SI5',criadoEm:now(),naoEncontrado:false};
+  Store.set('catalogo',k,d); SI5_ULT={motivo:'',ok:true};
+  return {...d,fonte:'SI5 Global'};
 }
 /* As imagens NÃO são gravadas em cada produto (economiza a cota do banco):
    ficam no catálogo da Cultivve e em memória neste aparelho. */
