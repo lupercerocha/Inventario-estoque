@@ -90,3 +90,15 @@ Ao mudar o app, altere `CACHE` em `sw.js` (ex.: `cvinv-v1.0.1`) para os celulare
 5. Em cada celular, abra o **link de acesso** da empresa uma vez (vincula o aparelho à empresa).
 6. Por último, cole o conteúdo de `firestore.rules` em Firestore → Regras → **Publicar**.
 7. Se algo bloquear, volte publicando `firestore.rules.piloto` (regras abertas) e fale com o suporte.
+
+## Consulta de produtos na SI5 Global (servidor de consulta)
+
+A SI5 não aceita consulta feita direto do navegador, por isso o app usa um pequeno
+servidor grátis no Google Apps Script, que guarda o token e faz a chamada.
+
+1. Acesse https://script.google.com e clique em **Novo projeto**.
+2. Apague o conteúdo e cole o arquivo **si5-servidor.gs** inteiro.
+3. Na linha `const TOKEN = '...'`, cole o token da SI5 entre as aspas e salve.
+4. **Implantar › Nova implantação › App da Web** — Executar como: **Eu**; Quem pode acessar: **Qualquer pessoa**. Autorize.
+5. Copie o **URL do app da Web** (termina em `/exec`).
+6. No app: **Cultivve › Catálogo e imagens › Servidor de consulta**, cole o endereço, toque em **Testar consulta** e **Salvar**.
