@@ -91,14 +91,16 @@ Ao mudar o app, altere `CACHE` em `sw.js` (ex.: `cvinv-v1.0.1`) para os celulare
 6. Por último, cole o conteúdo de `firestore.rules` em Firestore → Regras → **Publicar**.
 7. Se algo bloquear, volte publicando `firestore.rules.piloto` (regras abertas) e fale com o suporte.
 
-## Consulta de produtos na SI5 Global (servidor de consulta)
+## Consulta de produtos (SI5 Global + Cosmos, em cascata)
 
-A SI5 não aceita consulta feita direto do navegador, por isso o app usa um pequeno
-servidor grátis no Google Apps Script, que guarda o token e faz a chamada.
+As APIs de produto não aceitam consulta direto do navegador, por isso o app usa um
+servidor grátis no Google Apps Script (arquivo **si5-servidor.gs**). Ele guarda os tokens
+e procura primeiro na SI5; se a SI5 não achar, procura no Cosmos (Bluesoft).
 
-1. Acesse https://script.google.com e clique em **Novo projeto**.
+1. Em https://script.google.com abra o projeto (ou crie um **Novo projeto**).
 2. Apague o conteúdo e cole o arquivo **si5-servidor.gs** inteiro.
-3. Na linha `const TOKEN = '...'`, cole o token da SI5 entre as aspas e salve.
-4. **Implantar › Nova implantação › App da Web** — Executar como: **Eu**; Quem pode acessar: **Qualquer pessoa**. Autorize.
-5. Copie o **URL do app da Web** (termina em `/exec`).
-6. No app: **Cultivve › Catálogo e imagens › Servidor de consulta**, cole o endereço, toque em **Testar consulta** e **Salvar**.
+3. Cole os tokens nas linhas `TOKEN_SI5` e `TOKEN_COSMOS` e salve.
+   Depois, no menu de funções (ao lado de **Depurar**), escolha **autorizar** e clique em **Executar** — autorize o acesso ao Google Drive (é onde ficam as fotos tiradas pelos contadores, na pasta *Cultivve Inventário - Fotos de produtos*).
+4. Primeira vez: **Implantar › Nova implantação › App da Web** — Executar como: **Eu**; Quem pode acessar: **Qualquer pessoa**. Copie o URL (termina em `/exec`) e cole no app em **Cultivve › Catálogo e imagens › Servidor de consulta**.
+   Atualizando: **Implantar › Gerenciar implantações › lápis › Versão: Nova versão › Implantar** (o endereço não muda).
+5. No app, **Testar consulta** mostra o produto e de qual fonte ele veio.
