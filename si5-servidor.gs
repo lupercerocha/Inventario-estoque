@@ -29,6 +29,9 @@ function doGet(e) {
   let out;
   if (gtin.length < 8) {
     out = { status: 400, erro: 'código inválido' };
+  } else if (e.parameter.diag) {
+    // diagnóstico: consulta cada fonte separado, sem cache — use ?gtin=CODIGO&diag=1
+    out = { si5: temToken(TOKEN_SI5) ? si5(gtin) : 'sem token', cosmos: temToken(TOKEN_COSMOS) ? cosmos(gtin) : 'sem token' };
   } else {
     const cache = CacheService.getScriptCache();
     const salvo = cache.get('v2_' + gtin);
@@ -50,13 +53,28 @@ function cascata(gtin) {
   if (temToken(TOKEN_COSMOS)) fontes.push(cosmos);
   if (!fontes.length) return { status: 401, erro: 'nenhum token configurado no servidor' };
   const motivos = [];
+  const cache = CacheService.getScriptCache();
   for (const f of fontes) {
+    // fonte que já estourou o limite hoje não é chamada de novo até a meia-noite
+    if (cache.get('esgotado_' + f.name)) { motivos.push(nomeFonte(f) + ': limite do dia atingido'); continue; }
+    // fonte que já disse "não encontrado" para este código não é perguntada de novo por 6 horas
+    if (cache.get('nf_' + f.name + '_' + gtin)) { motivos.push(nomeFonte(f) + ': não encontrado'); continue; }
     const r = f(gtin);
+    if (r.status === 429) cache.put('esgotado_' + f.name, '1', segAteMeiaNoite());
+    if (r.status === 404) cache.put('nf_' + f.name + '_' + gtin, '1', 21600);
     if (r.status === 200 && r.data && r.data.produto) return r;
-    motivos.push(r.fonte + ': ' + (r.status === 404 ? 'não encontrado' : r.status === 429 ? 'limite do dia atingido' : r.status === 401 || r.status === 403 ? 'token inválido' : (r.erro || ('erro ' + r.status))));
+    motivos.push(r.fonte + ': ' + (r.status === 404 ? 'não encontrado' : r.status === 429 ? 'limite do dia atingido' : r.status === 401 || r.status === 403 ? 'token inválido (' + r.status + ')' : (r.erro || ('erro ' + r.status))) + (r.status !== 404 && r.corpo ? ' [' + r.corpo + ']' : ''));
   }
   const todos404 = motivos.every(m => /não encontrado/.test(m));
   return { status: todos404 ? 404 : 502, erro: motivos.join(' · ') };
+}
+
+function nomeFonte(f) { return f === si5 ? 'SI5' : 'Cosmos'; }
+/* segundos até a meia-noite de Brasília (máx. 6 h, limite do cache do Google) */
+function segAteMeiaNoite() {
+  const agora = new Date(); const br = new Date(agora.getTime() - 3 * 3600000);
+  const seg = 86400 - (br.getUTCHours() * 3600 + br.getUTCMinutes() * 60 + br.getUTCSeconds());
+  return Math.max(60, Math.min(21600, seg));
 }
 
 function temToken(t) { return t && t.indexOf('COLE_AQUI') !== 0; }
@@ -67,7 +85,7 @@ function si5(gtin) {
       headers: { Authorization: 'Bearer ' + TOKEN_SI5, Accept: 'application/json' }, muteHttpExceptions: true
     });
     const st = r.getResponseCode(); let j = null; try { j = JSON.parse(r.getContentText()); } catch (x) {}
-    if (st !== 200 || !j) return { status: st, fonte: 'SI5' };
+    if (st !== 200 || !j) return { status: st, fonte: 'SI5', corpo: r.getContentText().slice(0, 150) };
     return { status: 200, fonte: 'SI5', data: {
       produto: j.produto || j.descricao || j.nome || '', marca: j.marca || '', categoria: j.categoria || '',
       ncm: j.ncm || '', imagem_url: j.imagem_url || '', fonte: 'SI5 Global' } };
@@ -76,12 +94,15 @@ function si5(gtin) {
 
 function cosmos(gtin) {
   try {
-    const r = UrlFetchApp.fetch('https://api.cosmos.bluesoft.com.br/gtins/' + gtin + '.json', {
-      headers: { 'X-Cosmos-Token': TOKEN_COSMOS, 'User-Agent': 'Cosmos-API-Request', 'Content-Type': 'application/json' },
-      muteHttpExceptions: true
-    });
+    const op = {
+      headers: { 'X-Cosmos-Token': String(TOKEN_COSMOS).trim(), 'User-Agent': 'Cosmos-API-Request', 'Content-Type': 'application/json', Accept: 'application/json' },
+      muteHttpExceptions: true, followRedirects: true
+    };
+    let r = UrlFetchApp.fetch('https://api.cosmos.bluesoft.com.br/gtins/' + gtin + '.json', op);
+    // alguns ambientes respondem melhor sem o ".json"
+    if (r.getResponseCode() !== 200 && r.getResponseCode() !== 404 && r.getResponseCode() !== 429) r = UrlFetchApp.fetch('https://api.cosmos.bluesoft.com.br/gtins/' + gtin, op);
     const st = r.getResponseCode(); let j = null; try { j = JSON.parse(r.getContentText()); } catch (x) {}
-    if (st !== 200 || !j) return { status: st, fonte: 'Cosmos' };
+    if (st !== 200 || !j) return { status: st, fonte: 'Cosmos', corpo: r.getContentText().slice(0, 150) };
     const marca = (j.brand && (j.brand.name || j.brand.brand)) || j.brand_name || '';
     const cat = (j.gpc && j.gpc.description) || (j.category && j.category.description) || '';
     const ncm = (j.ncm && (j.ncm.code || j.ncm)) || '';
