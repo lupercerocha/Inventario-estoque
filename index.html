@@ -158,6 +158,7 @@ table.t tr.hl td{background:#fffaf0}
 .stp{border:1px solid var(--line);background:#fff;border-radius:12px;font-size:28px;font-weight:700;cursor:pointer;color:var(--navy)}
 .qty.bump{animation:bp .25s}
 @keyframes bp{50%{transform:scale(1.06);background:var(--teal-soft)}}
+.tags{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.ftag{display:inline-block;margin-top:3px;font-size:11px;font-weight:700;color:#5b4a1f;background:#f6efdc;border-radius:6px;padding:1px 7px;letter-spacing:.2px}
 .gtag{display:inline-block;margin-top:3px;font-size:11px;font-weight:700;color:#1d6b62;background:var(--teal-soft);border-radius:6px;padding:1px 7px;letter-spacing:.2px}
 .res .d .gtag{display:inline-block;color:#1d6b62;font-size:11px;margin-left:0}
 .ov.full{align-items:stretch;justify-content:stretch}
@@ -343,7 +344,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.6.0';
+const APP_VERSION = '3.6.1';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -612,6 +613,8 @@ function search(q,limit=40){
 
 /* ---------------- cálculo do inventário ---------------- */
 const GSEM='SEM GRUPO';
+/* marca / fabricante e referência do fabricante, quando vierem da planilha */
+const fabTag=p=>(p&&(p.marca||p.referencia))?`<span class="ftag">🏭 ${esc(p.marca||'')}${p.marca&&p.referencia?' · ':''}${p.referencia?'ref. '+esc(p.referencia):''}</span>`:'';
 const gLbl=p=>(p.grupo||GSEM)+(p.subgrupo?' › '+p.subgrupo:'');
 const byGrupo=(a,b)=>((a.grupo?0:1)-(b.grupo?0:1))||String(a.grupo||'').localeCompare(String(b.grupo||''),'pt-BR')||String(a.subgrupo||'').localeCompare(String(b.subgrupo||''),'pt-BR')||String(a.descricao).localeCompare(String(b.descricao),'pt-BR');
 function grupos(list){ const m=new Map(); list.forEach(p=>{ const g=p.grupo||GSEM; if(!m.has(g)) m.set(g,new Map()); const sm=m.get(g); const sg=p.subgrupo||''; sm.set(sg,(sm.get(sg)||0)+1); });
@@ -983,7 +986,7 @@ function showResults(v){
   const box=$('#res'); if(!box) return;
   if(!v.trim()){ box.innerHTML=''; return; }
   const rs=search(v,30);
-  box.innerHTML = rs.length ? rs.map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}<div class="d"><b>${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span><span class="gtag">${esc(gLbl(p))}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')
+  box.innerHTML = rs.length ? rs.map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}<div class="d"><b>${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span><span class="tags"><span class="gtag">${esc(gLbl(p))}</span>${fabTag(p)}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')
     : `<div class="empty small">Nada encontrado para “${esc(v)}”.</div>`;
   box.querySelectorAll('.res').forEach((el,ix)=>el.onclick=()=>{ const p=S.idxCod.get(norm(el.dataset.c))||rs[ix]; $('#q').value=''; box.innerHTML=''; setPending(p,'tecl'); });
 }
@@ -1003,7 +1006,7 @@ V.contar_refresh = ()=>{
     const done=new Set(S.lanc.filter(l=>l.rodada===3 && meu(l)).map(l=>String(l.codigo)));
     $('#c3n').textContent=`${div.filter(c=>done.has(String(c))).length} de ${div.length}`;
     l3.innerHTML = div.map(c=>{ const p=S.idxCod.get(norm(c))||{codigo:c,descricao:'(produto)'}; const ok=done.has(String(c));
-      return `<div class="res" data-c3="${esc(c)}" style="${ok?'opacity:.55':''}"><div class="d"><b>${ok?'✓ ':''}${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span></div><button class="btn sec" style="min-height:36px;padding:6px 10px" data-zero="${esc(c)}">Zero</button></div>`; }).join('') || '<div class="empty small">Nenhum item para recontar.</div>';
+      return `<div class="res" data-c3="${esc(c)}" style="${ok?'opacity:.55':''}"><div class="d"><b>${ok?'✓ ':''}${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span>${fabTag(p)}</div><button class="btn sec" style="min-height:36px;padding:6px 10px" data-zero="${esc(c)}">Zero</button></div>`; }).join('') || '<div class="empty small">Nenhum item para recontar.</div>';
     l3.querySelectorAll('[data-c3]').forEach(el=>el.onclick=e=>{ if(e.target.dataset.zero!=null) return; const p=S.idxCod.get(norm(el.dataset.c3)); if(p) setPending(p,'tecl'); });
     l3.querySelectorAll('[data-zero]').forEach(b=>b.onclick=async e=>{ e.stopPropagation(); const p=S.idxCod.get(norm(b.dataset.zero)); if(p && await ask(`Registrar que <b>${esc(p.descricao)}</b> não foi encontrado (quantidade zero)?`,{ok:'Registrar zero'})) lancar(p,0); });
   }
@@ -1040,7 +1043,7 @@ function drawLista(){
   $('#lsS').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{ S.ls.s=b.dataset.s; S.ls.lim=300; drawLista(); });
   const words=norm(S.ls.q).split(/\s+/).filter(Boolean);
   let arr=base.filter(p=>(!S.ls.g||(p.grupo||GSEM)===S.ls.g) && (!S.ls.s||p.subgrupo===S.ls.s) && (!S.ls.pend||!mine.has(String(p.codigo))));
-  if(words.length) arr=arr.filter(p=>{ const h=p._h||(p._h=norm(p.descricao)+' '+norm(p.codigo)+' '+String(p.ean||'')+' '+norm(p.grupo)+' '+norm(p.subgrupo)); return words.every(w=>h.includes(w)); });
+  if(words.length) arr=arr.filter(p=>{ const h=p._h||(p._h=norm(p.descricao)+' '+norm(p.codigo)+' '+String(p.ean||'')+' '+norm(p.grupo)+' '+norm(p.subgrupo)+' '+norm(p.marca)+' '+norm(p.referencia)); return words.every(w=>h.includes(w)); });
   arr=[...arr].sort(byGrupo);
   let html='', last=null;
   arr.slice(0,S.ls.lim).forEach(p=>{
@@ -1089,7 +1092,7 @@ function renderFast(){
   if(S.pend){
     const p=S.pend.p, un=(p.unidade||'UN').toUpperCase();
     el.hidden=false; el.className='card fast';
-    el.innerHTML=`<div class="row" style="align-items:flex-start">${thumb(p,64)}<div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</div><span class="gtag">${esc(gLbl(p))}</span></div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
+    el.innerHTML=`<div class="row" style="align-items:flex-start">${thumb(p,64)}<div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</div><span class="tags"><span class="gtag">${esc(gLbl(p))}</span>${fabTag(p)}</span></div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
       ${S.pend.ja?`<div class="small muted" style="margin-top:4px">Você já lançou ${fmt(S.pend.ja)} ${esc(un)} deste item nesta contagem — será somado.</div>`:''}
       <div class="qrow"><button class="stp" data-s="-1">−</button><input class="in qty" id="fQ" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="${S.pend.ed||S.pend.q!==1?esc(fmt(S.pend.q).replace(/\./g,'')):''}"><button class="stp" data-s="1">+</button></div>
       <div class="quick"><button data-a="6">+6</button><button data-a="12">+12</button><button data-a="24">+24</button><button data-a="0">Zerar</button></div>
@@ -1106,7 +1109,7 @@ function renderFast(){
   } else if(S.lastUm && LS.get('cvinv_modo','qtd')==='um'){
     const {p,tot}=S.lastUm;
     el.hidden=false; el.className='card fast ok';
-    el.innerHTML=`<div class="row">${thumb(p,48)}<div class="round-dot">+1</div><div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted">Seu total deste item: <b>${fmt(tot)} ${esc(p.unidade||'UN')}</b></div></div><button class="btn sec" id="fU">Desfazer</button></div>`;
+    el.innerHTML=`<div class="row">${thumb(p,48)}<div class="round-dot">+1</div><div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b>${fabTag(p)}<div class="small muted">Seu total deste item: <b>${fmt(tot)} ${esc(p.unidade||'UN')}</b></div></div><button class="btn sec" id="fU">Desfazer</button></div>`;
     $('#fU',el).onclick=()=>{ if(S.lastUm && S.lastUm.id){ Store.del('inventarios/'+S.inv.id+'/lancamentos',S.lastUm.id); toast('Último bipe desfeito'); } S.lastUm=null; renderFast(); };
   } else { el.hidden=true; el.innerHTML=''; }
 }
@@ -1657,7 +1660,7 @@ V.produtos_refresh = ()=>{
   const arr=(S.pq.trim()?search(S.pq,300):[...S.produtos].sort(byGrupo).slice(0,300));
   L.innerHTML=`<div class="small muted" style="margin-bottom:6px">${fmt(S.produtos.length)} produtos${arr.length>=300?' · mostrando 300, use a busca':''}</div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th></th><th>Código</th><th>Descrição</th><th>Cód. barras</th><th>Un</th><th>Grupo</th><th class="n">Estoque</th><th></th></tr></thead><tbody>
-    ${arr.map(p=>`<tr><td>${thumb(p,32)}</td><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}${p.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="mono small">${esc(p.ean||'')}</td><td>${esc(p.unidade||'')}</td><td class="small">${esc(gLbl(p))}</td><td class="n">${fmt(p.estoque)}</td><td><button class="x ed" data-pe="${esc(p.id)}">✎</button></td></tr>`).join('')||'<tr><td colspan="8" class="empty">Nenhum produto</td></tr>'}</tbody></table></div>`;
+    ${arr.map(p=>`<tr><td>${thumb(p,32)}</td><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}${p.novo?' <span class="badge b-blue">novo</span>':''}${(p.marca||p.referencia)?`<div class="small muted">${esc([p.marca,p.referencia?'ref. '+p.referencia:''].filter(Boolean).join(' · '))}</div>`:''}</td><td class="mono small">${esc(p.ean||'')}</td><td>${esc(p.unidade||'')}</td><td class="small">${esc(gLbl(p))}</td><td class="n">${fmt(p.estoque)}</td><td><button class="x ed" data-pe="${esc(p.id)}">✎</button></td></tr>`).join('')||'<tr><td colspan="8" class="empty">Nenhum produto</td></tr>'}</tbody></table></div>`;
   L.querySelectorAll('[data-pe]').forEach(b=>b.onclick=()=>editarProduto(S.produtos.find(p=>p.id===b.dataset.pe)));
 };
 function editarProduto(p){ if(!p) return;
