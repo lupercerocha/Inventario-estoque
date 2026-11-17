@@ -104,3 +104,11 @@ e procura primeiro na SI5; se a SI5 não achar, procura no Cosmos (Bluesoft).
 4. Primeira vez: **Implantar › Nova implantação › App da Web** — Executar como: **Eu**; Quem pode acessar: **Qualquer pessoa**. Copie o URL (termina em `/exec`) e cole no app em **Cultivve › Catálogo e imagens › Servidor de consulta**.
    Atualizando: **Implantar › Gerenciar implantações › lápis › Versão: Nova versão › Implantar** (o endereço não muda).
 5. No app, **Testar consulta** mostra o produto e de qual fonte ele veio.
+
+## Importar o relatório de estoque do ERP (CSV)
+
+O app aceita o CSV "Listagem de Estoque Gerencial" do Inteligence ERP (e relatórios parecidos) do jeito que sai do sistema:
+cabeçalhos repetidos em cada página, linhas de GRUPO/SUB-GRUPO e colunas deslocadas são reorganizados automaticamente.
+- PR.COMPRA vira o **custo unitário**; REFERENCIA vira **código de barras** quando é um EAN e **referência do fabricante** quando não é; MARCA também é importada.
+- Em bases grandes (milhares de itens com estoque zero), só os itens com estoque entram na lista de contagem; os de estoque zero ficam como **consulta** e entram na hora se forem bipados ou buscados.
+- No resultado: estoque no sistema e contado em R$, **saídas = perdas**, **entradas = sobras**, resultado do inventário e **possíveis trocas** de código entre itens parecidos.

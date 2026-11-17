@@ -71,8 +71,8 @@ a{color:var(--teal)}
 
 main{width:100%;padding:16px 16px calc(28px + var(--safe-b))}
 .stack>*+*{margin-top:14px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-.grid.kpi{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid.kpi{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
 .card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:16px;border:1px solid #e9ecef}
 .card.click{cursor:pointer;transition:transform .12s,box-shadow .12s}
 .card.click:active{transform:scale(.99)}
@@ -212,6 +212,13 @@ pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:
 #zoomImg img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.5)}
 @keyframes zf{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
 img.thumb,.fotobox img{cursor:zoom-in}
+.fin{border:1px solid var(--line)}.fin .kpi{margin:0;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.fin .v{white-space:nowrap;font-size:clamp(19px,1.9vw,26px)}.res-neg{background:#fdecec}.res-pos{background:#e7f6f3}
+.trocas{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:10px}
+.troca{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff}.troca.ok{border-color:var(--teal);background:#f0faf8}.troca.nao{opacity:.55}
+.tr-par{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}.tr-seta{align-self:center;font-size:20px;color:var(--muted)}
+.tr-it{display:flex;flex-direction:column;gap:3px;padding:8px;border-radius:8px;background:#fafafa;min-width:0}.tr-it.sai{border-left:3px solid var(--red)}.tr-it.ent{border-left:3px solid var(--teal)}
+.btn.sm{padding:6px 10px;font-size:13px;min-height:0}
+@media(max-width:600px){.fin .kpi{grid-template-columns:1fr 1fr}.fin .kpi .card:last-child{grid-column:1/-1}.fin .v{font-size:18px}.trocas{grid-template-columns:1fr}.tr-par{grid-template-columns:1fr}.tr-seta{transform:rotate(90deg);justify-self:center}}
 .rcols{display:grid;gap:18px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .rcols>div>.rsec:first-child{margin-top:16px}
 .rhist{margin-bottom:12px}.rhist-d{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px}
@@ -336,7 +343,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.5.4';
+const APP_VERSION = '3.6.0';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -560,14 +567,46 @@ function findExact(code){
   // QR Code e RFID (EPC) podem ter letras: nesses casos procura pelo código exato, não pelo código de barras
   return (/^[\d\s.-]+$/.test(c)?S.idxEan.get(eanKey(c)):null) || S.idxCod.get(norm(c)) || S.idxEan.get('#'+norm(c)) || null;
 }
+/* ---------- itens de consulta (estoque zero) ----------
+   Em bases grandes (ex.: 35 mil itens, a maioria com estoque zero) só os itens com estoque entram na lista
+   de contagem. Os outros ficam guardados em blocos e, se aparecerem na prateleira, entram na hora com
+   código, grupo e custo — sem gastar milhares de gravações no banco de dados. */
+function carregarReserva(){
+  if(!S.inv || !S.inv.reservaN) return Promise.resolve(null);
+  if(S.reserva && S.reserva.inv===S.inv.id) return Promise.resolve(S.reserva);
+  if(S.reservaP && S.reservaP.inv===S.inv.id) return S.reservaP.p;
+  const id=S.inv.id;
+  const p=Store.list('inventarios/'+id+'/reserva').then(docs=>{
+    const K=['codigo','descricao','ean','unidade','grupo','subgrupo','custo','referencia','marca'];
+    const list=[]; docs.forEach(d=>{ try{ JSON.parse(d.itens||'[]').forEach(a=>{ const o={_res:true}; K.forEach((k,i)=>o[k]=a[i]??''); o.custo=Number(o.custo)||0; list.push(o); }); }catch(e){} });
+    const idx=new Map(); list.forEach(o=>{ if(o.ean){ const k=eanKey(o.ean); if(k) idx.set(k,o); } idx.set('c:'+norm(o.codigo),o); });
+    if(S.inv && S.inv.id===id) S.reserva={inv:id,list,idx};
+    return S.reserva;
+  }).catch(e=>{ console.warn('reserva',e); S.reservaP=null; return null; });
+  S.reservaP={inv:id,p}; return p;
+}
+function findReserva(code){ const R=S.reserva; if(!R) return null; const c=String(code||'').trim();
+  return (/^[\d\s.-]+$/.test(c)?R.idx.get(eanKey(c)):null) || R.idx.get('c:'+norm(c)) || null; }
+/* coloca o item de consulta na lista de contagem (id fixo: dois celulares bipando ao mesmo tempo não duplicam) */
+function promover(it){
+  const ex=S.idxCod.get(norm(it.codigo)); if(ex) return ex;
+  const id='r_'+norm(it.codigo).replace(/[^a-z0-9]/g,'_');
+  const d={codigo:it.codigo,descricao:it.descricao,ean:it.ean||'',unidade:it.unidade||'UN',grupo:it.grupo||'',subgrupo:it.subgrupo||'',custo:it.custo||0,referencia:it.referencia||'',marca:it.marca||'',estoque:0,novo:false,daConsulta:true};
+  Store.set('inventarios/'+S.inv.id+'/produtos',id,d).catch(e=>console.warn(e));
+  const p={id,...d}; S.produtos.push(p); indexProdutos(); return p;
+}
 function search(q,limit=40){
   const n=norm(q); if(!n) return [];
   const words=n.split(/\s+/);
   const out=[];
   for(const p of S.produtos){
-    const hay=p._h || (p._h=norm(p.descricao)+' '+norm(p.codigo)+' '+String(p.ean||'')+' '+norm(p.grupo)+' '+norm(p.subgrupo));
+    const hay=p._h || (p._h=norm(p.descricao)+' '+norm(p.codigo)+' '+String(p.ean||'')+' '+norm(p.grupo)+' '+norm(p.subgrupo)+' '+norm(p.marca)+' '+norm(p.referencia));
     if(words.every(w=>hay.includes(w))){ out.push(p); if(out.length>=limit) break; }
   }
+  if(out.length<limit && S.reserva){ const ja=new Set(S.produtos.map(p=>norm(p.codigo)));
+    for(const it of S.reserva.list){ if(ja.has(norm(it.codigo))) continue;
+      const hay=it._h || (it._h=norm(it.descricao)+' '+norm(it.codigo)+' '+String(it.ean||'')+' '+norm(it.grupo)+' '+norm(it.marca)+' '+norm(it.referencia));
+      if(words.every(w=>hay.includes(w))){ out.push(it); if(out.length>=limit) break; } } }
   return out;
 }
 
@@ -580,7 +619,7 @@ function grupos(list){ const m=new Map(); list.forEach(p=>{ const g=p.grupo||GSE
 function calc(){ return calcFrom(S.produtos,S.lanc,modoDe(S.inv)); }
 function calcFrom(produtos,lanc,modo='duas'){
   const map=new Map();
-  produtos.forEach(p=>map.set(String(p.codigo),{codigo:String(p.codigo),descricao:p.descricao,ean:p.ean||'',unidade:p.unidade||'',grupo:p.grupo||'',subgrupo:p.subgrupo||'',custo:Number(p.custo)||0,estoque:Number(p.estoque)||0,novo:!!p.novo,c:[0,0,0],n:[0,0,0]}));
+  produtos.forEach(p=>map.set(String(p.codigo),{codigo:String(p.codigo),descricao:p.descricao,ean:p.ean||'',unidade:p.unidade||'',grupo:p.grupo||'',subgrupo:p.subgrupo||'',custo:Number(p.custo)||0,marca:p.marca||'',referencia:p.referencia||'',estoque:Number(p.estoque)||0,novo:!!p.novo,c:[0,0,0],n:[0,0,0]}));
   lanc.forEach(l=>{
     let r=map.get(String(l.codigo));
     if(!r){ r={codigo:String(l.codigo),descricao:l.descricao||'(sem cadastro)',ean:'',unidade:l.unidade||'',grupo:'',subgrupo:'',custo:0,estoque:0,novo:true,c:[0,0,0],n:[0,0,0]}; map.set(r.codigo,r); }
@@ -603,6 +642,40 @@ function calcFrom(produtos,lanc,modo='duas'){
   t.qEnt=r3(t.ent.reduce((s,r)=>s+r.dif,0)); t.qSai=r3(t.sai.reduce((s,r)=>s-r.dif,0));
   t.vEnt=Math.round(t.ent.reduce((s,r)=>s+r.dif*r.custo,0)*100)/100; t.vSai=Math.round(t.sai.reduce((s,r)=>s-r.dif*r.custo,0)*100)/100;
   return {rows,t};
+}
+/* ---------- valores do inventário ----------
+   SAÍDA = constava no sistema e não estava na prateleira → mercadoria que sumiu = PERDA.
+   ENTRADA = estava na prateleira e não constava no sistema → sobra (geralmente erro de lançamento). */
+function financeiro(rows,t){
+  const tem=rows.some(r=>r.custo);
+  const vSis=Math.round(rows.reduce((s,r)=>s+(Number(r.estoque)||0)*(r.custo||0),0)*100)/100;
+  const saldo=Math.round((t.vEnt-t.vSai)*100)/100;
+  return {tem,vSis,vCont:Math.round((vSis+saldo)*100)/100,vEnt:t.vEnt,vSai:t.vSai,saldo,pct:vSis?saldo/vSis*100:0};
+}
+/* ---------- possíveis trocas ----------
+   Um item com SAÍDA (faltou) e outro com ENTRADA (sobrou) de descrição muito parecida — mesma peça com
+   outra cor, modelo, medida ou referência — costuma ser venda/entrada lançada no código errado. */
+const STOP=new Set(['de','da','do','das','dos','com','para','p','c','e','em','a','o','x','un','pc','cx']);
+const toks=d=>norm(d).replace(/[^a-z0-9,./]+/g,' ').split(' ').filter(w=>w && !STOP.has(w));
+function trocasPossiveis(t){
+  const ent=t.ent.filter(r=>!r.novo||r.descricao), sai=t.sai;
+  if(!ent.length||!sai.length) return [];
+  const T=new Map(); [...ent,...sai].forEach(r=>{ if(!T.has(r.codigo)) T.set(r.codigo,toks(r.descricao)); });
+  const porTipo=new Map(); ent.forEach(r=>{ const k=(T.get(r.codigo)[0]||''); if(!porTipo.has(k)) porTipo.set(k,[]); porTipo.get(k).push(r); });
+  const cand=[];
+  sai.forEach(a=>{ const ta=T.get(a.codigo); if(!ta.length) return; const A=new Set(ta);
+    (porTipo.get(ta[0])||[]).forEach(b=>{ if(a.codigo===b.codigo) return;
+      if(a.unidade && b.unidade && norm(a.unidade)!==norm(b.unidade)) return;
+      const B=new Set(T.get(b.codigo)); let inter=0; A.forEach(w=>{ if(B.has(w)) inter++; });
+      const uni=A.size+B.size-inter; const jac=uni?inter/uni:0; if(jac<0.5) return;
+      const sc=jac+(a.grupo&&a.grupo===b.grupo?0.08:0)+(a.subgrupo&&a.subgrupo===b.subgrupo?0.05:0)+(a.marca&&a.marca===b.marca?0.07:0);
+      cand.push({a,b,sc,muda:[[...A].filter(w=>!B.has(w)).join(' '),[...B].filter(w=>!A.has(w)).join(' ')]}); }); });
+  cand.sort((x,y)=>y.sc-x.sc);
+  const usadoA=new Set(), usadoB=new Set(), out=[];
+  cand.forEach(c=>{ if(usadoA.has(c.a.codigo)||usadoB.has(c.b.codigo)) return; usadoA.add(c.a.codigo); usadoB.add(c.b.codigo);
+    const qa=-c.a.dif, qb=c.b.dif, q=Math.min(qa,qb);
+    out.push({...c,qa,qb,q,vA:qa*(c.a.custo||0),vB:qb*(c.b.custo||0),vComp:q*(c.a.custo||0),key:c.a.codigo+'|'+c.b.codigo}); });
+  return out;
 }
 function roundStats(rod){
   const L=S.lanc.filter(l=>l.rodada===rod);
@@ -782,14 +855,14 @@ V.inventarios = async ()=>{
     <div class="row between"><h1>Inventários</h1><button class="btn" id="nInv">+ Novo inventário</button></div>
     ${invs.length?`<div class="grid">${invs.map(i=>`<div class="card click" data-id="${i.id}">
       <div class="row between"><h3>${esc(i.nome)}</h3>${i.status==='finalizado'?'<span class="badge b-gray">Finalizado</span>':'<span class="badge b-ok">Em contagem</span>'}</div>
-      <div class="sub">${dBR(i.data)} · ${fmt(i.totalProdutos||0)} produtos na base</div>
+      <div class="sub">${dBR(i.data)} · ${fmt(i.totalProdutos||0)} produtos na base${i.reservaN?` + ${fmt(i.reservaN)} de consulta`:''}</div>
       <div class="row small" style="margin-top:8px;gap:6px">${rodadasDe(i).map(r=>{const st=(i.rodadas||{})['r'+r]||'bloqueada';return `<span class="badge ${RLBL[st][1]}">${r===3&&modoDe(i)==='uma_conf'?'Conf.':r+'ª'} ${RLBL[st][0].toLowerCase()}</span>`}).join('')}</div></div>`).join('')}</div>`
       :`<div class="card empty"><h2>Nenhum inventário ainda</h2><p>Crie um inventário e importe a planilha de estoque.</p></div>`}</div>`;
   $('#nInv').onclick=async ()=>{ const u=await exigir(ehGestor,'Novo inventário','Só gestores criam inventários'); if(u) novoInventario(); };
   app.querySelectorAll('.card[data-id]').forEach(c=>c.onclick=()=>openInv(invs.find(x=>x.id===c.dataset.id)));
 };
 function openInv(inv,next='invhome'){
-  clearSubs(); S.inv=inv; S.produtos=[]; S.lanc=[]; indexProdutos();
+  clearSubs(); S.inv=inv; S.produtos=[]; S.lanc=[]; S.reserva=null; S.reservaP=null; indexProdutos(); if(inv.reservaN) setTimeout(carregarReserva,500);
   const P='inventarios/'+inv.id;
   S.unsub.push(Store.watchDoc('inventarios',inv.id,d=>{ if(!d) return; const old=S.inv; S.inv=d;
     if(S.view==='contar' && S.rodada && d.rodadas['r'+S.rodada]!=='aberta'){ toast('O gestor encerrou a '+rn(S.rodada)); stopScanner(); S.view='invhome'; S.stack=S.stack.filter(v=>v!=='contar'); render(); return; }
@@ -912,7 +985,7 @@ function showResults(v){
   const rs=search(v,30);
   box.innerHTML = rs.length ? rs.map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}<div class="d"><b>${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span><span class="gtag">${esc(gLbl(p))}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')
     : `<div class="empty small">Nada encontrado para “${esc(v)}”.</div>`;
-  box.querySelectorAll('.res').forEach(el=>el.onclick=()=>{ const p=S.idxCod.get(norm(el.dataset.c)); $('#q').value=''; box.innerHTML=''; setPending(p,'tecl'); });
+  box.querySelectorAll('.res').forEach((el,ix)=>el.onclick=()=>{ const p=S.idxCod.get(norm(el.dataset.c))||rs[ix]; $('#q').value=''; box.innerHTML=''; setPending(p,'tecl'); });
 }
 V.contar_refresh = ()=>{
   const my=$('#my'); if(!my) return;
@@ -986,6 +1059,7 @@ function drawLista(){
 function jaLancado(p){ return r3(S.lanc.filter(l=>l.rodada===S.rodada && meu(l) && String(l.codigo)===String(p.codigo)).reduce((s,l)=>s+Number(l.qtd||0),0)); }
 function setPending(p,src='tecl'){
   if(!p) return;
+  if(p._res) p=promover(p);
   if(S.rodada===3 && !(S.inv.divergentes||[]).map(String).includes(String(p.codigo))){ beep(false); toast('Este item não está na lista da '+rn(3).toLowerCase(),true); return; }
   beep(true);
   if(LS.get('cvinv_modo','qtd')==='um'){
@@ -1107,6 +1181,10 @@ function handleCode(code,src){
   code=String(code||'').trim(); if(!code) return;
   const p=findExact(code);
   if(p){ setPending(p,src); return; }
+  if(S.inv && S.inv.reservaN){
+    const r=findReserva(code); if(r){ setPending(promover(r),src); return; }
+    if(!S.reserva){ carregarReserva().then(()=>{ const r2=findReserva(code); if(r2) setPending(promover(r2),src); else { beep(false); if(S.pend && LS.get('cvinv_auto',true)) confirmPending(); naoEncontrado(code); } }); return; }
+  }
   beep(false);
   if(S.pend && LS.get('cvinv_auto',true)) confirmPending();
   naoEncontrado(code);
@@ -1649,7 +1727,65 @@ V.lancamentos_refresh = ()=>{
 };
 
 /* ---------- IMPORTAR PLANILHA ---------- */
-const COLS=[['codigo','Código do produto',/^(cod|codigo|cód|código|id|sku|ref|referencia|referência)\b(?!.*barra)/],['subgrupo','Subgrupo',/^(sub ?-?grupo|sub ?-?categoria|sub ?-?familia|sub ?-?secao|sub ?-?departamento)/],['grupo','Grupo',/^(grupo|depart|secao|setor|categoria|familia|linha)/],['descricao','Descrição',/desc|produto|nome/],['ean','Código de barras',/barra|ean|gtin|cod.*bar/],['estoque','Quantidade em estoque',/estoq|qtd|quant|saldo|qtde/],['custo','Custo unitário (opcional)',/^(custo|preco de custo|preço de custo|vl ?custo|valor custo|custo medio|custo médio)/],['unidade','Unidade',/^(un|und|unid|unidade|medida|um)\b/]];
+const COLS=[['codigo','Código do produto',/^(cod|codigo|cód|código|id|sku)\b(?!.*(barra|fabric|refer))/],['subgrupo','Subgrupo',/^(sub ?-?grupo|sub ?-?categoria|sub ?-?familia|sub ?-?secao|sub ?-?departamento)/],['grupo','Grupo',/^(grupo|depart|secao|setor|categoria|familia|linha)/],['descricao','Descrição',/desc|produto|nome/],['ean','Código de barras',/barra|ean|gtin|cod.*bar/],['referencia','Referência do fabricante (opcional)',/^(ref|referencia|cod.*fabric)/],['marca','Marca (opcional)',/^(marca|fabricante)/],['estoque','Quantidade em estoque',/estoq|qtd|quant|saldo|qtde/],['custo','Custo unitário (opcional)',/^(custo|preco de custo|preço de custo|vl ?custo|valor custo|custo medio|custo médio|pr\.? ?compra|preco ?(de )?compra|preço ?(de )?compra|custo unit)/],['unidade','Unidade',/^(un|und|unid|unidade|medida|um)\b/]];
+/* ---------- leitura de CSV (qualquer separador e acentuação) ---------- */
+function lerTexto(buf){ try{ return new TextDecoder('utf-8',{fatal:true}).decode(buf); }catch(e){ return new TextDecoder('windows-1252').decode(buf); } }
+function parseCSV(txt){
+  txt=txt.replace(/^\uFEFF/,''); const amostra=txt.slice(0,20000);
+  const sep=[';',',','\t','|'].map(c=>[c,(amostra.match(new RegExp(c==='|'?'\\|':c,'g'))||[]).length]).sort((a,b)=>b[1]-a[1])[0][0];
+  const rows=[]; let row=[], cell='', q=false;
+  for(let i=0;i<txt.length;i++){ const ch=txt[i];
+    if(q){ if(ch==='"'){ if(txt[i+1]==='"'){ cell+='"'; i++; } else q=false; } else cell+=ch; continue; }
+    if(ch==='"') q=true; else if(ch===sep){ row.push(cell); cell=''; } else if(ch==='\n'||ch==='\r'){ if(ch==='\r'&&txt[i+1]==='\n') i++; row.push(cell); rows.push(row); row=[]; cell=''; } else cell+=ch; }
+  if(cell!==''||row.length){ row.push(cell); rows.push(row); }
+  return rows.map(r=>r.map(c=>c.trim()));
+}
+/* Relatório de estoque "impresso" pelo ERP (ex.: Inteligence ERP · Listagem de Estoque Gerencial):
+   cabeçalho da empresa repetido em cada página, linhas GRUPO:/SUB-GRUPO/SEÇÃO antes dos produtos e
+   colunas que às vezes saem deslocadas. Aqui vira uma planilha normal: uma linha por produto. */
+function limparRelatorio(rows){
+  const isHead=r=>{ const n=r.map(c=>norm(c)); return n.some(x=>/^(cod|codigo)\b/.test(x)) && n.some(x=>/^descri/.test(x)); };
+  const hi=rows.findIndex(isHead); if(hi<0) return null;
+  const H=rows[hi], assin=H.map(c=>String(c).trim()).join('|');
+  const repet=rows.filter(isHead).length;
+  const lin0=r=>norm(String(r[0]||'')).replace(/[:\s]+$/,'');
+  const temGrupo=rows.some(r=>/^(grupo|sub-?grupo|secao)$/.test(lin0(r)));
+  if(hi===0 && repet<2 && !temGrupo) return null;            // planilha comum: segue o caminho normal
+  const hc=H.map((c,i)=>[String(c).trim(),i]).filter(x=>x[0]);  // colunas com título
+  const hIdx=hc.map(x=>x[1]); const iTot=hc.findIndex(x=>/^total/.test(norm(x[0])));
+  const semPref=v=>String(v||'').trim().replace(/^\d+\s*-\s*/,'');
+  let g='',sg='',paginas=0; const out=[];
+  rows.forEach((r,ix)=>{
+    if(ix<hi) return;
+    const k=lin0(r);
+    if(isHead(r)){ paginas++; return; }
+    const vals=r.map((c,i)=>[String(c).trim(),i]).filter(x=>x[0]);
+    if(/^grupo$/.test(k)){ g=semPref((vals[1]||[])[0]); sg=''; return; }
+    if(/^sub-?grupo$/.test(k)){ sg=semPref((vals[1]||[])[0]); return; }
+    if(/^secao$/.test(k)) return;
+    if(!String(r[0]||'').trim() || vals.length<3) return;   // cabeçalho de página, rodapé, linhas vazias
+    const cel=new Array(hc.length).fill('');
+    if(vals.every(([,i])=>hIdx.includes(i))) vals.forEach(([v,i])=>{ cel[hIdx.indexOf(i)]=v; });
+    else if(iTot>=0){ // linha deslocada: até o TOTAL vai em ordem; depois do TOTAL, pela distância até ele
+      const tPos=vals[iTot]?vals[iTot][1]:null;
+      vals.forEach(([v,i],n)=>{ if(n<=iTot) cel[n]=v; else if(tPos!=null){ const off=i-tPos; const j=hc.findIndex(x=>x[1]-hc[iTot][1]===off); if(j>=0) cel[j]=v; else { const livre=cel.findIndex((c,jj)=>jj>iTot&&!c); if(livre>=0) cel[livre]=v; } } });
+    } else vals.forEach(([v],n)=>{ if(n<cel.length) cel[n]=v; });
+    out.push(cel.concat([g,sg]));
+  });
+  if(!out.length) return null;
+  let head=hc.map(x=>x[0]).concat(['Grupo','Subgrupo']);
+  // coluna "REFERÊNCIA" que na maioria é código de barras: separa em código de barras e referência do fabricante
+  const iRef=head.findIndex(h=>/^ref/.test(norm(h)));
+  if(iRef>=0 && !head.some(h=>/barra|ean|gtin/.test(norm(h)))){
+    const ehEan=v=>{ const d=String(v).replace(/\s/g,''); return /^\d{8,14}$/.test(d); };
+    const cheios=out.filter(r=>r[iRef]); if(cheios.length && cheios.filter(r=>ehEan(r[iRef])).length/cheios.length>0.5){
+      head=head.concat(['Código de barras','Referência do fabricante']);
+      out.forEach(r=>{ const v=r[iRef]; const e=ehEan(v); r.push(e?String(v).replace(/\s/g,''):'', e?'':v); });
+      head[iRef]='(referência original)';
+    }
+  }
+  return {rows:[head].concat(out),paginas:Math.max(1,paginas)};
+}
 V.importar = ()=>{
   useGestorLanc();
   header('Planilha de estoque',S.inv.nome);
@@ -1666,24 +1802,27 @@ V.importar = ()=>{
   $('#fx').onchange=async e=>{
     const f=e.target.files[0]; if(!f) return;
     try{
-      await lib('xlsx');
-      const wb=XLSX.read(await f.arrayBuffer(),{type:'array'});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''}).filter(r=>r.some(c=>String(c).trim()!==''));
+      const buf=await f.arrayBuffer(); let rows;
+      if(/\.(csv|txt)$/i.test(f.name)) rows=parseCSV(lerTexto(buf));
+      else { await lib('xlsx'); const wb=XLSX.read(buf,{type:'array'}); const ws=wb.Sheets[wb.SheetNames[0]]; rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''}); }
+      rows=rows.filter(r=>r.some(c=>String(c).trim()!==''));
+      const rel=limparRelatorio(rows.map(r=>r.map(c=>c==null?'':c)));
+      if(rel){ rows=rel.rows; toast(`Relatório do ERP reorganizado: ${fmt(rows.length-1)} produtos em ${fmt(rel.paginas)} página(s)`); }
       if(rows.length<2) return toast('Planilha vazia',true);
-      mapping(rows,f.name);
+      mapping(rows,f.name,!!rel);
     }catch(err){ console.error(err); toast('Não consegui ler o arquivo',true); }
   };
 };
-function mapping(rows,fname){
+function mapping(rows,fname,doErp){
   const head=rows[0].map(h=>String(h).trim());
   const auto={}; const used=new Set();
   COLS.forEach(([k,,re])=>{ const i=head.findIndex((h,ix)=>!used.has(ix) && re.test(norm(h))); if(i>=0){ auto[k]=i; used.add(i); } });
   const opts=sel=>`<option value="">— não tem —</option>`+head.map((h,i)=>`<option value="${i}" ${sel===i?'selected':''}>${esc(h||'Coluna '+(i+1))}</option>`).join('');
   const box=$('#map');
   box.innerHTML=`<div class="card stack"><h2>Conferir colunas — ${esc(fname)}</h2><div class="small muted">${fmt(rows.length-1)} linhas encontradas. Confirme qual coluna é cada informação.</div>
-    <div class="fgrid">${['codigo','descricao','ean','estoque','unidade','grupo','subgrupo','custo'].map(k=>COLS.find(c=>c[0]===k)).map(([k,l])=>`<label class="f">${l}${k==='codigo'||k==='descricao'?' *':''}<select class="in" data-k="${k}">${opts(auto[k])}</select></label>`).join('')}</div>
+    <div class="fgrid">${['codigo','descricao','ean','estoque','unidade','grupo','subgrupo','custo','referencia','marca'].map(k=>COLS.find(c=>c[0]===k)).map(([k,l])=>`<label class="f">${l}${k==='codigo'||k==='descricao'?' *':''}<select class="in" data-k="${k}">${opts(auto[k])}</select></label>`).join('')}</div>
     <div id="prev"></div>
+    <div id="resOpt"></div>
     ${S.produtos.length?`<div class="stack" style="gap:6px"><label class="chk"><input type="radio" name="modoImp" value="atualizar" checked> Atualizar os produtos existentes e acrescentar os novos</label>
       ${S.lanc.length?'':'<label class="chk"><input type="radio" name="modoImp" value="substituir"> Substituir a lista inteira</label>'}
       <label class="chk small"><input type="checkbox" id="zeraFora"> Zerar o estoque dos produtos que não estão na nova planilha</label></div>`:''}
@@ -1692,12 +1831,15 @@ function mapping(rows,fname){
   const build=()=>{ const m=get(); const out=[]; const seen=new Set(); let dup=0, vaz=0;
     rows.slice(1).forEach(r=>{ const cod=m.codigo!=null?codeStr(r[m.codigo]):''; const desc=m.descricao!=null?String(r[m.descricao]).trim():'';
       if(!cod||!desc){ vaz++; return; } const k=norm(cod); if(seen.has(k)){ dup++; return; } seen.add(k);
-      out.push({codigo:cod,descricao:desc,ean:m.ean!=null?codeStr(r[m.ean]):'',estoque:m.estoque!=null?r3(parseNum(r[m.estoque])):0,unidade:m.unidade!=null?String(r[m.unidade]).trim().toUpperCase():'UN',grupo:m.grupo!=null?String(r[m.grupo]).trim().toUpperCase():'',subgrupo:m.subgrupo!=null?String(r[m.subgrupo]).trim().toUpperCase():'',custo:m.custo!=null?r3(parseNum(r[m.custo])):0,novo:false}); });
+      out.push({codigo:cod,descricao:desc,ean:m.ean!=null?codeStr(r[m.ean]):'',estoque:m.estoque!=null?r3(parseNum(r[m.estoque])):0,unidade:m.unidade!=null?String(r[m.unidade]).trim().toUpperCase():'UN',grupo:m.grupo!=null?String(r[m.grupo]).trim().toUpperCase():'',subgrupo:m.subgrupo!=null?String(r[m.subgrupo]).trim().toUpperCase():'',custo:m.custo!=null?Math.round(parseNum(r[m.custo])*10000)/10000:0,referencia:m.referencia!=null?String(r[m.referencia]).trim():'',marca:m.marca!=null?String(r[m.marca]).trim().toUpperCase():'',novo:false}); });
     return {out,dup,vaz}; };
   const prev=()=>{ const {out,dup,vaz}=build();
     $('#prev').innerHTML=`<div class="small ${dup||vaz?'warnbox':'hint'}">${fmt(out.length)} produtos válidos${dup?` · ${dup} código(s) repetido(s) ignorado(s)`:''}${vaz?` · ${vaz} linha(s) sem código ou descrição ignorada(s)`:''}</div>
     <div class="tbl-wrap" style="margin-top:8px"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Cód. barras</th><th class="n">Estoque</th><th>Un</th><th>Grupo</th><th>Subgrupo</th><th class="n">Custo</th></tr></thead><tbody>${out.slice(0,6).map(p=>`<tr><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}</td><td class="mono">${esc(p.ean)}</td><td class="n">${fmt(p.estoque)}</td><td>${esc(p.unidade)}</td><td>${esc(p.grupo)}</td><td>${esc(p.subgrupo)}</td><td class="n">${p.custo?brl(p.custo):''}</td></tr>`).join('')}</tbody></table></div>`; };
-  box.querySelectorAll('[data-k]').forEach(s=>s.onchange=prev); prev();
+  const resOpt=()=>{ const el=$('#resOpt'); if(!el) return; const {out}=build(); const z=out.filter(p=>!p.estoque).length;
+    const pode=!S.lanc.length && out.length>=3000 && z>=out.length*0.3;
+    el.innerHTML=pode?`<label class="chk hint" style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="usaRes" checked style="margin-top:3px"><span><b>Base grande:</b> contar a partir dos <b>${fmt(out.length-z)}</b> itens com estoque. Os <b>${fmt(z)}</b> itens com estoque zero ficam como consulta — se aparecerem na prateleira, entram na contagem na hora, com código, grupo e custo (bipando ou buscando pelo nome). Isso evita gastar a cota diária do banco de dados.</span></label>`:''; };
+  box.querySelectorAll('[data-k]').forEach(s=>s.onchange=()=>{ prev(); resOpt(); }); prev(); resOpt();
   $('#bImp').onclick=async()=>{
     const m=get(); if(m.codigo==null||m.descricao==null) return toast('Escolha as colunas de código e descrição',true);
     const {out}=build(); if(!out.length) return toast('Nenhum produto válido',true);
@@ -1708,7 +1850,7 @@ function mapping(rows,fname){
       const col='inventarios/'+S.inv.id+'/produtos';
       if(modoImp==='atualizar' && S.produtos.length){
         const ex=new Map(S.produtos.map(p=>[norm(p.codigo),p])); const upd=[], add=[]; const vistos=new Set();
-        const CAMPOS=['descricao','ean','estoque','unidade','grupo','subgrupo','custo'];
+        const CAMPOS=['descricao','ean','estoque','unidade','grupo','subgrupo','custo','referencia','marca'];
         out.forEach(n=>{ const k=norm(n.codigo); vistos.add(k); const p=ex.get(k);
           if(!p){ add.push(n); return; }
           const d={}; CAMPOS.forEach(c=>{ if(c==='custo'&&!n.custo) return; if(String(n[c]??'')!==String(p[c]??'')) d[c]=n[c]; });
@@ -1724,10 +1866,18 @@ function mapping(rows,fname){
         return;
       }
       if(S.produtos.length){ const ids=(await Store.list(col)).map(p=>p.id); await Store.delMany(col,ids); }
-      await Store.addMany(col,out,n=>btn.textContent=`Importando… ${n}/${out.length}`);
-      await Store.set('inventarios',S.inv.id,{totalProdutos:out.length,importadoEm:now(),arquivo:fname});
-      logAcao('Importou a planilha',`${fname} · ${out.length} produtos`);
-      toast(fmt(out.length)+' produtos importados');
+      const usaRes=!!($('#usaRes')&&$('#usaRes').checked);
+      const lista=usaRes?out.filter(p=>p.estoque):out, cons=usaRes?out.filter(p=>!p.estoque):[];
+      const rcol='inventarios/'+S.inv.id+'/reserva';
+      try{ const velhos=(await Store.list(rcol)).map(d=>d.id); if(velhos.length) await Store.delMany(rcol,velhos); }catch(e){}
+      if(cons.length){ const K=['codigo','descricao','ean','unidade','grupo','subgrupo','custo','referencia','marca'];
+        for(let i=0;i<cons.length;i+=1500){ btn.textContent=`Guardando itens de consulta… ${fmt(Math.min(i+1500,cons.length))}/${fmt(cons.length)}`;
+          await Store.set(rcol,'b'+String(i/1500).padStart(3,'0'),{itens:JSON.stringify(cons.slice(i,i+1500).map(p=>K.map(k=>p[k]??'')))}); } }
+      await Store.addMany(col,lista,n=>btn.textContent=`Importando… ${n}/${lista.length}`);
+      await Store.set('inventarios',S.inv.id,{totalProdutos:lista.length,reservaN:cons.length,importadoEm:now(),arquivo:fname});
+      S.reserva=null; S.reservaP=null;
+      logAcao('Importou a planilha',`${fname} · ${lista.length} produtos${cons.length?` + ${cons.length} itens de consulta (estoque zero)`:''}`);
+      toast(fmt(lista.length)+' produtos importados'+(cons.length?` · ${fmt(cons.length)} de consulta`:''));
       if(S.stack[S.stack.length-1]==='gestor') back(); else { S.view='invhome'; render(); }
     }catch(err){ console.error(err); toast('Erro ao importar: '+(err.message||err),true); btn.disabled=false; btn.textContent='Importar produtos'; }
   };
@@ -1747,8 +1897,19 @@ V.resultado_refresh = ()=>{
   const inG=r=>!G||(r.grupo||GSEM)===G;
   const flt=(f==='grupos'?[]:({todos:rows,div:rows.filter(r=>r.d12),ent:t.ent,sai:t.sai,pend:rows.filter(r=>r.status==='pendente'),novos:rows.filter(r=>r.novo)}[f]||rows)).filter(inG);
   const resumo=resumoGrupos(rows);
+  const F=financeiro(rows,t); const TR=trocasPossiveis(t); const TRm=(S.inv.trocas||{});
+  const trAtivas=TR.filter(x=>TRm[x.key]!=='nao'), vTr=trAtivas.reduce((s,x)=>s+x.vComp,0);
   b.innerHTML=`
     ${t.pend?`<div class="warnbox">${t.pend} item(ns) com divergência ainda sem ${rn(3).toLowerCase()} — ficam sem quantidade final.</div>`:''}
+    ${F.tem?`<div class="card fin"><div class="row between"><h3>💰 Resultado financeiro (pelo custo de compra)</h3>${t.pend?'<span class="badge b-warn">parcial — há pendentes</span>':''}</div>
+      <div class="grid kpi" style="margin-top:10px">
+        <div class="card"><div class="l">Estoque no sistema</div><div class="v">${brl(F.vSis)}</div><div class="small muted">quantidade do ERP × custo</div></div>
+        <div class="card"><div class="l">Estoque contado</div><div class="v">${brl(F.vCont)}</div><div class="small muted">o que de fato está na loja</div></div>
+        <div class="card"><div class="l">Saídas — perdas</div><div class="v neg">${brl(F.vSai)}</div><div class="small muted">constava no sistema e não estava na prateleira</div></div>
+        <div class="card"><div class="l">Entradas — sobras</div><div class="v pos">${brl(F.vEnt)}</div><div class="small muted">estava na prateleira e não constava no sistema</div></div>
+        <div class="card ${F.saldo<0?'res-neg':'res-pos'}"><div class="l">Resultado do inventário</div><div class="v ${F.saldo<0?'neg':'pos'}">${F.saldo<0?'−':'+'} ${brl(Math.abs(F.saldo))}</div><div class="small muted">${F.saldo<0?'prejuízo':'sem prejuízo'} · ${fmt(Math.round(Math.abs(F.pct)*10)/10)}% do estoque</div></div>
+      </div>
+      ${TR.length?`<div class="hint" style="margin-top:10px">🔁 <b>${fmt(trAtivas.length)} possível(is) troca(s) de código</b> entre itens parecidos (cor, modelo, medida, referência) — até <b>${brl(vTr)}</b> das perdas podem ser só lançamento no código errado. <a href="#" id="rVerTr">Ver possíveis trocas</a></div>`:''}</div>`:''}
     <div class="grid kpi">
       <div class="card"><div class="l">Itens no inventário</div><div class="v">${fmt(t.itens)}</div></div>
       <div class="card"><div class="l">Batem com o estoque</div><div class="v">${fmt(t.semDif)}</div></div>
@@ -1768,26 +1929,42 @@ V.resultado_refresh = ()=>{
         <div class="row" style="margin-top:10px"><button class="btn dark" id="rPdf">PDF</button><button class="btn sec" id="rXls">Excel</button></div></div>
     </div>
     <div class="small muted">Layout do arquivo do ERP: <b>${esc({csv:'texto delimitado',fixo:'TXT posicional',xlsx:'Excel'}[erpCfg().formato])}</b> · <a href="#" id="rCfgErp">configurar para o ERP do cliente</a>${t.pend?' · ⚠ itens pendentes ficam fora dos ajustes':''}</div>
-    <div class="tabs">${[['todos','Todos',rows.length],['ent','Entradas',t.ent.length],['sai','Saídas',t.sai.length],['div',modoDe(S.inv)==='uma_conf'?'Divergentes × estoque':'Divergentes 1×2',t.div12],['pend','Pendentes',t.pend],['novos','Novos',t.novos],['grupos','Por grupo',resumo.length]].map(([k,l,n])=>`<button data-t="${k}" class="${f===k?'on':''}">${l} (${n})</button>`).join('')}</div>
-    ${f==='grupos'?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Grupo</th><th>Subgrupo</th><th class="n">Itens</th><th class="n">Batem</th><th class="n">Diverg. 1×2</th><th class="n">Pendentes</th><th class="n">Entradas</th><th class="n">Saídas</th></tr></thead><tbody>
-      ${resumo.map(x=>`<tr class="${x.sub?'':'hl'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td></tr>`).join('')}</tbody></table></div>`:`
+    <div class="tabs">${[['todos','Todos',rows.length],['ent','Entradas',t.ent.length],['sai','Saídas',t.sai.length],['div',modoDe(S.inv)==='uma_conf'?'Divergentes × estoque':'Divergentes 1×2',t.div12],['pend','Pendentes',t.pend],['novos','Novos',t.novos],...(TR.length?[['trocas','Possíveis trocas',TR.length]]:[]),['grupos','Por grupo',resumo.length]].map(([k,l,n])=>`<button data-t="${k}" class="${f===k?'on':''}">${l} (${n})</button>`).join('')}</div>
+    ${f==='grupos'?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Grupo</th><th>Subgrupo</th><th class="n">Itens</th><th class="n">Batem</th><th class="n">Diverg. 1×2</th><th class="n">Pendentes</th><th class="n">Entradas</th><th class="n">Saídas</th>${F.tem?'<th class="n">R$ entradas</th><th class="n">R$ saídas</th><th class="n">Resultado</th>':''}</tr></thead><tbody>
+      ${resumo.map(x=>`<tr class="${x.sub?'':'hl'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td>${F.tem?`<td class="n pos">${brl(x.vEnt)}</td><td class="n neg">${brl(x.vSai)}</td><td class="n ${x.vEnt-x.vSai<0?'neg':'pos'}"><b>${brl(x.vEnt-x.vSai)}</b></td>`:''}</tr>`).join('')}</tbody></table></div>`:f==='trocas'?blocoTrocas(TR,TRm):`
     <div class="row"><select class="in" id="rG" style="max-width:340px"><option value="">Todos os grupos</option>${grupos(rows).map(x=>`<option ${G===x.g?'selected':''}>${esc(x.g)}</option>`).join('')}</select></div>
-    <div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">3ª</th><th class="n">Final</th><th class="n">Estoque</th><th class="n">Diferença</th><th>Ação</th></tr></thead><tbody>
+    <div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">3ª</th><th class="n">Final</th><th class="n">Estoque</th><th class="n">Diferença</th>${F.tem?'<th class="n">Custo</th><th class="n">Valor dif.</th>':''}<th>Ação</th></tr></thead><tbody>
     ${flt.slice(0,3000).map(r=>`<tr class="${r.d12?'hl':''}"><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td>
       <td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(r.c[1])}</td><td class="n">${r.n[2]?fmt(r.c[2]):'—'}</td><td class="n"><b>${fmt(r.final)}</b></td><td class="n">${fmt(r.estoque)}</td>
-      <td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif==null?'—':fmtS(r.dif)}</td>
-      <td>${r.status==='pendente'?'<span class="badge b-warn">Pendente</span>':r.dif>0.0004?'<span class="badge b-ok">Entrada</span>':r.dif<-0.0004?'<span class="badge b-red">Saída</span>':'<span class="badge b-gray">OK</span>'}</td></tr>`).join('')||'<tr><td colspan="11" class="empty">Nenhum item</td></tr>'}
+      <td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif==null?'—':fmtS(r.dif)}</td>${F.tem?`<td class="n">${r.custo?brl(r.custo):'—'}</td><td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif&&r.custo?brl(r.dif*r.custo):'—'}</td>`:''}
+      <td>${r.status==='pendente'?'<span class="badge b-warn">Pendente</span>':r.dif>0.0004?'<span class="badge b-ok">Entrada</span>':r.dif<-0.0004?'<span class="badge b-red">Saída</span>':'<span class="badge b-gray">OK</span>'}</td></tr>`).join('')||`<tr><td colspan="${F.tem?13:11}" class="empty">Nenhum item</td></tr>`}
     </tbody></table></div>`}
     <div class="hint">Regra: se a 1ª e a 2ª contagens batem, esse é o valor final. Se divergem, vale a 3ª contagem. Produto da base que ninguém encontrou conta como zero (saída de todo o estoque). Diferença = contagem final − estoque do sistema.</div>`;
   b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{ S.tabRes=x.dataset.t; V.resultado_refresh(); });
+  const vt=$('#rVerTr'); if(vt) vt.onclick=ev=>{ ev.preventDefault(); S.tabRes='trocas'; V.resultado_refresh(); setTimeout(()=>{ const x=b.querySelector('.tabs'); if(x) x.scrollIntoView({behavior:'smooth'}); },50); };
+  b.querySelectorAll('[data-tr]').forEach(x=>x.onclick=async()=>{ const [k,v]=[x.dataset.tr,x.dataset.v]; const m={...(S.inv.trocas||{})}; if(m[k]===v) delete m[k]; else m[k]=v;
+    S.inv.trocas=m; V.resultado_refresh(); try{ await Store.set('inventarios',S.inv.id,{trocas:m}); }catch(e){ toast('Não salvou: '+(e.message||e),true); } });
   const rg=$('#rG'); if(rg) rg.onchange=()=>{ S.resG=rg.value; V.resultado_refresh(); };
   $('#rPdf').onclick=gerarPDF; $('#rXls').onclick=gerarExcel;
   $('#rErpE').onclick=()=>exportarErp('E'); $('#rErpS').onclick=()=>exportarErp('S'); $('#rPdfE').onclick=()=>pdfMov('E'); $('#rPdfS').onclick=()=>pdfMov('S');
   $('#rCfgErp').onclick=ev=>{ ev.preventDefault(); S.pTab='erp'; go('painel'); };
 };
+function blocoTrocas(TR,TRm){
+  const lin=x=>{ const st=TRm[x.key]; return `<div class="troca ${st==='ok'?'ok':st==='nao'?'nao':''}">
+    <div class="tr-par">
+      <div class="tr-it sai"><span class="badge b-red">faltou ${fmt(x.qa)} ${esc(x.a.unidade||'')}</span><b>${esc(x.a.descricao)}</b><span class="mono small">${esc(x.a.codigo)}${x.a.marca?' · '+esc(x.a.marca):''}</span>${x.muda[0]?`<span class="small">só neste: <b>${esc(x.muda[0].toUpperCase())}</b></span>`:''}${x.a.custo?`<span class="small neg">${brl(x.vA)}</span>`:''}</div>
+      <div class="tr-seta">⇄</div>
+      <div class="tr-it ent"><span class="badge b-ok">sobrou ${fmt(x.qb)} ${esc(x.b.unidade||'')}</span><b>${esc(x.b.descricao)}</b><span class="mono small">${esc(x.b.codigo)}${x.b.marca?' · '+esc(x.b.marca):''}</span>${x.muda[1]?`<span class="small">só neste: <b>${esc(x.muda[1].toUpperCase())}</b></span>`:''}${x.b.custo?`<span class="small pos">${brl(x.vB)}</span>`:''}</div>
+    </div>
+    <div class="row between small" style="margin-top:8px"><span class="muted">Semelhança ${Math.round(Math.min(1,x.sc)*100)}% · ${fmt(x.q)} unidade(s) se compensam${x.a.custo?' · '+brl(x.vComp):''}</span>
+      <span class="row" style="gap:6px"><button class="btn sm ${st==='ok'?'':'sec'}" data-tr="${esc(x.key)}" data-v="ok">✓ É troca</button><button class="btn sm ${st==='nao'?'red':'sec'}" data-tr="${esc(x.key)}" data-v="nao">✕ Não é</button></span></div></div>`; };
+  const conf=TR.filter(x=>TRm[x.key]==='ok');
+  return `<div class="hint">Itens com <b>saída</b> (faltou) e itens com <b>entrada</b> (sobrou) de descrição muito parecida — mesma peça com outra cor, modelo, medida ou referência. Normalmente é venda ou nota lançada no código errado: fisicamente a mercadoria está na loja. Confira na prateleira e marque. ${conf.length?`<br><b>${conf.length} confirmada(s)</b> como troca — ${brl(conf.reduce((s,x)=>s+x.vComp,0))} que não são perda real. Os ajustes de entrada e saída continuam necessários para corrigir os códigos no ERP.`:''}</div>
+    <div class="trocas">${TR.map(lin).join('')}</div>`;
+}
 function resumoGrupos(rows){
-  const out=[]; const add=(o,r)=>{ o.itens++; if(r.dif!=null&&eq(r.dif,0)) o.ok++; if(r.d12) o.div++; if(r.status==='pendente') o.pend++; if(r.dif>0.0004) o.ent++; if(r.dif<-0.0004) o.sai++; };
-  const z=(g,sub)=>({g,sub,itens:0,ok:0,div:0,pend:0,ent:0,sai:0});
+  const out=[]; const add=(o,r)=>{ o.itens++; if(r.dif!=null&&eq(r.dif,0)) o.ok++; if(r.d12) o.div++; if(r.status==='pendente') o.pend++; if(r.dif>0.0004){ o.ent++; o.vEnt+=r.dif*(r.custo||0); } if(r.dif<-0.0004){ o.sai++; o.vSai-=r.dif*(r.custo||0); } };
+  const z=(g,sub)=>({g,sub,itens:0,ok:0,div:0,pend:0,ent:0,sai:0,vEnt:0,vSai:0});
   grupos(rows).forEach(x=>{ const tot=z(x.g,''); const subs=new Map(x.subs.map(sg=>[sg,z(x.g,sg)]));
     rows.filter(r=>(r.grupo||GSEM)===x.g).forEach(r=>{ add(tot,r); if(r.subgrupo&&subs.has(r.subgrupo)) add(subs.get(r.subgrupo),r); });
     out.push(tot); subs.forEach(v=>out.push(v)); });
@@ -1798,13 +1975,20 @@ function sheet(aoa,widths){ const ws=XLSX.utils.aoa_to_sheet(aoa); ws['!cols']=(
 async function gerarExcel(){ await lib('xlsx');
   const {rows,t}=calc(); const e=S.empresa,i=S.inv;
   const wb=XLSX.utils.book_new();
-  const head=['Código','Descrição','Grupo','Subgrupo','Cód. barras','Unidade','1ª contagem','2ª contagem','3ª contagem','Contagem final','Estoque sistema','Diferença','Ação'];
+  const F=financeiro(rows,t), TR=trocasPossiveis(t), TRm=i.trocas||{};
+  if(F.tem) XLSX.utils.book_append_sheet(wb,sheet([[`Resultado financeiro — ${i.nome} — ${e.fantasia||e.razao} — ${dBR(i.data)}`],[],['Indicador','Valor (R$)','Observação'],
+    ['Estoque no sistema',F.vSis,'quantidade do ERP × custo de compra'],['Estoque contado',F.vCont,'o que de fato está na loja'],
+    ['Saídas — perdas',F.vSai,'constava no sistema e não estava na prateleira'],['Entradas — sobras',F.vEnt,'estava na prateleira e não constava no sistema'],
+    ['Resultado do inventário',F.saldo,F.saldo<0?'prejuízo':'sem prejuízo'],['% do estoque',Math.round(F.pct*100)/100,''],
+    ['Possíveis trocas de código',TR.filter(x=>TRm[x.key]!=='nao').reduce((s,x)=>s+x.vComp,0),`${TR.length} par(es) de itens parecidos`]],[{wch:30},{wch:16},{wch:50}]),'Resumo financeiro');
+  const head=['Código','Descrição','Grupo','Subgrupo','Cód. barras','Referência','Marca','Unidade','1ª contagem','2ª contagem','3ª contagem','Contagem final','Estoque sistema','Diferença','Custo unit.','Valor diferença','Ação'];
   const acao=r=>r.status==='pendente'?'PENDENTE':r.dif>0.0004?'ENTRADA':r.dif<-0.0004?'SAÍDA':'OK';
-  XLSX.utils.book_append_sheet(wb,sheet([[`Inventário: ${i.nome} — ${e.fantasia||e.razao} — ${dBR(i.data)}`],[],head].concat(rows.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.ean,r.unidade,r.c[0],r.c[1],r.n[2]?r.c[2]:'',r.final??'',r.estoque,r.dif??'',acao(r)])),head.map((h,ix)=>({wch:ix===1?44:14}))),'Contagem completa');
+  XLSX.utils.book_append_sheet(wb,sheet([[`Inventário: ${i.nome} — ${e.fantasia||e.razao} — ${dBR(i.data)}`],[],head].concat(rows.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.ean,r.referencia||'',r.marca||'',r.unidade,r.c[0],r.c[1],r.n[2]?r.c[2]:'',r.final??'',r.estoque,r.dif??'',r.custo||'',r.dif&&r.custo?Math.round(r.dif*r.custo*100)/100:'',acao(r)])),head.map((h,ix)=>({wch:ix===1?44:14}))),'Contagem completa');
   XLSX.utils.book_append_sheet(wb,sheet([['Código','Descrição','Grupo','Subgrupo','Unidade','1ª','2ª','Diferença','3ª']].concat(rows.filter(r=>r.d12).map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.unidade,r.c[0],r.c[1],r3(r.c[1]-r.c[0]),r.n[2]?r.c[2]:'']))),'Divergências 1x2');
-  const mov=a=>[['Código','Descrição','Grupo','Subgrupo','Cód. barras','Unidade','Estoque sistema','Contagem final','Quantidade']].concat(a.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.ean,r.unidade,r.estoque,r.final,Math.abs(r.dif)]));
+  const mov=a=>[['Código','Descrição','Grupo','Subgrupo','Cód. barras','Unidade','Estoque sistema','Contagem final','Quantidade','Custo unit.','Valor']].concat(a.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.ean,r.unidade,r.estoque,r.final,Math.abs(r.dif),r.custo||'',r.custo?Math.round(Math.abs(r.dif)*r.custo*100)/100:'']));
   XLSX.utils.book_append_sheet(wb,sheet(mov(t.ent)),'Entradas');
   XLSX.utils.book_append_sheet(wb,sheet(mov(t.sai)),'Saídas');
+  if(TR.length) XLSX.utils.book_append_sheet(wb,sheet([['Situação','Semelhança %','FALTOU — código','Descrição','Qtd faltou','Valor faltou','SOBROU — código','Descrição','Qtd sobrou','Valor sobrou','Qtd que se compensa','Valor que se compensa','O que muda']].concat(TR.map(x=>[TRm[x.key]==='ok'?'CONFIRMADA':TRm[x.key]==='nao'?'DESCARTADA':'A CONFERIR',Math.round(Math.min(1,x.sc)*100),x.a.codigo,x.a.descricao,x.qa,Math.round(x.vA*100)/100,x.b.codigo,x.b.descricao,x.qb,Math.round(x.vB*100)/100,x.q,Math.round(x.vComp*100)/100,`${(x.muda[0]||'—').toUpperCase()} → ${(x.muda[1]||'—').toUpperCase()}`]))),'Possíveis trocas');
   XLSX.utils.book_append_sheet(wb,sheet([['Grupo','Subgrupo','Itens','Batem com estoque','Divergências 1x2','Pendentes','Entradas','Saídas']].concat(resumoGrupos(rows).map(x=>[x.g,x.sub||'(total do grupo)',x.itens,x.ok,x.div,x.pend,x.ent,x.sai])),[{wch:26},{wch:26},{wch:8},{wch:18},{wch:16},{wch:10},{wch:10},{wch:10}]),'Resumo por grupo');
   XLSX.utils.book_append_sheet(wb,sheet([['Data/hora','Contagem','Contador','Código','Descrição','Quantidade','Unidade']].concat([...S.lanc].sort((a,b)=>String(a.ts).localeCompare(String(b.ts))).map(l=>[dtBR(l.ts),l.rodada+'ª',l.contador,l.codigo,l.descricao,l.qtd,l.unidade]))),'Lançamentos');
   XLSX.writeFile(wb,fileBase()+'.xlsx'); toast('Planilha gerada');
@@ -1833,6 +2017,9 @@ async function gerarPDF(){
   doc.autoTable({startY:27,theme:'grid',styles:{fontSize:8.5,cellPadding:1.8},headStyles:{fillColor:NAVY},margin:{left:14,right:14},
     head:[['Itens','Batem com estoque','Divergências 1ª×2ª','Pendentes de 3ª','Itens p/ entrada','Itens p/ saída','Novos cadastrados','Lançamentos 1ª / 2ª / 3ª']],
     body:[[t.itens,t.semDif,t.div12,t.pend,t.ent.length,t.sai.length,t.novos,`${st[0].lanc} / ${st[1].lanc} / ${st[2].lanc}`]]});
+  { const F=financeiro(todos,t); if(F.tem){ doc.autoTable({startY:doc.lastAutoTable.finalY+2,theme:'grid',styles:{fontSize:8.5,cellPadding:1.8},headStyles:{fillColor:TEAL},margin:{left:14,right:14},
+    head:[['Estoque no sistema','Estoque contado','Saídas — perdas','Entradas — sobras','Resultado do inventário','% do estoque']],
+    body:[[brl(F.vSis),brl(F.vCont),brl(F.vSai),brl(F.vEnt),(F.saldo<0?'− ':'+ ')+brl(Math.abs(F.saldo))+(F.saldo<0?' (prejuízo)':''),fmt(Math.round(Math.abs(F.pct)*10)/10)+'%']]}); } }
   const cont=[1,2,3].map(r=>Object.keys(st[r-1].pessoas).join(', ')||'—');
   const rg=resumoGrupos(rows).filter(x=>!x.sub);
   doc.setFontSize(8.5); doc.setTextColor(70);
