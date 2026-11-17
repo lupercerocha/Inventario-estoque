@@ -279,12 +279,31 @@ h4.rsec{font-family:"Chakra Petch";font-size:13px;color:var(--navy);margin:14px 
 .hero-card .inst{margin-top:6px}
 .hero-foot{position:relative;color:rgba(242,241,241,.55)!important;padding:14px 0 calc(16px + var(--safe-b))}
 @media(max-width:860px){ .hero-logo{height:32px} .hero-in{grid-template-columns:1fr;gap:56px;padding-top:calc(34px + var(--safe-t))} .hero h1{margin-top:26px} .hero-chips{display:none} .hero-tri{width:360px;height:360px} }
+/* celular: tudo cabe numa tela só, sem rolar */
+@media(max-width:600px){
+  .hero{height:100vh;height:100dvh;min-height:0}
+  .hero-in{display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:calc(16px + var(--safe-t)) 18px 8px;min-height:0}
+  .hero-logo{height:24px} .hero-tag{font-size:13px;margin-top:3px}
+  .hero h1{font-size:clamp(26px,8vw,34px);margin-top:12px;letter-spacing:-.5px}
+  .hero-txt p{font-size:clamp(13px,3.7vw,15px);margin-top:8px;line-height:1.4}
+  .hero-card{padding:14px 16px 16px;gap:8px;border-radius:18px;min-height:0;flex-shrink:1}
+  .hero-ico{width:52px;height:52px;margin:-40px auto 0;border-radius:14px}
+  .hero-card h3{font-size:17px;margin-top:0}
+  .hero-emps{max-height:28dvh;gap:6px} .hero-emp{padding:9px 12px} .hero-emp b{font-size:15px}
+  .hero-ou{margin-top:0}
+  .hero-cod{font-size:20px!important;height:46px;letter-spacing:4px}
+  .hero-card .btn{min-height:46px;padding-top:10px;padding-bottom:10px}
+  .hero-card .inst{display:none}
+  .hero-foot{padding:4px 0 calc(8px + var(--safe-b));font-size:12px}
+}
+@media(max-width:600px) and (max-height:620px){ .hero-txt p{display:none} .hero h1{margin-top:8px} }
 .results{margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}
 .res{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
 .res:active{background:var(--teal-soft)}
 .res .d{flex:1;min-width:0}
 .res .d b{display:block;font-weight:600;font-size:14px}
 .res .d span{font-size:12px;color:var(--muted)}
+.res .d>.mono,.lanc .d .mono{display:block}.res .d .tags,.lanc .d .tags{margin-top:2px}.res .d .ftag{color:#5b4a1f}.res .thumb,.lanc .thumb{flex-shrink:0}
 .lanc{display:flex;gap:10px;align-items:center;padding:10px 12px;border-bottom:1px solid #f0f2f4}
 .lanc:last-child{border-bottom:0}
 .lanc .d{flex:1;min-width:0}
@@ -344,7 +363,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.6.1';
+const APP_VERSION = '3.6.3';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -614,6 +633,11 @@ function search(q,limit=40){
 /* ---------------- cálculo do inventário ---------------- */
 const GSEM='SEM GRUPO';
 /* marca / fabricante e referência do fabricante, quando vierem da planilha */
+/* linha padrão de produto — a mesma em todas as listas do app:
+   descrição · Cód. interno · EAN (código de barras) · grupo › subgrupo · 🏭 fabricante/marca · ref. do fabricante */
+const idsProd=p=>`<span class="mono">Cód. ${esc(p.codigo)}${p.ean?` · EAN ${esc(p.ean)}`:''}</span>`;
+const tagsProd=(p,grupo=true)=>`<span class="tags">${grupo?`<span class="gtag">${esc(gLbl(p))}</span>`:''}${fabTag(p)}</span>`;
+const infoProd=(p,{check=false,grupo=true}={})=>`<div class="d"><b>${check?'✓ ':''}${esc(p.descricao)}</b>${idsProd(p)}${tagsProd(p,grupo)}</div>`;
 const fabTag=p=>(p&&(p.marca||p.referencia))?`<span class="ftag">🏭 ${esc(p.marca||'')}${p.marca&&p.referencia?' · ':''}${p.referencia?'ref. '+esc(p.referencia):''}</span>`:'';
 const gLbl=p=>(p.grupo||GSEM)+(p.subgrupo?' › '+p.subgrupo:'');
 const byGrupo=(a,b)=>((a.grupo?0:1)-(b.grupo?0:1))||String(a.grupo||'').localeCompare(String(b.grupo||''),'pt-BR')||String(a.subgrupo||'').localeCompare(String(b.subgrupo||''),'pt-BR')||String(a.descricao).localeCompare(String(b.descricao),'pt-BR');
@@ -986,7 +1010,7 @@ function showResults(v){
   const box=$('#res'); if(!box) return;
   if(!v.trim()){ box.innerHTML=''; return; }
   const rs=search(v,30);
-  box.innerHTML = rs.length ? rs.map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}<div class="d"><b>${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span><span class="tags"><span class="gtag">${esc(gLbl(p))}</span>${fabTag(p)}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')
+  box.innerHTML = rs.length ? rs.map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}${infoProd(p)}<span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')
     : `<div class="empty small">Nada encontrado para “${esc(v)}”.</div>`;
   box.querySelectorAll('.res').forEach((el,ix)=>el.onclick=()=>{ const p=S.idxCod.get(norm(el.dataset.c))||rs[ix]; $('#q').value=''; box.innerHTML=''; setPending(p,'tecl'); });
 }
@@ -997,7 +1021,7 @@ V.contar_refresh = ()=>{
   $('#myN').textContent=mine.length+' lançamento(s)';
   const nItens=new Set(mine.map(l=>String(l.codigo))).size;
   const sub=$('.top .ttl small'); if(sub){ const tot=r===3?(S.inv.divergentes||[]).length:S.produtos.filter(p=>!p.novo).length; sub.textContent=`${S.contador} · ${fmt(nItens)}${tot?'/'+fmt(tot):''} itens${tot?' · '+Math.round(nItens/tot*100)+'%':''}`; }
-  my.innerHTML = mine.length ? mine.slice(0,200).map(l=>`<div class="lanc"><div class="d"><b>${esc(l.descricao)}</b><span class="small muted mono">${esc(l.codigo)} · ${new Date(l.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</span></div><div class="q">${fmt(l.qtd)} <small class="muted">${esc(l.unidade||'')}</small></div><button class="x ed" data-ed="${l.id}" aria-label="Corrigir">✎</button><button class="x" data-del="${l.id}" aria-label="Excluir">✕</button></div>`).join('')
+  my.innerHTML = mine.length ? mine.slice(0,200).map(l=>{ const pp=S.idxCod.get(norm(l.codigo))||{codigo:l.codigo,descricao:l.descricao}; return `<div class="lanc">${thumb(pp)}<div class="d"><b>${esc(l.descricao)}</b><span class="small muted">${idsProd(pp)} · ${new Date(l.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</span>${tagsProd(pp)}</div><div class="q">${fmt(l.qtd)} <small class="muted">${esc(l.unidade||'')}</small></div><button class="x ed" data-ed="${l.id}" aria-label="Corrigir">✎</button><button class="x" data-del="${l.id}" aria-label="Excluir">✕</button></div>`; }).join('')
     : '<div class="empty small">Nenhum lançamento ainda. Bipe ou busque um produto.</div>';
   my.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>excluirLanc(mine.find(x=>x.id===b.dataset.del)));
   my.querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>editarLanc(mine.find(x=>x.id===b.dataset.ed)));
@@ -1006,7 +1030,7 @@ V.contar_refresh = ()=>{
     const done=new Set(S.lanc.filter(l=>l.rodada===3 && meu(l)).map(l=>String(l.codigo)));
     $('#c3n').textContent=`${div.filter(c=>done.has(String(c))).length} de ${div.length}`;
     l3.innerHTML = div.map(c=>{ const p=S.idxCod.get(norm(c))||{codigo:c,descricao:'(produto)'}; const ok=done.has(String(c));
-      return `<div class="res" data-c3="${esc(c)}" style="${ok?'opacity:.55':''}"><div class="d"><b>${ok?'✓ ':''}${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span>${fabTag(p)}</div><button class="btn sec" style="min-height:36px;padding:6px 10px" data-zero="${esc(c)}">Zero</button></div>`; }).join('') || '<div class="empty small">Nenhum item para recontar.</div>';
+      return `<div class="res" data-c3="${esc(c)}" style="${ok?'opacity:.55':''}">${thumb(p)}${infoProd(p,{check:ok})}<button class="btn sec" style="min-height:36px;padding:6px 10px" data-zero="${esc(c)}">Zero</button></div>`; }).join('') || '<div class="empty small">Nenhum item para recontar.</div>';
     l3.querySelectorAll('[data-c3]').forEach(el=>el.onclick=e=>{ if(e.target.dataset.zero!=null) return; const p=S.idxCod.get(norm(el.dataset.c3)); if(p) setPending(p,'tecl'); });
     l3.querySelectorAll('[data-zero]').forEach(b=>b.onclick=async e=>{ e.stopPropagation(); const p=S.idxCod.get(norm(b.dataset.zero)); if(p && await ask(`Registrar que <b>${esc(p.descricao)}</b> não foi encontrado (quantidade zero)?`,{ok:'Registrar zero'})) lancar(p,0); });
   }
@@ -1050,7 +1074,7 @@ function drawLista(){
     const gl=gLbl(p);
     if(gl!==last){ html+=`<div class="lsh">${esc(gl)}</div>`; last=gl; }
     const ok=mine.has(String(p.codigo));
-    html+=`<div class="res${ok?' done':''}" data-c="${esc(p.codigo)}">${thumb(p)}<div class="d"><b>${ok?'✓ ':''}${esc(p.descricao)}</b><span class="mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</span></div><span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`;
+    html+=`<div class="res${ok?' done':''}" data-c="${esc(p.codigo)}">${thumb(p)}${infoProd(p,{check:ok})}<span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`;
   });
   if(arr.length>S.ls.lim) html+=`<button class="btn sec block" id="lsMore" style="margin:10px 0">Mostrar mais (${arr.length-S.ls.lim} restantes)</button>`;
   L.innerHTML = html || '<div class="empty">Nenhum produto com esses filtros.</div>';
@@ -1092,7 +1116,7 @@ function renderFast(){
   if(S.pend){
     const p=S.pend.p, un=(p.unidade||'UN').toUpperCase();
     el.hidden=false; el.className='card fast';
-    el.innerHTML=`<div class="row" style="align-items:flex-start">${thumb(p,64)}<div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted mono">${esc(p.codigo)}${p.ean?' · '+esc(p.ean):''}</div><span class="tags"><span class="gtag">${esc(gLbl(p))}</span>${fabTag(p)}</span></div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
+    el.innerHTML=`<div class="row" style="align-items:flex-start">${thumb(p,64)}<div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted">${idsProd(p)}</div>${tagsProd(p)}</div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
       ${S.pend.ja?`<div class="small muted" style="margin-top:4px">Você já lançou ${fmt(S.pend.ja)} ${esc(un)} deste item nesta contagem — será somado.</div>`:''}
       <div class="qrow"><button class="stp" data-s="-1">−</button><input class="in qty" id="fQ" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="${S.pend.ed||S.pend.q!==1?esc(fmt(S.pend.q).replace(/\./g,'')):''}"><button class="stp" data-s="1">+</button></div>
       <div class="quick"><button data-a="6">+6</button><button data-a="12">+12</button><button data-a="24">+24</button><button data-a="0">Zerar</button></div>
@@ -1660,7 +1684,7 @@ V.produtos_refresh = ()=>{
   const arr=(S.pq.trim()?search(S.pq,300):[...S.produtos].sort(byGrupo).slice(0,300));
   L.innerHTML=`<div class="small muted" style="margin-bottom:6px">${fmt(S.produtos.length)} produtos${arr.length>=300?' · mostrando 300, use a busca':''}</div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th></th><th>Código</th><th>Descrição</th><th>Cód. barras</th><th>Un</th><th>Grupo</th><th class="n">Estoque</th><th></th></tr></thead><tbody>
-    ${arr.map(p=>`<tr><td>${thumb(p,32)}</td><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}${p.novo?' <span class="badge b-blue">novo</span>':''}${(p.marca||p.referencia)?`<div class="small muted">${esc([p.marca,p.referencia?'ref. '+p.referencia:''].filter(Boolean).join(' · '))}</div>`:''}</td><td class="mono small">${esc(p.ean||'')}</td><td>${esc(p.unidade||'')}</td><td class="small">${esc(gLbl(p))}</td><td class="n">${fmt(p.estoque)}</td><td><button class="x ed" data-pe="${esc(p.id)}">✎</button></td></tr>`).join('')||'<tr><td colspan="8" class="empty">Nenhum produto</td></tr>'}</tbody></table></div>`;
+    ${arr.map(p=>`<tr><td>${thumb(p,32)}</td><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}${p.novo?' <span class="badge b-blue">novo</span>':''}${(p.marca||p.referencia)?`<div class="small muted">🏭 ${esc([p.marca,p.referencia?'ref. '+p.referencia:''].filter(Boolean).join(' · '))}</div>`:''}</td><td class="mono small">${esc(p.ean||'')}</td><td>${esc(p.unidade||'')}</td><td class="small">${esc(gLbl(p))}</td><td class="n">${fmt(p.estoque)}</td><td><button class="x ed" data-pe="${esc(p.id)}">✎</button></td></tr>`).join('')||'<tr><td colspan="8" class="empty">Nenhum produto</td></tr>'}</tbody></table></div>`;
   L.querySelectorAll('[data-pe]').forEach(b=>b.onclick=()=>editarProduto(S.produtos.find(p=>p.id===b.dataset.pe)));
 };
 function editarProduto(p){ if(!p) return;
@@ -1703,7 +1727,7 @@ V.confronto_refresh = ()=>{
     <div class="row between"><h1>${d.length} divergência(s)</h1>
       <div class="row">${R.r3==='bloqueada'&&!aberta&&d.length?`<button class="btn" id="cLib">Liberar ${mC?'conferência':'3ª contagem'}</button>`:''}<button class="btn sec" id="cXls">Excel</button></div></div>
     ${d.length?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">${mC?'Contagem':'1ª'}</th><th class="n">${mC?'Estoque':'2ª'}</th><th class="n">Diferença</th><th class="n">${mC?'Conferência':'3ª'}</th></tr></thead><tbody>
-      ${d.map(r=>`<tr><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td><td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(mC?r.estoque:r.c[1])}</td><td class="n">${fmtS(r3((mC?r.estoque:r.c[1])-r.c[0]))}</td><td class="n">${r.n[2]?fmt(r.c[2]):'<span class="badge b-warn">pendente</span>'}</td></tr>`).join('')}
+      ${d.map(r=>`<tr><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${(r.ean||r.marca||r.referencia)?`<div class="small muted">${r.ean?'EAN '+esc(r.ean):''}${r.ean&&(r.marca||r.referencia)?' · ':''}${r.marca||r.referencia?'🏭 '+esc([r.marca,r.referencia?'ref. '+r.referencia:''].filter(Boolean).join(' · ')):''}</div>`:''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td><td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(mC?r.estoque:r.c[1])}</td><td class="n">${fmtS(r3((mC?r.estoque:r.c[1])-r.c[0]))}</td><td class="n">${r.n[2]?fmt(r.c[2]):'<span class="badge b-warn">pendente</span>'}</td></tr>`).join('')}
     </tbody></table></div>`:`<div class="card empty"><h2>Nenhuma divergência</h2><p>A 1ª e a 2ª contagens bateram em todos os itens contados.</p></div>`}`;
   const l=$('#cLib'); if(l) l.onclick=liberar3;
   $('#cXls').onclick=async()=>{ await lib('xlsx'); const aoa=[['Código','Descrição','Grupo','Subgrupo','Unidade','1ª contagem','2ª contagem','Diferença','3ª contagem']].concat(d.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.unidade,r.c[0],r.c[1],r3(r.c[1]-r.c[0]),r.n[2]?r.c[2]:''])); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Divergências 1x2'); XLSX.writeFile(wb,fileBase()+'_divergencias_1x2.xlsx'); };
@@ -1937,7 +1961,7 @@ V.resultado_refresh = ()=>{
       ${resumo.map(x=>`<tr class="${x.sub?'':'hl'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td>${F.tem?`<td class="n pos">${brl(x.vEnt)}</td><td class="n neg">${brl(x.vSai)}</td><td class="n ${x.vEnt-x.vSai<0?'neg':'pos'}"><b>${brl(x.vEnt-x.vSai)}</b></td>`:''}</tr>`).join('')}</tbody></table></div>`:f==='trocas'?blocoTrocas(TR,TRm):`
     <div class="row"><select class="in" id="rG" style="max-width:340px"><option value="">Todos os grupos</option>${grupos(rows).map(x=>`<option ${G===x.g?'selected':''}>${esc(x.g)}</option>`).join('')}</select></div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">3ª</th><th class="n">Final</th><th class="n">Estoque</th><th class="n">Diferença</th>${F.tem?'<th class="n">Custo</th><th class="n">Valor dif.</th>':''}<th>Ação</th></tr></thead><tbody>
-    ${flt.slice(0,3000).map(r=>`<tr class="${r.d12?'hl':''}"><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td>
+    ${flt.slice(0,3000).map(r=>`<tr class="${r.d12?'hl':''}"><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${(r.ean||r.marca||r.referencia)?`<div class="small muted">${r.ean?'EAN '+esc(r.ean):''}${r.ean&&(r.marca||r.referencia)?' · ':''}${r.marca||r.referencia?'🏭 '+esc([r.marca,r.referencia?'ref. '+r.referencia:''].filter(Boolean).join(' · ')):''}</div>`:''}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td>
       <td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(r.c[1])}</td><td class="n">${r.n[2]?fmt(r.c[2]):'—'}</td><td class="n"><b>${fmt(r.final)}</b></td><td class="n">${fmt(r.estoque)}</td>
       <td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif==null?'—':fmtS(r.dif)}</td>${F.tem?`<td class="n">${r.custo?brl(r.custo):'—'}</td><td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif&&r.custo?brl(r.dif*r.custo):'—'}</td>`:''}
       <td>${r.status==='pendente'?'<span class="badge b-warn">Pendente</span>':r.dif>0.0004?'<span class="badge b-ok">Entrada</span>':r.dif<-0.0004?'<span class="badge b-red">Saída</span>':'<span class="badge b-gray">OK</span>'}</td></tr>`).join('')||`<tr><td colspan="${F.tem?13:11}" class="empty">Nenhum item</td></tr>`}
@@ -2380,7 +2404,7 @@ async function finalizarInv(inv,rows,t,L,u){
   Store.add('inventarios/'+inv.id+'/log',{acao:'Encerrou o inventário',detalhe:`${t.ent.length} entrada(s), ${t.sai.length} saída(s)`,quem:u?u.nome:quem(),ts:now(),device:DEV});
   S.hist=null;
 }
-function rowsToItens(rows){ return rows.map(r=>({k:r.codigo,d:r.descricao,g:r.grupo,s:r.subgrupo,u:r.unidade,b:r.ean,e:r.estoque,c1:r.c[0],c2:r.c[1],c3:r.n[2]?r.c[2]:null,f:r.final,x:r.dif,v:r.custo||0,nv:r.novo?1:0})); }
+function rowsToItens(rows){ return rows.map(r=>({k:r.codigo,d:r.descricao,g:r.grupo,s:r.subgrupo,u:r.unidade,b:r.ean,m:r.marca||'',r:r.referencia||'',e:r.estoque,c1:r.c[0],c2:r.c[1],c3:r.n[2]?r.c[2]:null,f:r.final,x:r.dif,v:r.custo||0,nv:r.novo?1:0})); }
 async function salvarHistorico(inv,rows,t,L){
   const itens=rowsToItens(rows); const P=1500; let partes=0;
   for(let i=0;i<itens.length||i===0;i+=P){ await Store.set('historico',inv.id+'_'+partes,{empresaId:inv.empresaId,invId:inv.id,parte:partes,dados:JSON.stringify(itens.slice(i,i+P))}); partes++; if(!itens.length) break; }
@@ -2484,7 +2508,7 @@ P.prod = async ()=>{
   b.innerHTML=`<div class="card"><label class="f">Procure o produto pelo nome, código ou código de barras<input class="in" id="ppQ" autocomplete="off" placeholder="Ex.: arroz"></label><div class="results" id="ppR"></div></div><div id="ppB"></div>`;
   const q=$('#ppQ');
   q.oninput=()=>{ const n=norm(q.value).split(/\s+/).filter(Boolean); const rs=n.length?lista.filter(x=>{ const hh=norm(x.d)+' '+norm(x.k)+' '+(x.b||''); return n.every(w=>hh.includes(w)); }).slice(0,30):[];
-    $('#ppR').innerHTML=rs.map(x=>`<div class="res" data-k="${esc(x.k)}"><div class="d"><b>${esc(x.d)}</b><span class="mono">${esc(x.k)}${x.b?' · '+esc(x.b):''}</span></div></div>`).join('');
+    $('#ppR').innerHTML=rs.map(x=>{ const pp=S.idxCod&&S.idxCod.get(norm(x.k)); const q=pp||{codigo:x.k,descricao:x.d,ean:x.b,grupo:x.g,subgrupo:x.s,marca:x.m,referencia:x.r}; return `<div class="res" data-k="${esc(x.k)}">${thumb(q)}${infoProd({...q,descricao:x.d})}</div>`; }).join('');
     $('#ppR').querySelectorAll('[data-k]').forEach(el=>el.onclick=()=>{ S.pProd=el.dataset.k; q.value=''; $('#ppR').innerHTML=''; desenha(); }); };
   const desenha=()=>{
     const k=S.pProd; if(!k){ $('#ppB').innerHTML=`<div class="empty">Escolha um produto para ver o que aconteceu com ele em cada inventário.</div>`; return; }
