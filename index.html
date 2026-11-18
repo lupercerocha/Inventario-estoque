@@ -180,6 +180,9 @@ table.t tr.hl td{background:#fffaf0}
 pre.prev{background:#0d1622;color:#cfe;padding:12px;border-radius:10px;overflow:auto;font-size:12px;font-family:"JetBrains Mono",monospace;white-space:pre;margin:8px 0 0}
 .adj.ent{border-left:5px solid #1d7a46}.adj.sai{border-left:5px solid var(--red)}
 .ptabs button{font-size:14px;padding:9px 14px}
+.cadbtn{display:block;width:100%;margin-top:8px;padding:8px 10px;border:1px dashed #b9c4cf;border-radius:10px;background:#f7f9fb;color:var(--navy);font:inherit;font-size:13px;font-weight:600;text-align:left;cursor:pointer}
+.cadl{display:grid;gap:4px}.cadv{font-weight:600;font-size:14px}.cadv.vazio{font-weight:500;color:#b0571f;font-size:13px}
+tr.cadoff td{opacity:.5}
 .etgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 .etq{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:12px;text-align:center;break-inside:avoid}
 .etq b{display:block;font-size:14px}.etq svg{max-width:100%;height:auto;margin-top:6px}
@@ -375,7 +378,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.6.9';
+const APP_VERSION = '3.8.0';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -940,12 +943,13 @@ V.inventarios = async ()=>{
   app.querySelectorAll('.card[data-id]').forEach(c=>c.onclick=()=>openInv(invs.find(x=>x.id===c.dataset.id)));
 };
 function openInv(inv,next='invhome'){
-  clearSubs(); S.inv=inv; S.produtos=[]; S.lanc=[]; S.reserva=null; S.reservaP=null; indexProdutos(); if(inv.reservaN) setTimeout(carregarReserva,500);
+  clearSubs(); S.inv=inv; S.produtos=[]; S.lanc=[]; S.cad=[]; S.reserva=null; S.reservaP=null; indexProdutos(); if(inv.reservaN) setTimeout(carregarReserva,500);
   const P='inventarios/'+inv.id;
   S.unsub.push(Store.watchDoc('inventarios',inv.id,d=>{ if(!d) return; const old=S.inv; S.inv=d;
     if(S.view==='contar' && S.rodada && d.rodadas['r'+S.rodada]!=='aberta'){ toast('O gestor encerrou a '+rn(S.rodada)); stopScanner(); S.view='invhome'; S.stack=S.stack.filter(v=>v!=='contar'); render(); return; }
     if(['gestor','confronto','resultado','invhome'].includes(S.view) && JSON.stringify(old)!==JSON.stringify(d)) render(); }));
   S.unsub.push(Store.watch(P+'/produtos',rows=>{ S.produtos=rows; indexProdutos(); refreshLive(); agendaImagens(); }));
+  S.cad=[]; S.unsub.push(Store.watch(P+'/cadastro',rows=>{ S.cad=rows; if(S.view==='resultado' && S.tabRes==='cad') V.resultado_refresh(); }));
   S.unsub.push(startLancWatch());
   go(next);
 }
@@ -1191,6 +1195,7 @@ function renderFast(){
     const p=S.pend.p, un=(p.unidade||'UN').toUpperCase();
     el.hidden=false; el.className='card fast';
     el.innerHTML=`<div class="row" style="align-items:flex-start">${thumb(p,64)}<div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted">${idsProd(p)}</div>${tagsProd(p)}</div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
+      ${p.novo?'':`<button type="button" class="cadbtn" id="fCadB">✏ ${eansDe(p).length?'Completar ou corrigir cadastro':'Completar cadastro · sem código de barras'}</button>`}
       ${S.pend.ja?`<div class="small muted" style="margin-top:4px">Você já lançou ${fmt(S.pend.ja)} ${esc(un)} deste item nesta contagem — será somado.</div>`:''}
       <div class="qrow"><button class="stp" data-s="-1">−</button><input class="in qty" id="fQ" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="${S.pend.ed||S.pend.q!==1?esc(fmt(S.pend.q).replace(/\./g,'')):''}"><button class="stp" data-s="1">+</button></div>
       <div class="quick"><button data-a="6">+6</button><button data-a="12">+12</button><button data-a="24">+24</button><button data-a="0">Zerar</button></div>
@@ -1204,6 +1209,7 @@ function renderFast(){
     el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ const a=Number(b.dataset.a); S.pend.q= a===0?0:r3((S.pend.ed?S.pend.q:0)+a); S.pend.ed=true; f.value=fmt(S.pend.q).replace(/\./g,''); });
     $('#fOk',el).onclick=confirmPending;
     $('#fX',el).onclick=()=>{ S.pend=null; renderFast(); };
+    const cb=$('#fCadB',el); if(cb) cb.onclick=()=>{ const f2=$('#fQ'); if(f2&&f2.value.trim()!==''){ S.pend.q=parseNum(f2.value); S.pend.ed=true; } completarCadastro(p); };
   } else if(S.lastUm && LS.get('cvinv_modo','qtd')==='um'){
     const {p,tot}=S.lastUm;
     el.hidden=false; el.className='card fast ok';
@@ -1213,6 +1219,115 @@ function renderFast(){
 }
 function quem(){ return (S.sess&&S.sess.nome)||(S.me&&S.me.nome)||S.contador||'?'; }
 function logAcao(acao,detalhe){ if(!S.inv) return; Store.add('inventarios/'+S.inv.id+'/log',{acao,detalhe:detalhe||'',quem:quem(),ts:now(),device:DEV}); }
+
+/* =====================================================================
+   COMPLEMENTO DE CADASTRO (contador e gestor)
+   - Campo vazio no ERP: quem conta preenche e já vale no app (ex.: código de barras → o próximo bipe reconhece).
+   - Campo preenchido e errado: só é apontado; o app continua com o dado do ERP e a correção vai para o
+     relatório "Divergências de cadastro" (corrigir no ERP). O gestor confirma ou desconsidera cada uma.
+   ===================================================================== */
+const CAD_CAMPOS={ean:'Código de barras',descricao:'Descrição',unidade:'Unidade',grupo:'Grupo',subgrupo:'Subgrupo',marca:'Fabricante',referencia:'Referência'};
+const CAD_UN=['UN','KG','CX','PCT','FD','L','G','ML','DZ','M','M2','M3','PC','PAR','RL','JG','KIT','SC','BD','GL','LT','TB','BR','CJ'];
+function registrarCad(p,campo,de,para,obs,aplicado){
+  if(!S.inv) return;
+  Store.add('inventarios/'+S.inv.id+'/cadastro',{codigo:String(p.codigo),descricao:p.descricao||'',campo,de:de||'',para:para||'',obs:obs||'',aplicado:!!aplicado,status:'aberta',quem:quem(),ts:now(),device:DEV,rodada:S.rodada||null});
+  logAcao(aplicado?'Completou cadastro':'Apontou erro de cadastro',`${p.codigo} · ${CAD_CAMPOS[campo]||'Observação'}: ${de?de+' → ':''}${para||obs||''}`);
+}
+const eansDe=p=>String(p.ean||'').split(/[;,\s]+/).filter(Boolean);
+function eanEmUso(code,p){ const o=/^\d+$/.test(code)?S.idxEan.get(eanKey(code)):S.idxEan.get('#'+norm(code)); return o && String(o.codigo)!==String(p.codigo) ? o : null; }
+/* grava um código de barras no produto (se já tiver um, entra como código adicional) */
+function gravarEan(p,code){
+  code=String(code||'').trim(); if(!code) return false;
+  const o=eanEmUso(code,p); if(o){ toast('Esse código de barras já é de: '+o.descricao,true); return false; }
+  const atual=eansDe(p); if(atual.some(e=>eanKey(e)===eanKey(code)||e===code)) return true;
+  const novo=[...atual,code].join(';');
+  if(p.id) Store.set('inventarios/'+S.inv.id+'/produtos',p.id,{ean:novo});
+  registrarCad(p,'ean',atual.join(' / '),code,'',true);
+  p.ean=novo; indexProdutos(); return true;
+}
+function completarCadastro(p,{depois}={}){
+  if(!p) return;
+  const G=ehGestor(S.me);
+  const linha=(k)=>{ const v=String(p[k]??'').trim();
+    const inp=k==='unidade'
+      ? `<select class="in" name="${k}"><option value="">${v?'— está certo —':'— escolher —'}</option>${CAD_UN.filter(u=>u!==v).map(u=>`<option>${u}</option>`).join('')}</select>`
+      : `<input class="in" name="${k}" autocomplete="off" ${k==='ean'?'inputmode="numeric"':''} ${['grupo','subgrupo','marca'].includes(k)?'autocapitalize="characters"':''} placeholder="${v?(k==='ean'?'Código adicional (opcional)':'Só preencha se estiver errado'):'Preencher'}">`;
+    return `<div class="cadl"><div class="small muted">${CAD_CAMPOS[k]}</div>${v?`<div class="cadv">${esc(k==='ean'?eansDe(p).map(codFmt).join(' / '):v)}</div>`:'<div class="cadv vazio">não informado no ERP</div>'}${inp}</div>`; };
+  modal(`<h2>Completar cadastro</h2><div class="small muted mono">${esc(p.codigo)} · ${esc(p.descricao)}</div>
+    <p class="small muted" style="margin:8px 0 0">Campo <b>vazio</b>: o que você preencher já vale no app. Campo <b>errado</b>: escreva o correto; ele vai para o relatório de correções do ERP.</p>
+    <form id="fCad" class="stack" style="margin-top:10px">
+      ${['ean','descricao','unidade','grupo','subgrupo','marca','referencia'].map(linha).join('')}
+      <label class="f">Observação para o cadastro<textarea class="in" name="obs" rows="2" placeholder="Ex.: embalagem mudou, vem em caixa com 12"></textarea></label>
+      <div class="row"><button type="button" class="btn sec" id="cdC" style="flex:1">Cancelar</button><button class="btn" style="flex:2">Salvar</button></div></form>`,
+  {onOpen:o=>{ $('#cdC',o).onclick=closeModal;
+    $('#fCad',o).onsubmit=ev=>{ ev.preventDefault();
+      const d=Object.fromEntries(new FormData(ev.target).entries()); let n=0; const apl={};
+      for(const k of Object.keys(CAD_CAMPOS)){
+        let nv=String(d[k]||'').trim(); if(!nv) continue;
+        if(['grupo','subgrupo','marca','unidade'].includes(k)) nv=nv.toUpperCase();
+        const v=String(p[k]??'').trim();
+        if(k==='ean'){ if(!gravarEan(p,nv)) return; n++; continue; }
+        if(nv===v) continue;
+        if(!v){ apl[k]=nv; registrarCad(p,k,'',nv,'',true); }
+        else registrarCad(p,k,v,nv,'',false);
+        n++;
+      }
+      const obs=String(d.obs||'').trim(); if(obs){ registrarCad(p,'outro','','',obs,false); n++; }
+      if(Object.keys(apl).length){ if(p.id) Store.set('inventarios/'+S.inv.id+'/produtos',p.id,apl); Object.assign(p,apl); indexProdutos(); }
+      closeModal(); if(n) toast('✓ Cadastro registrado'+(G?'':' — o gestor vai conferir')); if(depois) depois(p); else renderFast(); }; }});
+}
+/* código bipado que não está na planilha: pode ser um produto da planilha que está sem código de barras */
+function vincularEan(code,info){
+  const semEan=()=>baseLista().filter(p=>!p.novo);
+  let soSem=true;
+  modal(`<div class="row between"><h2>Qual produto é este?</h2><button class="x" id="vjX" aria-label="Fechar" style="color:var(--navy)">✕</button></div>
+    <div class="small muted">Código bipado: <b class="mono">${esc(codFmt(code))}</b>${info&&info.descricao?' · '+esc(info.descricao):''}</div>
+    <p class="small muted" style="margin:6px 0 0">Escolha o produto da planilha. O código de barras fica gravado nele e a contagem continua normalmente.</p>
+    <input class="in" id="vjQ" placeholder="Nome, código ou fabricante" autocomplete="off" style="margin-top:10px">
+    <label class="chk small muted" style="margin:8px 0 4px"><input type="checkbox" id="vjS" checked> Só produtos sem código de barras</label>
+    <div id="vjL" class="lslist"></div>`,{cls:'full',onOpen:o=>{
+      $('#vjX',o).onclick=closeModal;
+      const draw=()=>{ const n=norm($('#vjQ',o).value).split(/\s+/).filter(Boolean);
+        const arr=semEan().filter(p=>(!soSem||!eansDe(p).length) && (!n.length||n.every(w=>(norm(p.descricao)+' '+norm(p.codigo)+' '+norm(p.marca||'')+' '+norm(p.referencia||'')).includes(w))));
+        $('#vjL',o).innerHTML=arr.slice(0,200).map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}${infoProd(p)}<span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')+(arr.length>200?`<div class="small muted" style="padding:8px">Mais ${arr.length-200} produto(s) — refine a busca</div>`:'')||'<div class="empty">Nenhum produto encontrado. Desmarque o filtro ou volte e cadastre como produto novo.</div>';
+        $('#vjL',o).querySelectorAll('[data-c]').forEach(el=>el.onclick=async()=>{ const p=S.idxCod.get(norm(el.dataset.c)); if(!p) return;
+          if(eansDe(p).length && !await ask(`<b>${esc(p.descricao)}</b> já tem o código ${esc(eansDe(p).map(codFmt).join(' / '))}. Gravar <b>${esc(codFmt(code))}</b> como código adicional?`,{ok:'Gravar'})) return;
+          if(gravarEan(p,code)){ closeModal(); toast('✓ Código de barras gravado no produto'); setPending(p,'tecl'); } }); };
+      let t=null; $('#vjQ',o).oninput=()=>{ clearTimeout(t); t=setTimeout(draw,120); };
+      $('#vjS',o).onchange=e=>{ soSem=e.target.checked; draw(); };
+      draw(); setTimeout(()=>$('#vjQ',o).focus(),80);
+    }});
+}
+/* linhas do relatório "Divergências de cadastro" */
+function cadRows(rows){
+  const out=[]; const byCod=new Map(rows.map(r=>[String(r.codigo),r]));
+  const acao=c=>c.campo==='outro'?'Verificar cadastro':c.campo==='ean'?(c.de?'Incluir código de barras adicional':'Cadastrar código de barras'):(c.de?'Corrigir ':'Preencher ')+(CAD_CAMPOS[c.campo]||c.campo).toLowerCase();
+  (S.cad||[]).forEach(c=>{ const r=byCod.get(String(c.codigo)); if(r&&r.novo) return;
+    out.push({id:c.id,tipo:'reg',codigo:c.codigo,descricao:(r&&r.descricao)||c.descricao,campo:c.campo,acao:acao(c),de:c.de,para:c.campo==='outro'?c.obs:c.para,obs:c.campo==='outro'?'':c.obs,quem:c.quem,ts:c.ts,status:c.status||'aberta',aplicado:c.aplicado}); });
+  rows.filter(r=>r.novo && (r.n[0]||r.n[1]||r.n[2])).forEach(r=>out.push({tipo:'novo',codigo:r.codigo,descricao:r.descricao,campo:'novo',acao:'Cadastrar produto novo no ERP',de:'',para:[r.ean&&'EAN '+r.ean,r.unidade,gLbl(r),r.marca].filter(Boolean).join(' · '),quem:'',ts:'',status:'aberta'}));
+  if(S.cadSemEan!==false){ const tem=new Set((S.cad||[]).filter(c=>c.campo==='ean').map(c=>String(c.codigo)));
+    rows.filter(r=>!r.novo && !r.ean && !tem.has(String(r.codigo)) && (r.n[0]||r.n[1]||r.n[2])).forEach(r=>out.push({tipo:'auto',codigo:r.codigo,descricao:r.descricao,campo:'ean',acao:'Cadastrar código de barras',de:'',para:'(não informado na contagem)',quem:'',ts:'',status:'aberta'})); }
+  return out.sort((a,b)=>String(a.descricao).localeCompare(String(b.descricao))||String(a.ts).localeCompare(String(b.ts)));
+}
+async function excelCadastro(){ await lib('xlsx'); const {rows}=calc(); const L=cadRows(rows).filter(x=>x.status!=='descartada');
+  const aoa=[[`Divergências de cadastro — ${S.inv.nome} — ${S.empresa.fantasia||S.empresa.razao} — ${dBR(S.inv.data)}`],[],['Código','Descrição','O que fazer no ERP','Campo','Como está no ERP','Como deve ficar / observação','Informado por','Data/hora','Situação']]
+    .concat(L.map(x=>[x.codigo,x.descricao,x.acao,x.campo==='novo'?'Produto':(CAD_CAMPOS[x.campo]||'Observação'),x.de,x.para,x.quem,x.ts?dtBR(x.ts):'',x.status==='confirmada'?'Confirmada':'A conferir']));
+  const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa,[{wch:14},{wch:40},{wch:32},{wch:16},{wch:28},{wch:34},{wch:16},{wch:17},{wch:12}]),'Cadastro'); XLSX.writeFile(wb,fileBase()+'_divergencias_cadastro.xlsx'); }
+async function pdfCadastro(){
+  await lib('pdf'); const {rows}=calc(); const L=cadRows(rows).filter(x=>x.status!=='descartada'); const e=S.empresa,i=S.inv;
+  const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:'mm',format:'a4',orientation:'landscape'});
+  const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(); const logo=await svgToPng(LOGO_SVG('#000924'),884,128); const cor=[61,160,148];
+  const topo=()=>{ doc.setFillColor(...cor); doc.rect(0,0,W,2,'F'); if(logo) doc.addImage(logo,'PNG',W-14-38,7,38,5.5);
+    doc.setTextColor(23,35,52); doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.text('Divergências de cadastro — corrigir no ERP',14,12);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(90); doc.text(`${e.fantasia||''}${e.cnpj?' · CNPJ '+e.cnpj:''}`,14,17); doc.text(`${i.nome} · Data: ${dBR(i.data)} · Emitido em ${new Date().toLocaleString('pt-BR')}`,14,21.5); };
+  topo();
+  doc.autoTable({startY:26,theme:'grid',styles:{fontSize:7.5,cellPadding:1.3},headStyles:{fillColor:cor},margin:{left:14,right:14,top:26},
+    head:[['Código','Descrição','O que fazer','Como está no ERP','Como deve ficar / observação','Informado por','Situação']],
+    body:L.map(x=>[x.codigo,x.descricao,x.acao,x.de||'—',x.para||'',x.quem?x.quem+(x.ts?' · '+dtBR(x.ts):''):'',x.status==='confirmada'?'Confirmada':'A conferir']),
+    columnStyles:{0:{cellWidth:22},2:{cellWidth:42},3:{cellWidth:38},4:{cellWidth:52},5:{cellWidth:34},6:{cellWidth:18}},didDrawPage:d=>{ if(d.pageNumber>1) topo(); }});
+  const n=doc.internal.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(7.5); doc.setTextColor(120); doc.text(MARCA,14,H-7); doc.text(`Página ${p} de ${n}`,W-14,H-7,{align:'right'}); }
+  doc.save(fileBase()+'_divergencias_cadastro.pdf');
+}
 async function excluirLanc(l){ if(!l) return;
   if(!await ask(`Excluir o lançamento de ${fmt(l.qtd)} ${esc(l.unidade||'')} de <b>${esc(l.descricao)}</b> (${rn(l.rodada)}, ${esc(l.contador)})?`,{ok:'Excluir',danger:true,title:'Excluir lançamento'})) return;
   Store.del('inventarios/'+S.inv.id+'/lancamentos',l.id); logAcao('Excluiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} ${l.unidade||''} · ${rn(l.rodada)} · contador ${l.contador}`); toast('Lançamento excluído'); }
@@ -1314,8 +1429,11 @@ async function naoEncontrado(code,forcar=false){
   else corpo=`<p class="muted">O código <b class="mono">${esc(codFmt(code))}</b> não está na relação de produtos e não foi encontrado no catálogo. Deseja cadastrar agora?</p>
     ${ehMaster()&&SI5_ULT.motivo?`<div class="warnbox small" style="margin-top:8px"><b>Consulta SI5:</b> ${esc(SI5_ULT.motivo)}</div>`:''}
     <div class="row" style="flex-wrap:wrap;gap:8px;margin-top:10px">${google}${ehMaster()?'<button class="btn sec" id="nfR">🔄 Consultar SI5 de novo</button>':''}</div>`;
-  m.querySelector('.md').innerHTML=`<h2>Produto não está na planilha</h2>${corpo}<div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn sec" id="nfN">Cancelar</button><button class="btn" id="nfS">${info?'Cadastrar e contar':'Cadastrar'}</button></div>`;
+  m.querySelector('.md').innerHTML=`<h2>Produto não está na planilha</h2>${corpo}
+    <button class="btn block" id="nfV" style="margin-top:12px">📎 É um produto da planilha sem código de barras</button>
+    <div class="row" style="justify-content:flex-end;margin-top:8px"><button class="btn sec" id="nfN">Cancelar</button><button class="btn sec" id="nfS">${info?'Cadastrar como novo e contar':'Cadastrar como novo'}</button></div>`;
   $('#nfN').onclick=closeModal; $('#nfS').onclick=()=>{ closeModal(); novoProduto(pre); };
+  $('#nfV').onclick=()=>{ closeModal(); vincularEan(code,info); };
   const R=$('#nfR'); if(R) R.onclick=()=>naoEncontrado(code,true);
 }
 
@@ -1773,6 +1891,7 @@ function editarProduto(p){ if(!p) return;
     const mud=Object.keys(novo).filter(k=>String(novo[k]??'')!==String(p[k]??(k==='estoque'||k==='custo'?0:'')));
     if(!mud.length){ closeModal(); return; }
     Store.set('inventarios/'+S.inv.id+'/produtos',p.id,novo);
+    mud.filter(k=>CAD_CAMPOS[k]).forEach(k=>Store.add('inventarios/'+S.inv.id+'/cadastro',{codigo:String(p.codigo),descricao:p.descricao||'',campo:k,de:String(p[k]??''),para:String(novo[k]??''),obs:'',aplicado:true,status:'aberta',quem:quem(),ts:now(),device:DEV}));
     logAcao('Corrigiu produto',`${p.codigo} · `+mud.map(k=>`${k}: ${p[k]??''} → ${novo[k]}`).join(' · '));
     closeModal(); toast('Produto atualizado'); }; }});
 }
@@ -2000,6 +2119,7 @@ V.resultado_refresh = ()=>{
   const resumo=resumoGrupos(rows);
   const F=financeiro(rows,t); const TR=trocasPossiveis(t); const TRm=(S.inv.trocas||{});
   const trAtivas=TR.filter(x=>TRm[x.key]!=='nao'), vTr=trAtivas.reduce((s,x)=>s+x.vComp,0);
+  const CRall=cadRows(rows), CR=CRall.filter(x=>x.status!=='descartada');
   b.innerHTML=`
     ${t.pend?`<div class="warnbox">${t.pend} item(ns) com divergência ainda sem ${rn(3).toLowerCase()} — ficam sem quantidade final.</div>`:''}
     ${F.tem?`<div class="card fin"><div class="row between"><h3>💰 Resultado financeiro (pelo custo de compra)</h3>${t.pend?'<span class="badge b-warn">parcial — há pendentes</span>':''}</div>
@@ -2026,12 +2146,20 @@ V.resultado_refresh = ()=>{
       <div class="card adj sai"><div class="row between"><h3>⬇ Ajuste de SAÍDA</h3><span class="badge b-red">${t.sai.length} itens</span></div>
         <div class="sub">Qtd. total ${fmt(t.qSai)}${t.vSai?' · '+brl(t.vSai):''} — contagem menor que o sistema</div>
         <div class="row" style="margin-top:10px"><button class="btn red" id="rErpS" ${t.sai.length?'':'disabled'}>⬇ Arquivo para o ERP</button><button class="btn sec" id="rPdfS" ${t.sai.length?'':'disabled'}>PDF</button></div></div>
+      <div class="card"><div class="row between"><h3>🧾 Divergências de cadastro</h3><span class="badge b-blue">${CR.length} itens</span></div>
+        <div class="sub">O que corrigir ou completar no cadastro do ERP (código de barras, descrição, unidade…)</div>
+        <div class="row" style="margin-top:10px"><button class="btn" id="rCadV">Ver</button><button class="btn sec" id="rCadP" ${CR.length?'':'disabled'}>PDF</button><button class="btn sec" id="rCadX" ${CR.length?'':'disabled'}>Excel</button></div></div>
       <div class="card"><h3>📋 Relatório completo</h3><div class="sub">1ª, 2ª e 3ª contagens, estoque, divergências, entradas e saídas</div>
         <div class="row" style="margin-top:10px"><button class="btn dark" id="rPdf">PDF</button><button class="btn sec" id="rXls">Excel</button></div></div>
     </div>
     <div class="small muted">Layout do arquivo do ERP: <b>${esc({csv:'texto delimitado',fixo:'TXT posicional',xlsx:'Excel'}[erpCfg().formato])}</b> · <a href="#" id="rCfgErp">configurar para o ERP do cliente</a>${t.pend?' · ⚠ itens pendentes ficam fora dos ajustes':''}</div>
-    <div class="tabs">${[['todos','Todos',rows.length],['ent','Entradas',t.ent.length],['sai','Saídas',t.sai.length],['div',modoDe(S.inv)==='uma_conf'?'Divergentes × estoque':'Divergentes 1×2',t.div12],['pend','Pendentes',t.pend],['novos','Novos',t.novos],...(TR.length?[['trocas','Possíveis trocas',TR.length]]:[]),['grupos','Por grupo',resumo.length]].map(([k,l,n])=>`<button data-t="${k}" class="${f===k?'on':''}">${l} (${n})</button>`).join('')}</div>
-    ${f==='grupos'?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Grupo</th><th>Subgrupo</th><th class="n">Itens</th><th class="n">Batem</th><th class="n">Diverg. 1×2</th><th class="n">Pendentes</th><th class="n">Entradas</th><th class="n">Saídas</th>${F.tem?'<th class="n">R$ entradas</th><th class="n">R$ saídas</th><th class="n">Resultado</th>':''}</tr></thead><tbody>
+    <div class="tabs">${[['todos','Todos',rows.length],['ent','Entradas',t.ent.length],['sai','Saídas',t.sai.length],['div',modoDe(S.inv)==='uma_conf'?'Divergentes × estoque':'Divergentes 1×2',t.div12],['pend','Pendentes',t.pend],['novos','Novos',t.novos],...(TR.length?[['trocas','Possíveis trocas',TR.length]]:[]),['cad','Cadastro',CR.length],['grupos','Por grupo',resumo.length]].map(([k,l,n])=>`<button data-t="${k}" class="${f===k?'on':''}">${l} (${n})</button>`).join('')}</div>
+    ${f==='cad'?`<div class="hint">Itens que precisam de ajuste no <b>cadastro do ERP</b>, informados por quem contou ou pelo gestor. Campo que estava vazio já foi preenchido no app; campo errado só foi apontado. Confirme ✓ o que estiver certo e desconsidere ✕ o que não proceder.</div>
+      <label class="chk small"><input type="checkbox" id="rCadA" ${S.cadSemEan!==false?'checked':''}> Incluir itens contados que continuam sem código de barras</label>
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Produto</th><th>O que fazer no ERP</th><th>Quem</th><th></th></tr></thead><tbody>
+      ${CRall.map(x=>`<tr class="${x.status==='descartada'?'cadoff':''}"><td style="min-width:110px">${esc(x.descricao)}<div class="small muted mono">${esc(x.codigo)}</div></td><td style="min-width:190px"><b>${esc(x.acao)}</b>${x.de?`<div class="small"><span class="muted">No ERP:</span> <s>${esc(x.de)}</s></div>`:''}${x.para?`<div class="small"><span class="muted">${x.campo==='outro'?'Obs.:':x.tipo==='novo'?'Dados:':'Correto:'}</span> <b>${esc(x.para)}</b></div>`:''}${x.tipo==='auto'?'<div class="small muted">detectado pelo sistema</div>':''}${x.aplicado&&x.tipo==='reg'&&!x.de?'<div class="small muted">já vale no app</div>':''}</td><td class="small">${esc(x.quem||'')}${x.ts?'<br>'+dtBR(x.ts):''}</td>
+        <td style="white-space:nowrap">${x.id?(x.status==='descartada'?`<span class="badge b-gray">Desconsiderada</span> <button class="btn ghost" data-cs="${x.id}" data-v="aberta">Voltar</button>`:`${x.status==='confirmada'?'<span class="badge b-ok">Confirmada</span>':`<button class="btn ghost" data-cs="${x.id}" data-v="confirmada" title="Confirmar">✓</button>`}<button class="btn ghost" style="color:var(--red)" data-cs="${x.id}" data-v="descartada" title="Desconsiderar">✕</button>`):''}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Nenhuma divergência de cadastro</td></tr>'}
+      </tbody></table></div>`:f==='grupos'?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Grupo</th><th>Subgrupo</th><th class="n">Itens</th><th class="n">Batem</th><th class="n">Diverg. 1×2</th><th class="n">Pendentes</th><th class="n">Entradas</th><th class="n">Saídas</th>${F.tem?'<th class="n">R$ entradas</th><th class="n">R$ saídas</th><th class="n">Resultado</th>':''}</tr></thead><tbody>
       ${resumo.map(x=>`<tr class="${x.sub?'':'hl'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td>${F.tem?`<td class="n pos">${brl(x.vEnt)}</td><td class="n neg">${brl(x.vSai)}</td><td class="n ${x.vEnt-x.vSai<0?'neg':'pos'}"><b>${brl(x.vEnt-x.vSai)}</b></td>`:''}</tr>`).join('')}</tbody></table></div>`:f==='trocas'?blocoTrocas(TR,TRm):`
     <div class="row"><select class="in" id="rG" style="max-width:340px"><option value="">Todos os grupos</option>${grupos(rows).map(x=>`<option ${G===x.g?'selected':''}>${esc(x.g)}</option>`).join('')}</select></div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">3ª</th><th class="n">Final</th><th class="n">Estoque</th><th class="n">Diferença</th>${F.tem?'<th class="n">Custo</th><th class="n">Valor dif.</th>':''}<th>Ação</th></tr></thead><tbody>
@@ -2047,6 +2175,11 @@ V.resultado_refresh = ()=>{
     S.inv.trocas=m; V.resultado_refresh(); try{ await Store.set('inventarios',S.inv.id,{trocas:m}); }catch(e){ toast('Não salvou: '+(e.message||e),true); } });
   const rg=$('#rG'); if(rg) rg.onchange=()=>{ S.resG=rg.value; V.resultado_refresh(); };
   $('#rPdf').onclick=gerarPDF; $('#rXls').onclick=gerarExcel;
+  $('#rCadV').onclick=()=>{ S.tabRes='cad'; V.resultado_refresh(); setTimeout(()=>{ const x=b.querySelector('.tabs'); if(x) x.scrollIntoView({behavior:'smooth'}); },50); };
+  $('#rCadP').onclick=pdfCadastro; $('#rCadX').onclick=excelCadastro;
+  const ca=$('#rCadA'); if(ca) ca.onchange=()=>{ S.cadSemEan=ca.checked; V.resultado_refresh(); };
+  b.querySelectorAll('[data-cs]').forEach(x=>x.onclick=()=>{ const c=(S.cad||[]).find(z=>z.id===x.dataset.cs); if(c){ c.status=x.dataset.v; V.resultado_refresh(); }
+    Store.set('inventarios/'+S.inv.id+'/cadastro',x.dataset.cs,{status:x.dataset.v,revisadoPor:quem(),revisadoEm:now()}); });
   $('#rErpE').onclick=()=>exportarErp('E'); $('#rErpS').onclick=()=>exportarErp('S'); $('#rPdfE').onclick=()=>pdfMov('E'); $('#rPdfS').onclick=()=>pdfMov('S');
   $('#rCfgErp').onclick=ev=>{ ev.preventDefault(); S.pTab='erp'; go('painel'); };
 };
@@ -2092,6 +2225,8 @@ async function gerarExcel(){ await lib('xlsx');
   if(TR.length) XLSX.utils.book_append_sheet(wb,sheet([['Situação','Semelhança %','FALTOU — código','Descrição','Qtd faltou','Valor faltou','SOBROU — código','Descrição','Qtd sobrou','Valor sobrou','Qtd que se compensa','Valor que se compensa','O que muda']].concat(TR.map(x=>[TRm[x.key]==='ok'?'CONFIRMADA':TRm[x.key]==='nao'?'DESCARTADA':'A CONFERIR',Math.round(Math.min(1,x.sc)*100),x.a.codigo,x.a.descricao,x.qa,Math.round(x.vA*100)/100,x.b.codigo,x.b.descricao,x.qb,Math.round(x.vB*100)/100,x.q,Math.round(x.vComp*100)/100,`${(x.muda[0]||'—').toUpperCase()} → ${(x.muda[1]||'—').toUpperCase()}`]))),'Possíveis trocas');
   XLSX.utils.book_append_sheet(wb,sheet([['Grupo','Subgrupo','Itens','Batem com estoque','Divergências 1x2','Pendentes','Entradas','Saídas']].concat(resumoGrupos(rows).map(x=>[x.g,x.sub||'(total do grupo)',x.itens,x.ok,x.div,x.pend,x.ent,x.sai])),[{wch:26},{wch:26},{wch:8},{wch:18},{wch:16},{wch:10},{wch:10},{wch:10}]),'Resumo por grupo');
   XLSX.utils.book_append_sheet(wb,sheet([['Data/hora','Contagem','Contador','Código','Descrição','Quantidade','Unidade']].concat([...S.lanc].sort((a,b)=>String(a.ts).localeCompare(String(b.ts))).map(l=>[dtBR(l.ts),l.rodada+'ª',l.contador,l.codigo,l.descricao,l.qtd,l.unidade]))),'Lançamentos');
+  const CRx=cadRows(rows).filter(x=>x.status!=='descartada');
+  if(CRx.length) XLSX.utils.book_append_sheet(wb,sheet([['Código','Descrição','O que fazer no ERP','Como está no ERP','Como deve ficar / observação','Informado por','Data/hora','Situação']].concat(CRx.map(x=>[x.codigo,x.descricao,x.acao,x.de,x.para,x.quem,x.ts?dtBR(x.ts):'',x.status==='confirmada'?'Confirmada':'A conferir']))),'Divergências de cadastro');
   XLSX.writeFile(wb,fileBase()+'.xlsx'); toast('Planilha gerada');
 }
 function svgToPng(svg,w,h){ return new Promise(res=>{ const img=new Image(); img.onload=()=>{ const c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h); res(c.toDataURL('image/png')); }; img.onerror=()=>res(null); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg); }); }
@@ -2405,7 +2540,7 @@ function drawInicio(){
         <div class="sub" style="margin-top:8px">Gerenciar contagens, escala, confronto e resultado →</div></div>`
        :`<div class="card"><h3>Nenhum inventário em andamento</h3><button class="btn" id="gNovo" style="margin-top:10px">+ Iniciar novo inventário</button></div>`}
       <div class="card click" id="gUsers"><h3>👥 Usuários</h3><div class="sub">${usuarios().length} cadastrado(s) · cadastrar contadores e gestores, trocar PIN</div></div>
-      <div class="card click" id="gPainel"><h3>📊 Painel e relatórios</h3><div class="sub">Indicadores, histórico, produto ao longo dos inventários, usuários e layout do ERP</div></div>
+      <div class="card click" id="gPainel"><h3>📊 Painel e relatórios</h3><div class="sub">Estoque de cada produto, indicadores, histórico, usuários e layout do ERP</div></div>
       <div class="card click" id="gTodos"><h3>🗂 Todos os inventários</h3><div class="sub">${(S.homeInvs||[]).length} inventário(s)</div></div>
     </div>`;
   } else if(me && podeEnc(me) && atual){
@@ -2515,16 +2650,61 @@ function barras(dados,{fmtV=v=>fmt(v),cor='var(--teal)',alto=150}={}){
 /* =====================================================================
    PAINEL DO GESTOR (web e celular)
    ===================================================================== */
-S.pTab='ind';
+S.pTab='est';
 V.painel = async ()=>{
   const u=await exigir(ehGestor,'Painel do gestor','Esse PIN não é de um gestor'); if(!u){ back(); return; }
   header('Painel · '+(S.empresa.fantasia||S.empresa.razao),'Indicadores, relatórios e configurações');
-  const tabs=[['ind','📈 Indicadores'],['hist','🗂 Histórico'],['prod','🔎 Produto'],['geral','📑 Relatório geral'],['users','👥 Usuários'],['erp','⚙ Exportação ERP'],['emp','🏢 Empresa']];
+  const tabs=[['est','📦 Estoque'],['ind','📈 Indicadores'],['hist','🗂 Histórico'],['prod','🔎 Produto'],['geral','📑 Relatório geral'],['users','👥 Usuários'],['erp','⚙ Exportação ERP'],['emp','🏢 Empresa']];
   $('#app').innerHTML=`<div class="stack"><div class="tabs ptabs">${tabs.map(([k,l])=>`<button data-p="${k}" class="${S.pTab===k?'on':''}">${l}</button>`).join('')}</div><div id="pBody" class="stack"><div class="empty">Carregando…</div></div></div>`;
   $('#app').querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{ S.pTab=b.dataset.p; V.painel(); });
   try{ await P[S.pTab](); }catch(e){ console.error(e); $('#pBody').innerHTML='<div class="warnbox">Erro ao carregar: '+esc(e.message||e)+'</div>'; }
 };
 const P={};
+/* Inventário em andamento: produtos da planilha do ERP com o estoque (só o gestor vê; a contagem continua cega) */
+async function carregarAtual(force){
+  let inv=invAtual();
+  if(!inv) inv=(await Store.list('inventarios','empresaId',S.empresa.id)).filter(i=>i.status!=='finalizado').sort((a,b)=>String(b.criadoEm).localeCompare(String(a.criadoEm)))[0]||null;
+  if(!inv) return null;
+  if(!force && S.pAtual && S.pAtual.id===inv.id && Date.now()-S.pAtual.t<60000) return S.pAtual;
+  const prods=await Store.list('inventarios/'+inv.id+'/produtos'); const L=await Store.list('inventarios/'+inv.id+'/lancamentos');
+  const {rows}=calcFrom(prods,L,modoDe(inv));
+  S.pAtual={id:inv.id,inv,rows,t:Date.now()}; return S.pAtual;
+}
+const atualItem=r=>({k:r.codigo,d:r.descricao,g:r.grupo,s:r.subgrupo,u:r.unidade,b:r.ean,m:r.marca||'',r:r.referencia||'',e:r.estoque,v:r.custo||0});
+P.est = async ()=>{
+  const b=$('#pBody'); const A=await carregarAtual(true);
+  if(!A){ b.innerHTML='<div class="card empty"><h2>Nenhum inventário em andamento</h2><p>Importe a planilha do ERP em um novo inventário para ver o estoque de cada produto aqui.</p></div>'; return; }
+  const R=A.rows; const temCusto=R.some(r=>r.custo);
+  const gs=[...new Set(R.map(r=>r.grupo||GSEM))].sort();
+  const totQ=r3(R.reduce((s,r)=>s+(Number(r.estoque)||0),0)), totV=R.reduce((s,r)=>s+(Number(r.estoque)||0)*(r.custo||0),0);
+  const zer=R.filter(r=>!(Number(r.estoque)>0)).length, cont=R.filter(r=>r.n[0]||r.n[1]||r.n[2]).length;
+  b.innerHTML=`<div class="sub">Estoque do sistema (planilha do ERP) no inventário <b>${esc(A.inv.nome)}</b> · ${dBR(A.inv.data)}. Só gestores veem esta tela; o contador continua contando às cegas.</div>
+    <div class="grid kpi">
+      <div class="card"><div class="l">Produtos na planilha</div><div class="v">${fmt(R.length)}</div></div>
+      <div class="card"><div class="l">Quantidade em estoque</div><div class="v">${fmt(totQ)}</div><div class="small muted">soma de todas as unidades</div></div>
+      ${temCusto?`<div class="card"><div class="l">Valor em estoque</div><div class="v">${brl(totV)}</div><div class="small muted">estoque × custo</div></div>`:''}
+      <div class="card"><div class="l">Estoque zerado ou negativo</div><div class="v">${fmt(zer)}</div></div>
+      <div class="card"><div class="l">Já contados</div><div class="v">${fmt(cont)}</div><div class="small muted">de ${fmt(R.length)}</div></div>
+    </div>
+    <div class="card"><div class="row"><input class="in" id="eQ" autocomplete="off" placeholder="Buscar por nome, código ou código de barras" style="flex:2;min-width:200px">
+      <select class="in" id="eG" style="flex:1;min-width:160px"><option value="">Todos os grupos</option>${gs.map(g=>`<option>${esc(g)}</option>`).join('')}</select>
+      <select class="in" id="eF" style="flex:1;min-width:160px"><option value="">Todos os estoques</option><option value="pos">Com estoque</option><option value="zero">Zerado ou negativo</option></select>
+      <button class="btn sec" id="eX">📊 Excel</button></div></div>
+    <div id="eT"></div>`;
+  const desenha=()=>{
+    const n=norm($('#eQ').value).split(/\s+/).filter(Boolean), G=$('#eG').value, F=$('#eF').value;
+    const v=R.filter(r=>(!G||(r.grupo||GSEM)===G) && (!F||(F==='pos'?Number(r.estoque)>0:!(Number(r.estoque)>0))) && (!n.length||n.every(w=>(norm(r.descricao)+' '+norm(r.codigo)+' '+(r.ean||'')).includes(w))));
+    const mx=500;
+    $('#eT').innerHTML=`<div class="small muted">${fmt(v.length)} produto(s)${v.length>mx?` · mostrando os primeiros ${mx}; use a busca ou o Excel para ver todos`:''}</div>
+      <div class="tbl-wrap" style="max-height:70vh"><table class="t"><thead><tr><th>Descrição</th><th class="n">Estoque</th>${temCusto?'<th class="n">Valor</th><th class="n">Custo</th>':''}<th>Código</th><th>Grupo</th><th></th></tr></thead><tbody>
+      ${v.slice(0,mx).map(r=>`<tr><td style="min-width:170px">${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${r.ean?`<div class="small muted">EAN ${esc(r.ean)}</div>`:''}</td><td class="n ${Number(r.estoque)<0?'neg':''}" style="white-space:nowrap"><b>${fmt(r.estoque)}</b> <small class="muted">${esc(r.unidade||'')}</small></td>${temCusto?`<td class="n" style="white-space:nowrap">${brl((Number(r.estoque)||0)*(r.custo||0))}</td><td class="n" style="white-space:nowrap">${brl(r.custo)}</td>`:''}<td class="mono">${esc(r.codigo)}</td><td class="small">${esc(gLbl(r))}</td><td><button class="btn ghost" data-prod="${esc(r.codigo)}">Ver</button></td></tr>`).join('')||`<tr><td colspan="8" class="empty">Nenhum produto encontrado</td></tr>`}
+      </tbody></table></div>`;
+    $('#eT').querySelectorAll('[data-prod]').forEach(x=>x.onclick=()=>{ S.pProd=x.dataset.prod; S.pTab='prod'; V.painel(); });
+  };
+  $('#eQ').oninput=desenha; $('#eG').onchange=desenha; $('#eF').onchange=desenha; desenha();
+  $('#eX').onclick=async()=>{ await lib('xlsx'); const aoa=[['Código','Código de barras','Descrição','Grupo','Subgrupo','Marca','Referência','Unidade','Estoque','Custo','Valor em estoque']].concat(R.map(r=>[r.codigo,r.ean||'',r.descricao,r.grupo||'',r.subgrupo||'',r.marca||'',r.referencia||'',r.unidade||'',r.estoque,r.custo||0,Math.round((Number(r.estoque)||0)*(r.custo||0)*100)/100]));
+    const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Estoque'); XLSX.writeFile(wb,'estoque_'+(S.empresa.fantasia||'').replace(/\W+/g,'_')+'.xlsx'); };
+};
 P.ind = async ()=>{
   const h=await carregarHist(); const b=$('#pBody'); const I=h.invs;
   if(!I.length){ b.innerHTML='<div class="card empty"><h2>Ainda não há inventários encerrados</h2><p>Os indicadores aparecem depois do primeiro inventário encerrado.</p></div>'; return; }
@@ -2576,35 +2756,43 @@ P.hist = async ()=>{
     const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Histórico'); XLSX.writeFile(wb,'historico_inventarios_'+(S.empresa.fantasia||'').replace(/\W+/g,'_')+'.xlsx'); };
 };
 P.prod = async ()=>{
-  const h=await carregarHist(); const b=$('#pBody'); const I=h.invs;
+  const h=await carregarHist(); const b=$('#pBody'); const I=h.invs; const A=await carregarAtual();
   const cat=new Map(); I.forEach(i=>i.itens.forEach(x=>cat.set(x.k,x)));
+  const atualBy=new Map(); if(A) A.rows.forEach(r=>{ atualBy.set(r.codigo,r); cat.set(r.codigo,{...(cat.get(r.codigo)||{}),...atualItem(r)}); });
   const lista=[...cat.values()];
   b.innerHTML=`<div class="card"><label class="f">Procure o produto pelo nome, código ou código de barras<input class="in" id="ppQ" autocomplete="off" placeholder="Ex.: arroz"></label><div class="results" id="ppR"></div></div><div id="ppB"></div>`;
   const q=$('#ppQ');
   q.oninput=()=>{ const n=norm(q.value).split(/\s+/).filter(Boolean); const rs=n.length?lista.filter(x=>{ const hh=norm(x.d)+' '+norm(x.k)+' '+(x.b||''); return n.every(w=>hh.includes(w)); }).slice(0,30):[];
-    $('#ppR').innerHTML=rs.map(x=>{ const pp=S.idxCod&&S.idxCod.get(norm(x.k)); const q=pp||{codigo:x.k,descricao:x.d,ean:x.b,grupo:x.g,subgrupo:x.s,marca:x.m,referencia:x.r}; return `<div class="res" data-k="${esc(x.k)}">${thumb(q)}${infoProd({...q,descricao:x.d})}</div>`; }).join('');
+    $('#ppR').innerHTML=rs.map(x=>{ const pp=S.idxCod&&S.idxCod.get(norm(x.k)); const q=pp||{codigo:x.k,descricao:x.d,ean:x.b,grupo:x.g,subgrupo:x.s,marca:x.m,referencia:x.r}; const ra=atualBy.get(x.k); return `<div class="res" data-k="${esc(x.k)}">${thumb(q)}${infoProd({...q,descricao:x.d})}${ra?`<span class="badge b-blue" style="margin-left:auto;white-space:nowrap">Estoque ${fmt(ra.estoque)} ${esc(ra.unidade||'')}</span>`:''}</div>`; }).join('');
     $('#ppR').querySelectorAll('[data-k]').forEach(el=>el.onclick=()=>{ S.pProd=el.dataset.k; q.value=''; $('#ppR').innerHTML=''; desenha(); }); };
   const desenha=()=>{
-    const k=S.pProd; if(!k){ $('#ppB').innerHTML=`<div class="empty">Escolha um produto para ver o que aconteceu com ele em cada inventário.</div>`; return; }
+    const k=S.pProd; if(!k){ $('#ppB').innerHTML=`<div class="empty">Escolha um produto para ver o estoque atual e o que aconteceu com ele em cada inventário.${A?`<br><small>${fmt(A.rows.length)} produto(s) no inventário em andamento.</small>`:''}</div>`; return; }
     const linhas=I.map(i=>({i,x:i.itens.find(x=>x.k===k)})).filter(o=>o.x);
     const p=cat.get(k)||{};
     const aj=linhas.filter(o=>o.x.x!=null&&!eq(o.x.x,0));
     const qS=r3(linhas.reduce((s,o)=>s+(o.x.x<0?-o.x.x:0),0)), qE=r3(linhas.reduce((s,o)=>s+(o.x.x>0?o.x.x:0),0));
     const vS=linhas.reduce((s,o)=>s+(o.x.x<0?-o.x.x*(o.x.v||0):0),0);
+    const ra=atualBy.get(k);
+    const blocoAtual=ra?`<div class="sec-title"><h2>Inventário em andamento · ${esc(A.inv.nome)}</h2></div><div class="grid kpi">
+      <div class="card"><div class="l">Estoque na empresa (ERP)</div><div class="v">${fmt(ra.estoque)} <small>${esc(ra.unidade||'')}</small></div></div>
+      ${ra.custo?`<div class="card"><div class="l">Custo unitário</div><div class="v">${brl(ra.custo)}</div></div><div class="card"><div class="l">Valor em estoque</div><div class="v">${brl((Number(ra.estoque)||0)*ra.custo)}</div></div>`:''}
+      <div class="card"><div class="l">Contado até agora</div><div class="v">${ra.n[0]||ra.n[1]||ra.n[2]?[0,1,2].filter(i=>ra.n[i]).map(i=>(i===2?'3ª':(i+1)+'ª')+': '+fmt(ra.c[i])).join(' · '):'—'}</div></div></div>`:'';
     $('#ppB').innerHTML=`<div class="card"><h2>${esc(p.d)}</h2><div class="small muted mono">${esc(k)}${p.b?' · '+esc(p.b):''} · ${esc(p.u||'')} · ${esc((p.g||GSEM)+(p.s?' › '+p.s:''))}</div></div>
-      <div class="grid kpi"><div class="card"><div class="l">Inventários</div><div class="v">${linhas.length}</div></div><div class="card"><div class="l">Com ajuste</div><div class="v">${aj.length}</div></div>
+      ${blocoAtual}${linhas.length?'':'<div class="hint">Este produto ainda não passou por nenhum inventário encerrado.</div>'}
+      ${linhas.length?`<div class="sec-title"><h2>Inventários encerrados</h2></div>`:''}<div class="grid kpi" ${linhas.length?'':'hidden'}><div class="card"><div class="l">Inventários</div><div class="v">${linhas.length}</div></div><div class="card"><div class="l">Com ajuste</div><div class="v">${aj.length}</div></div>
       <div class="card"><div class="l">Saídas acumuladas</div><div class="v neg">${fmt(qS)}</div></div><div class="card"><div class="l">Entradas acumuladas</div><div class="v pos">${fmt(qE)}</div></div>${vS?`<div class="card"><div class="l">Valor das saídas</div><div class="v neg">${brl(vS)}</div></div>`:''}</div>
-      <div class="card"><h3>Diferença em cada inventário</h3>${barras(linhas.map(o=>({l:dBR(o.i.data).slice(0,5),v:o.x.x||0,c:(o.x.x||0)<0?'var(--red)':'#1d7a46'})),{fmtV:v=>fmtS(v)})}</div>
+      ${linhas.length?'':'<div hidden>'}<div class="card"><h3>Diferença em cada inventário</h3>${barras(linhas.map(o=>({l:dBR(o.i.data).slice(0,5),v:o.x.x||0,c:(o.x.x||0)<0?'var(--red)':'#1d7a46'})),{fmtV:v=>fmtS(v)})}</div>
       <div class="tbl-wrap"><table class="t"><thead><tr><th>Data</th><th>Inventário</th><th class="n">Estoque sistema</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">3ª</th><th class="n">Final</th><th class="n">Diferença</th><th>Ação</th></tr></thead><tbody>
       ${linhas.map(({i,x})=>`<tr><td>${dBR(i.data)}</td><td>${esc(i.nome)}</td><td class="n">${fmt(x.e)}</td><td class="n">${fmt(x.c1)}</td><td class="n">${fmt(x.c2)}</td><td class="n">${x.c3==null?'—':fmt(x.c3)}</td><td class="n"><b>${fmt(x.f)}</b></td><td class="n ${x.x>0?'pos':x.x<0?'neg':''}">${x.x==null?'—':fmtS(x.x)}</td><td>${x.x==null?'<span class="badge b-warn">Pendente</span>':x.x>0.0004?'<span class="badge b-ok">Entrada</span>':x.x<-0.0004?'<span class="badge b-red">Saída</span>':'<span class="badge b-gray">OK</span>'}</td></tr>`).join('')}
-      </tbody></table></div>`;
+      </tbody></table></div>${linhas.length?'':'</div>'}`;
   };
   desenha();
 };
 P.geral = async ()=>{
-  const h=await carregarHist(); const b=$('#pBody'); const I=h.invs.slice(-12);
+  const h=await carregarHist(); const b=$('#pBody'); const I=h.invs.slice(-12); const A=await carregarAtual();
   const cat=new Map(); I.forEach(i=>i.itens.forEach(x=>{ if(!cat.has(x.k)) cat.set(x.k,{...x}); else Object.assign(cat.get(x.k),{d:x.d,g:x.g,s:x.s}); }));
-  const G=S.pG||'', so=S.pSo!==false;
+  const est=new Map(); if(A) A.rows.forEach(r=>{ est.set(r.codigo,r.estoque); const x=atualItem(r); if(!cat.has(x.k)) cat.set(x.k,{...x}); else Object.assign(cat.get(x.k),{d:x.d,g:x.g,s:x.s}); });
+  const G=S.pG||'', so=S.pSo==null?h.invs.length>0:S.pSo;
   let rows=[...cat.values()].map(p=>{ const vals=I.map(i=>{ const x=i.itens.find(z=>z.k===p.k); return x?x.x:undefined; }); const n=vals.filter(v=>v!=null&&v!==undefined&&!eq(v,0)).length;
     return {...p,vals,n,qS:r3(vals.reduce((s,v)=>s+(v<0?-v:0),0)),qE:r3(vals.reduce((s,v)=>s+(v>0?v:0),0))}; });
   rows.sort((a,b)=>byGrupo({grupo:a.g,subgrupo:a.s,descricao:a.d},{grupo:b.g,subgrupo:b.s,descricao:b.d}));
@@ -2612,15 +2800,15 @@ P.geral = async ()=>{
   const view=rows.filter(r=>(!G||(r.g||GSEM)===G) && (!so||r.n>0));
   b.innerHTML=`<div class="row"><select class="in" id="gG" style="max-width:280px"><option value="">Todos os grupos</option>${gs.map(g=>`<option ${g===G?'selected':''}>${esc(g)}</option>`).join('')}</select>
     <label class="chk small"><input type="checkbox" id="gSo" ${so?'checked':''}> Só produtos que tiveram ajuste</label><span class="spacer"></span><button class="btn sec" id="gX">📊 Excel completo</button></div>
-    <div class="small muted">Diferença (contagem final − estoque) de cada produto nos últimos ${I.length} inventários encerrados. Negativo = saída, positivo = entrada.</div>
-    <div class="tbl-wrap" style="max-height:70vh"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th>${I.map(i=>`<th class="n">${dBR(i.data).slice(0,5)}<br><small>${esc(String(i.data||'').slice(0,4))}</small></th>`).join('')}<th class="n">Com ajuste</th><th class="n">Saídas</th><th class="n">Entradas</th></tr></thead><tbody>
-    ${view.slice(0,2000).map(r=>`<tr><td class="mono">${esc(r.k)}</td><td>${esc(r.d)}</td><td class="small">${esc(r.g||GSEM)}</td>${r.vals.map(v=>`<td class="n ${v>0?'pos':v<0?'neg':''}">${v===undefined?'<span class="muted">·</span>':v==null?'—':fmtS(v)}</td>`).join('')}<td class="n">${r.n}</td><td class="n neg">${fmt(r.qS)}</td><td class="n pos">${fmt(r.qE)}</td></tr>`).join('')||`<tr><td colspan="${I.length+6}" class="empty">Nada para mostrar</td></tr>`}
+    <div class="small muted">${A?`<b>Estoque atual</b> = planilha do ERP do inventário em andamento (${esc(A.inv.nome)}). `:''}Diferença (contagem final − estoque) de cada produto nos últimos ${I.length} inventários encerrados. Negativo = saída, positivo = entrada.${!I.length?' Ainda não há inventários encerrados.':''}</div>
+    <div class="tbl-wrap" style="max-height:70vh"><table class="t"><thead><tr><th>Código</th><th>Descrição</th>${A?'<th class="n">Estoque atual</th>':''}<th>Grupo</th>${I.map(i=>`<th class="n">${dBR(i.data).slice(0,5)}<br><small>${esc(String(i.data||'').slice(0,4))}</small></th>`).join('')}<th class="n">Com ajuste</th><th class="n">Saídas</th><th class="n">Entradas</th></tr></thead><tbody>
+    ${view.slice(0,2000).map(r=>`<tr><td class="mono">${esc(r.k)}</td><td>${esc(r.d)}</td>${A?`<td class="n"><b>${est.has(r.k)?fmt(est.get(r.k)):'<span class="muted">·</span>'}</b></td>`:''}<td class="small">${esc(r.g||GSEM)}</td>${r.vals.map(v=>`<td class="n ${v>0?'pos':v<0?'neg':''}">${v===undefined?'<span class="muted">·</span>':v==null?'—':fmtS(v)}</td>`).join('')}<td class="n">${r.n}</td><td class="n neg">${fmt(r.qS)}</td><td class="n pos">${fmt(r.qE)}</td></tr>`).join('')||`<tr><td colspan="${I.length+7}" class="empty">${so&&!I.length?'Nenhum ajuste ainda: desmarque “Só produtos que tiveram ajuste” para ver todos':'Nada para mostrar'}</td></tr>`}
     </tbody></table></div>`;
   $('#gG').onchange=e=>{ S.pG=e.target.value; P.geral(); };
   $('#gSo').onchange=e=>{ S.pSo=e.target.checked; P.geral(); };
-  $('#gX').onclick=async()=>{ await lib('xlsx'); const all=h.invs; const aoa=[['Código','Descrição','Grupo','Subgrupo',...all.map(i=>dBR(i.data)+' '+i.nome),'Inventários com ajuste','Saídas acumuladas','Entradas acumuladas']];
+  $('#gX').onclick=async()=>{ await lib('xlsx'); const all=h.invs; const aoa=[['Código','Descrição','Grupo','Subgrupo',...(A?['Estoque atual']:[]),...all.map(i=>dBR(i.data)+' '+i.nome),'Inventários com ajuste','Saídas acumuladas','Entradas acumuladas']];
     [...cat.values()].forEach(p=>{ const vals=all.map(i=>{ const x=i.itens.find(z=>z.k===p.k); return x?(x.x==null?'pend.':x.x):''; }); const nums=vals.filter(v=>typeof v==='number');
-      aoa.push([p.k,p.d,p.g,p.s,...vals,nums.filter(v=>!eq(v,0)).length,r3(nums.reduce((s,v)=>s+(v<0?-v:0),0)),r3(nums.reduce((s,v)=>s+(v>0?v:0),0))]); });
+      aoa.push([p.k,p.d,p.g,p.s,...(A?[est.has(p.k)?est.get(p.k):'']:[]),...vals,nums.filter(v=>!eq(v,0)).length,r3(nums.reduce((s,v)=>s+(v<0?-v:0),0)),r3(nums.reduce((s,v)=>s+(v>0?v:0),0))]); });
     const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Produtos x inventários'); XLSX.writeFile(wb,'relatorio_geral_produtos.xlsx'); };
 };
 P.users = async ()=>{
@@ -3068,7 +3256,7 @@ A.limpa = async ()=>{
       let invs=await Store.list('inventarios'); if(emp) invs=invs.filter(i=>i.empresaId===emp);
       if(fI||fU){
         for(const [k,inv] of invs.entries()){ P(`Apagando inventário ${k+1} de ${invs.length}…`);
-          for(const sub of ['produtos','lancamentos','log']){ const col='inventarios/'+inv.id+'/'+sub; const ids=(await Store.list(col)).map(x=>x.id); if(ids.length) await Store.delMany(col,ids); }
+          for(const sub of ['produtos','lancamentos','log','cadastro']){ const col='inventarios/'+inv.id+'/'+sub; const ids=(await Store.list(col)).map(x=>x.id); if(ids.length) await Store.delMany(col,ids); }
           await Store.delMany('inventarios',[inv.id]); }
         let h=await Store.list('historico'); if(emp) h=h.filter(x=>x.empresaId===emp); if(h.length) await Store.delMany('historico',h.map(x=>x.id));
       }
