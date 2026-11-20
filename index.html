@@ -87,7 +87,14 @@ main{width:100%;padding:16px 16px calc(28px + var(--safe-b))}
 .btn.sec{background:#fff;color:var(--navy);border:1px solid var(--line)}
 .btn.dark{background:var(--navy)}
 .btn.red{background:var(--red)}
-.btn.ghost{background:transparent;color:var(--teal);padding:8px 10px;min-height:auto}
+.btn.ghost{background:transparent;color:var(--teal);padding:8px 10px;min-height:auto}.btn.red-t{color:var(--red)!important}
+.lgInvs{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow:auto;padding:4px 2px}
+.lglist{display:flex;flex-direction:column;gap:8px}
+.lgprod{display:flex;gap:10px;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:4px}.lgprod .d{flex:1;min-width:0;display:flex;flex-direction:column}
+.lgtab{display:flex;flex-direction:column}.lgl{display:grid;grid-template-columns:150px minmax(150px,auto) 90px 1fr;gap:10px;align-items:center;padding:7px 4px 7px 10px;border-left:3px solid var(--teal);border-bottom:1px dashed var(--line);font-size:14px}
+.lgl.alt{border-left-color:var(--red)}.lgl.ger{border-left-color:#94a3b8}.lgl.ex{opacity:.55;border-left-style:dashed}.lgl:last-child{border-bottom:0}.lgt{font-variant-numeric:tabular-nums;font-weight:600}.lgqq{text-align:right}
+@media(max-width:640px){.lgprod{flex-wrap:wrap}.lgprod>.small{width:100%;padding-left:52px}.lgl{grid-template-columns:auto 1fr auto;row-gap:2px;font-size:13px}.lgl .lgt{white-space:nowrap;font-size:12.5px}.lgl .lgt{grid-column:1}.lgl .lga{grid-column:2}.lgl .lgqq{grid-column:3}.lgl .lgw{grid-column:1/-1;font-size:13px}}.lgev{border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:8px 10px;background:#fff}
+.lgev.alt{border-left-color:var(--red)}.lgev.ex{opacity:.6;border-left-style:dashed}.lgev.ger{border-left-color:#94a3b8}.lgh{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.lgb{margin:4px 0 2px}.lgq{font-size:15px;margin-top:2px}
 .btn.block{width:100%}
 .btn.big{min-height:64px;font-size:17px;border-radius:14px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
@@ -396,7 +403,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.8.5';
+const APP_VERSION = '3.9.1';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -960,14 +967,21 @@ V.inventarios = async ()=>{
   const app=$('#app'); app.innerHTML='<div class="empty">Carregando…</div>';
   const invs=(await Store.list('inventarios','empresaId',e.id)).sort((a,b)=>String(b.criadoEm).localeCompare(String(a.criadoEm)));
   app.innerHTML=`<div class="stack">
-    <div class="row between"><h1>Inventários</h1><button class="btn" id="nInv">+ Novo inventário</button></div>
+    <div class="row between"><h1>Inventários</h1><span class="row" style="gap:8px">${invs.length&&(ehGestor(S.me)||adminOk())?'<button class="btn ghost red-t" id="xTodos">🗑 Excluir todos</button>':''}<button class="btn" id="nInv">+ Novo inventário</button></span></div>
     ${invs.length?`<div class="grid">${invs.map(i=>`<div class="card click" data-id="${i.id}">
       <div class="row between"><h3>${esc(i.nome)}</h3>${i.status==='finalizado'?'<span class="badge b-gray">Finalizado</span>':'<span class="badge b-ok">Em contagem</span>'}</div>
       <div class="sub">${dBR(i.data)} · ${fmt(i.totalProdutos||0)} produtos na base${i.reservaN?` + ${fmt(i.reservaN)} de consulta`:''}</div>
-      <div class="row small" style="margin-top:8px;gap:6px">${rodadasDe(i).map(r=>{const st=(i.rodadas||{})['r'+r]||'bloqueada';return `<span class="badge ${RLBL[st][1]}">${r===3&&modoDe(i)==='uma_conf'?'Conf.':r+'ª'} ${RLBL[st][0].toLowerCase()}</span>`}).join('')}</div></div>`).join('')}</div>`
+      <div class="row between" style="margin-top:8px;gap:6px"><span class="row small" style="gap:6px;flex-wrap:wrap">${rodadasDe(i).map(r=>{const st=(i.rodadas||{})['r'+r]||'bloqueada';return `<span class="badge ${RLBL[st][1]}">${r===3&&modoDe(i)==='uma_conf'?'Conf.':r+'ª'} ${RLBL[st][0].toLowerCase()}</span>`}).join('')}</span>${ehGestor(S.me)||adminOk()?`<button class="btn ghost sm red-t" data-xinv="${i.id}" title="Excluir este inventário">🗑 Excluir</button>`:''}</div></div>`).join('')}</div>`
       :`<div class="card empty"><h2>Nenhum inventário ainda</h2><p>Crie um inventário e importe a planilha de estoque.</p></div>`}</div>`;
   $('#nInv').onclick=async ()=>{ const u=await exigir(ehGestor,'Novo inventário','Só gestores criam inventários'); if(u) novoInventario(); };
   app.querySelectorAll('.card[data-id]').forEach(c=>c.onclick=()=>openInv(invs.find(x=>x.id===c.dataset.id)));
+  app.querySelectorAll('[data-xinv]').forEach(b=>b.onclick=async ev=>{ ev.stopPropagation(); const i=invs.find(x=>x.id===b.dataset.xinv);
+    const u=await exigir(u=>ehGestor(u),'Excluir inventário','Só o gestor exclui inventários'); if(!u) return;
+    if(!await ask(`Excluir o inventário <b>${esc(i.nome)}</b> (${dBR(i.data)})?<br><span class="small muted">Ele some do aplicativo para todos. Só a Cultivve consegue restaurar.</span>`,{ok:'Excluir',danger:true})) return;
+    await excluirInventarios([i]); toast('Inventário excluído'); V.inventarios(); });
+  const xt=$('#xTodos'); if(xt) xt.onclick=async()=>{ const u=await exigir(u=>ehGestor(u),'Excluir todos os inventários','Só o gestor exclui inventários'); if(!u) return;
+    const t=await askText(`Excluir os ${invs.length} inventário(s)`,{label:'Todos somem do aplicativo para todos; só a Cultivve consegue restaurar. Para confirmar, digite EXCLUIR'}); if(String(t||'').trim().toUpperCase()!=='EXCLUIR') return t!=null&&toast('Digite EXCLUIR para confirmar',true);
+    await excluirInventarios(invs); toast(invs.length+' inventário(s) excluído(s)'); V.inventarios(); };
 };
 function openInv(inv,next='invhome'){
   clearSubs(); S.inv=inv; S.produtos=[]; S.lanc=[]; S.cad=[]; S.reserva=null; S.reservaP=null; indexProdutos(); if(inv.reservaN) setTimeout(carregarReserva,500);
@@ -1245,7 +1259,27 @@ function renderFast(){
   } else { el.hidden=true; el.innerHTML=''; }
 }
 function quem(){ return (S.sess&&S.sess.nome)||(S.me&&S.me.nome)||S.contador||'?'; }
-function logAcao(acao,detalhe){ if(!S.inv) return; Store.add('inventarios/'+S.inv.id+'/log',{acao,detalhe:detalhe||'',quem:quem(),ts:now(),device:DEV}); }
+/* ---------- lixeira ----------
+   Excluir empresa ou inventário NÃO apaga do banco: marca excluido:true (quem, quando, se foi a empresa ou a Cultivve).
+   Some de todas as listas do app; só a Cultivve vê na Lixeira e pode restaurar ou apagar definitivamente. */
+const COL_LIXEIRA=['inventarios','empresas'];
+{ const _l=Store.list.bind(Store), _w=Store.watch.bind(Store);
+  Store.listAll=_l;
+  Store.list=async(col,...a)=>{ const r=await _l(col,...a); return COL_LIXEIRA.includes(col)?r.filter(x=>!x.excluido):r; };
+  Store.watch=(col,cb,...a)=>_w(col,(rows,pend)=>cb(COL_LIXEIRA.includes(col)?rows.filter(x=>!x.excluido):rows,pend),...a); }
+function marcaExclusao(){ return {excluido:true,excluidoEm:now(),excluidoPor:adminOk()?'Cultivve':(S.me?S.me.nome:quem()),excluidoPorTipo:adminOk()?'cultivve':'empresa'}; }
+async function excluirInventarios(lista){
+  for(const inv of lista){ await Store.set('inventarios',inv.id,marcaExclusao());
+    try{ await Store.add('inventarios/'+inv.id+'/log',{acao:'Excluiu o inventário',detalhe:'enviado para a lixeira da Cultivve',quem:adminOk()?'Cultivve':(S.me?S.me.nome:quem()),ts:now(),device:DEV}); }catch(e){} }
+  S.hist=null; S.pAtual=null;
+}
+async function restaurarDoc(col,id){ await Store.set(col,id,{excluido:false,restauradoEm:now()}); }
+async function apagarInvDefinitivo(id){
+  for(const sub of ['produtos','lancamentos','log','cadastro','reserva']){ const col='inventarios/'+id+'/'+sub; const ids=(await Store.listAll(col)).map(x=>x.id); if(ids.length) await Store.delMany(col,ids); }
+  const h=(await Store.listAll('historico')).filter(x=>x.invId===id); if(h.length) await Store.delMany('historico',h.map(x=>x.id));
+  await Store.delMany('inventarios',[id]);
+}
+function logAcao(acao,detalhe,extra){ if(!S.inv) return; Store.add('inventarios/'+S.inv.id+'/log',{acao,detalhe:detalhe||'',quem:quem(),ts:now(),device:DEV,...(extra||{})}); }
 
 /* =====================================================================
    COMPLEMENTO DE CADASTRO (contador e gestor)
@@ -1258,7 +1292,7 @@ const CAD_UN=['UN','KG','CX','PCT','FD','L','G','ML','DZ','M','M2','M3','PC','PA
 function registrarCad(p,campo,de,para,obs,aplicado){
   if(!S.inv) return;
   Store.add('inventarios/'+S.inv.id+'/cadastro',{codigo:String(p.codigo),descricao:p.descricao||'',campo,de:de||'',para:para||'',obs:obs||'',aplicado:!!aplicado,status:'aberta',quem:quem(),ts:now(),device:DEV,rodada:S.rodada||null});
-  logAcao(aplicado?'Completou cadastro':'Apontou erro de cadastro',`${p.codigo} · ${CAD_CAMPOS[campo]||'Observação'}: ${de?de+' → ':''}${para||obs||''}`);
+  logAcao(aplicado?'Completou cadastro':'Apontou erro de cadastro',`${p.codigo} · ${CAD_CAMPOS[campo]||'Observação'}: ${de?de+' → ':''}${para||obs||''}`,{codigo:String(p.codigo)});
 }
 const eansDe=p=>String(p.ean||'').split(/[;,\s]+/).filter(Boolean);
 function eanEmUso(code,p){ const o=/^\d+$/.test(code)?S.idxEan.get(eanKey(code)):S.idxEan.get('#'+norm(code)); return o && String(o.codigo)!==String(p.codigo) ? o : null; }
@@ -1357,12 +1391,12 @@ async function pdfCadastro(){
 }
 async function excluirLanc(l){ if(!l) return;
   if(!await ask(`Excluir o lançamento de ${fmt(l.qtd)} ${esc(l.unidade||'')} de <b>${esc(l.descricao)}</b> (${rn(l.rodada)}, ${esc(l.contador)})?`,{ok:'Excluir',danger:true,title:'Excluir lançamento'})) return;
-  Store.del('inventarios/'+S.inv.id+'/lancamentos',l.id); logAcao('Excluiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} ${l.unidade||''} · ${rn(l.rodada)} · contador ${l.contador}`); toast('Lançamento excluído'); }
+  Store.del('inventarios/'+S.inv.id+'/lancamentos',l.id); logAcao('Excluiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} ${l.unidade||''} · ${rn(l.rodada)} · contador ${l.contador}`,{codigo:String(l.codigo),qtd:l.qtd,rodada:l.rodada,contador:l.contador||'',lancTs:l.ts||''}); toast('Lançamento excluído'); }
 async function editarLanc(l){ if(!l) return;
   const v=await askText('Corrigir quantidade',{label:`${l.descricao} — lançado: ${fmt(l.qtd)} ${l.unidade||''}`,value:fmt(l.qtd).replace(/\./g,''),inputmode:'decimal'}); if(v==null||v.trim()==='') return;
   const q=parseNum(v); if(!(q>=0)) return toast('Quantidade inválida',true); if(eq(q,l.qtd)) return;
   Store.set('inventarios/'+S.inv.id+'/lancamentos',l.id,{qtd:r3(q),qtdAnterior:l.qtd,editadoPor:quem(),editadoEm:now()});
-  logAcao('Corrigiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} → ${fmt(q)} · ${rn(l.rodada)} · contador ${l.contador}`); toast('Quantidade corrigida'); }
+  logAcao('Corrigiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} → ${fmt(q)} · ${rn(l.rodada)} · contador ${l.contador}`,{codigo:String(l.codigo),qtd:q,qtdAntes:l.qtd,rodada:l.rodada,contador:l.contador||''}); toast('Quantidade corrigida'); }
 function lancar(p,qtd,silent){
   const id=Store.add('inventarios/'+S.inv.id+'/lancamentos',{rodada:S.rodada,codigo:String(p.codigo),descricao:p.descricao,unidade:p.unidade||'',qtd:r3(qtd),contador:S.contador,contadorId:(S.me&&S.me.nome===S.contador)?S.me.id:'',device:DEV,ts:now()});
   if(!silent) toast(`✓ ${fmt(qtd)} ${p.unidade||''} — ${String(p.descricao).slice(0,32)}`);
@@ -1401,7 +1435,7 @@ function novoProduto(pre){
         Store.get('catalogo',gk).then(c=>{ if(!c || c.naoEncontrado || !c.descricao) Store.set('catalogo',gk,{gtin:gk,descricao:d.descricao,categoria:d.grupo||'',origem:'cadastro na contagem',empresaId:S.empresa.id,criadoEm:now(),naoEncontrado:false}); }).catch(()=>{});
         if(foto){ S.img.set(gk,{imagem:foto}); enviarFoto(gk,foto,d.descricao); }
       }
-      Store.add('inventarios/'+S.inv.id+'/produtos',p); logAcao('Cadastrou produto na contagem',`${p.descricao} (${p.codigo}${p.ean?' · '+p.ean:''})`);
+      Store.add('inventarios/'+S.inv.id+'/produtos',p); logAcao('Cadastrou produto na contagem',`${p.descricao} (${p.codigo}${p.ean?' · '+p.ean:''})`,{codigo:String(p.codigo)});
       if(!S.idxCod.has(norm(p.codigo))){ S.produtos.push(p); indexProdutos(); }
       closeModal(); setPending(p,'tecl'); }; }});
 }
@@ -1919,7 +1953,7 @@ function editarProduto(p){ if(!p) return;
     if(!mud.length){ closeModal(); return; }
     Store.set('inventarios/'+S.inv.id+'/produtos',p.id,novo);
     mud.filter(k=>CAD_CAMPOS[k]).forEach(k=>Store.add('inventarios/'+S.inv.id+'/cadastro',{codigo:String(p.codigo),descricao:p.descricao||'',campo:k,de:String(p[k]??''),para:String(novo[k]??''),obs:'',aplicado:true,status:'aberta',quem:quem(),ts:now(),device:DEV}));
-    logAcao('Corrigiu produto',`${p.codigo} · `+mud.map(k=>`${k}: ${p[k]??''} → ${novo[k]}`).join(' · '));
+    logAcao('Corrigiu produto',`${p.codigo} · `+mud.map(k=>`${k}: ${p[k]??''} → ${novo[k]}`).join(' · '),{codigo:String(p.codigo)});
     closeModal(); toast('Produto atualizado'); }; }});
 }
 /* ---------- REGISTRO DE ATIVIDADES ---------- */
@@ -2687,7 +2721,7 @@ S.pTab='est';
 V.painel = async ()=>{
   const u=await exigir(ehGestor,'Painel do gestor','Esse PIN não é de um gestor'); if(!u){ back(); return; }
   header('Painel · '+(S.empresa.fantasia||S.empresa.razao),'Indicadores, relatórios e configurações');
-  const tabs=[['est','📦 Estoque'],['ind','📈 Indicadores'],['hist','🗂 Histórico'],['prod','🔎 Produto'],['geral','📑 Relatório geral'],['users','👥 Usuários'],['erp','⚙ Exportação ERP'],['emp','🏢 Empresa']];
+  const tabs=[['est','📦 Estoque'],['ind','📈 Indicadores'],['hist','🗂 Histórico'],['prod','🔎 Produto'],['log','📜 Log'],['geral','📑 Relatório geral'],['users','👥 Usuários'],['erp','⚙ Exportação ERP'],['emp','🏢 Empresa']];
   $('#app').innerHTML=`<div class="stack"><div class="tabs ptabs">${tabs.map(([k,l])=>`<button data-p="${k}" class="${S.pTab===k?'on':''}">${l}</button>`).join('')}</div><div id="pBody" class="stack"><div class="empty">Carregando…</div></div></div>`;
   $('#app').querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{ S.pTab=b.dataset.p; V.painel(); });
   try{ await P[S.pTab](); }catch(e){ console.error(e); $('#pBody').innerHTML='<div class="warnbox">Erro ao carregar: '+esc(e.message||e)+'</div>'; }
@@ -2820,6 +2854,95 @@ P.prod = async ()=>{
       </tbody></table></div>${linhas.length?'':'</div>'}`;
   };
   desenha();
+};
+
+/* ---------- LOG: quem fez, o quê, quando — por produto, por contador e por inventário ----------
+   Junta, dos inventários escolhidos: cada lançamento de contagem (quem contou, quanto, em que rodada, a que horas,
+   em qual aparelho), as exclusões e correções de lançamento, cadastros e correções de produto e as ações do gestor. */
+P.log = async ()=>{
+  const b=$('#pBody'); b.innerHTML='<div class="empty">Carregando…</div>';
+  const invs=(await Store.list('inventarios','empresaId',S.empresa.id)).sort((a,c)=>String(c.data||c.criadoEm).localeCompare(String(a.data||a.criadoEm)));
+  const F=S.logF||(S.logF={prod:'',cont:'',modo:'inv',sel:invs.slice(0,1).map(i=>i.id),de:'',ate:'',tipo:''});
+  F.sel=F.sel.filter(id=>invs.some(i=>i.id===id)); if(!F.sel.length&&invs.length) F.sel=[invs[0].id];
+  const hoje=new Date().toISOString().slice(0,10);
+  b.innerHTML=`<div class="card stack">
+    <div class="hint">Escolha os <b>inventários</b> (ou um <b>período</b>) e, se quiser, filtre por <b>produto</b> e por <b>contador</b>. Mostra quem contou, quanto, em qual contagem, a que horas e em qual aparelho — e também exclusões, correções e ações do gestor.</div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <label class="f">Produto (código, código de barras ou nome)<input class="in" id="lgP" value="${esc(F.prod)}" placeholder="ex.: 016168"></label>
+      <label class="f">Contador<select class="in" id="lgC"><option value="">Todos</option></select></label>
+      <label class="f">Tipo<select class="in" id="lgT">${[['','Tudo'],['cont','Só contagens'],['alt','Só exclusões e correções'],['ger','Só ações do gestor e cadastro']].map(([k,t])=>`<option value="${k}" ${F.tipo===k?'selected':''}>${t}</option>`).join('')}</select></label>
+    </div>
+    <div class="tabs" id="lgM"><button data-m="inv" class="${F.modo==='inv'?'on':''}">Por inventário</button><button data-m="per" class="${F.modo==='per'?'on':''}">Por período</button></div>
+    ${F.modo==='inv'?`<div class="lgInvs">${invs.map(i=>`<label class="chk"><input type="checkbox" data-iv="${i.id}" ${F.sel.includes(i.id)?'checked':''}> <b>${esc(i.nome)}</b> <span class="small muted">${dBR(i.data)} · ${i.status==='finalizado'?'finalizado':'em andamento'}</span></label>`).join('')||'<div class="empty small">Nenhum inventário</div>'}</div>`
+      :`<div class="row" style="gap:10px;flex-wrap:wrap"><label class="f">De<input class="in" type="date" id="lgDe" value="${esc(F.de||hoje.slice(0,8)+'01')}"></label><label class="f">Até<input class="in" type="date" id="lgAte" value="${esc(F.ate||hoje)}"></label></div>`}
+    <div class="row" style="gap:8px"><button class="btn" id="lgGo">Ver log</button><button class="btn sec" id="lgX" disabled>⬇ Excel</button></div></div>
+    <div id="lgR"></div>`;
+  b.querySelectorAll('#lgM [data-m]').forEach(x=>x.onclick=()=>{ F.modo=x.dataset.m; P.log(); });
+  b.querySelectorAll('[data-iv]').forEach(x=>x.onchange=()=>{ F.sel=[...b.querySelectorAll('[data-iv]:checked')].map(y=>y.dataset.iv); });
+  let EV=[];
+  const carregar=async()=>{
+    F.prod=$('#lgP').value.trim(); F.cont=$('#lgC').value; F.tipo=$('#lgT').value;
+    if(F.modo==='per'){ F.de=$('#lgDe').value; F.ate=$('#lgAte').value; }
+    const de=F.modo==='per'?(F.de||'0000'):'', ate=F.modo==='per'?((F.ate||'9999')+'T23:59:59.999Z'):'';
+    const alvo=F.modo==='inv'?invs.filter(i=>F.sel.includes(i.id)):invs;
+    if(!alvo.length){ $('#lgR').innerHTML='<div class="card empty">Escolha pelo menos um inventário</div>'; return; }
+    $('#lgR').innerHTML='<div class="empty">Juntando os registros…</div>';
+    EV=[];
+    for(const inv of alvo){
+      const P2='inventarios/'+inv.id;
+      const [L,G,prods]=await Promise.all([Store.list(P2+'/lancamentos'),Store.list(P2+'/log'),Store.list(P2+'/produtos')]);
+      const pm=new Map(prods.map(p=>[String(p.codigo),p]));
+      L.forEach(l=>{ const p=pm.get(String(l.codigo))||{}; EV.push({ts:l.ts,inv,tipo:'cont',acao:'Contou',codigo:String(l.codigo),descricao:l.descricao||p.descricao||'',ean:p.ean||'',un:l.unidade||p.unidade||'',qtd:l.qtd,rodada:l.rodada,quem:l.contador||'',device:l.device||''}); });
+      G.forEach(g=>{ const cod=g.codigo||((String(g.detalhe||'').match(/\(([^)·\s]+)/)||[])[1])||''; const p=pm.get(String(cod))||{};
+        const alt=/lançamento/i.test(g.acao);
+        // a contagem que depois foi excluída continua aparecendo no log, marcada
+        if(g.acao==='Excluiu lançamento' && g.lancTs) EV.push({ts:g.lancTs,inv,tipo:'cont',acao:'Contou (excluído depois)',ex:true,codigo:String(cod),descricao:p.descricao||'',ean:p.ean||'',un:p.unidade||'',qtd:g.qtd,rodada:g.rodada,quem:g.contador||'',device:''});
+        EV.push({ts:g.ts,inv,tipo:alt?'alt':'ger',acao:g.acao,detalhe:g.detalhe||'',codigo:String(cod||''),descricao:p.descricao||'',ean:p.ean||'',un:p.unidade||'',qtd:g.qtd,qtdAntes:g.qtdAntes,rodada:g.rodada,quem:g.quem||'',contador:g.contador||'',device:g.device||''}); });
+    }
+    const q=norm(F.prod);
+    EV=EV.filter(e=>(!de||String(e.ts)>=de)&&(!ate||String(e.ts)<=ate)
+      &&(!q||norm(e.codigo)===q||String(e.ean).replace(/\D/g,'').includes(q.replace(/\D/g,'')||'§')||norm(e.descricao).includes(q)||norm(e.detalhe).includes(q))
+      &&(!F.cont||e.quem===F.cont||e.contador===F.cont)&&(!F.tipo||e.tipo===F.tipo))
+      .sort((a,c)=>String(c.ts).localeCompare(String(a.ts)));
+    // contadores disponíveis
+    const nomes=[...new Set(EV.map(e=>e.quem).concat(EV.map(e=>e.contador)).filter(Boolean))].sort((a,c)=>a.localeCompare(c,'pt-BR'));
+    $('#lgC').innerHTML='<option value="">Todos</option>'+nomes.map(n=>`<option ${F.cont===n?'selected':''}>${esc(n)}</option>`).join('');
+    desenhar(); };
+  const desenhar=()=>{
+    const r=$('#lgR'); $('#lgX').disabled=!EV.length;
+    if(!EV.length){ r.innerHTML='<div class="card empty">Nenhum registro com esses filtros</div>'; return; }
+    const cont=EV.filter(e=>e.tipo==='cont'&&!e.ex); const porC={}; cont.forEach(e=>{ const k=e.quem||'—'; const o=porC[k]||(porC[k]={n:0,qtd:0,itens:new Set(),ini:e.ts,fim:e.ts}); o.n++; o.qtd+=Number(e.qtd)||0; o.itens.add(e.codigo); if(e.ts<o.ini) o.ini=e.ts; if(e.ts>o.fim) o.fim=e.ts; });
+    const hr=t=>t?new Date(t).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}):'';
+    const umProd=F.prod && new Set(EV.map(e=>e.codigo)).size===1;
+    r.innerHTML=`<div class="grid kpi"><div class="card"><div class="l">Registros</div><div class="v">${fmt(EV.length)}</div></div><div class="card"><div class="l">Lançamentos de contagem</div><div class="v">${fmt(cont.length)}</div></div><div class="card"><div class="l">Exclusões e correções</div><div class="v">${fmt(EV.filter(e=>e.tipo==='alt').length)}</div></div><div class="card"><div class="l">Contadores</div><div class="v">${fmt(Object.keys(porC).length)}</div></div></div>
+      ${Object.keys(porC).length?`<div class="card"><h3>Por contador</h3><div class="tbl-wrap"><table class="t"><thead><tr><th>Contador</th><th class="n">Lançamentos</th><th class="n">Itens</th>${umProd?'<th class="n">Quantidade</th>':''}<th>Primeiro</th><th>Último</th></tr></thead><tbody>${Object.entries(porC).sort((a,c)=>c[1].n-a[1].n).map(([k,o])=>`<tr><td><b>${esc(k)}</b></td><td class="n">${fmt(o.n)}</td><td class="n">${fmt(o.itens.size)}</td>${umProd?`<td class="n">${fmt(o.qtd)}</td>`:''}<td class="small">${hr(o.ini)}</td><td class="small">${hr(o.fim)}</td></tr>`).join('')}</tbody></table></div></div>`:''}
+      ${linhaDoTempo()}`;
+  };
+  /* linha do tempo sem repetir nada: os dados do produto aparecem uma vez no topo do bloco dele;
+     cada linha é só hora · ação · contagem · quantidade · quem · aparelho (e o inventário, se houver mais de um) */
+  const linhaDoTempo=()=>{
+    const hr=t=>t?new Date(t).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}):'';
+    const variosInv=new Set(EV.map(e=>e.inv.id)).size>1;
+    const grupos=new Map(); EV.slice(0,1500).forEach(e=>{ const k=e.codigo||'__geral'; if(!grupos.has(k)) grupos.set(k,[]); grupos.get(k).push(e); });
+    const prodDe=k=>{ const e=grupos.get(k).find(x=>x.descricao)||grupos.get(k)[0]; return e; };
+    const linha=e=>`<div class="lgl ${e.tipo}${e.ex?' ex':''}">
+      <span class="lgt">${hr(e.ts)}</span>
+      <span class="lga"><span class="badge ${e.ex?'b-gray':e.tipo==='cont'?'b-ok':e.tipo==='alt'?'b-red':'b-gray'}">${esc(e.acao)}</span>${e.rodada?` <span class="badge b-blue">${esc(rn(e.rodada,e.inv))}</span>`:''}</span>
+      <span class="lgqq">${e.tipo==='cont'?`<b>${fmt(e.qtd)}</b> ${esc(e.un||'')}`:e.qtdAntes!=null?`${fmt(e.qtdAntes)} → <b>${fmt(e.qtd)}</b>`:e.qtd!=null&&e.tipo==='alt'?`${fmt(e.qtd)} ${esc(e.un||'')}`:''}</span>
+      <span class="lgw">👤 ${esc(e.quem||'—')}${e.contador&&e.contador!==e.quem?` <span class="muted">(lanç. de ${esc(e.contador)})</span>`:''}${e.device?` <span class="muted">· ${esc(String(e.device).slice(-6))}</span>`:''}${variosInv?` <span class="muted">· ${esc(e.inv.nome)}</span>`:''}${!e.codigo&&e.detalhe?` <span class="muted">· ${esc(e.detalhe)}</span>`:''}</span></div>`;
+    const blocos=[...grupos.keys()].map(k=>{ const L=grupos.get(k);
+      if(k==='__geral') return `<div class="card lgbloco"><h3>Ações gerais do inventário</h3><div class="lgtab">${L.map(linha).join('')}</div></div>`;
+      const e=prodDe(k); const p=(S.idxCod&&S.idxCod.get(norm(k)))||{codigo:k,descricao:e.descricao,ean:e.ean,unidade:e.un};
+      const tot=L.filter(x=>x.tipo==='cont'&&!x.ex).length;
+      return `<div class="card lgbloco"><div class="lgprod">${thumb(p)}${infoProd({...p,descricao:p.descricao||e.descricao,ean:p.ean||e.ean})}<span class="small muted" style="white-space:nowrap">${fmt(tot)} contagem(ns)</span></div><div class="lgtab">${L.map(linha).join('')}</div></div>`; });
+    return `<div class="row between" style="margin:4px 2px"><h3>Linha do tempo</h3>${!variosInv&&EV[0]?`<span class="small muted">${esc(EV[0].inv.nome)} · ${dBR(EV[0].inv.data)}</span>`:''}</div>${EV.length>1500?'<div class="small muted">Mostrando os 1.500 mais recentes — o Excel traz tudo.</div>':''}${blocos.join('')}`;
+  };
+  $('#lgGo').onclick=carregar;
+  $('#lgX').onclick=async()=>{ await lib('xlsx'); const wb=XLSX.utils.book_new();
+    const rows=[['Data e hora','Inventário','Data do inventário','Contagem','Ação','Código','Descrição','Cód. barras','Quantidade','Qtd anterior','Unidade','Quem fez','Contador do lançamento','Aparelho','Detalhe']].concat(EV.map(e=>[e.ts?new Date(e.ts).toLocaleString('pt-BR'):'',e.inv.nome,dBR(e.inv.data),e.rodada?rn(e.rodada,e.inv):'',e.acao,e.codigo,e.descricao,e.ean,e.qtd??'',e.qtdAntes??'',e.un,e.quem,e.contador||'',e.device,e.detalhe||'']));
+    const ws=XLSX.utils.aoa_to_sheet(rows); ws['!cols']=rows[0].map((h,i)=>({wch:[18,24,12,10,22,10,40,15,10,10,6,16,16,10,50][i]||12})); XLSX.utils.book_append_sheet(wb,ws,'Log');
+    XLSX.writeFile(wb,`log-${(S.empresa.fantasia||'empresa').replace(/\W+/g,'_')}-${new Date().toISOString().slice(0,10)}.xlsx`); };
+  if(F.auto!==false) carregar();
 };
 P.geral = async ()=>{
   const h=await carregarHist(); const b=$('#pBody'); const I=h.invs.slice(-12); const A=await carregarAtual();
@@ -3134,7 +3257,7 @@ async function resolverCodigo(c,idSalvo){
   /* caminho rápido: empresa já usada neste aparelho → abre com a cópia guardada e atualiza em segundo plano */
   if(idSalvo && (adminOk() || (Store.auth&&Store.auth.currentUser&&LS.get('cvinv_mb','')===Store.auth.currentUser.uid+'|'+idSalvo+'|'+c) || Store.mode!=='cloud')){
     const loc=await Store.getLocal('empresas',idSalvo);
-    if(loc && loc.status!=='bloqueada' && (adminOk() || loc.codigo===c)){
+    if(loc && !loc.excluido && loc.status!=='bloqueada' && (adminOk() || loc.codigo===c)){
       LS.set('cvinv_emp',loc.id); LS.set('cvinv_emp_cod',c);
       setTimeout(async()=>{ try{ await garantirMembro(loc.id,c); const r=await Store.get('empresas',loc.id); if(r && S.empresa && S.empresa.id===r.id){ S.empresa=r; if(r.status==='bloqueada'){ toast('O acesso desta empresa está suspenso. Fale com a Cultivve.',true); S.empresa=null; go('acesso',false); } } }catch(e){} },0);
       return {empresa:loc};
@@ -3150,6 +3273,7 @@ async function resolverCodigo(c,idSalvo){
   const r=await Store.get('empresas',empId).catch(()=>null);
   if(!r) return {erro:'Não foi possível entrar nesta empresa. Fale com a Cultivve.'};
   if(r.status==='bloqueada') return {erro:'O acesso desta empresa está suspenso. Fale com a Cultivve.'};
+  if(r.excluido){ LS.set('cvinv_emps',(LS.get('cvinv_emps',[])||[]).filter(x=>x.id!==r.id)); return {erro:'Esta empresa foi excluída. Fale com a Cultivve.'}; }
   LS.set('cvinv_emp',r.id); LS.set('cvinv_emp_cod',c);
   const lista=(LS.get('cvinv_emps',[])||[]).filter(x=>x.id!==r.id); lista.unshift({id:r.id,codigo:c,nome:r.fantasia||r.razao||c,cidade:[r.cidade,r.uf].filter(Boolean).join('/')}); LS.set('cvinv_emps',lista.slice(0,12));
   return {empresa:r};
@@ -3165,7 +3289,7 @@ V.admin = async ()=>{
   if(!adminOk()){ if(!await entrarAdmin()){ S.view=S.empresa?'inicio':'acesso'; render(); return; } }
   header('Cultivve · Administração','Todas as empresas',{back:!!S.stack.length,right:'<button class="ic" id="aSair">Sair</button>'});
   $('#aSair').onclick=async()=>{ await sairAdmin(); S.stack=[]; S.view=S.empresa?'inicio':'acesso'; render(); };
-  const tabs=[['emp','🏢 Empresas'],['cat','🖼 Catálogo e imagens'],['limpa','🧹 Limpar dados'],['con','🔌 Conexão']];
+  const tabs=[['emp','🏢 Empresas'],['lixo','🗑 Lixeira'],['cat','🖼 Catálogo e imagens'],['limpa','🧹 Limpar dados'],['con','🔌 Conexão']];
   $('#app').innerHTML=`<div class="stack"><div class="tabs ptabs">${tabs.map(([k,l])=>`<button data-a="${k}" class="${S.aTab===k?'on':''}">${l}</button>`).join('')}</div><div id="aBody" class="stack"><div class="empty">Carregando…</div></div></div>`;
   $('#app').querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ S.aTab=b.dataset.a; V.admin(); });
   try{ await A[S.aTab](); }catch(e){ console.error(e); $('#aBody').innerHTML='<div class="warnbox">Erro: '+esc(e.message||e)+'</div>'; }
@@ -3180,7 +3304,7 @@ A.emp = async ()=>{
   const tem=new Set((await Store.listIn('codigos',emps.map(e=>e.codigo)).catch(()=>[])).map(c=>c.id));
   emps.forEach(e=>{ if(!tem.has(e.codigo)) Store.set('codigos',e.codigo,{empresaId:e.id}); });
   const ultimo=id=>invs.filter(i=>i.empresaId===id&&i.status==='finalizado').sort((a,b)=>String(b.data).localeCompare(String(a.data)))[0];
-  b.innerHTML=`<div class="row between"><h2>Empresas (${emps.length})</h2><button class="btn" id="aNova">+ Nova empresa</button></div>
+  b.innerHTML=`<div class="row between"><h2>Empresas (${emps.length})</h2><span class="row" style="gap:8px">${emps.length?'<button class="btn ghost red-t" id="aXTodas">🗑 Excluir todas</button>':''}<button class="btn" id="aNova">+ Nova empresa</button></span></div>
     <div class="hint">Crie a empresa com o gestor dela e envie o <b>link de acesso</b>. O gestor entra com o PIN, cadastra os colaboradores e sobe a planilha do sistema.</div>
     <div class="row"><span class="spacer"></span><button class="btn ghost" id="aRest">⬆ Restaurar backup</button><input type="file" id="aRestF" accept=".json,application/json" hidden></div>
     <div class="grid">${emps.map(e=>{ const n=invs.filter(i=>i.empresaId===e.id); const ab=n.filter(i=>i.status!=='finalizado').length; const bl=e.status==='bloqueada';
@@ -3193,8 +3317,15 @@ A.emp = async ()=>{
           <button class="btn sec" data-link="${e.id}">🔗 Link de acesso</button>
           <button class="btn sec" data-ed="${e.id}">Editar</button>
           <button class="btn sec" data-bk="${e.id}">⬇ Backup</button>
-          <button class="btn ghost" data-bl="${e.id}" style="color:${bl?'var(--teal)':'var(--red)'}">${bl?'Ativar':'Bloquear'}</button></div></div>`; }).join('')||'<div class="card empty">Nenhuma empresa ainda.</div>'}</div>`;
+          <button class="btn ghost" data-bl="${e.id}" style="color:${bl?'var(--teal)':'var(--red)'}">${bl?'Ativar':'Bloquear'}</button>
+          <button class="btn ghost red-t" data-xemp="${e.id}">🗑 Excluir</button></div></div>`; }).join('')||'<div class="card empty">Nenhuma empresa ainda.</div>'}</div>`;
   $('#aNova').onclick=()=>empresaForm({},()=>V.admin());
+  const excluirEmps=async lista=>{ for(const e of lista) await Store.set('empresas',e.id,marcaExclusao()); if(S.empresa&&lista.some(e=>e.id===S.empresa.id)) S.empresa=null; };
+  b.querySelectorAll('[data-xemp]').forEach(x=>x.onclick=async()=>{ const e=emps.find(z=>z.id===x.dataset.xemp);
+    if(!await ask(`Excluir a empresa <b>${esc(e.fantasia||e.razao)}</b>?<br><span class="small muted">Ela e os inventários dela somem do aplicativo e ninguém consegue entrar. Fica na <b>Lixeira</b> e você pode restaurar quando quiser.</span>`,{ok:'Excluir',danger:true})) return;
+    await excluirEmps([e]); toast('Empresa excluída — está na Lixeira'); V.admin(); });
+  const xa=$('#aXTodas'); if(xa) xa.onclick=async()=>{ const t=await askText(`Excluir as ${emps.length} empresa(s)`,{label:'Todas vão para a Lixeira (dá para restaurar). Para confirmar, digite EXCLUIR'}); if(String(t||'').trim().toUpperCase()!=='EXCLUIR') return t!=null&&toast('Digite EXCLUIR para confirmar',true);
+    await excluirEmps(emps); toast(emps.length+' empresa(s) excluída(s) — estão na Lixeira'); V.admin(); };
   b.querySelectorAll('[data-bk]').forEach(x=>x.onclick=()=>exportarEmpresa(emps.find(e=>e.id===x.dataset.bk)));
   $('#aRest').onclick=()=>$('#aRestF').click();
   $('#aRestF').onchange=async ev=>{ const f=ev.target.files[0]; ev.target.value=''; if(f) restaurarBackup(f); };
@@ -3269,6 +3400,32 @@ A.con = async ()=>{ const cc=await cfgCultivve(); $('#aBody').innerHTML=`<div cl
     <div class="small muted">Desligado, a câmera lê só código de barras. Cada empresa pode mudar só para ela no cadastro da empresa (campo "Ler QR Code na contagem").</div></div>`;
   $('#cQr').onchange=async e=>{ await Store.set('config','cultivve',{qrPadrao:e.target.checked}); S.cfgC={...(S.cfgC||{}),qrPadrao:e.target.checked}; toast(e.target.checked?'QR Code ligado para todas as empresas (exceto as que desligaram)':'QR Code desligado para todas as empresas (exceto as que ligaram)'); };
   $('#cCfg').onclick=()=>go('config'); $('#cDiag').onchange=e=>{ LS.set('cvinv_diag',e.target.checked); toast(e.target.checked?'Dados técnicos ligados neste aparelho':'Dados técnicos desligados'); }; };
+A.lixo = async ()=>{
+  const b=$('#aBody'); b.innerHTML='<div class="empty">Carregando…</div>';
+  const emps=await Store.listAll('empresas'), invs=await Store.listAll('inventarios');
+  const nomeE=id=>{ const e=emps.find(x=>x.id===id); return e?(e.fantasia||e.razao):'(empresa apagada)'; };
+  const eDel=emps.filter(e=>e.excluido).sort((a,b)=>String(b.excluidoEm).localeCompare(String(a.excluidoEm)));
+  const iDel=invs.filter(i=>i.excluido).sort((a,b)=>String(b.excluidoEm).localeCompare(String(a.excluidoEm)));
+  const quemTxt=x=>`${x.excluidoPorTipo==='cultivve'?'<span class="badge b-blue">Cultivve</span>':'<span class="badge b-gray">Empresa</span>'} ${esc(x.excluidoPor||'')} · ${x.excluidoEm?new Date(x.excluidoEm).toLocaleString('pt-BR'):''}`;
+  b.innerHTML=`<div class="stack">
+    <div class="hint">Tudo o que foi excluído — pela Cultivve ou pelo gestor da empresa — fica aqui, guardado para sempre. Só a Cultivve vê esta tela. <b>Restaurar</b> traz de volta com todos os produtos, lançamentos e histórico. <b>Apagar definitivo</b> remove do banco de dados e não tem volta.</div>
+    <div class="card"><h2>Empresas excluídas (${eDel.length})</h2>${eDel.length?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Empresa</th><th>Excluída por</th><th class="n">Inventários</th><th></th></tr></thead><tbody>${eDel.map(e=>`<tr><td><b>${esc(e.fantasia||e.razao)}</b><div class="small muted">${esc(e.cnpj||'')} · código ${esc(e.codigo||'')}</div></td><td class="small">${quemTxt(e)}</td><td class="n">${invs.filter(i=>i.empresaId===e.id).length}</td>
+      <td class="row" style="gap:6px;justify-content:flex-end"><button class="btn sm" data-re="${e.id}">↩ Restaurar</button><button class="btn sm ghost red-t" data-pe="${e.id}">Apagar definitivo</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty small">Nenhuma empresa na lixeira</div>'}</div>
+    <div class="card"><h2>Inventários excluídos (${iDel.length})</h2>${iDel.length?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Inventário</th><th>Empresa</th><th>Excluído por</th><th></th></tr></thead><tbody>${iDel.map(i=>`<tr><td><b>${esc(i.nome)}</b><div class="small muted">${dBR(i.data)} · ${fmt(i.totalProdutos||0)} produtos · ${i.status==='finalizado'?'finalizado':'em andamento'}</div></td><td>${esc(nomeE(i.empresaId))}${emps.find(x=>x.id===i.empresaId&&x.excluido)?' <span class="badge b-red">excluída</span>':''}</td><td class="small">${quemTxt(i)}</td>
+      <td class="row" style="gap:6px;justify-content:flex-end"><button class="btn sm" data-ri="${i.id}">↩ Restaurar</button><button class="btn sm ghost red-t" data-pi="${i.id}">Apagar definitivo</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty small">Nenhum inventário na lixeira</div>'}</div></div>`;
+  b.querySelectorAll('[data-re]').forEach(x=>x.onclick=async()=>{ await restaurarDoc('empresas',x.dataset.re); toast('Empresa restaurada'); A.lixo(); });
+  b.querySelectorAll('[data-ri]').forEach(x=>x.onclick=async()=>{ const i=invs.find(z=>z.id===x.dataset.ri); const e=emps.find(z=>z.id===i.empresaId);
+    if(e&&e.excluido){ if(!await ask(`A empresa <b>${esc(e.fantasia||e.razao)}</b> também está excluída. Restaurar a empresa junto?`,{ok:'Restaurar as duas'})) return; await restaurarDoc('empresas',e.id); }
+    await restaurarDoc('inventarios',i.id); S.hist=null; toast('Inventário restaurado'); A.lixo(); });
+  b.querySelectorAll('[data-pi]').forEach(x=>x.onclick=async()=>{ const i=invs.find(z=>z.id===x.dataset.pi);
+    const t=await askText('Apagar definitivo',{label:`O inventário "${i.nome}" será apagado do banco de dados, sem volta. Digite APAGAR`}); if(String(t||'').trim().toUpperCase()!=='APAGAR') return;
+    toast('Apagando…'); await apagarInvDefinitivo(i.id); toast('Inventário apagado definitivamente'); A.lixo(); });
+  b.querySelectorAll('[data-pe]').forEach(x=>x.onclick=async()=>{ const e=emps.find(z=>z.id===x.dataset.pe); const dela=invs.filter(i=>i.empresaId===e.id);
+    const t=await askText('Apagar definitivo',{label:`A empresa "${e.fantasia||e.razao}" e os ${dela.length} inventário(s) dela serão apagados do banco de dados, sem volta. Digite APAGAR`}); if(String(t||'').trim().toUpperCase()!=='APAGAR') return;
+    toast('Apagando…'); for(const i of dela) await apagarInvDefinitivo(i.id);
+    const h=(await Store.listAll('historico')).filter(z=>z.empresaId===e.id); if(h.length) await Store.delMany('historico',h.map(z=>z.id));
+    if(e.codigo) await Store.delMany('codigos',[e.codigo]).catch(()=>{}); await Store.delMany('empresas',[e.id]); toast('Empresa apagada definitivamente'); A.lixo(); });
+};
 A.limpa = async ()=>{
   const b=$('#aBody'); const emps=await Store.list('empresas');
   b.innerHTML=`<div class="card stack"><h2>Limpar dados de teste</h2>
@@ -3286,14 +3443,14 @@ A.limpa = async ()=>{
     const P=t=>{ $('#lP').textContent=t; };
     const btn=$('#lGo'); btn.disabled=true;
     try{
-      let invs=await Store.list('inventarios'); if(emp) invs=invs.filter(i=>i.empresaId===emp);
+      let invs=await Store.listAll('inventarios'); if(emp) invs=invs.filter(i=>i.empresaId===emp);
       if(fI||fU){
         for(const [k,inv] of invs.entries()){ P(`Apagando inventário ${k+1} de ${invs.length}…`);
-          for(const sub of ['produtos','lancamentos','log','cadastro']){ const col='inventarios/'+inv.id+'/'+sub; const ids=(await Store.list(col)).map(x=>x.id); if(ids.length) await Store.delMany(col,ids); }
+          for(const sub of ['produtos','lancamentos','log','cadastro','reserva']){ const col='inventarios/'+inv.id+'/'+sub; const ids=(await Store.list(col)).map(x=>x.id); if(ids.length) await Store.delMany(col,ids); }
           await Store.delMany('inventarios',[inv.id]); }
         let h=await Store.list('historico'); if(emp) h=h.filter(x=>x.empresaId===emp); if(h.length) await Store.delMany('historico',h.map(x=>x.id));
       }
-      if(fU){ let es=await Store.list('empresas'); if(emp) es=es.filter(e=>e.id===emp); if(es.length){ await Store.delMany('empresas',es.map(e=>e.id)); const cs=es.map(e=>e.codigo).filter(Boolean); if(cs.length) await Store.delMany('codigos',cs); } }
+      if(fU){ let es=await Store.listAll('empresas'); if(emp) es=es.filter(e=>e.id===emp); if(es.length){ await Store.delMany('empresas',es.map(e=>e.id)); const cs=es.map(e=>e.codigo).filter(Boolean); if(cs.length) await Store.delMany('codigos',cs); } }
       if(fC){ P('Apagando catálogo…'); const cs=await Store.list('catalogo'); if(cs.length) await Store.delMany('catalogo',cs.map(x=>x.id)); }
       if(fA){ try{ Object.keys(localStorage).filter(k=>k.startsWith('cvinv_')&&!['cvinv_fbcfg','cvinv_dev','cvinv_admin_ate','cvinv_admin_tipo','cvinv_admin_email'].includes(k)).forEach(k=>localStorage.removeItem(k)); }catch(e){} }
       S.hist=null; P('✓ Pronto. Dados apagados.'); toast('Dados apagados');

@@ -112,3 +112,10 @@ cabeçalhos repetidos em cada página, linhas de GRUPO/SUB-GRUPO e colunas deslo
 - PR.COMPRA vira o **custo unitário**; REFERENCIA vira **código de barras** quando é um EAN e **referência do fabricante** quando não é; MARCA também é importada.
 - Em bases grandes (milhares de itens com estoque zero), só os itens com estoque entram na lista de contagem; os de estoque zero ficam como **consulta** e entram na hora se forem bipados ou buscados.
 - No resultado: estoque no sistema e contado em R$, **saídas = perdas**, **entradas = sobras**, resultado do inventário e **possíveis trocas** de código entre itens parecidos.
+
+## Exclusão e lixeira (v3.9.0)
+- Gestor exclui um inventário ou todos (Todos os inventários → 🗑). Cultivve exclui uma empresa ou todas (Administração → Empresas → 🗑).
+- Nada é apagado de verdade: vai para **Administração → 🗑 Lixeira**, que só a Cultivve vê. Lá dá para **Restaurar** ou **Apagar definitivo**.
+
+## Log (v3.9.0)
+- Painel do gestor → **📜 Log**: por inventário(s) ou por período, filtrando por produto e por contador. Mostra cada contagem (quem, quanto, rodada, hora, aparelho), exclusões e correções de lançamento e ações do gestor. Exporta para Excel.
