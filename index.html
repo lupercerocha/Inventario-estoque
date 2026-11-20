@@ -91,9 +91,18 @@ main{width:100%;padding:16px 16px calc(28px + var(--safe-b))}
 .lgInvs{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow:auto;padding:4px 2px}
 .lglist{display:flex;flex-direction:column;gap:8px}
 .lgprod{display:flex;gap:10px;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:4px}.lgprod .d{flex:1;min-width:0;display:flex;flex-direction:column}
-.lgtab{display:flex;flex-direction:column}.lgl{display:grid;grid-template-columns:150px minmax(150px,auto) 90px 1fr;gap:10px;align-items:center;padding:7px 4px 7px 10px;border-left:3px solid var(--teal);border-bottom:1px dashed var(--line);font-size:14px}
-.lgl.alt{border-left-color:var(--red)}.lgl.ger{border-left-color:#94a3b8}.lgl.ex{opacity:.55;border-left-style:dashed}.lgl:last-child{border-bottom:0}.lgt{font-variant-numeric:tabular-nums;font-weight:600}.lgqq{text-align:right}
-@media(max-width:640px){.lgprod{flex-wrap:wrap}.lgprod>.small{width:100%;padding-left:52px}.lgl{grid-template-columns:auto 1fr auto;row-gap:2px;font-size:13px}.lgl .lgt{white-space:nowrap;font-size:12.5px}.lgl .lgt{grid-column:1}.lgl .lga{grid-column:2}.lgl .lgqq{grid-column:3}.lgl .lgw{grid-column:1/-1;font-size:13px}}.lgev{border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:8px 10px;background:#fff}
+.lgprod{border:1px solid var(--line);border-radius:10px;padding:10px;margin:4px 0 6px;background:#fff}
+.lginv{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 2px}.lgsel{border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-size:13px;font-weight:600;background:#f8fafc}
+.lgsec{margin-top:12px;--c:#1d7a46;--b:#e7f5ec}.lgsec.c-a{--c:#185fa5;--b:#e6f1fb}.lgsec.c-p{--c:#534ab7;--b:#eeedfe}.lgsec.c-m{--c:#8a5a0b;--b:#faeeda}.lgsec.c-r{--c:#993556;--b:#fbeaf0}.lgsec.c-g{--c:#5f5e5a;--b:#f1efe8}
+.lgsh{display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 0;user-select:none}.lgic{width:30px;height:30px;border-radius:50%;background:var(--b);color:var(--c);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none}
+.lgst{flex:1;font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}.lgbd{background:var(--b);color:var(--c);font-size:12px;font-weight:600;border-radius:10px;padding:1px 9px}.lgch{color:#64748b;transition:transform .15s}
+.lgsec.off .lgtl{display:none}.lgsec.off .lgch{transform:rotate(-90deg)}
+.lgtl{position:relative;margin-left:72px;border-left:2px solid #cbd5e1;padding:2px 0 4px}.lge{position:relative;padding:5px 0 9px 16px;min-height:34px}
+.lgdt{position:absolute;left:-74px;top:5px;width:60px;text-align:right;font-size:12px;line-height:1.3;color:#64748b;font-variant-numeric:tabular-nums}.lgdt b{display:block;color:var(--ink,#0f172a);font-size:12.5px}
+.lgdot{position:absolute;left:-7px;top:9px;width:8px;height:8px;border-radius:50%;border:2px solid var(--c);background:#fff}.lge.ex .lgdot{border-color:#94a3b8}
+.lgtx{font-size:14.5px;line-height:1.4}.lge.ex .lgtx{color:#64748b}.lgsub{font-size:12.5px;color:#64748b;margin-top:2px}.lgpn{font-weight:600}
+
+@media(max-width:640px){.lgtl{margin-left:58px}.lgdt{left:-62px;width:50px;font-size:11.5px}.lgtx{font-size:14px}}.lgev{border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:8px 10px;background:#fff}
 .lgev.alt{border-left-color:var(--red)}.lgev.ex{opacity:.6;border-left-style:dashed}.lgev.ger{border-left-color:#94a3b8}.lgh{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.lgb{margin:4px 0 2px}.lgq{font-size:15px;margin-top:2px}
 .btn.block{width:100%}
 .btn.big{min-height:64px;font-size:17px;border-radius:14px}
@@ -403,7 +412,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.9.1';
+const APP_VERSION = '3.9.2';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -2892,12 +2901,12 @@ P.log = async ()=>{
       const P2='inventarios/'+inv.id;
       const [L,G,prods]=await Promise.all([Store.list(P2+'/lancamentos'),Store.list(P2+'/log'),Store.list(P2+'/produtos')]);
       const pm=new Map(prods.map(p=>[String(p.codigo),p]));
-      L.forEach(l=>{ const p=pm.get(String(l.codigo))||{}; EV.push({ts:l.ts,inv,tipo:'cont',acao:'Contou',codigo:String(l.codigo),descricao:l.descricao||p.descricao||'',ean:p.ean||'',un:l.unidade||p.unidade||'',qtd:l.qtd,rodada:l.rodada,quem:l.contador||'',device:l.device||''}); });
+      L.forEach(l=>{ const p=pm.get(String(l.codigo))||{}; EV.push({ts:l.ts,inv,tipo:'cont',acao:'Contou',codigo:String(l.codigo),descricao:l.descricao||p.descricao||'',ean:p.ean||'',un:l.unidade||p.unidade||'',est:p.estoque,qtd:l.qtd,rodada:l.rodada,quem:l.contador||'',device:l.device||''}); });
       G.forEach(g=>{ const cod=g.codigo||((String(g.detalhe||'').match(/\(([^)·\s]+)/)||[])[1])||''; const p=pm.get(String(cod))||{};
         const alt=/lançamento/i.test(g.acao);
         // a contagem que depois foi excluída continua aparecendo no log, marcada
-        if(g.acao==='Excluiu lançamento' && g.lancTs) EV.push({ts:g.lancTs,inv,tipo:'cont',acao:'Contou (excluído depois)',ex:true,codigo:String(cod),descricao:p.descricao||'',ean:p.ean||'',un:p.unidade||'',qtd:g.qtd,rodada:g.rodada,quem:g.contador||'',device:''});
-        EV.push({ts:g.ts,inv,tipo:alt?'alt':'ger',acao:g.acao,detalhe:g.detalhe||'',codigo:String(cod||''),descricao:p.descricao||'',ean:p.ean||'',un:p.unidade||'',qtd:g.qtd,qtdAntes:g.qtdAntes,rodada:g.rodada,quem:g.quem||'',contador:g.contador||'',device:g.device||''}); });
+        let syn=null; if(g.acao==='Excluiu lançamento' && g.lancTs){ syn={ts:g.lancTs,inv,tipo:'cont',acao:'Contou (excluído depois)',ex:true,exEm:g.ts,exPor:g.quem||'',codigo:String(cod),descricao:p.descricao||'',ean:p.ean||'',un:p.unidade||'',est:p.estoque,qtd:g.qtd,rodada:g.rodada,quem:g.contador||'',device:''}; EV.push(syn); }
+        const ev={ts:g.ts,inv,tipo:alt?'alt':'ger',acao:g.acao,detalhe:g.detalhe||'',codigo:String(cod||''),descricao:p.descricao||'',ean:p.ean||'',un:p.unidade||'',est:p.estoque,qtd:g.qtd,qtdAntes:g.qtdAntes,rodada:g.rodada,quem:g.quem||'',contador:g.contador||'',device:g.device||''}; if(syn){ syn.par=ev; ev.par=syn; } EV.push(ev); });
     }
     const q=norm(F.prod);
     EV=EV.filter(e=>(!de||String(e.ts)>=de)&&(!ate||String(e.ts)<=ate)
@@ -2917,25 +2926,44 @@ P.log = async ()=>{
     r.innerHTML=`<div class="grid kpi"><div class="card"><div class="l">Registros</div><div class="v">${fmt(EV.length)}</div></div><div class="card"><div class="l">Lançamentos de contagem</div><div class="v">${fmt(cont.length)}</div></div><div class="card"><div class="l">Exclusões e correções</div><div class="v">${fmt(EV.filter(e=>e.tipo==='alt').length)}</div></div><div class="card"><div class="l">Contadores</div><div class="v">${fmt(Object.keys(porC).length)}</div></div></div>
       ${Object.keys(porC).length?`<div class="card"><h3>Por contador</h3><div class="tbl-wrap"><table class="t"><thead><tr><th>Contador</th><th class="n">Lançamentos</th><th class="n">Itens</th>${umProd?'<th class="n">Quantidade</th>':''}<th>Primeiro</th><th>Último</th></tr></thead><tbody>${Object.entries(porC).sort((a,c)=>c[1].n-a[1].n).map(([k,o])=>`<tr><td><b>${esc(k)}</b></td><td class="n">${fmt(o.n)}</td><td class="n">${fmt(o.itens.size)}</td>${umProd?`<td class="n">${fmt(o.qtd)}</td>`:''}<td class="small">${hr(o.ini)}</td><td class="small">${hr(o.fim)}</td></tr>`).join('')}</tbody></table></div></div>`:''}
       ${linhaDoTempo()}`;
+    r.querySelectorAll('.lgsh').forEach(h=>h.onclick=()=>h.parentElement.classList.toggle('off'));
   };
-  /* linha do tempo sem repetir nada: os dados do produto aparecem uma vez no topo do bloco dele;
-     cada linha é só hora · ação · contagem · quantidade · quem · aparelho (e o inventário, se houver mais de um) */
+  /* linha do tempo (v3.9.2): dados do produto uma vez no topo; por inventário, seções por etapa
+     (1ª/2ª/3ª contagem, correções, cadastro, ações do gestor), recolhíveis, em ordem cronológica.
+     Cada entrada: data/hora à esquerda · ponto na linha · uma frase · linha cinza com Por:/aparelho. */
   const linhaDoTempo=()=>{
-    const hr=t=>t?new Date(t).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}):'';
-    const variosInv=new Set(EV.map(e=>e.inv.id)).size>1;
-    const grupos=new Map(); EV.slice(0,1500).forEach(e=>{ const k=e.codigo||'__geral'; if(!grupos.has(k)) grupos.set(k,[]); grupos.get(k).push(e); });
-    const prodDe=k=>{ const e=grupos.get(k).find(x=>x.descricao)||grupos.get(k)[0]; return e; };
-    const linha=e=>`<div class="lgl ${e.tipo}${e.ex?' ex':''}">
-      <span class="lgt">${hr(e.ts)}</span>
-      <span class="lga"><span class="badge ${e.ex?'b-gray':e.tipo==='cont'?'b-ok':e.tipo==='alt'?'b-red':'b-gray'}">${esc(e.acao)}</span>${e.rodada?` <span class="badge b-blue">${esc(rn(e.rodada,e.inv))}</span>`:''}</span>
-      <span class="lgqq">${e.tipo==='cont'?`<b>${fmt(e.qtd)}</b> ${esc(e.un||'')}`:e.qtdAntes!=null?`${fmt(e.qtdAntes)} → <b>${fmt(e.qtd)}</b>`:e.qtd!=null&&e.tipo==='alt'?`${fmt(e.qtd)} ${esc(e.un||'')}`:''}</span>
-      <span class="lgw">👤 ${esc(e.quem||'—')}${e.contador&&e.contador!==e.quem?` <span class="muted">(lanç. de ${esc(e.contador)})</span>`:''}${e.device?` <span class="muted">· ${esc(String(e.device).slice(-6))}</span>`:''}${variosInv?` <span class="muted">· ${esc(e.inv.nome)}</span>`:''}${!e.codigo&&e.detalhe?` <span class="muted">· ${esc(e.detalhe)}</span>`:''}</span></div>`;
-    const blocos=[...grupos.keys()].map(k=>{ const L=grupos.get(k);
-      if(k==='__geral') return `<div class="card lgbloco"><h3>Ações gerais do inventário</h3><div class="lgtab">${L.map(linha).join('')}</div></div>`;
-      const e=prodDe(k); const p=(S.idxCod&&S.idxCod.get(norm(k)))||{codigo:k,descricao:e.descricao,ean:e.ean,unidade:e.un};
-      const tot=L.filter(x=>x.tipo==='cont'&&!x.ex).length;
-      return `<div class="card lgbloco"><div class="lgprod">${thumb(p)}${infoProd({...p,descricao:p.descricao||e.descricao,ean:p.ean||e.ean})}<span class="small muted" style="white-space:nowrap">${fmt(tot)} contagem(ns)</span></div><div class="lgtab">${L.map(linha).join('')}</div></div>`; });
-    return `<div class="row between" style="margin:4px 2px"><h3>Linha do tempo</h3>${!variosInv&&EV[0]?`<span class="small muted">${esc(EV[0].inv.nome)} · ${dBR(EV[0].inv.data)}</span>`:''}</div>${EV.length>1500?'<div class="small muted">Mostrando os 1.500 mais recentes — o Excel traz tudo.</div>':''}${blocos.join('')}`;
+    const dd=t=>t?new Date(t).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}):'';
+    const hh=t=>t?new Date(t).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}):'';
+    const lf=s=>{ s=String(s||''); return s.charAt(0).toLowerCase()+s.slice(1); };
+    const T=EV.slice().sort((a,c)=>String(a.ts).localeCompare(String(c.ts)));
+    const corte=T.length>1500; const V=corte?T.slice(-1500):T; const VS=new Set(V);
+    const VV=V.filter(e=>!(e.acao==='Excluiu lançamento'&&e.par&&VS.has(e.par)));
+    const cods=new Set(VV.filter(e=>e.codigo).map(e=>e.codigo)); const umP=cods.size===1;
+    const etapa=e=>!e.codigo?'g':(e.tipo==='cont'||e.ex)?'r'+(e.rodada||1):e.tipo==='alt'?'c':'k';
+    const ORD=['r1','r2','r3','c','k','g'];
+    const ET={r1:['1','v'],r2:['2','a'],r3:['3','p'],c:['✎','m'],k:['🏷','r'],g:['⚙','g']};
+    const tit=(k,inv)=>k[0]==='r'?rn(+k[1],inv):k==='c'?'Correções e exclusões':k==='k'?'Cadastro de produto':'Ações do gestor';
+    const curto=s=>{ s=String(s||''); return s.length>38?s.slice(0,36)+'…':s; };
+    const ent=e=>{ const q=`<b>${fmt(e.qtd)}</b> ${esc(e.un||'')}`; const pre=!umP&&e.codigo?`<span class="lgpn">${esc(curto(e.descricao||e.codigo))}</span> · `:''; let tx; const sub=[];
+      if(e.ex){ tx=`<s>${esc(e.quem||'—')} contou ${q}</s> · excluído${e.exEm?' às '+hh(e.exEm):''}`; if(e.exPor) sub.push('Por: '+esc(e.exPor)); }
+      else if(e.acao==='Contou') tx=`${esc(e.quem||'—')} contou ${q}`;
+      else if(e.acao==='Corrigiu lançamento'){ tx=`${esc(e.contador||e.quem||'—')} corrigiu ${e.qtdAntes!=null?fmt(e.qtdAntes)+' → ':''}<b>${fmt(e.qtd)}</b> ${esc(e.un||'')}`; if(e.rodada) sub.push(esc(rn(e.rodada,e.inv))); if(e.contador&&e.contador!==e.quem) sub.push('Por: '+esc(e.quem)); }
+      else if(e.acao==='Excluiu lançamento'){ tx=`${esc(e.quem||'—')} excluiu ${e.qtd!=null?'o lançamento de '+q:'um lançamento'}${e.contador&&e.contador!==e.quem?' de '+esc(e.contador):''}`; if(e.rodada) sub.push(esc(rn(e.rodada,e.inv))); }
+      else { tx=`${esc(e.quem||'—')} ${esc(lf(e.acao))}`; if(e.detalhe) sub.push(esc(e.detalhe)); }
+      if(e.device) sub.push('Aparelho '+esc(String(e.device).slice(-6)));
+      return `<div class="lge${e.ex?' ex':''}"><div class="lgdt"><b>${dd(e.ts)}</b>${hh(e.ts)}</div><i class="lgdot"></i><div class="lgtx">${pre}${tx}</div>${sub.length?`<div class="lgsub">${sub.join(' · ')}</div>`:''}</div>`; };
+    const porInv=new Map(); VV.forEach(e=>{ if(!porInv.has(e.inv.id)) porInv.set(e.inv.id,{inv:e.inv,L:[]}); porInv.get(e.inv.id).L.push(e); });
+    const blocos=[...porInv.values()].map(({inv,L})=>{
+      const S2=new Map(); L.forEach(e=>{ const k=etapa(e); if(!S2.has(k)) S2.set(k,[]); S2.get(k).push(e); });
+      const est=umP?(L.find(e=>e.est!=null)||{}).est:null; const un=umP?((L.find(e=>e.un)||{}).un||''):'';
+      const secs=ORD.filter(k=>S2.has(k)).map(k=>{ const E=S2.get(k); const [ic,cor]=ET[k];
+        const tot=umP&&k[0]==='r'?r3(E.filter(e=>!e.ex&&e.tipo==='cont').reduce((s,e)=>s+(Number(e.qtd)||0),0)):null;
+        return `<div class="lgsec c-${cor}"><div class="lgsh"><span class="lgic">${ic}</span><span class="lgst">${esc(tit(k,inv))}</span>${tot!=null?`<span class="small muted">Total ${fmt(tot)} ${esc(un)}</span>`:''}<span class="lgbd">${E.length}</span><span class="lgch">▾</span></div><div class="lgtl">${E.map(ent).join('')}</div></div>`; }).join('');
+      return `<div class="lginv"><span class="lgsel">${esc(inv.nome)}</span><span class="small muted">${dBR(inv.data)}${est!=null?` · Estoque no sistema ${fmt(est)} ${esc(un)}`:''}</span></div>${secs}`; }).join('');
+    let topo='';
+    if(umP){ const k=[...cods][0]; const e=VV.find(x=>x.codigo===k&&x.descricao)||VV.find(x=>x.codigo===k); const p=(S.idxCod&&S.idxCod.get(norm(k)))||{codigo:k,descricao:e.descricao,ean:e.ean,unidade:e.un};
+      topo=`<div class="lgprod">${thumb(p)}${infoProd({...p,descricao:p.descricao||e.descricao,ean:p.ean||e.ean})}</div>`; }
+    return `<div class="card lgbloco"><div class="row between" style="margin-bottom:6px"><h3>Linha do tempo</h3><span class="small muted">Da mais antiga para a mais recente</span></div>${corte?'<div class="small muted">Mostrando os 1.500 registros mais recentes — o Excel traz tudo.</div>':''}${topo}${blocos}</div>`;
   };
   $('#lgGo').onclick=carregar;
   $('#lgX').onclick=async()=>{ await lib('xlsx'); const wb=XLSX.utils.book_new();
