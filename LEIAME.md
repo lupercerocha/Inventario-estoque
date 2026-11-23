@@ -119,3 +119,9 @@ cabeçalhos repetidos em cada página, linhas de GRUPO/SUB-GRUPO e colunas deslo
 
 ## Log (v3.9.0)
 - Painel do gestor → **📜 Log**: por inventário(s) ou por período, filtrando por produto e por contador. Mostra cada contagem (quem, quanto, rodada, hora, aparelho), exclusões e correções de lançamento e ações do gestor. Exporta para Excel.
+
+## Caixa fechada (v3.9.3)
+- Bipar o código da caixa (DUN-14, 14 dígitos começando de 1 a 8) acha o produto pelo código da unidade — não precisa cadastrar o código da caixa no ERP.
+- A contagem abre em "Caixas fechadas × Unid. por caixa + Avulsas". Na 1ª vez o contador informa quantas unidades vêm na caixa; o fator fica guardado na empresa (campo `caixas`) e vale para os próximos inventários.
+- Bipar de novo a caixa soma +1 caixa; bipar a unidade soma +1 avulsa. Sem código de caixa: botão "📦 Caixas fechadas + avulsas" ou digitar `2x12+6`.
+- O lançamento guarda cx, fator e avulsas; aparece na lista, no log e no Excel do log ("2 cx × 12 + 6 avulsas").

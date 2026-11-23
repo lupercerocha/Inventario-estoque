@@ -173,6 +173,8 @@ table.t tr.hl td{background:#fffaf0}
 .fast.ok{border-color:#9fd9d1;background:#f4fbfa}
 .fast .fd{font-size:16px;display:block}
 .qrow{display:grid;grid-template-columns:64px 1fr 64px;gap:8px;margin-top:10px}
+.cxbox{margin-top:10px;border:1px dashed #9fd9d1;border-radius:12px;padding:10px;background:#f4fbfa}.cxg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.cxg label{display:flex;flex-direction:column;justify-content:flex-end;gap:4px;line-height:1.2;font-size:12px;font-weight:600;color:#475569}.cxg .in{height:52px;font-size:22px;font-weight:700;text-align:center;padding:4px}
+.cxtot{margin-top:8px;font-size:16px;text-align:center}.cxtot b{font-size:22px;color:var(--teal)}.lnk{background:none;border:0;color:var(--teal);text-decoration:underline;cursor:pointer;padding:6px 0 0;font-size:13px}.cxon{margin-top:8px}.lanc .q small.cxq{display:block;font-size:11px;color:#64748b;font-weight:500;white-space:nowrap}
 .stp{border:1px solid var(--line);background:#fff;border-radius:12px;font-size:28px;font-weight:700;cursor:pointer;color:var(--navy)}
 .qty.bump{animation:bp .25s}
 @keyframes bp{50%{transform:scale(1.06);background:var(--teal-soft)}}
@@ -412,7 +414,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.9.2';
+const APP_VERSION = '3.9.3';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -449,6 +451,20 @@ function parseNum(v){
   const n=parseFloat(s); return isNaN(n)?0:n;
 }
 const eanKey = s => String(s||'').replace(/\D/g,'').replace(/^0+/,'');
+/* ---------- caixa fechada (DUN-14 / GTIN-14) ----------
+   1º dígito (1 a 8) = indicador da embalagem; os 12 seguintes = código da unidade sem o dígito final;
+   o último é um novo dígito verificador. O indicador NÃO diz quantas unidades vêm na caixa:
+   o fator (unid. por caixa) é perguntado na 1ª vez e fica guardado na empresa (empresas/{id}.caixas). */
+function gtinCD(s){ let t=0; [...String(s)].reverse().forEach((d,i)=>t+=Number(d)*(i%2===0?3:1)); return String((10-t%10)%10); }
+function dunParaUnidade(code){ const d=String(code||'').replace(/\D/g,''); if(!/^[1-8]\d{13}$/.test(d)) return null; const b=d.slice(1,13); return b+gtinCD(b); }
+function fatorCx(p,dun){ const c=((S.empresa&&S.empresa.caixas)||{})[String(p&&p.codigo)]; if(!c) return 0; return Number((dun&&c.duns&&c.duns[dun])||c.f)||0; }
+function salvarFatorCx(p,f,dun){ if(!S.empresa||!(f>0)) return; const cod=String(p.codigo); const all=S.empresa.caixas||{}; const cur=all[cod]||{};
+  if(Number(cur.f)===f && (!dun||Number((cur.duns||{})[dun])===f)) return;
+  const novo={f,duns:{...(cur.duns||{}),...(dun?{[dun]:f}:{})},por:quem(),em:now()};
+  S.empresa.caixas={...all,[cod]:novo}; Store.set('empresas',S.empresa.id,{caixas:{[cod]:novo}}); }
+function parseQtdExpr(v){ const t=String(v||'').toLowerCase().replace(/\s+/g,'').replace(/cx/g,'x'); const m=t.match(/^([\d.,]+)[x×*]([\d.,]+)(?:\+([\d.,]+))?$/); if(!m) return null;
+  const cx=parseNum(m[1]),f=parseNum(m[2]),av=m[3]?parseNum(m[3]):0; if(!(cx>=0&&f>0&&av>=0)) return null; return {q:r3(cx*f+av),cx,f,av}; }
+function cxTxt(l){ return l&&l.cx?`${fmt(l.cx)} cx × ${fmt(l.fator)}${l.av?' + '+fmt(l.av)+' avulsa'+(l.av==1?'':'s'):''}`:''; }
 function toast(msg,err){ const t=document.createElement('div'); t.className='toast'+(err?' err':''); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),err?6000:2600); }
 let actx=null;
 function beep(ok=true){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); const o=actx.createOscillator(),g=actx.createGain(); o.frequency.value=ok?1100:300; o.connect(g); g.connect(actx.destination); g.gain.value=.08; o.start(); o.stop(actx.currentTime+(ok?.09:.25)); }catch(e){} try{navigator.vibrate&&navigator.vibrate(ok?40:[80,40,80])}catch(e){} }
@@ -1132,7 +1148,7 @@ V.contar_refresh = ()=>{
   $('#myN').textContent=mine.length+' lançamento(s)';
   const nItens=new Set(mine.map(l=>String(l.codigo))).size;
   const sub=$('.top .ttl small'); if(sub){ const tot=r===3?(S.inv.divergentes||[]).length:S.produtos.filter(p=>!p.novo).length; sub.textContent=`${S.contador} · ${fmt(nItens)}${tot?'/'+fmt(tot):''} itens${tot?' · '+Math.round(nItens/tot*100)+'%':''}`; }
-  my.innerHTML = mine.length ? mine.slice(0,200).map(l=>{ const pp=S.idxCod.get(norm(l.codigo))||{codigo:l.codigo,descricao:l.descricao}; return `<div class="lanc">${thumb(pp)}<div class="d"><b>${esc(l.descricao)}</b><span class="small muted">${idsProd(pp)} · ${new Date(l.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</span>${tagsProd(pp)}</div><div class="q">${fmt(l.qtd)} <small class="muted">${esc(l.unidade||'')}</small></div><button class="x ed" data-ed="${l.id}" aria-label="Corrigir">✎</button><button class="x" data-del="${l.id}" aria-label="Excluir">✕</button></div>`; }).join('')
+  my.innerHTML = mine.length ? mine.slice(0,200).map(l=>{ const pp=S.idxCod.get(norm(l.codigo))||{codigo:l.codigo,descricao:l.descricao}; return `<div class="lanc">${thumb(pp)}<div class="d"><b>${esc(l.descricao)}</b><span class="small muted">${idsProd(pp)} · ${new Date(l.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</span>${tagsProd(pp)}</div><div class="q">${fmt(l.qtd)} <small class="muted">${esc(l.unidade||'')}</small>${l.cx?`<small class="cxq">${esc(cxTxt(l))}</small>`:''}</div><button class="x ed" data-ed="${l.id}" aria-label="Corrigir">✎</button><button class="x" data-del="${l.id}" aria-label="Excluir">✕</button></div>`; }).join('')
     : '<div class="empty small">Nenhum lançamento ainda. Bipe ou busque um produto.</div>';
   my.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>excluirLanc(mine.find(x=>x.id===b.dataset.del)));
   my.querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>editarLanc(mine.find(x=>x.id===b.dataset.ed)));
@@ -1212,30 +1228,48 @@ function drawLista(){
 
 /* ---------- lançamento rápido (sem janela, câmera continua ligada) ---------- */
 function jaLancado(p){ return r3(S.lanc.filter(l=>l.rodada===S.rodada && meu(l) && String(l.codigo)===String(p.codigo)).reduce((s,l)=>s+Number(l.qtd||0),0)); }
-function setPending(p,src='tecl'){
+function setPending(p,src='tecl',o={}){
   if(!p) return;
   if(p._res) p=promover(p);
   if(S.rodada===3 && !(S.inv.divergentes||[]).map(String).includes(String(p.codigo))){ beep(false); toast('Este item não está na lista da '+rn(3).toLowerCase(),true); return; }
   beep(true);
-  if(LS.get('cvinv_modo','qtd')==='um'){
+  const fx=o.dun?fatorCx(p,o.dun):0;
+  if(LS.get('cvinv_modo','qtd')==='um' && o.dun && fx){
+    const tot=r3(jaLancado(p)+fx);
+    Promise.resolve(lancar(p,fx,true,{cx:1,fator:fx,av:0,dun:o.dun})).then(id=>{ S.lastUm={p,id,tot,cx:fx}; renderFast(); });
+    return;
+  }
+  if(LS.get('cvinv_modo','qtd')==='um' && !o.dun){
     const tot=jaLancado(p)+1;
     Promise.resolve(lancar(p,1,true)).then(id=>{ S.lastUm={p,id,tot}; renderFast(); }); enriquecerAgora(p).then(()=>{ if(S.lastUm&&S.lastUm.p===p) renderFast(); });
     return;
   }
-  if(S.pend && String(S.pend.p.codigo)===String(p.codigo)){ S.pend.q=r3(S.pend.q+1); renderFast(); flashQty(); return; }
+  if(S.pend && String(S.pend.p.codigo)===String(p.codigo)){
+    const P=S.pend;
+    if(o.dun){ if(!P.box) cxLiga(P,0); P.cx=r3((P.cx||0)+1); if(!P.dun){ P.dun=o.dun; if(!P.f) P.f=fx; } cxCalc(P); }
+    else if(P.box){ P.av=r3((P.av||0)+1); cxCalc(P); }
+    else P.q=r3(P.q+1);
+    renderFast(); flashQty(); return; }
   if(S.pend){ if(LS.get('cvinv_auto',true)) confirmPending(); else { S.pend=null; } }
   S.pend={p,q:1,ja:jaLancado(p)};
+  if(o.dun){ cxLiga(S.pend,1); S.pend.dun=o.dun; S.pend.f=fx||fatorCx(p); cxCalc(S.pend); }
   renderFast(); enriquecerAgora(p);
   if(src!=='cam'){ const f=$('#fQ'); if(f){ f.focus(); f.select(); } }
   else { const el=$('#fast'); if(el && el.getBoundingClientRect().bottom>innerHeight) el.scrollIntoView({block:'nearest'}); }
 }
 const openQty=p=>setPending(p,'tecl');
+function cxLiga(P,cx){ P.box=true; P.cx=cx; P.av=0; if(!P.f) P.f=fatorCx(P.p,P.dun); cxCalc(P); }
+function cxCalc(P){ P.q=r3((Number(P.cx)||0)*(Number(P.f)||0)+(Number(P.av)||0)); P.ed=true; }
 function confirmPending(){
   if(!S.pend) return;
-  const f=$('#fQ'); if(f && f.value.trim()!=='') S.pend.q=parseNum(f.value);
-  const {p,q}=S.pend;
+  const P=S.pend; let extra={};
+  if(P.box){
+    if(P.cx>0 && !(P.f>0)){ toast('Informe quantas unidades vêm em cada caixa',true); const ff=$('#fF'); if(ff) ff.focus(); return; }
+    cxCalc(P); if(P.cx>0){ extra={cx:P.cx,fator:P.f,av:P.av||0}; if(P.dun) extra.dun=P.dun; salvarFatorCx(P.p,P.f,P.dun); }
+  } else { const f=$('#fQ'); if(f && f.value.trim()!==''){ const ex=parseQtdExpr(f.value); if(ex){ P.q=ex.q; extra={cx:ex.cx,fator:ex.f,av:ex.av}; salvarFatorCx(P.p,ex.f); } else P.q=parseNum(f.value); } }
+  const {p,q}=P;
   if(!(q>=0)){ toast('Quantidade inválida',true); return; }
-  lancar(p,q); S.pend=null; renderFast();
+  lancar(p,q,false,extra); S.pend=null; renderFast();
   if(!Cam.on){ const qq=$('#q'); if(qq) qq.focus(); }
 }
 function flashQty(){ const f=$('#fQ'); if(f){ f.classList.remove('bump'); void f.offsetWidth; f.classList.add('bump'); } }
@@ -1247,10 +1281,28 @@ function renderFast(){
     el.innerHTML=`<div class="row" style="align-items:flex-start">${thumb(p,64)}<div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b><div class="small muted">${idsProd(p)}</div>${tagsProd(p)}</div><span class="badge b-gray">${esc(un)}</span>${p.novo?'<span class="badge b-blue">novo</span>':''}</div>
       ${p.novo?'':`<button type="button" class="cadbtn" id="fCadB">✏ ${eansDe(p).length?'Completar ou corrigir cadastro':'Completar cadastro · sem código de barras'}</button>`}
       ${S.pend.ja?`<div class="small muted" style="margin-top:4px">Você já lançou ${fmt(S.pend.ja)} ${esc(un)} deste item nesta contagem — será somado.</div>`:''}
-      <div class="qrow"><button class="stp" data-s="-1">−</button><input class="in qty" id="fQ" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="${S.pend.ed||S.pend.q!==1?esc(fmt(S.pend.q).replace(/\./g,'')):''}"><button class="stp" data-s="1">+</button></div>
+      ${S.pend.box?`<div class="cxbox">
+        <div class="cxg"><label>Caixas fechadas<input class="in" id="fCx" inputmode="decimal" autocomplete="off" value="${esc(fmt(S.pend.cx||0).replace(/\./g,''))}"></label>
+        <label>Unid. por caixa<input class="in" id="fF" inputmode="decimal" autocomplete="off" placeholder="?" value="${S.pend.f?esc(fmt(S.pend.f).replace(/\./g,'')):''}"></label>
+        <label>Avulsas<input class="in" id="fAv" inputmode="decimal" autocomplete="off" value="${esc(fmt(S.pend.av||0).replace(/\./g,''))}"></label></div>
+        ${S.pend.f?'':'<div class="small" style="color:#8a5a0b;margin-top:6px">1ª vez desta caixa: informe quantas unidades vêm nela. Fica guardado para as próximas.</div>'}
+        <div class="cxtot" id="fCxT"></div>
+        <div class="small muted" style="margin-top:4px">${S.pend.dun?'Bipe de novo a caixa para somar +1 caixa; bipe a unidade para somar +1 avulsa.':'Bipe a unidade para somar +1 avulsa.'}</div>
+        <button type="button" class="lnk" id="fCxOff">Voltar para quantidade simples</button></div>`
+      :`<div class="qrow"><button class="stp" data-s="-1">−</button><input class="in qty" id="fQ" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="${S.pend.ed||S.pend.q!==1?esc(fmt(S.pend.q).replace(/\./g,'')):''}"><button class="stp" data-s="1">+</button></div>
       <div class="quick"><button data-a="6">+6</button><button data-a="12">+12</button><button data-a="24">+24</button><button data-a="0">Zerar</button></div>
+      <button type="button" class="cadbtn cxon" id="fCxOn">📦 Caixas fechadas + avulsas${fatorCx(p)?` · caixa com ${fmt(fatorCx(p))}`:''}</button>`}
       <div class="row" style="margin-top:10px"><button class="btn sec" id="fX" style="flex:1">Descartar</button><button class="btn" id="fOk" style="flex:2">Confirmar</button></div>
       ${Cam.on&&LS.get('cvinv_auto',true)?'<div class="small muted" style="text-align:center;margin-top:6px">Bipe o próximo produto para confirmar este automaticamente</div>':''}`;
+    if(S.pend.box){ const P=S.pend, un2=esc(un);
+      const tot=()=>{ cxCalc(P); $('#fCxT',el).innerHTML=`${fmt(P.cx||0)} cx × ${P.f?fmt(P.f):'?'}${P.av?' + '+fmt(P.av):''} = <b>${fmt(P.q)}</b> ${un2}`; }; tot();
+      [['#fCx','cx'],['#fF','f'],['#fAv','av']].forEach(([id,k])=>{ const i=$(id,el); i.onfocus=()=>setTimeout(()=>i.select(),0); i.oninput=()=>{ P[k]=i.value.trim()===''?0:parseNum(i.value); tot(); }; i.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); confirmPending(); } }; });
+      $('#fCxOff',el).onclick=()=>{ P.box=false; P.ed=true; renderFast(); };
+      $('#fOk',el).onclick=confirmPending; $('#fX',el).onclick=()=>{ S.pend=null; renderFast(); };
+      const cb=$('#fCadB',el); if(cb) cb.onclick=()=>completarCadastro(p);
+      if(!P.f) setTimeout(()=>{ const ff=$('#fF'); if(ff && !Cam.on) ff.focus(); },0);
+      return; }
+    $('#fCxOn',el).onclick=()=>{ cxLiga(S.pend,1); renderFast(); setTimeout(()=>{ const i=$(S.pend&&S.pend.f?'#fCx':'#fF'); if(i){ i.focus(); i.select(); } },0); };
     const f=$('#fQ',el);
     f.onfocus=()=>setTimeout(()=>f.select(),0);
     f.oninput=()=>{ S.pend.ed=true; S.pend.q=f.value.trim()===''?1:parseNum(f.value); };
@@ -1263,7 +1315,7 @@ function renderFast(){
   } else if(S.lastUm && LS.get('cvinv_modo','qtd')==='um'){
     const {p,tot}=S.lastUm;
     el.hidden=false; el.className='card fast ok';
-    el.innerHTML=`<div class="row">${thumb(p,48)}<div class="round-dot">+1</div><div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b>${fabTag(p)}<div class="small muted">Seu total deste item: <b>${fmt(tot)} ${esc(p.unidade||'UN')}</b></div></div><button class="btn sec" id="fU">Desfazer</button></div>`;
+    el.innerHTML=`<div class="row">${thumb(p,48)}<div class="round-dot">${S.lastUm.cx?'📦':'+1'}</div><div style="flex:1;min-width:0"><b class="fd">${esc(p.descricao)}</b>${fabTag(p)}<div class="small muted">${S.lastUm.cx?`Caixa fechada: +${fmt(S.lastUm.cx)} · `:''}Seu total deste item: <b>${fmt(tot)} ${esc(p.unidade||'UN')}</b></div></div><button class="btn sec" id="fU">Desfazer</button></div>`;
     $('#fU',el).onclick=()=>{ if(S.lastUm && S.lastUm.id){ Store.del('inventarios/'+S.inv.id+'/lancamentos',S.lastUm.id); toast('Último bipe desfeito'); } S.lastUm=null; renderFast(); };
   } else { el.hidden=true; el.innerHTML=''; }
 }
@@ -1402,13 +1454,13 @@ async function excluirLanc(l){ if(!l) return;
   if(!await ask(`Excluir o lançamento de ${fmt(l.qtd)} ${esc(l.unidade||'')} de <b>${esc(l.descricao)}</b> (${rn(l.rodada)}, ${esc(l.contador)})?`,{ok:'Excluir',danger:true,title:'Excluir lançamento'})) return;
   Store.del('inventarios/'+S.inv.id+'/lancamentos',l.id); logAcao('Excluiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} ${l.unidade||''} · ${rn(l.rodada)} · contador ${l.contador}`,{codigo:String(l.codigo),qtd:l.qtd,rodada:l.rodada,contador:l.contador||'',lancTs:l.ts||''}); toast('Lançamento excluído'); }
 async function editarLanc(l){ if(!l) return;
-  const v=await askText('Corrigir quantidade',{label:`${l.descricao} — lançado: ${fmt(l.qtd)} ${l.unidade||''}`,value:fmt(l.qtd).replace(/\./g,''),inputmode:'decimal'}); if(v==null||v.trim()==='') return;
-  const q=parseNum(v); if(!(q>=0)) return toast('Quantidade inválida',true); if(eq(q,l.qtd)) return;
-  Store.set('inventarios/'+S.inv.id+'/lancamentos',l.id,{qtd:r3(q),qtdAnterior:l.qtd,editadoPor:quem(),editadoEm:now()});
+  const v=await askText('Corrigir quantidade',{label:`${l.descricao} — lançado: ${fmt(l.qtd)} ${l.unidade||''}`,value:l.cx?`${fmt(l.cx)}x${fmt(l.fator)}${l.av?'+'+fmt(l.av):''}`.replace(/\./g,''):fmt(l.qtd).replace(/\./g,''),inputmode:'text'}); if(v==null||v.trim()==='') return;
+  const ex=parseQtdExpr(v); const q=ex?ex.q:parseNum(v); if(!(q>=0)) return toast('Quantidade inválida',true); if(eq(q,l.qtd) && !ex) return;
+  Store.set('inventarios/'+S.inv.id+'/lancamentos',l.id,{qtd:r3(q),qtdAnterior:l.qtd,editadoPor:quem(),editadoEm:now(),cx:ex?ex.cx:null,fator:ex?ex.f:null,av:ex?ex.av:null});
   logAcao('Corrigiu lançamento',`${l.descricao} (${l.codigo}) · ${fmt(l.qtd)} → ${fmt(q)} · ${rn(l.rodada)} · contador ${l.contador}`,{codigo:String(l.codigo),qtd:q,qtdAntes:l.qtd,rodada:l.rodada,contador:l.contador||''}); toast('Quantidade corrigida'); }
-function lancar(p,qtd,silent){
-  const id=Store.add('inventarios/'+S.inv.id+'/lancamentos',{rodada:S.rodada,codigo:String(p.codigo),descricao:p.descricao,unidade:p.unidade||'',qtd:r3(qtd),contador:S.contador,contadorId:(S.me&&S.me.nome===S.contador)?S.me.id:'',device:DEV,ts:now()});
-  if(!silent) toast(`✓ ${fmt(qtd)} ${p.unidade||''} — ${String(p.descricao).slice(0,32)}`);
+function lancar(p,qtd,silent,extra){
+  const id=Store.add('inventarios/'+S.inv.id+'/lancamentos',{rodada:S.rodada,codigo:String(p.codigo),descricao:p.descricao,unidade:p.unidade||'',qtd:r3(qtd),contador:S.contador,contadorId:(S.me&&S.me.nome===S.contador)?S.me.id:'',device:DEV,ts:now(),...(extra||{})});
+  if(!silent) toast(`✓ ${extra&&extra.cx?cxTxt(extra)+' = ':''}${fmt(qtd)} ${p.unidade||''} — ${String(p.descricao).slice(0,32)}`);
   return id;
 }
 function novoProduto(pre){
@@ -1467,9 +1519,13 @@ function handleCode(code,src){
   code=String(code||'').trim(); if(!code) return;
   const p=findExact(code);
   if(p){ setPending(p,src); return; }
+  // código de caixa fechada (14 dígitos): acha a unidade pelo código de dentro
+  const un=dunParaUnidade(code), dun=un?String(code).replace(/\D/g,''):'';
+  if(un){ const pu=findExact(un); if(pu){ setPending(pu,src,{dun}); return; } }
+  const achaRes=()=>{ const r=findReserva(code); if(r) return [r,{}]; const r2=un&&findReserva(un); return r2?[r2,{dun}]:null; };
   if(S.inv && S.inv.reservaN){
-    const r=findReserva(code); if(r){ setPending(promover(r),src); return; }
-    if(!S.reserva){ carregarReserva().then(()=>{ const r2=findReserva(code); if(r2) setPending(promover(r2),src); else { beep(false); if(S.pend && LS.get('cvinv_auto',true)) confirmPending(); naoEncontrado(code); } }); return; }
+    const r=achaRes(); if(r){ setPending(promover(r[0]),src,r[1]); return; }
+    if(!S.reserva){ carregarReserva().then(()=>{ const r2=achaRes(); if(r2) setPending(promover(r2[0]),src,r2[1]); else { beep(false); if(S.pend && LS.get('cvinv_auto',true)) confirmPending(); naoEncontrado(code); } }); return; }
   }
   beep(false);
   if(S.pend && LS.get('cvinv_auto',true)) confirmPending();
@@ -2009,7 +2065,7 @@ V.lancamentos_refresh = ()=>{
   if(f!=='todas') L=L.filter(l=>String(l.rodada)===f);
   b.innerHTML=`<div class="tabs">${[['todas','Todas'],...rodadasDe(S.inv).map(r=>[String(r),rn(r)])].map(([k,l])=>`<button data-t="${k}" class="${f===k?'on':''}">${l}</button>`).join('')}</div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th>Hora</th><th>Cont.</th><th>Contador</th><th>Código</th><th>Descrição</th><th class="n">Qtd</th><th></th></tr></thead><tbody>
-    ${L.slice(0,1500).map(l=>`<tr><td class="small">${dtBR(l.ts)}</td><td class="small">${rn(l.rodada)}</td><td>${esc(l.contador)}</td><td class="mono">${esc(l.codigo)}</td><td>${esc(l.descricao)}</td><td class="n">${fmt(l.qtd)} ${esc(l.unidade||'')}${l.editadoEm?` <span class="badge b-warn" title="Corrigido por ${esc(l.editadoPor)} (antes: ${fmt(l.qtdAnterior)})">corrigido</span>`:''}</td><td style="white-space:nowrap"><button class="x ed" data-ed="${l.id}">✎</button> <button class="x" data-del="${l.id}">✕</button></td></tr>`).join('')||'<tr><td colspan="7" class="empty">Sem lançamentos</td></tr>'}
+    ${L.slice(0,1500).map(l=>`<tr><td class="small">${dtBR(l.ts)}</td><td class="small">${rn(l.rodada)}</td><td>${esc(l.contador)}</td><td class="mono">${esc(l.codigo)}</td><td>${esc(l.descricao)}</td><td class="n">${fmt(l.qtd)} ${esc(l.unidade||'')}${l.cx?`<br><small class="muted">${esc(cxTxt(l))}</small>`:''}${l.editadoEm?` <span class="badge b-warn" title="Corrigido por ${esc(l.editadoPor)} (antes: ${fmt(l.qtdAnterior)})">corrigido</span>`:''}</td><td style="white-space:nowrap"><button class="x ed" data-ed="${l.id}">✎</button> <button class="x" data-del="${l.id}">✕</button></td></tr>`).join('')||'<tr><td colspan="7" class="empty">Sem lançamentos</td></tr>'}
     </tbody></table></div>`;
   b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{ S.tabLanc=x.dataset.t; V.lancamentos_refresh(); });
   b.querySelectorAll('[data-del]').forEach(x=>x.onclick=()=>excluirLanc(S.lanc.find(z=>z.id===x.dataset.del)));
@@ -2901,7 +2957,7 @@ P.log = async ()=>{
       const P2='inventarios/'+inv.id;
       const [L,G,prods]=await Promise.all([Store.list(P2+'/lancamentos'),Store.list(P2+'/log'),Store.list(P2+'/produtos')]);
       const pm=new Map(prods.map(p=>[String(p.codigo),p]));
-      L.forEach(l=>{ const p=pm.get(String(l.codigo))||{}; EV.push({ts:l.ts,inv,tipo:'cont',acao:'Contou',codigo:String(l.codigo),descricao:l.descricao||p.descricao||'',ean:p.ean||'',un:l.unidade||p.unidade||'',est:p.estoque,qtd:l.qtd,rodada:l.rodada,quem:l.contador||'',device:l.device||''}); });
+      L.forEach(l=>{ const p=pm.get(String(l.codigo))||{}; EV.push({ts:l.ts,inv,tipo:'cont',acao:'Contou',codigo:String(l.codigo),descricao:l.descricao||p.descricao||'',ean:p.ean||'',un:l.unidade||p.unidade||'',est:p.estoque,qtd:l.qtd,rodada:l.rodada,quem:l.contador||'',device:l.device||'',detalhe:cxTxt(l)}); });
       G.forEach(g=>{ const cod=g.codigo||((String(g.detalhe||'').match(/\(([^)·\s]+)/)||[])[1])||''; const p=pm.get(String(cod))||{};
         const alt=/lançamento/i.test(g.acao);
         // a contagem que depois foi excluída continua aparecendo no log, marcada
@@ -2946,7 +3002,7 @@ P.log = async ()=>{
     const curto=s=>{ s=String(s||''); return s.length>38?s.slice(0,36)+'…':s; };
     const ent=e=>{ const q=`<b>${fmt(e.qtd)}</b> ${esc(e.un||'')}`; const pre=!umP&&e.codigo?`<span class="lgpn">${esc(curto(e.descricao||e.codigo))}</span> · `:''; let tx; const sub=[];
       if(e.ex){ tx=`<s>${esc(e.quem||'—')} contou ${q}</s> · excluído${e.exEm?' às '+hh(e.exEm):''}`; if(e.exPor) sub.push('Por: '+esc(e.exPor)); }
-      else if(e.acao==='Contou') tx=`${esc(e.quem||'—')} contou ${q}`;
+      else if(e.acao==='Contou'){ tx=`${esc(e.quem||'—')} contou ${q}`; if(e.detalhe) sub.push('📦 '+esc(e.detalhe)); }
       else if(e.acao==='Corrigiu lançamento'){ tx=`${esc(e.contador||e.quem||'—')} corrigiu ${e.qtdAntes!=null?fmt(e.qtdAntes)+' → ':''}<b>${fmt(e.qtd)}</b> ${esc(e.un||'')}`; if(e.rodada) sub.push(esc(rn(e.rodada,e.inv))); if(e.contador&&e.contador!==e.quem) sub.push('Por: '+esc(e.quem)); }
       else if(e.acao==='Excluiu lançamento'){ tx=`${esc(e.quem||'—')} excluiu ${e.qtd!=null?'o lançamento de '+q:'um lançamento'}${e.contador&&e.contador!==e.quem?' de '+esc(e.contador):''}`; if(e.rodada) sub.push(esc(rn(e.rodada,e.inv))); }
       else { tx=`${esc(e.quem||'—')} ${esc(lf(e.acao))}`; if(e.detalhe) sub.push(esc(e.detalhe)); }
