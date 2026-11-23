@@ -125,3 +125,9 @@ cabeçalhos repetidos em cada página, linhas de GRUPO/SUB-GRUPO e colunas deslo
 - A contagem abre em "Caixas fechadas × Unid. por caixa + Avulsas". Na 1ª vez o contador informa quantas unidades vêm na caixa; o fator fica guardado na empresa (campo `caixas`) e vale para os próximos inventários.
 - Bipar de novo a caixa soma +1 caixa; bipar a unidade soma +1 avulsa. Sem código de caixa: botão "📦 Caixas fechadas + avulsas" ou digitar `2x12+6`.
 - O lançamento guarda cx, fator e avulsas; aparece na lista, no log e no Excel do log ("2 cx × 12 + 6 avulsas").
+- (v3.9.4) Caixas com código próprio (ex.: PFERD — EAN/UPC da caixa sem relação com o da unidade): ao bipar, em "Produto não está na planilha" use "📦 É a caixa fechada de um produto da planilha", escolha o produto e informe as unidades por caixa. O vínculo fica na empresa e vale para todos os celulares e próximos inventários.
+
+## Resultado em tempo real, ordenação e cabeçalho fixo (v3.9.5–3.9.6)
+- Resultado: "Só itens já contados" (ligado por padrão enquanto o inventário está aberto) — KPIs, financeiro e tabelas consideram só o que já foi bipado; atualiza a cada lançamento. Item ainda sem a 2ª contagem mostra a diferença parcial com * (última contagem − estoque). Os arquivos para o ERP e os relatórios continuam usando o inventário inteiro.
+- Todas as tabelas do sistema ordenam clicando no título da coluna (▲/▼); a ordem se mantém quando a tela atualiza.
+- Cabeçalho das tabelas fica fixo abaixo da barra do topo ao rolar a página (e acompanha a rolagem lateral).

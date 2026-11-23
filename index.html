@@ -128,9 +128,12 @@ input.in:focus,select.in:focus{outline:2px solid var(--teal);border-color:var(--
 .kpi .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
 
 .tbl-wrap{overflow:auto;border-radius:var(--r);border:1px solid #e9ecef;background:#fff;box-shadow:var(--sh)}
+table.t thead th{z-index:2;box-shadow:inset 0 -1px 0 var(--line)}
+.thfix{position:fixed;z-index:25;overflow:hidden;pointer-events:auto;box-shadow:0 3px 6px rgba(0,0,0,.08)}.thfix table.t{margin:0}.thfix th{position:static!important}
 table.t{width:100%;min-width:680px;border-collapse:collapse;font-size:14px}
 table.t th{position:sticky;top:0;background:#f7f8f9;text-align:left;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}
 table.t td{padding:9px 10px;border-bottom:1px solid #f0f2f4;vertical-align:top}
+table.t.srt th{cursor:pointer;user-select:none}table.t.srt th:hover{color:var(--navy)}table.t th.s-up::after{content:' ▲';font-size:10px}table.t th.s-dn::after{content:' ▼';font-size:10px}.rescont.on{border:1px solid #9fd9d1;background:#f4fbfa}
 table.t td.n,table.t th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 table.t tr.hl td{background:#fffaf0}
 .pos{color:#1d7a46;font-weight:700}.neg{color:var(--red);font-weight:700}
@@ -414,7 +417,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.9.3';
+const APP_VERSION = '3.9.6';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -464,6 +467,9 @@ function salvarFatorCx(p,f,dun){ if(!S.empresa||!(f>0)) return; const cod=String
   S.empresa.caixas={...all,[cod]:novo}; Store.set('empresas',S.empresa.id,{caixas:{[cod]:novo}}); }
 function parseQtdExpr(v){ const t=String(v||'').toLowerCase().replace(/\s+/g,'').replace(/cx/g,'x'); const m=t.match(/^([\d.,]+)[x×*]([\d.,]+)(?:\+([\d.,]+))?$/); if(!m) return null;
   const cx=parseNum(m[1]),f=parseNum(m[2]),av=m[3]?parseNum(m[3]):0; if(!(cx>=0&&f>0&&av>=0)) return null; return {q:r3(cx*f+av),cx,f,av}; }
+/* códigos de caixa vinculados à mão (fabricantes que usam um EAN/UPC próprio na caixa, ex.: PFERD) */
+function findCaixa(code){ const k=eanKey(code)||norm(code); const C=(S.empresa&&S.empresa.caixas)||{};
+  for(const cod in C){ const d=C[cod]&&C[cod].duns; if(d && d[k]){ const p=S.idxCod.get(norm(cod)); if(p) return {p,dun:k}; } } return null; }
 function cxTxt(l){ return l&&l.cx?`${fmt(l.cx)} cx × ${fmt(l.fator)}${l.av?' + '+fmt(l.av)+' avulsa'+(l.av==1?'':'s'):''}`:''; }
 function toast(msg,err){ const t=document.createElement('div'); t.className='toast'+(err?' err':''); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),err?6000:2600); }
 let actx=null;
@@ -1399,20 +1405,24 @@ function completarCadastro(p,{depois}={}){
       closeModal(); if(n) toast('✓ Cadastro registrado'+(G?'':' — o gestor vai conferir')); if(depois) depois(p); else renderFast(); }; }});
 }
 /* código bipado que não está na planilha: pode ser um produto da planilha que está sem código de barras */
-function vincularEan(code,info){
+function vincularEan(code,info,caixa){
   const semEan=()=>baseLista().filter(p=>!p.novo);
-  let soSem=true;
-  modal(`<div class="row between"><h2>Qual produto é este?</h2><button class="x" id="vjX" aria-label="Fechar" style="color:var(--navy)">✕</button></div>
+  let soSem=!caixa;
+  modal(`<div class="row between"><h2>${caixa?'De qual produto é esta caixa?':'Qual produto é este?'}</h2><button class="x" id="vjX" aria-label="Fechar" style="color:var(--navy)">✕</button></div>
     <div class="small muted">Código bipado: <b class="mono">${esc(codFmt(code))}</b>${info&&info.descricao?' · '+esc(info.descricao):''}</div>
-    <p class="small muted" style="margin:6px 0 0">Escolha o produto da planilha. O código de barras fica gravado nele e a contagem continua normalmente.</p>
+    <p class="small muted" style="margin:6px 0 0">${caixa?'Escolha o produto (a unidade). Depois informe quantas unidades vêm na caixa. Das próximas vezes, bipar esta caixa já conta a caixa inteira.':'Escolha o produto da planilha. O código de barras fica gravado nele e a contagem continua normalmente.'}</p>
     <input class="in" id="vjQ" placeholder="Nome, código ou fabricante" autocomplete="off" style="margin-top:10px">
-    <label class="chk small muted" style="margin:8px 0 4px"><input type="checkbox" id="vjS" checked> Só produtos sem código de barras</label>
+    <label class="chk small muted" style="margin:8px 0 4px"><input type="checkbox" id="vjS" ${soSem?'checked':''}> Só produtos sem código de barras</label>
     <div id="vjL" class="lslist"></div>`,{cls:'full',onOpen:o=>{
       $('#vjX',o).onclick=closeModal;
       const draw=()=>{ const n=norm($('#vjQ',o).value).split(/\s+/).filter(Boolean);
         const arr=semEan().filter(p=>(!soSem||!eansDe(p).length) && (!n.length||n.every(w=>(norm(p.descricao)+' '+norm(p.codigo)+' '+norm(p.marca||'')+' '+norm(p.referencia||'')).includes(w))));
         $('#vjL',o).innerHTML=arr.slice(0,200).map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}${infoProd(p)}<span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')+(arr.length>200?`<div class="small muted" style="padding:8px">Mais ${arr.length-200} produto(s) — refine a busca</div>`:'')||'<div class="empty">Nenhum produto encontrado. Desmarque o filtro ou volte e cadastre como produto novo.</div>';
         $('#vjL',o).querySelectorAll('[data-c]').forEach(el=>el.onclick=async()=>{ const p=S.idxCod.get(norm(el.dataset.c)); if(!p) return;
+          if(caixa){ const v=await askText('Unidades por caixa',{label:`Quantas unidades de ${p.descricao} vêm nesta caixa? (${codFmt(code)})`,value:'',inputmode:'decimal'}); if(v==null) return;
+            const f=parseNum(v); if(!(f>0)) return toast('Informe quantas unidades vêm na caixa',true);
+            const k=eanKey(code)||norm(code); salvarFatorCx(p,f,k); logAcao('Vinculou código de caixa',`${p.codigo} · ${codFmt(code)} = caixa com ${fmt(f)} ${p.unidade||''}`,{codigo:String(p.codigo)});
+            closeModal(); toast(`✓ Caixa vinculada: ${fmt(f)} ${p.unidade||''} por caixa`); setPending(p,'tecl',{dun:k}); return; }
           if(eansDe(p).length && !await ask(`<b>${esc(p.descricao)}</b> já tem o código ${esc(eansDe(p).map(codFmt).join(' / '))}. Gravar <b>${esc(codFmt(code))}</b> como código adicional?`,{ok:'Gravar'})) return;
           if(gravarEan(p,code)){ closeModal(); toast('✓ Código de barras gravado no produto'); setPending(p,'tecl'); } }); };
       let t=null; $('#vjQ',o).oninput=()=>{ clearTimeout(t); t=setTimeout(draw,120); };
@@ -1519,6 +1529,7 @@ function handleCode(code,src){
   code=String(code||'').trim(); if(!code) return;
   const p=findExact(code);
   if(p){ setPending(p,src); return; }
+  const cv=findCaixa(code); if(cv){ setPending(cv.p,src,{dun:cv.dun}); return; }
   // código de caixa fechada (14 dígitos): acha a unidade pelo código de dentro
   const un=dunParaUnidade(code), dun=un?String(code).replace(/\D/g,''):'';
   if(un){ const pu=findExact(un); if(pu){ setPending(pu,src,{dun}); return; } }
@@ -1556,10 +1567,12 @@ async function naoEncontrado(code,forcar=false){
     ${ehMaster()&&SI5_ULT.motivo?`<div class="warnbox small" style="margin-top:8px"><b>Consulta SI5:</b> ${esc(SI5_ULT.motivo)}</div>`:''}
     <div class="row" style="flex-wrap:wrap;gap:8px;margin-top:10px">${google}${ehMaster()?'<button class="btn sec" id="nfR">🔄 Consultar SI5 de novo</button>':''}</div>`;
   m.querySelector('.md').innerHTML=`<h2>Produto não está na planilha</h2>${corpo}
-    <button class="btn block" id="nfV" style="margin-top:12px">📎 É um produto da planilha sem código de barras</button>
+    <button class="btn block" id="nfC" style="margin-top:12px">📦 É a caixa fechada de um produto da planilha</button>
+    <button class="btn sec block" id="nfV" style="margin-top:8px">📎 É um produto da planilha sem código de barras</button>
     <div class="row" style="justify-content:flex-end;margin-top:8px"><button class="btn sec" id="nfN">Cancelar</button><button class="btn sec" id="nfS">${info?'Cadastrar como novo e contar':'Cadastrar como novo'}</button></div>`;
   $('#nfN').onclick=closeModal; $('#nfS').onclick=()=>{ closeModal(); novoProduto(pre); };
   $('#nfV').onclick=()=>{ closeModal(); vincularEan(code,info); };
+  $('#nfC').onclick=()=>{ closeModal(); vincularEan(code,info,true); };
   const R=$('#nfR'); if(R) R.onclick=()=>naoEncontrado(code,true);
 }
 
@@ -2231,13 +2244,17 @@ function mapping(rows,fname,doErp){
 
 /* ---------- RESULTADO E RELATÓRIO ---------- */
 V.resultado = ()=>{
+  if(S._resInv!==S.inv.id){ S._resInv=S.inv.id; S.resCont=null; }
   header('Resultado',S.inv.nome);
   $('#app').innerHTML='<div id="rBody" class="stack"></div>';
   V.resultado_refresh();
 };
 V.resultado_refresh = ()=>{
   const b=$('#rBody'); if(!b) return;
-  const {rows,t}=calc(); const f=S.tabRes;
+  if(S.resCont==null) S.resCont=S.inv.status!=='finalizado';
+  const contados=new Set(S.lanc.map(l=>String(l.codigo))); const nTot=S.produtos.length;
+  const {rows,t}=S.resCont?calcFrom(S.produtos.filter(p=>contados.has(String(p.codigo))),S.lanc,modoDe(S.inv)):calc(); const f=S.tabRes;
+  const ultC=r=>{ for(let i=2;i>=0;i--) if(r.n[i]) return r.c[i]; return null; };
   const sum=a=>r3(a.reduce((s,r)=>s+Math.abs(r.dif),0));
   const G=S.resG||'';
   const inG=r=>!G||(r.grupo||GSEM)===G;
@@ -2247,6 +2264,8 @@ V.resultado_refresh = ()=>{
   const trAtivas=TR.filter(x=>TRm[x.key]!=='nao'), vTr=trAtivas.reduce((s,x)=>s+x.vComp,0);
   const CRall=cadRows(rows), CR=CRall.filter(x=>x.status!=='descartada');
   b.innerHTML=`
+    <div class="card rescont ${S.resCont?'on':''}"><label class="chk"><input type="checkbox" id="rSoC" ${S.resCont?'checked':''}> <b>Só itens já contados</b> <span class="small muted">— acompanha o inventário em tempo real, a cada bipada</span></label>
+      <div class="small" style="margin-top:4px">${fmt(contados.size)} de ${fmt(nTot)} itens já contados (${nTot?fmt(Math.round(contados.size/nTot*1000)/10):0}%)${S.resCont?' · números abaixo consideram só esses itens; o que ainda não foi contado não aparece como saída':' · mostrando todos os itens: o que não foi contado aparece como saída'}</div></div>
     ${t.pend?`<div class="warnbox">${t.pend} item(ns) com divergência ainda sem ${rn(3).toLowerCase()} — ficam sem quantidade final.</div>`:''}
     ${F.tem?`<div class="card fin"><div class="row between"><h3>💰 Resultado financeiro (pelo custo de compra)</h3>${t.pend?'<span class="badge b-warn">parcial — há pendentes</span>':''}</div>
       <div class="grid kpi" style="margin-top:10px">
@@ -2285,17 +2304,18 @@ V.resultado_refresh = ()=>{
       <div class="tbl-wrap"><table class="t cadt"><thead><tr><th>Produto</th><th>O que fazer no ERP</th><th>Quem</th><th></th></tr></thead><tbody>
       ${CRall.map(x=>`<tr class="${x.status==='descartada'?'cadoff':''}"><td style="min-width:110px">${esc(x.descricao)}<div class="small muted mono">${esc(x.codigo)}</div></td><td style="min-width:190px"><b>${esc(x.acao)}</b>${x.de?`<div class="small"><span class="muted">No ERP:</span> <s>${esc(x.de)}</s></div>`:''}${x.para?`<div class="small"><span class="muted">${x.campo==='outro'?'Obs.:':x.tipo==='novo'?'Dados:':'Correto:'}</span> <b>${esc(x.para)}</b></div>`:''}${x.tipo==='auto'?'<div class="small muted">detectado pelo sistema</div>':''}${x.aplicado&&x.tipo==='reg'&&!x.de?'<div class="small muted">já vale no app</div>':''}</td><td class="small">${esc(x.quem||'')}${x.ts?'<br>'+dtBR(x.ts):''}</td>
         <td style="white-space:nowrap">${x.id?(x.status==='descartada'?`<span class="badge b-gray">Desconsiderada</span> <button class="btn ghost" data-cs="${x.id}" data-v="aberta">Voltar</button>`:`${x.status==='confirmada'?'<span class="badge b-ok">Confirmada</span>':`<button class="btn ghost" data-cs="${x.id}" data-v="confirmada" title="Confirmar">✓</button>`}<button class="btn ghost" style="color:var(--red)" data-cs="${x.id}" data-v="descartada" title="Desconsiderar">✕</button>`):''}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Nenhuma divergência de cadastro</td></tr>'}
-      </tbody></table></div>`:f==='grupos'?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Grupo</th><th>Subgrupo</th><th class="n">Itens</th><th class="n">Batem</th><th class="n">Diverg. 1×2</th><th class="n">Pendentes</th><th class="n">Entradas</th><th class="n">Saídas</th>${F.tem?'<th class="n">Entradas (R$)</th><th class="n">Saídas (R$)</th><th class="n">Resultado (R$)</th>':''}</tr></thead><tbody>
-      ${resumo.map(x=>`<tr class="${x.sub?'':'hl'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td>${F.tem?`<td class="n pos">${brl(x.vEnt)}</td><td class="n neg">${brl(x.vSai)}</td><td class="n ${x.vEnt-x.vSai<0?'neg':'pos'}"><b>${brl(x.vEnt-x.vSai)}</b></td>`:''}</tr>`).join('')}</tbody></table></div>`:f==='trocas'?blocoTrocas(TR,TRm):`
+      </tbody></table></div>`:f==='grupos'?`<div class="tbl-wrap"><table class="t" data-blocks="1"><thead><tr><th>Grupo</th><th>Subgrupo</th><th class="n">Itens</th><th class="n">Batem</th><th class="n">Diverg. 1×2</th><th class="n">Pendentes</th><th class="n">Entradas</th><th class="n">Saídas</th>${F.tem?'<th class="n">Entradas (R$)</th><th class="n">Saídas (R$)</th><th class="n">Resultado (R$)</th>':''}</tr></thead><tbody>
+      ${resumo.map(x=>`<tr class="${x.sub?'':'hl blk'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td>${F.tem?`<td class="n pos">${brl(x.vEnt)}</td><td class="n neg">${brl(x.vSai)}</td><td class="n ${x.vEnt-x.vSai<0?'neg':'pos'}"><b>${brl(x.vEnt-x.vSai)}</b></td>`:''}</tr>`).join('')}</tbody></table></div>`:f==='trocas'?blocoTrocas(TR,TRm):`
     <div class="row"><select class="in" id="rG" style="max-width:340px"><option value="">Todos os grupos</option>${grupos(rows).map(x=>`<option ${G===x.g?'selected':''}>${esc(x.g)}</option>`).join('')}</select></div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">3ª</th><th class="n">Final</th><th class="n">Estoque</th><th class="n">Diferença</th>${F.tem?'<th class="n">Custo (R$)</th><th class="n">Valor dif. (R$)</th>':''}<th>Ação</th></tr></thead><tbody>
     ${flt.slice(0,3000).map(r=>`<tr class="${r.d12?'hl':''}"><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${`<div class="small muted">${r.ean?'EAN '+esc(r.ean):'<span class="semean" style="font-size:11px;font-weight:600;color:#6b7785;background:#eef1f4;border-radius:5px;padding:0 5px">s/ cód. barras</span>'}${(r.marca||r.referencia)?' · ':''}${r.marca||r.referencia?'🏭 '+esc([r.marca,r.referencia?'ref. '+r.referencia:''].filter(Boolean).join(' · ')):''}</div>`}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td>
       <td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(r.c[1])}</td><td class="n">${r.n[2]?fmt(r.c[2]):'—'}</td><td class="n"><b>${fmt(r.final)}</b></td><td class="n">${fmt(r.estoque)}</td>
-      <td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif==null?'—':fmtS(r.dif)}</td>${F.tem?`<td class="n">${r.custo?brl(r.custo):'—'}</td><td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif&&r.custo?brl(r.dif*r.custo):'—'}</td>`:''}
+      <td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif==null?(ultC(r)!=null?`<span class="muted" title="Parcial: última contagem − estoque">${fmtS(r3(ultC(r)-r.estoque))}*</span>`:'—'):fmtS(r.dif)}</td>${F.tem?`<td class="n">${r.custo?brl(r.custo):'—'}</td><td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif&&r.custo?brl(r.dif*r.custo):'—'}</td>`:''}
       <td>${r.status==='pendente'?'<span class="badge b-warn">Pendente</span>':r.dif>0.0004?'<span class="badge b-ok">Entrada</span>':r.dif<-0.0004?'<span class="badge b-red">Saída</span>':'<span class="badge b-gray">OK</span>'}</td></tr>`).join('')||`<tr><td colspan="${F.tem?13:11}" class="empty">Nenhum item</td></tr>`}
     </tbody></table></div>`}
     <div class="hint">Regra: se a 1ª e a 2ª contagens batem, esse é o valor final. Se divergem, vale a 3ª contagem. Produto da base que ninguém encontrou conta como zero (saída de todo o estoque). Diferença = contagem final − estoque do sistema.</div>`;
   b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{ S.tabRes=x.dataset.t; V.resultado_refresh(); });
+  $('#rSoC').onchange=e=>{ S.resCont=e.target.checked; V.resultado_refresh(); };
   const vt=$('#rVerTr'); if(vt) vt.onclick=ev=>{ ev.preventDefault(); S.tabRes='trocas'; V.resultado_refresh(); setTimeout(()=>{ const x=b.querySelector('.tabs'); if(x) x.scrollIntoView({behavior:'smooth'}); },50); };
   b.querySelectorAll('[data-tr]').forEach(x=>x.onclick=async()=>{ const [k,v]=[x.dataset.tr,x.dataset.v]; const m={...(S.inv.trocas||{})}; if(m[k]===v) delete m[k]; else m[k]=v;
     S.inv.trocas=m; V.resultado_refresh(); try{ await Store.set('inventarios',S.inv.id,{trocas:m}); }catch(e){ toast('Não salvou: '+(e.message||e),true); } });
@@ -3220,6 +3240,63 @@ const MODOS={
 };
 const modoDe=inv=>(inv&&MODOS[inv.modo])?inv.modo:'duas';
 const rodadasDe=inv=>MODOS[modoDe(inv)].rod;
+/* ---------- ordenação de tabelas ----------
+   Toda tabela .t do sistema: clicar no título da coluna ordena (crescente → decrescente).
+   A escolha fica guardada por tabela e é reaplicada quando a tela se redesenha (ex.: resultado em tempo real).
+   data-blocks: linhas .blk puxam as linhas seguintes junto (total do grupo + subgrupos). */
+const SORT={};
+function tKey(tb){ return (S.view||'')+'|'+[...tb.tHead.rows[0].cells].map(c=>c.dataset.lbl||c.textContent.trim()).join('|'); }
+function cellVal(td){ if(!td) return {e:1}; if(td.dataset.sort!=null){ const n=Number(td.dataset.sort); return isNaN(n)?{t:td.dataset.sort}:{n}; }
+  let x=td.textContent.replace(/\s+/g,' ').trim(); if(!x||x==='—'||x==='-') return {e:1};
+  let m=x.match(/^(\d{2})\/(\d{2})\/(\d{2,4})(?:,?\s*(\d{2}):(\d{2})(?::(\d{2}))?)?/);
+  if(m){ const y=m[3].length===2?'20'+m[3]:m[3]; return {t:y+m[2]+m[1]+(m[4]||'00')+(m[5]||'00')+(m[6]||'00'),d:1}; }
+  const z=x.replace(/R\$/g,'').replace(/[−–]/g,'-').replace(/[*%]/g,'').trim();
+  m=z.match(/^([+-]?\s?[\d.]*\d(?:,\d+)?)(?:\s|$)/);
+  if(m && !/^0\d{3,}/.test(m[1].replace(/[+\-\s]/g,'')) && (z.length<=m[0].length+8)){ const n=parseNum(m[1].replace(/\s/g,'').replace(/^\+/,'')); if(!isNaN(n)) return {n}; }
+  return {t:x}; }
+function sortTabela(tb,col,dir){
+  const body=tb.tBodies[0]; if(!body) return; const rows=[...body.rows]; if(rows.length<2) return;
+  if(rows.some(r=>r.cells.length===1&&r.cells[0].colSpan>1)) return;
+  let grupos;
+  if(tb.dataset.blocks){ grupos=[]; rows.forEach(r=>{ if(r.classList.contains('blk')||!grupos.length) grupos.push([r]); else grupos[grupos.length-1].push(r); }); }
+  else grupos=rows.map(r=>[r]);
+  const cmp=(A,B)=>{ const a=cellVal(A[0].cells[col]), b=cellVal(B[0].cells[col]); if(a.e&&b.e) return 0; if(a.e) return 1; if(b.e) return -1;
+    if(a.n!=null&&b.n!=null) return (a.n-b.n)*dir; if(a.n!=null) return -1*dir; if(b.n!=null) return 1*dir;
+    return String(a.t).localeCompare(String(b.t),'pt-BR',{numeric:true,sensitivity:'base'})*dir; };
+  grupos.sort(cmp); const fr=document.createDocumentFragment(); grupos.forEach(g=>g.forEach(r=>fr.appendChild(r))); body.appendChild(fr);
+  [...tb.tHead.rows[0].cells].forEach((c,i)=>{ c.classList.toggle('s-up',i===col&&dir>0); c.classList.toggle('s-dn',i===col&&dir<0); });
+}
+document.addEventListener('click',e=>{ const th=e.target.closest('table.t thead th'); if(!th||e.target.closest('button,input,select,a')) return;
+  const tb=th.closest('table'); if(!tb.tBodies[0]||!th.textContent.trim()) return; const col=th.cellIndex, k=tKey(tb);
+  const cur=SORT[k]; const dir=cur&&cur.col===col?-cur.dir:1; SORT[k]={col,dir}; sortTabela(tb,col,dir); });
+new MutationObserver(()=>{ clearTimeout(window._srtT); window._srtT=setTimeout(()=>{ document.querySelectorAll('table.t').forEach(tb=>{ if(!tb.tHead||!tb.tHead.rows[0]) return; tb.classList.add('srt');
+  const sv=SORT[tKey(tb)]; if(sv && tb._srt!==tb.tBodies[0]){ tb._srt=tb.tBodies[0]; sortTabela(tb,sv.col,sv.dir); } }); if(THF&&!document.body.contains(THF.tb)){ THF.el.remove(); THF=null; } thFix(); },30); }).observe(document.body,{childList:true,subtree:true});
+/* ---------- cabeçalho fixo das tabelas ----------
+   A tabela rola com a página; quando o título das colunas passa por baixo da barra do topo, uma cópia dele
+   fica presa logo abaixo da barra, com as mesmas larguras e acompanhando a rolagem lateral. Clicar na cópia ordena. */
+let THF=null;
+function thFix(){
+  const topEl=$('#top'); const y0=topEl?topEl.getBoundingClientRect().bottom:0;
+  let alvo=null;
+  for(const tb of document.querySelectorAll('table.t')){ const w=tb.closest('.tbl-wrap'); if(!w||!tb.tHead||!tb.offsetParent) continue;
+    if(w.scrollHeight>w.clientHeight+4) continue; // tabela com rolagem própria: o título já fica preso dentro dela
+    if(tb.closest('#ov')) continue;
+    const r=tb.getBoundingClientRect(), hh=tb.tHead.getBoundingClientRect().height;
+    if(r.top<y0 && r.bottom>y0+hh+20){ alvo={tb,w}; break; } }
+  if(!alvo){ if(THF){ THF.el.remove(); THF=null; } return; }
+  const {tb,w}=alvo, wr=w.getBoundingClientRect();
+  if(!THF||THF.tb!==tb||THF.n!==tb.tHead.innerHTML.length){ if(THF) THF.el.remove();
+    const el=document.createElement('div'); el.className='thfix'; const t2=document.createElement('table'); t2.className=tb.className; t2.style.tableLayout='fixed';
+    t2.appendChild(tb.tHead.cloneNode(true)); el.appendChild(t2); document.body.appendChild(el);
+    el.addEventListener('click',e=>{ const th=e.target.closest('th'); if(!th) return; const o=tb.tHead.rows[0].cells[th.cellIndex]; if(o) o.click(); setTimeout(()=>{ if(THF) THF.n=-1; thFix(); },0); });
+    THF={el,tb,t2,n:tb.tHead.innerHTML.length}; }
+  const {el,t2}=THF; el.style.top=y0+'px'; el.style.left=wr.left+'px'; el.style.width=w.clientWidth+'px';
+  t2.style.width=tb.offsetWidth+'px'; const o=[...tb.tHead.rows[0].cells], c=[...t2.tHead.rows[0].cells];
+  o.forEach((th,i)=>{ if(c[i]){ c[i].style.width=th.getBoundingClientRect().width+'px'; c[i].className=th.className; } });
+  t2.style.transform=`translateX(${-w.scrollLeft}px)`;
+}
+addEventListener('scroll',()=>requestAnimationFrame(thFix),{passive:true,capture:true});
+addEventListener('resize',()=>requestAnimationFrame(thFix));
 function rn(r,inv=S.inv){ if(r===3 && modoDe(inv)==='uma_conf') return 'Conferência'; if(r===1 && modoDe(inv)!=='duas') return 'Contagem'; return ({1:'1ª contagem',2:'2ª contagem',3:'3ª contagem'})[r]; }
 function rodadasIniciais(modo){ return modo==='uma'?{r1:'aberta',r2:'nao',r3:'nao'}:modo==='uma_conf'?{r1:'aberta',r2:'nao',r3:'bloqueada'}:{r1:'aberta',r2:'aberta',r3:'bloqueada'}; }
 const lblDiv=inv=>({duas:'Divergências 1ª × 2ª',uma_conf:'Divergências contagem × estoque',uma:'Divergências'})[modoDe(inv)];
