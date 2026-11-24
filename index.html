@@ -138,6 +138,10 @@ table.t td.n,table.t th.n{text-align:right;font-variant-numeric:tabular-nums;whi
 table.t tr.hl td{background:#fffaf0}
 .pos{color:#1d7a46;font-weight:700}.neg{color:var(--red);font-weight:700}
 
+.gtabs{position:sticky;top:var(--topH,56px);z-index:28;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:2px;overflow-x:auto;padding:0 12px;scrollbar-width:none}.gtabs::-webkit-scrollbar{display:none}
+.gtabs button{border:0;background:none;padding:12px 14px 10px;font-weight:600;font-size:14px;color:#64748b;white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent}
+.gtabs button.on{color:var(--navy);border-bottom-color:var(--teal)}.gtabs button:hover{color:var(--navy)}.gtabs .n{display:inline-block;margin-left:6px;background:#eef2f6;color:#475569;border-radius:99px;font-size:11.5px;padding:1px 7px}.gtabs button.on .n{background:#e3f4f1;color:#0f766e}
+.kpi .card.click:hover{border-color:var(--teal)}.kpi .card .go{font-size:12px;color:var(--teal);margin-top:4px}
 .tabs{display:flex;gap:6px;overflow:auto;padding-bottom:2px}
 .tabs button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 14px;font-weight:600;font-size:13px;white-space:nowrap;cursor:pointer}
 .tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -391,6 +395,7 @@ textarea.in{width:100%;min-height:150px;border:1px solid var(--line);border-radi
 <body>
 <header class="top" id="top"></header>
 <div id="modebar"></div>
+<nav id="gtabs" class="gtabs" hidden></nav>
 <main id="app"><div class="splash"><div class="spin"></div><div id="splashMsg">Abrindo o app…</div></div></main>
 
 <script>
@@ -417,7 +422,7 @@ const FIREBASE_CONFIG = {
   storageBucket: "...", messagingSenderId: "...", appId: "..."
 };
 */
-const APP_VERSION = '3.9.6';
+const APP_VERSION = '3.9.8';
 const LOGO_SVG = (c)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="1193.73 523.53 442.51 63.83"><path fill="${c}" d="M1322.09 527.20L1322.09 585.36L1285.64 585.36C1277.86 585.36 1272.00 582.79 1268.04 577.64C1264.19 572.63 1262.26 565.23 1262.26 555.45L1262.26 525.53L1281.53 525.53L1281.53 557.91C1281.53 560.590 1282.10 563.51 1283.55 565.51C1284.57 566.94 1286.11 567.89 1288.29 567.89L1302.82 567.89L1302.82 525.53L1322.09 525.53L1322.09 527.20"/><path fill="${c}" d="M1386.95 585.36L1359.85 585.36C1354.54 585.36 1349.94 584.96 1346.07 584.16C1342.09 583.34 1338.87 582.10 1336.40 580.43C1333.86 578.71 1331.94 576.46 1330.67 573.70C1329.42 570.99 1328.79 567.82 1328.79 564.16L1328.79 525.53L1348.06 525.53L1348.06 561.15C1348.06 561.71 1348.10 562.22 1348.18 562.69C1348.26 563.17 1348.37 563.61 1348.53 564.04C1349.12 565.67 1350.89 566.62 1352.92 567.16C1355.24 567.79 1357.91 567.89 1359.85 567.89L1388.62 567.89L1388.62 585.36L1386.95 585.36"/><path fill="${c}" d="M1606.60 543.00C1604.09 543.00 1601.97 543.14 1600.22 543.44C1598.56 543.72 1597.26 544.12 1596.33 544.64C1595.46 545.13 1594.80 545.70 1594.36 546.35C1594.29 546.46 1594.23 547.78 1594.17 547.89L1626.00 547.89L1626.00 563.01L1594.24 563.01C1594.30 563.13 1594.37 564.37 1594.45 564.48C1594.88 565.14 1595.50 565.73 1596.31 566.24C1597.14 566.77 1598.33 567.17 1599.86 567.45C1601.49 567.75 1603.52 567.89 1605.94 567.89L1634.25 567.89L1634.25 585.36L1605.94 585.36C1603.09 585.36 1600.43 585.25 1597.96 585.02C1595.49 584.79 1593.27 584.44 1591.31 583.99C1589.30 583.52 1587.49 582.95 1585.87 582.28C1584.22 581.59 1582.76 580.79 1581.51 579.88C1580.24 578.95 1579.14 577.92 1578.22 576.78C1577.30 575.64 1576.56 574.39 1576.01 573.04C1575.47 571.73 1575.07 570.33 1574.81 568.84C1574.55 567.36 1574.42 565.81 1574.42 564.16L1574.42 546.82C1574.42 545.20 1574.55 543.63 1574.83 542.12C1575.10 540.61 1575.51 539.19 1576.06 537.85C1576.63 536.46 1577.39 535.19 1578.34 534.04C1579.29 532.89 1580.42 531.86 1581.73 530.95C1583.02 530.06 1584.50 529.27 1586.18 528.59C1587.82 527.93 1589.66 527.37 1591.69 526.90C1593.70 526.45 1595.95 526.10 1598.46 525.88C1600.98 525.65 1603.69 525.53 1606.60 525.53L1634.25 525.53L1634.25 543.00L1606.60 543.00"/><path fill="${c}" d="M1412.92 585.36L1395.32 585.36L1395.32 543.00L1375.04 543.00L1375.04 525.53L1434.87 525.53L1434.87 543.00L1414.59 543.00L1414.59 585.36L1412.92 585.36"/><path fill="${c}" d="M1227.92 543.00C1225.32 543.00 1223.13 543.16 1221.36 543.48C1219.69 543.79 1218.40 544.23 1217.49 544.81C1216.63 545.35 1216.00 545.98 1215.59 546.68C1215.20 547.36 1215.00 548.15 1215.00 549.05L1215.00 561.20C1215.00 562.22 1215.15 563.14 1215.51 563.93C1215.85 564.68 1216.39 565.34 1217.17 565.89C1218.37 566.72 1220.05 567.22 1221.81 567.51C1223.67 567.820 1225.64 567.89 1227.26 567.89L1255.56 567.89L1255.56 585.36L1227.26 585.36C1224.41 585.36 1221.75 585.25 1219.28 585.02C1216.81 584.79 1214.59 584.44 1212.62 583.99C1207.23 582.74 1203.04 580.71 1200.16 577.51C1197.25 574.28 1195.73 569.95 1195.73 564.16L1195.73 546.82C1195.73 540.90 1197.31 536.54 1200.32 533.31C1203.27 530.13 1207.55 528.15 1213.01 526.90C1215.02 526.45 1217.27 526.10 1219.78 525.88C1222.30 525.65 1225.01 525.53 1227.92 525.53L1255.56 525.53L1255.56 543.00L1227.92 543.00"/><path fill="${c}" d="M1459.71 585.36L1441.57 585.36L1441.57 525.53L1461.44 525.53L1461.44 585.36L1459.71 585.36"/><path fill="#00AE9C" fill-rule="evenodd" d="M1560.97 525.53L1574.42 525.53L1567.69 539.04L1560.97 525.53"/><path fill="${c}" fill-rule="evenodd" d="M1554.38 525.53L1564.37 545.72L1544.64 585.36L1537.57 585.36L1531.13 572.43L1554.38 525.53"/><path fill="#00AE9C" fill-rule="evenodd" d="M1507.98 525.53L1517.95 545.47L1498.01 545.47L1507.930 565.42L1508.03 565.42L1527.83 525.53L1547.82 525.53L1517.95 585.36L1497.91 585.36L1468.14 525.53L1507.98 525.53"/></svg>`;
 
 /* ---------------- utilidades ---------------- */
@@ -454,6 +459,8 @@ function parseNum(v){
   const n=parseFloat(s); return isNaN(n)?0:n;
 }
 const eanKey = s => String(s||'').replace(/\D/g,'').replace(/^0+/,'');
+/* tira os zeros da frente (o ERP manda 000000000610101324 → 610101324; etiqueta 000000011802 → 11802) */
+const semZeros = s => String(s??'').trim().replace(/^0+(?=.)/,'');
 /* ---------- caixa fechada (DUN-14 / GTIN-14) ----------
    1º dígito (1 a 8) = indicador da embalagem; os 12 seguintes = código da unidade sem o dígito final;
    o último é um novo dígito verificador. O indicador NÃO diz quantas unidades vêm na caixa:
@@ -655,13 +662,16 @@ function back(){ if(!S.stack.length) return; try{ history.back(); }catch(e){ bac
 window.addEventListener('popstate',()=>{ if(S.stack.length) backInternal(); });
 
 function indexProdutos(){
-  S.idxEan=new Map(); S.idxCod=new Map();
+  S.idxEan=new Map(); S.idxCod=new Map(); S.idxCodZ=new Map(); S.idxForn=new Map();
+  S.produtos.forEach(p=>{ if(p.codigo){ const z=semZeros(norm(p.codigo)); if(!S.idxCodZ.has(z)) S.idxCodZ.set(z,p); } if(p.forn){ const f=semZeros(norm(p.forn)); if(f && !S.idxForn.has(f)) S.idxForn.set(f,p); } });
   S.produtos.forEach(p=>{ if(p.ean) String(p.ean).split(/[;,\s]+/).forEach(e=>{ if(!e) return; if(/^\d+$/.test(e)){ const k=eanKey(e); if(k) S.idxEan.set(k,p); } else S.idxEan.set('#'+norm(e),p); }); if(p.codigo) S.idxCod.set(norm(p.codigo),p); });
 }
 function findExact(code){
   const c=String(code||'').trim(); if(!c) return null;
   // QR Code e RFID (EPC) podem ter letras: nesses casos procura pelo código exato, não pelo código de barras
-  return (/^[\d\s.-]+$/.test(c)?S.idxEan.get(eanKey(c)):null) || S.idxCod.get(norm(c)) || S.idxEan.get('#'+norm(c)) || null;
+  const z=semZeros(norm(c));
+  return (/^[\d\s.-]+$/.test(c)?S.idxEan.get(eanKey(c)):null) || S.idxCod.get(norm(c)) || S.idxEan.get('#'+norm(c))
+    || (S.idxCodZ&&S.idxCodZ.get(z)) || (S.idxForn&&S.idxForn.get(z)) || null;
 }
 /* ---------- itens de consulta (estoque zero) ----------
    Em bases grandes (ex.: 35 mil itens, a maioria com estoque zero) só os itens com estoque entram na lista
@@ -673,21 +683,22 @@ function carregarReserva(){
   if(S.reservaP && S.reservaP.inv===S.inv.id) return S.reservaP.p;
   const id=S.inv.id;
   const p=Store.list('inventarios/'+id+'/reserva').then(docs=>{
-    const K=['codigo','descricao','ean','unidade','grupo','subgrupo','custo','referencia','marca'];
+    const K=['codigo','descricao','ean','unidade','grupo','subgrupo','custo','referencia','marca','forn'];
     const list=[]; docs.forEach(d=>{ try{ JSON.parse(d.itens||'[]').forEach(a=>{ const o={_res:true}; K.forEach((k,i)=>o[k]=a[i]??''); o.custo=Number(o.custo)||0; list.push(o); }); }catch(e){} });
-    const idx=new Map(); list.forEach(o=>{ if(o.ean){ const k=eanKey(o.ean); if(k) idx.set(k,o); } idx.set('c:'+norm(o.codigo),o); });
+    const idx=new Map(); list.forEach(o=>{ if(o.ean){ const k=eanKey(o.ean); if(k) idx.set(k,o); } idx.set('c:'+norm(o.codigo),o); const z='z:'+semZeros(norm(o.codigo)); if(!idx.has(z)) idx.set(z,o); if(o.forn){ const f='f:'+semZeros(norm(o.forn)); if(!idx.has(f)) idx.set(f,o); } });
     if(S.inv && S.inv.id===id) S.reserva={inv:id,list,idx};
     return S.reserva;
   }).catch(e=>{ console.warn('reserva',e); S.reservaP=null; return null; });
   S.reservaP={inv:id,p}; return p;
 }
 function findReserva(code){ const R=S.reserva; if(!R) return null; const c=String(code||'').trim();
-  return (/^[\d\s.-]+$/.test(c)?R.idx.get(eanKey(c)):null) || R.idx.get('c:'+norm(c)) || null; }
+  const z=semZeros(norm(c));
+  return (/^[\d\s.-]+$/.test(c)?R.idx.get(eanKey(c)):null) || R.idx.get('c:'+norm(c)) || R.idx.get('z:'+z) || R.idx.get('f:'+z) || null; }
 /* coloca o item de consulta na lista de contagem (id fixo: dois celulares bipando ao mesmo tempo não duplicam) */
 function promover(it){
   const ex=S.idxCod.get(norm(it.codigo)); if(ex) return ex;
   const id='r_'+norm(it.codigo).replace(/[^a-z0-9]/g,'_');
-  const d={codigo:it.codigo,descricao:it.descricao,ean:it.ean||'',unidade:it.unidade||'UN',grupo:it.grupo||'',subgrupo:it.subgrupo||'',custo:it.custo||0,referencia:it.referencia||'',marca:it.marca||'',estoque:0,novo:false,daConsulta:true};
+  const d={codigo:it.codigo,descricao:it.descricao,ean:it.ean||'',unidade:it.unidade||'UN',grupo:it.grupo||'',subgrupo:it.subgrupo||'',custo:it.custo||0,referencia:it.referencia||'',marca:it.marca||'',forn:it.forn||'',estoque:0,novo:false,daConsulta:true};
   Store.set('inventarios/'+S.inv.id+'/produtos',id,d).catch(e=>console.warn(e));
   const p={id,...d}; S.produtos.push(p); indexProdutos(); return p;
 }
@@ -698,13 +709,13 @@ function promover(it){
 function marcasSet(){ const k=S.produtos.length+'|'+(S.reserva?S.reserva.list.length:0); if(S._mk&&S._mk.k===k) return S._mk.set;
   const set=new Set(); S.produtos.forEach(p=>{ if(p.marca) set.add(norm(p.marca)); }); if(S.reserva) S.reserva.list.forEach(p=>{ if(p.marca) set.add(norm(p.marca)); });
   S._mk={k,set}; return set; }
-function prepBusca(q){ const ws=norm(q).split(/\s+/).filter(Boolean); const mk=marcasSet();
+function prepBusca(q){ q=String(q||'').split(/\s+/).map(w=>/^0+\d/.test(w)?semZeros(w):w).join(' '); const ws=norm(q).split(/\s+/).filter(Boolean); const mk=marcasSet();
   // nome de fabricante com duas palavras ("3m do brasil", "soldas brasil")
   const fab=[...mk].filter(m=>m.includes(' ')&&norm(q).includes(m));
   let resto=norm(q); fab.forEach(m=>{ resto=resto.replace(m,' '); });
   const words=resto.split(/\s+/).filter(Boolean);
   return {fab:fab.concat(words.filter(w=>mk.has(w))), words:words.filter(w=>!mk.has(w)), todas:ws}; }
-const hayDe=p=>p._h || (p._h=norm(p.descricao)+' '+norm(p.codigo)+' '+String(p.ean||'')+' '+norm(p.grupo)+' '+norm(p.subgrupo)+' '+norm(p.marca)+' '+norm(p.referencia));
+const hayDe=p=>p._h || (p._h=norm(p.descricao)+' '+norm(p.codigo)+' '+String(p.ean||'')+' '+norm(p.grupo)+' '+norm(p.subgrupo)+' '+norm(p.marca)+' '+norm(p.referencia)+' '+norm(p.forn));
 const tokDe=p=>p._t || (p._t=new Set(norm(p.descricao+' '+(p.referencia||'')).split(/[^a-z0-9]+/).filter(Boolean)));
 const daMarca=(p,B)=>B.fab.length>0 && B.fab.some(f=>norm(p.marca)===f);
 function bate(p,B){ const h=hayDe(p);
@@ -728,7 +739,7 @@ const GSEM='SEM GRUPO';
 /* marca / fabricante e referência do fabricante, quando vierem da planilha */
 /* linha padrão de produto — a mesma em todas as listas do app:
    descrição · Cód. interno · EAN (código de barras) · grupo › subgrupo · 🏭 fabricante/marca · ref. do fabricante */
-const idsProd=p=>`<span class="mono ids">${p.ean?`EAN <span class="ean">${esc(String(p.ean).split(/[;,\s]+/).filter(Boolean).map(codFmt).join(' / '))}</span>`:`<span class="semean">s/ cód. barras</span>`} · Cód. ${esc(p.codigo)}</span>`;
+const idsProd=p=>`<span class="mono ids">${p.ean?`EAN <span class="ean">${esc(String(p.ean).split(/[;,\s]+/).filter(Boolean).map(codFmt).join(' / '))}</span>`:`<span class="semean">s/ cód. barras</span>`} · Cód. ${esc(p.codigo)}${p.forn?` · Forn. ${esc(p.forn)}`:''}</span>`;
 const tagsProd=(p,grupo=true)=>`<span class="tags">${grupo?`<span class="gtag">${esc(gLbl(p))}</span>`:''}${fabTag(p)}</span>`;
 const infoProd=(p,{check=false,grupo=true,desc=null}={})=>`<div class="d"><b>${check?'✓ ':''}${desc||esc(p.descricao)}</b>${idsProd(p)}${tagsProd(p,grupo)}</div>`;
 /* destaca o que muda entre produtos parecidos da mesma lista (cor, modelo, medida, voltagem, referência):
@@ -761,7 +772,7 @@ function grupos(list){ const m=new Map(); list.forEach(p=>{ const g=p.grupo||GSE
 function calc(){ return calcFrom(S.produtos,S.lanc,modoDe(S.inv)); }
 function calcFrom(produtos,lanc,modo='duas'){
   const map=new Map();
-  produtos.forEach(p=>map.set(String(p.codigo),{codigo:String(p.codigo),descricao:p.descricao,ean:p.ean||'',unidade:p.unidade||'',grupo:p.grupo||'',subgrupo:p.subgrupo||'',custo:Number(p.custo)||0,marca:p.marca||'',referencia:p.referencia||'',estoque:Number(p.estoque)||0,novo:!!p.novo,c:[0,0,0],n:[0,0,0]}));
+  produtos.forEach(p=>map.set(String(p.codigo),{codigo:String(p.codigo),descricao:p.descricao,ean:p.ean||'',unidade:p.unidade||'',grupo:p.grupo||'',subgrupo:p.subgrupo||'',custo:Number(p.custo)||0,marca:p.marca||'',referencia:p.referencia||'',forn:p.forn||'',estoque:Number(p.estoque)||0,novo:!!p.novo,c:[0,0,0],n:[0,0,0]}));
   lanc.forEach(l=>{
     let r=map.get(String(l.codigo));
     if(!r){ r={codigo:String(l.codigo),descricao:l.descricao||'(sem cadastro)',ean:'',unidade:l.unidade||'',grupo:'',subgrupo:'',custo:0,estoque:0,novo:true,c:[0,0,0],n:[0,0,0]}; map.set(r.codigo,r); }
@@ -870,7 +881,23 @@ document.addEventListener('click',ev=>{
   document.body.appendChild(o);
 },true);
 window.addEventListener('unhandledrejection',ev=>{ const m=(ev.reason&&ev.reason.message)||String(ev.reason||''); if(/Falha ao carregar|firebase|Failed to fetch|aborted/i.test(m)) return; console.error(ev.reason); toast('Algo deu errado: '+m,true); });
-function render(){ if(S.view!=='acesso') document.body.classList.remove('hero-on'); modeBar(); telaAcesa(S.view==='contar'); return (V[S.view]||V.empresas)(); }
+function render(){ if(S.view!=='acesso') document.body.classList.remove('hero-on'); modeBar(); telaAcesa(S.view==='contar'); const r=(V[S.view]||V.empresas)(); abasGestor(); return r; }
+/* ---------- abas do gestor ----------
+   Painel, divergências, resultado, lançamentos, produtos, atividades, etiquetas e planilha ficam numa barra de abas
+   fixa logo abaixo do topo. Trocar de aba não empilha telas: "voltar" sai do gestor. */
+const ABAS_G=['gestor','confronto','resultado','lancamentos','produtos','log','etiquetas','importar'];
+function abasGestor(){
+  const nav=$('#gtabs'); if(!nav) return;
+  if(!S.inv || !ABAS_G.includes(S.view)){ nav.hidden=true; nav.innerHTML=''; return; }
+  const mC=modoDe(S.inv)==='uma_conf', base=S.produtos.filter(p=>!p.novo).length;
+  const A=[['gestor','📊 Painel'],...(modoDe(S.inv)==='uma'?[]:[['confronto',mC?'⚖ Contagem × estoque':'⚖ Confronto 1ª × 2ª']]),['resultado','📋 Resultado'],['lancamentos','🧾 Lançamentos',S.lanc.length],['produtos','📦 Produtos',base],['log','📜 Atividades'],['etiquetas','🏷 Códigos de barras'],['importar','⬆ Planilha']];
+  nav.hidden=false;
+  nav.innerHTML=A.map(([v,l,n])=>`<button data-aba="${v}" class="${S.view===v?'on':''}">${l}${n!=null?`<span class="n">${fmt(n)}</span>`:''}</button>`).join('');
+  document.documentElement.style.setProperty('--topH',($('#top').offsetHeight||56)+'px');
+  nav.querySelectorAll('[data-aba]').forEach(b=>b.onclick=()=>irAba(b.dataset.aba));
+  const on=nav.querySelector('.on'); if(on) on.scrollIntoView({block:'nearest',inline:'nearest'});
+}
+function irAba(v){ if(S.view===v) return; if(typeof lancMode!=='undefined' && lancMode!=='all') useGestorLanc(); closeModal(); go(v,false); }
 
 /* ---------- EMPRESAS ---------- */
 V.empresas = async ()=>{ S.view=adminOk()?'admin':(S.empresa?'inicio':'acesso'); return render(); };
@@ -1040,7 +1067,7 @@ function useGestorLanc(){
   S.unsub[i]=startLancWatch(true);
 }
 let liveT=null;
-function refreshLive(){ clearTimeout(liveT); liveT=setTimeout(()=>{ if(['contar','gestor','confronto','resultado','lancamentos'].includes(S.view)) (V[S.view+'_refresh']||V[S.view])(); },150); }
+function refreshLive(){ clearTimeout(liveT); liveT=setTimeout(()=>{ if(['contar','gestor','confronto','resultado','lancamentos'].includes(S.view)) (V[S.view+'_refresh']||V[S.view])(); if(ABAS_G.includes(S.view)) abasGestor(); },150); }
 
 /* ---------- HOME DO INVENTÁRIO ---------- */
 V.invhome = ()=>{
@@ -1354,7 +1381,7 @@ function logAcao(acao,detalhe,extra){ if(!S.inv) return; Store.add('inventarios/
    - Campo preenchido e errado: só é apontado; o app continua com o dado do ERP e a correção vai para o
      relatório "Divergências de cadastro" (corrigir no ERP). O gestor confirma ou desconsidera cada uma.
    ===================================================================== */
-const CAD_CAMPOS={ean:'Código de barras',descricao:'Descrição',unidade:'Unidade',grupo:'Grupo',subgrupo:'Subgrupo',marca:'Fabricante',referencia:'Referência'};
+const CAD_CAMPOS={ean:'Código de barras',descricao:'Descrição',unidade:'Unidade',grupo:'Grupo',subgrupo:'Subgrupo',marca:'Fabricante',referencia:'Referência',forn:'Código do fornecedor'};
 const CAD_UN=['UN','KG','CX','PCT','FD','L','G','ML','DZ','M','M2','M3','PC','PAR','RL','JG','KIT','SC','BD','GL','LT','TB','BR','CJ'];
 function registrarCad(p,campo,de,para,obs,aplicado){
   if(!S.inv) return;
@@ -1384,7 +1411,7 @@ function completarCadastro(p,{depois}={}){
   modal(`<h2>Completar cadastro</h2><div class="small muted mono">${esc(p.codigo)} · ${esc(p.descricao)}</div>
     <p class="small muted" style="margin:8px 0 0">Campo <b>vazio</b>: o que você preencher já vale no app. Campo <b>errado</b>: escreva o correto; ele vai para o relatório de correções do ERP.</p>
     <form id="fCad" class="stack" style="margin-top:10px">
-      ${['ean','descricao','unidade','grupo','subgrupo','marca','referencia'].map(linha).join('')}
+      ${['ean','descricao','unidade','grupo','subgrupo','marca','referencia','forn'].map(linha).join('')}
       <label class="f">Observação para o cadastro<textarea class="in" name="obs" rows="2" placeholder="Ex.: embalagem mudou, vem em caixa com 12"></textarea></label>
       <div class="row"><button type="button" class="btn sec" id="cdC" style="flex:1">Cancelar</button><button class="btn" style="flex:2">Salvar</button></div></form>`,
   {onOpen:o=>{ $('#cdC',o).onclick=closeModal;
@@ -1393,6 +1420,7 @@ function completarCadastro(p,{depois}={}){
       for(const k of Object.keys(CAD_CAMPOS)){
         let nv=String(d[k]||'').trim(); if(!nv) continue;
         if(['grupo','subgrupo','marca','unidade'].includes(k)) nv=nv.toUpperCase();
+        if(k==='forn') nv=semZeros(nv);
         const v=String(p[k]??'').trim();
         if(k==='ean'){ if(!gravarEan(p,nv)) return; n++; continue; }
         if(nv===v) continue;
@@ -1416,7 +1444,7 @@ function vincularEan(code,info,caixa){
     <div id="vjL" class="lslist"></div>`,{cls:'full',onOpen:o=>{
       $('#vjX',o).onclick=closeModal;
       const draw=()=>{ const n=norm($('#vjQ',o).value).split(/\s+/).filter(Boolean);
-        const arr=semEan().filter(p=>(!soSem||!eansDe(p).length) && (!n.length||n.every(w=>(norm(p.descricao)+' '+norm(p.codigo)+' '+norm(p.marca||'')+' '+norm(p.referencia||'')).includes(w))));
+        const arr=semEan().filter(p=>(!soSem||!eansDe(p).length) && (!n.length||n.every(w=>(norm(p.descricao)+' '+norm(p.codigo)+' '+norm(p.marca||'')+' '+norm(p.referencia||'')+' '+norm(p.forn||'')).includes(w))));
         $('#vjL',o).innerHTML=arr.slice(0,200).map(p=>`<div class="res" data-c="${esc(p.codigo)}">${thumb(p)}${infoProd(p)}<span class="badge b-gray">${esc(p.unidade||'UN')}</span></div>`).join('')+(arr.length>200?`<div class="small muted" style="padding:8px">Mais ${arr.length-200} produto(s) — refine a busca</div>`:'')||'<div class="empty">Nenhum produto encontrado. Desmarque o filtro ou volte e cadastre como produto novo.</div>';
         $('#vjL',o).querySelectorAll('[data-c]').forEach(el=>el.onclick=async()=>{ const p=S.idxCod.get(norm(el.dataset.c)); if(!p) return;
           if(caixa){ const v=await askText('Unidades por caixa',{label:`Quantas unidades de ${p.descricao} vêm nesta caixa? (${codFmt(code)})`,value:'',inputmode:'decimal'}); if(v==null) return;
@@ -1916,12 +1944,12 @@ V.gestor_refresh = ()=>{
   const pode3 = modoDe(i)==='uma_conf' ? (R.r1==='fechada' && R.r3==='bloqueada') : (R.r1==='fechada' && R.r2==='fechada' && R.r3==='bloqueada');
   b.innerHTML=`
     <div class="grid kpi">
-      <div class="card"><div class="l">Produtos na base</div><div class="v">${fmt(base)}</div></div>
-      <div class="card"><div class="l">Cadastrados na contagem</div><div class="v">${fmt(t.novos)}</div></div>
-      <div class="card"><div class="l">${lblDiv(i)}</div><div class="v">${fmt(t.div12)}</div></div>
-      <div class="card"><div class="l">Pendentes de ${modoDe(i)==='uma_conf'?'conferência':'3ª'}</div><div class="v">${fmt(t.pend)}</div></div>
-      <div class="card"><div class="l">Precisam de entrada</div><div class="v pos">${fmt(t.ent.length)}</div></div>
-      <div class="card"><div class="l">Precisam de saída</div><div class="v neg">${fmt(t.sai.length)}</div></div>
+      <div class="card click" data-kgo="produtos"><div class="l">Produtos na base</div><div class="v">${fmt(base)}</div><div class="go">Ver produtos ›</div></div>
+      <div class="card click" data-kgo="resultado" data-kt="novos"><div class="l">Cadastrados na contagem</div><div class="v">${fmt(t.novos)}</div><div class="go">Ver novos ›</div></div>
+      <div class="card click" data-kgo="${modoDe(i)==='uma'?'resultado':'confronto'}" data-kt="div"><div class="l">${lblDiv(i)}</div><div class="v">${fmt(t.div12)}</div><div class="go">Ver lista ›</div></div>
+      <div class="card click" data-kgo="resultado" data-kt="pend"><div class="l">Pendentes de ${modoDe(i)==='uma_conf'?'conferência':'3ª'}</div><div class="v">${fmt(t.pend)}</div><div class="go">Ver pendentes ›</div></div>
+      <div class="card click" data-kgo="resultado" data-kt="ent"><div class="l">Precisam de entrada</div><div class="v pos">${fmt(t.ent.length)}</div><div class="go">Ver entradas ›</div></div>
+      <div class="card click" data-kgo="resultado" data-kt="sai"><div class="l">Precisam de saída</div><div class="v neg">${fmt(t.sai.length)}</div><div class="go">Ver saídas ›</div></div>
     </div>
     ${!S.produtos.length?`<div class="warnbox">Nenhum produto importado. <button class="btn ghost" id="gImp2">Importar planilha agora</button></div>`:''}
     <div class="grid">${rodadasDe(i).map(r=>{ const s=R['r'+r]||'bloqueada', x=st[r-1];
@@ -1938,26 +1966,17 @@ V.gestor_refresh = ()=>{
         ${r===3&&s!=='bloqueada'?`<div class="small muted">${(i.divergentes||[]).length} itens na lista de recontagem</div>`:''}
         ${r===3&&s==='bloqueada'&&!pode3?`<div class="small muted" style="margin-top:4px">Encerre ${modoDe(i)==='uma_conf'?'a contagem':'a 1ª e a 2ª contagens'} para liberar.</div>`:''}
         <div class="row" style="margin-top:10px">${acts}</div></div>`; }).join('')}</div>
-    <div class="grid">
-      ${modoDe(i)==='uma'?'':`<div class="card click" id="gConf"><h3>⚖ ${modoDe(i)==='uma_conf'?'Contagem × estoque':'Confronto 1ª × 2ª'}</h3><div class="sub">${modoDe(i)==='uma_conf'?'Itens em que a contagem não bateu com o sistema (vão para a conferência)':'Lista de divergências entre as duas contagens cegas'}</div></div>`}
-      <div class="card click" id="gRes"><h3>📋 Resultado e relatório</h3><div class="sub">Contagem final × estoque, entradas e saídas, PDF e Excel</div></div>
-      <div class="card click" id="gLanc"><h3>🧾 Todos os lançamentos</h3><div class="sub">Conferir e corrigir lançamentos de cada contador</div></div>
-      <div class="card"><h3>🖼 Imagens dos produtos</h3><div class="sub" id="gImg">${(()=>{ const x=statusImagens(); return x.total?`${fmt(x.comImg)} de ${fmt(x.total)} produtos com imagem`:'Sem produtos com código de barras'; })()}</div>
-        <div class="small muted" style="margin-top:4px">As imagens aparecem aos poucos, conforme os produtos são bipados. ${MARCA}</div></div>
-      <div class="card click" id="gProd"><h3>📦 Produtos</h3><div class="sub">Corrigir descrição, código de barras, unidade, grupo ou estoque</div></div>
-      <div class="card click" id="gLog"><h3>📜 Registro de atividades</h3><div class="sub">Quem encerrou, liberou, corrigiu ou excluiu, e quando</div></div>
-      <div class="card click" id="gBar"><h3>🏷 Códigos de barras</h3><div class="sub">Ver e imprimir os códigos dos produtos — para testes e etiquetas</div></div>
-      <div class="card click" id="gImp"><h3>⬆ Planilha de estoque</h3><div class="sub">${S.produtos.length?fmt(base)+' produtos importados':'Importar Excel ou CSV'}</div></div>
-    </div>
+    <div class="small muted" id="gImg">🖼 ${(()=>{ const x=statusImagens(); return x.total?`Imagens: ${fmt(x.comImg)} de ${fmt(x.total)} produtos com código de barras já têm foto — aparecem aos poucos, conforme os produtos são bipados.`:'Sem produtos com código de barras para buscar imagem.'; })()} ${MARCA}</div>
     ${!fin?`<div class="row"><span class="spacer"></span><button class="btn red" id="gFin">Encerrar inventário e iniciar novo</button></div>`:`<div class="warnbox">Inventário encerrado em ${dtBR(i.finalizadoEm)}${i.finalizadoPor?' por '+esc(i.finalizadoPor):''}. <button class="btn ghost" id="gReab">Reabrir</button> <button class="btn ghost" id="gNovo2">Iniciar novo inventário</button></div>`}`;
   b.querySelectorAll('[data-esc]').forEach(x=>x.onclick=()=>escalaModal(+x.dataset.esc));
   const gn2=$('#gNovo2'); if(gn2) gn2.onclick=encerrarFluxo;
-  b.querySelectorAll('[data-close]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.close; if(await ask(`Encerrar a ${rn(r)}? Os contadores desta rodada não poderão mais lançar.`,{ok:'Encerrar'})) setRodada(r,'fechada'); });
+  b.querySelectorAll('[data-close]').forEach(x=>x.onclick=async()=>{ const r=+x.dataset.close; const it=st[r-1].itens, falta=r<3?Math.max(base-it,0):0;
+    const aviso=falta&&base&&it/base<0.9?`<div class="warnbox" style="margin-top:10px">Só <b>${fmt(it)}</b> de <b>${fmt(base)}</b> itens foram contados (${fmt(Math.round(it/base*1000)/10)}%). Os <b>${fmt(falta)}</b> não contados vão valer <b>zero</b>${modoDe(i)==='uma_conf'?' e os que têm estoque entram na lista da conferência':''}.</div>`:'';
+    if(await ask(`Encerrar a ${rn(r)}? Os contadores desta rodada não poderão mais lançar.${aviso}`,{ok:'Encerrar'})) setRodada(r,'fechada'); });
   b.querySelectorAll('[data-open]').forEach(x=>x.onclick=async()=>{ const r=x.dataset.open; if(await ask(`Reabrir a ${rn(r)}?`,{ok:'Reabrir'})) setRodada(r,'aberta'); });
   const l3=$('#lib3'); if(l3) l3.onclick=liberar3;
-  const gcf=$('#gConf'); if(gcf) gcf.onclick=()=>go('confronto'); $('#gRes').onclick=()=>go('resultado'); $('#gLanc').onclick=()=>go('lancamentos'); $('#gBar').onclick=()=>go('etiquetas'); $('#gProd').onclick=()=>go('produtos'); $('#gLog').onclick=()=>go('log');
-  $('#gImp').onclick=()=>go('importar');
-  const i2=$('#gImp2'); if(i2) i2.onclick=()=>go('importar');
+  b.querySelectorAll('[data-kgo]').forEach(x=>x.onclick=()=>{ if(x.dataset.kt){ S.tabRes=x.dataset.kt; S.resCont=false; S._resInv=S.inv.id; } irAba(x.dataset.kgo); });
+  const i2=$('#gImp2'); if(i2) i2.onclick=()=>irAba('importar');
   const f=$('#gFin'); if(f) f.onclick=encerrarFluxo;
   const rb=$('#gReab'); if(rb) rb.onclick=async()=>{ if(await ask('Reabrir este inventário?')){ Store.set('inventarios',i.id,{status:'contagem',finalizadoEm:null}); logAcao('Reabriu o inventário',''); } };
 };
@@ -1965,7 +1984,7 @@ function setRodada(r,st){ const R={...(S.inv.rodadas||{})}; R['r'+r]=st; Store.s
 async function liberar3(){
   const {rows}=calc(); const div=rows.filter(r=>r.d12).map(r=>r.codigo);
   const nm=modoDe(S.inv)==='uma_conf'?'conferência':'3ª contagem';
-  if(!div.length){ return ask(modoDe(S.inv)==='uma_conf'?'A contagem bateu com o estoque em todos os itens. Não há o que conferir — vá direto ao resultado.':'A 1ª e a 2ª contagens bateram em todos os itens. Não há o que recontar — vá direto ao resultado.',{ok:'Ver resultado',title:'Sem divergências'}).then(ok=>ok&&go('resultado')); }
+  if(!div.length){ return ask(modoDe(S.inv)==='uma_conf'?'A contagem bateu com o estoque em todos os itens. Não há o que conferir — vá direto ao resultado.':'A 1ª e a 2ª contagens bateram em todos os itens. Não há o que recontar — vá direto ao resultado.',{ok:'Ver resultado',title:'Sem divergências'}).then(ok=>ok&&irAba('resultado')); }
   if(!await ask(`Liberar a ${nm} com <b>${div.length}</b> item(ns) divergente(s)? Os contadores verão só a lista desses itens, sem quantidades.`,{ok:'Liberar'})) return;
   const R={...(S.inv.rodadas||{}),r3:'aberta'};
   await Store.set('inventarios',S.inv.id,{rodadas:R,divergentes:div,liberado3Em:now()}); S.inv={...S.inv,rodadas:R,divergentes:div}; logAcao('Liberou '+nm,div.length+' item(ns)'); toast(nm.charAt(0).toUpperCase()+nm.slice(1)+' liberada');
@@ -2059,7 +2078,7 @@ V.confronto_refresh = ()=>{
     <div class="row between"><h1>${d.length} divergência(s)</h1>
       <div class="row">${R.r3==='bloqueada'&&!aberta&&d.length?`<button class="btn" id="cLib">Liberar ${mC?'conferência':'3ª contagem'}</button>`:''}<button class="btn sec" id="cXls">Excel</button></div></div>
     ${d.length?`<div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">${mC?'Contagem':'1ª'}</th><th class="n">${mC?'Estoque':'2ª'}</th><th class="n">Diferença</th><th class="n">${mC?'Conferência':'3ª'}</th></tr></thead><tbody>
-      ${d.map(r=>`<tr><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${`<div class="small muted">${r.ean?'EAN '+esc(r.ean):'<span class="semean" style="font-size:11px;font-weight:600;color:#6b7785;background:#eef1f4;border-radius:5px;padding:0 5px">s/ cód. barras</span>'}${(r.marca||r.referencia)?' · ':''}${r.marca||r.referencia?'🏭 '+esc([r.marca,r.referencia?'ref. '+r.referencia:''].filter(Boolean).join(' · ')):''}</div>`}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td><td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(mC?r.estoque:r.c[1])}</td><td class="n">${fmtS(r3((mC?r.estoque:r.c[1])-r.c[0]))}</td><td class="n">${r.n[2]?fmt(r.c[2]):'<span class="badge b-warn">pendente</span>'}</td></tr>`).join('')}
+      ${d.map(r=>`<tr><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${`<div class="small muted">${r.ean?'EAN '+esc(r.ean):'<span class="semean" style="font-size:11px;font-weight:600;color:#6b7785;background:#eef1f4;border-radius:5px;padding:0 5px">s/ cód. barras</span>'}${(r.marca||r.referencia)?' · ':''}${r.marca||r.referencia?'🏭 '+esc([r.marca,r.referencia?'ref. '+r.referencia:''].filter(Boolean).join(' · ')):''}${r.forn?' · Forn. '+esc(r.forn):''}</div>`}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td><td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(mC?r.estoque:r.c[1])}</td><td class="n">${fmtS(r3((mC?r.estoque:r.c[1])-r.c[0]))}</td><td class="n">${r.n[2]?fmt(r.c[2]):'<span class="badge b-warn">pendente</span>'}</td></tr>`).join('')}
     </tbody></table></div>`:`<div class="card empty"><h2>Nenhuma divergência</h2><p>A 1ª e a 2ª contagens bateram em todos os itens contados.</p></div>`}`;
   const l=$('#cLib'); if(l) l.onclick=liberar3;
   $('#cXls').onclick=async()=>{ await lib('xlsx'); const aoa=[['Código','Descrição','Grupo','Subgrupo','Unidade','1ª contagem','2ª contagem','Diferença','3ª contagem']].concat(d.map(r=>[r.codigo,r.descricao,r.grupo,r.subgrupo,r.unidade,r.c[0],r.c[1],r3(r.c[1]-r.c[0]),r.n[2]?r.c[2]:''])); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,sheet(aoa),'Divergências 1x2'); XLSX.writeFile(wb,fileBase()+'_divergencias_1x2.xlsx'); };
@@ -2086,7 +2105,7 @@ V.lancamentos_refresh = ()=>{
 };
 
 /* ---------- IMPORTAR PLANILHA ---------- */
-const COLS=[['codigo','Código do produto',/^(cod|codigo|cód|código|id|sku)\b(?!.*(barra|fabric|refer))/],['subgrupo','Subgrupo',/^(sub ?-?grupo|sub ?-?categoria|sub ?-?familia|sub ?-?secao|sub ?-?departamento)/],['grupo','Grupo',/^(grupo|depart|secao|setor|categoria|familia|linha)/],['descricao','Descrição',/desc|produto|nome/],['ean','Código de barras',/barra|ean|gtin|cod.*bar/],['referencia','Referência do fabricante (opcional)',/^(ref|referencia|cod.*fabric)/],['marca','Marca (opcional)',/^(marca|fabricante)/],['estoque','Quantidade em estoque',/estoq|qtd|quant|saldo|qtde/],['custo','Custo unitário (opcional)',/^(custo|preco de custo|preço de custo|vl ?custo|valor custo|custo medio|custo médio|pr\.? ?compra|preco ?(de )?compra|preço ?(de )?compra|custo unit)/],['unidade','Unidade',/^(un|und|unid|unidade|medida|um)\b/]];
+const COLS=[['forn','Código do fornecedor (opcional)',/^(cod|codigo|ref|referencia)\b\.?\s*(do |de |da )?forn/],['codigo','Código do produto',/^(cod|codigo|cód|código|id|sku)\b(?!.*(barra|fabric|refer|forn))/],['subgrupo','Subgrupo',/^(sub ?-?grupo|sub ?-?categoria|sub ?-?familia|sub ?-?secao|sub ?-?departamento)/],['grupo','Grupo',/^(grupo|depart|secao|setor|categoria|familia|linha)/],['descricao','Descrição',/desc|produto|nome/],['ean','Código de barras',/barra|ean|gtin|cod.*bar/],['referencia','Referência do fabricante (opcional)',/^(ref|referencia|cod.*fabric)/],['marca','Marca (opcional)',/^(marca|fabricante)/],['estoque','Quantidade em estoque',/estoq|qtd|quant|saldo|qtde/],['custo','Custo unitário (opcional)',/^(custo|preco de custo|preço de custo|vl ?custo|valor custo|custo medio|custo médio|pr\.? ?compra|preco ?(de )?compra|preço ?(de )?compra|custo unit)/],['unidade','Unidade',/^(un|und|unid|unidade|medida|um)\b/]];
 /* ---------- leitura de CSV (qualquer separador e acentuação) ---------- */
 function lerTexto(buf){ try{ return new TextDecoder('utf-8',{fatal:true}).decode(buf); }catch(e){ return new TextDecoder('windows-1252').decode(buf); } }
 function parseCSV(txt){
@@ -2179,7 +2198,7 @@ function mapping(rows,fname,doErp){
   const opts=sel=>`<option value="">— não tem —</option>`+head.map((h,i)=>`<option value="${i}" ${sel===i?'selected':''}>${esc(h||'Coluna '+(i+1))}</option>`).join('');
   const box=$('#map');
   box.innerHTML=`<div class="card stack"><h2>Conferir colunas — ${esc(fname)}</h2><div class="small muted">${fmt(rows.length-1)} linhas encontradas. Confirme qual coluna é cada informação.</div>
-    <div class="fgrid">${['codigo','descricao','ean','estoque','unidade','grupo','subgrupo','custo','referencia','marca'].map(k=>COLS.find(c=>c[0]===k)).map(([k,l])=>`<label class="f">${l}${k==='codigo'||k==='descricao'?' *':''}<select class="in" data-k="${k}">${opts(auto[k])}</select></label>`).join('')}</div>
+    <div class="fgrid">${['codigo','descricao','ean','estoque','unidade','grupo','subgrupo','custo','referencia','marca','forn'].map(k=>COLS.find(c=>c[0]===k)).map(([k,l])=>`<label class="f">${l}${k==='codigo'||k==='descricao'?' *':''}<select class="in" data-k="${k}">${opts(auto[k])}</select></label>`).join('')}</div>
     <div id="prev"></div>
     <div id="resOpt"></div>
     ${S.produtos.length?`<div class="stack" style="gap:6px"><label class="chk"><input type="radio" name="modoImp" value="atualizar" checked> Atualizar os produtos existentes e acrescentar os novos</label>
@@ -2190,11 +2209,11 @@ function mapping(rows,fname,doErp){
   const build=()=>{ const m=get(); const out=[]; const seen=new Set(); let dup=0, vaz=0;
     rows.slice(1).forEach(r=>{ const cod=m.codigo!=null?codeStr(r[m.codigo]):''; const desc=m.descricao!=null?String(r[m.descricao]).trim():'';
       if(!cod||!desc){ vaz++; return; } const k=norm(cod); if(seen.has(k)){ dup++; return; } seen.add(k);
-      out.push({codigo:cod,descricao:desc,ean:m.ean!=null?codeStr(r[m.ean]):'',estoque:m.estoque!=null?r3(parseNum(r[m.estoque])):0,unidade:m.unidade!=null?String(r[m.unidade]).trim().toUpperCase():'UN',grupo:m.grupo!=null?String(r[m.grupo]).trim().toUpperCase():'',subgrupo:m.subgrupo!=null?String(r[m.subgrupo]).trim().toUpperCase():'',custo:m.custo!=null?Math.round(parseNum(r[m.custo])*10000)/10000:0,referencia:m.referencia!=null?String(r[m.referencia]).trim():'',marca:m.marca!=null?String(r[m.marca]).trim().toUpperCase():'',novo:false}); });
+      out.push({codigo:cod,descricao:desc,ean:m.ean!=null?codeStr(r[m.ean]):'',estoque:m.estoque!=null?r3(parseNum(r[m.estoque])):0,unidade:m.unidade!=null?String(r[m.unidade]).trim().toUpperCase():'UN',grupo:m.grupo!=null?String(r[m.grupo]).trim().toUpperCase():'',subgrupo:m.subgrupo!=null?String(r[m.subgrupo]).trim().toUpperCase():'',custo:m.custo!=null?Math.round(parseNum(r[m.custo])*10000)/10000:0,referencia:m.referencia!=null?String(r[m.referencia]).trim():'',marca:m.marca!=null?String(r[m.marca]).trim().toUpperCase():'',forn:m.forn!=null?semZeros(codeStr(r[m.forn])):'',novo:false}); });
     return {out,dup,vaz}; };
   const prev=()=>{ const {out,dup,vaz}=build();
     $('#prev').innerHTML=`<div class="small ${dup||vaz?'warnbox':'hint'}">${fmt(out.length)} produtos válidos${dup?` · ${dup} código(s) repetido(s) ignorado(s)`:''}${vaz?` · ${vaz} linha(s) sem código ou descrição ignorada(s)`:''}</div>
-    <div class="tbl-wrap" style="margin-top:8px"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Cód. barras</th><th class="n">Estoque</th><th>Un</th><th>Grupo</th><th>Subgrupo</th><th class="n">Custo (R$)</th></tr></thead><tbody>${out.slice(0,6).map(p=>`<tr><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}</td><td class="mono">${esc(p.ean)}</td><td class="n">${fmt(p.estoque)}</td><td>${esc(p.unidade)}</td><td>${esc(p.grupo)}</td><td>${esc(p.subgrupo)}</td><td class="n">${p.custo?brl(p.custo):''}</td></tr>`).join('')}</tbody></table></div>`; };
+    <div class="tbl-wrap" style="margin-top:8px"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Cód. barras</th><th class="n">Estoque</th><th>Un</th><th>Grupo</th><th>Subgrupo</th><th class="n">Custo (R$)</th><th>Cód. fornecedor</th></tr></thead><tbody>${out.slice(0,6).map(p=>`<tr><td class="mono">${esc(p.codigo)}</td><td>${esc(p.descricao)}</td><td class="mono">${esc(p.ean)}</td><td class="n">${fmt(p.estoque)}</td><td>${esc(p.unidade)}</td><td>${esc(p.grupo)}</td><td>${esc(p.subgrupo)}</td><td class="n">${p.custo?brl(p.custo):''}</td><td class="mono">${esc(p.forn||'')}</td></tr>`).join('')}</tbody></table></div>`; };
   const resOpt=()=>{ const el=$('#resOpt'); if(!el) return; const {out}=build(); const z=out.filter(p=>!p.estoque).length;
     const pode=!S.lanc.length && out.length>=3000 && z>=out.length*0.3;
     el.innerHTML=pode?`<label class="chk hint" style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="usaRes" checked style="margin-top:3px"><span><b>Base grande:</b> contar a partir dos <b>${fmt(out.length-z)}</b> itens com estoque. Os <b>${fmt(z)}</b> itens com estoque zero ficam como consulta — se aparecerem na prateleira, entram na contagem na hora, com código, grupo e custo (bipando ou buscando pelo nome). Isso evita gastar a cota diária do banco de dados.</span></label>`:''; };
@@ -2209,10 +2228,10 @@ function mapping(rows,fname,doErp){
       const col='inventarios/'+S.inv.id+'/produtos';
       if(modoImp==='atualizar' && S.produtos.length){
         const ex=new Map(S.produtos.map(p=>[norm(p.codigo),p])); const upd=[], add=[]; const vistos=new Set();
-        const CAMPOS=['descricao','ean','estoque','unidade','grupo','subgrupo','custo','referencia','marca'];
+        const CAMPOS=['descricao','ean','estoque','unidade','grupo','subgrupo','custo','referencia','marca','forn'];
         out.forEach(n=>{ const k=norm(n.codigo); vistos.add(k); const p=ex.get(k);
           if(!p){ add.push(n); return; }
-          const d={}; CAMPOS.forEach(c=>{ if(c==='custo'&&!n.custo) return; if(String(n[c]??'')!==String(p[c]??'')) d[c]=n[c]; });
+          const d={}; CAMPOS.forEach(c=>{ if(c==='custo'&&!n.custo) return; if(c!=='estoque' && c!=='descricao' && m[c]==null) return; if(String(n[c]??'')!==String(p[c]??'')) d[c]=n[c]; });
           if(Object.keys(d).length) upd.push({id:p.id,data:d}); });
         if($('#zeraFora')&&$('#zeraFora').checked) S.produtos.forEach(p=>{ if(!vistos.has(norm(p.codigo)) && !p.novo && Number(p.estoque)) upd.push({id:p.id,data:{estoque:0}}); });
         if(upd.length>3000 && !await ask(`Vão ser atualizados <b>${fmt(upd.length)}</b> produtos. Isso usa bastante da cota diária do banco de dados. Continuar?`,{ok:'Continuar'})){ btn.disabled=false; btn.textContent='Aplicar planilha'; return; }
@@ -2221,7 +2240,7 @@ function mapping(rows,fname,doErp){
         await Store.set('inventarios',S.inv.id,{totalProdutos:S.produtos.length+add.length,importadoEm:now(),arquivo:fname});
         logAcao('Atualizou a planilha',`${fname} · ${upd.length} atualizado(s) · ${add.length} novo(s)`);
         toast(`${fmt(upd.length)} atualizado(s), ${fmt(add.length)} novo(s)`);
-        if(S.stack[S.stack.length-1]==='gestor') back(); else { S.view='invhome'; render(); }
+        if(ABAS_G.includes(S.view)) irAba('gestor'); else { S.view='invhome'; render(); }
         return;
       }
       if(S.produtos.length){ const ids=(await Store.list(col)).map(p=>p.id); await Store.delMany(col,ids); }
@@ -2229,7 +2248,7 @@ function mapping(rows,fname,doErp){
       const lista=usaRes?out.filter(p=>p.estoque):out, cons=usaRes?out.filter(p=>!p.estoque):[];
       const rcol='inventarios/'+S.inv.id+'/reserva';
       try{ const velhos=(await Store.list(rcol)).map(d=>d.id); if(velhos.length) await Store.delMany(rcol,velhos); }catch(e){}
-      if(cons.length){ const K=['codigo','descricao','ean','unidade','grupo','subgrupo','custo','referencia','marca'];
+      if(cons.length){ const K=['codigo','descricao','ean','unidade','grupo','subgrupo','custo','referencia','marca','forn'];
         for(let i=0;i<cons.length;i+=1500){ btn.textContent=`Guardando itens de consulta… ${fmt(Math.min(i+1500,cons.length))}/${fmt(cons.length)}`;
           await Store.set(rcol,'b'+String(i/1500).padStart(3,'0'),{itens:JSON.stringify(cons.slice(i,i+1500).map(p=>K.map(k=>p[k]??'')))}); } }
       await Store.addMany(col,lista,n=>btn.textContent=`Importando… ${n}/${lista.length}`);
@@ -2237,7 +2256,7 @@ function mapping(rows,fname,doErp){
       S.reserva=null; S.reservaP=null;
       logAcao('Importou a planilha',`${fname} · ${lista.length} produtos${cons.length?` + ${cons.length} itens de consulta (estoque zero)`:''}`);
       toast(fmt(lista.length)+' produtos importados'+(cons.length?` · ${fmt(cons.length)} de consulta`:''));
-      if(S.stack[S.stack.length-1]==='gestor') back(); else { S.view='invhome'; render(); }
+      if(ABAS_G.includes(S.view)) irAba('gestor'); else { S.view='invhome'; render(); }
     }catch(err){ console.error(err); toast('Erro ao importar: '+(err.message||err),true); btn.disabled=false; btn.textContent='Importar produtos'; }
   };
 }
@@ -2308,7 +2327,7 @@ V.resultado_refresh = ()=>{
       ${resumo.map(x=>`<tr class="${x.sub?'':'hl blk'}"><td>${x.sub?'':'<b>'+esc(x.g)+'</b>'}</td><td>${esc(x.sub||'')}${x.sub?'':'<span class="muted small">total do grupo</span>'}</td><td class="n">${x.itens}</td><td class="n">${x.ok}</td><td class="n">${x.div}</td><td class="n">${x.pend}</td><td class="n pos">${x.ent}</td><td class="n neg">${x.sai}</td>${F.tem?`<td class="n pos">${brl(x.vEnt)}</td><td class="n neg">${brl(x.vSai)}</td><td class="n ${x.vEnt-x.vSai<0?'neg':'pos'}"><b>${brl(x.vEnt-x.vSai)}</b></td>`:''}</tr>`).join('')}</tbody></table></div>`:f==='trocas'?blocoTrocas(TR,TRm):`
     <div class="row"><select class="in" id="rG" style="max-width:340px"><option value="">Todos os grupos</option>${grupos(rows).map(x=>`<option ${G===x.g?'selected':''}>${esc(x.g)}</option>`).join('')}</select></div>
     <div class="tbl-wrap"><table class="t"><thead><tr><th>Código</th><th>Descrição</th><th>Grupo</th><th>Un</th><th class="n">1ª</th><th class="n">2ª</th><th class="n">3ª</th><th class="n">Final</th><th class="n">Estoque</th><th class="n">Diferença</th>${F.tem?'<th class="n">Custo (R$)</th><th class="n">Valor dif. (R$)</th>':''}<th>Ação</th></tr></thead><tbody>
-    ${flt.slice(0,3000).map(r=>`<tr class="${r.d12?'hl':''}"><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${`<div class="small muted">${r.ean?'EAN '+esc(r.ean):'<span class="semean" style="font-size:11px;font-weight:600;color:#6b7785;background:#eef1f4;border-radius:5px;padding:0 5px">s/ cód. barras</span>'}${(r.marca||r.referencia)?' · ':''}${r.marca||r.referencia?'🏭 '+esc([r.marca,r.referencia?'ref. '+r.referencia:''].filter(Boolean).join(' · ')):''}</div>`}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td>
+    ${flt.slice(0,3000).map(r=>`<tr class="${r.d12?'hl':''}"><td class="mono">${esc(r.codigo)}</td><td>${esc(r.descricao)}${r.novo?' <span class="badge b-blue">novo</span>':''}${`<div class="small muted">${r.ean?'EAN '+esc(r.ean):'<span class="semean" style="font-size:11px;font-weight:600;color:#6b7785;background:#eef1f4;border-radius:5px;padding:0 5px">s/ cód. barras</span>'}${(r.marca||r.referencia)?' · ':''}${r.marca||r.referencia?'🏭 '+esc([r.marca,r.referencia?'ref. '+r.referencia:''].filter(Boolean).join(' · ')):''}${r.forn?' · Forn. '+esc(r.forn):''}</div>`}</td><td class="small">${esc(gLbl(r))}</td><td>${esc(r.unidade)}</td>
       <td class="n">${fmt(r.c[0])}</td><td class="n">${fmt(r.c[1])}</td><td class="n">${r.n[2]?fmt(r.c[2]):'—'}</td><td class="n"><b>${fmt(r.final)}</b></td><td class="n">${fmt(r.estoque)}</td>
       <td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif==null?(ultC(r)!=null?`<span class="muted" title="Parcial: última contagem − estoque">${fmtS(r3(ultC(r)-r.estoque))}*</span>`:'—'):fmtS(r.dif)}</td>${F.tem?`<td class="n">${r.custo?brl(r.custo):'—'}</td><td class="n ${r.dif>0?'pos':r.dif<0?'neg':''}">${r.dif&&r.custo?brl(r.dif*r.custo):'—'}</td>`:''}
       <td>${r.status==='pendente'?'<span class="badge b-warn">Pendente</span>':r.dif>0.0004?'<span class="badge b-ok">Entrada</span>':r.dif<-0.0004?'<span class="badge b-red">Saída</span>':'<span class="badge b-gray">OK</span>'}</td></tr>`).join('')||`<tr><td colspan="${F.tem?13:11}" class="empty">Nenhum item</td></tr>`}
@@ -3276,7 +3295,7 @@ new MutationObserver(()=>{ clearTimeout(window._srtT); window._srtT=setTimeout((
    fica presa logo abaixo da barra, com as mesmas larguras e acompanhando a rolagem lateral. Clicar na cópia ordena. */
 let THF=null;
 function thFix(){
-  const topEl=$('#top'); const y0=topEl?topEl.getBoundingClientRect().bottom:0;
+  const topEl=$('#top'), gt=$('#gtabs'); const y0=Math.max(topEl?topEl.getBoundingClientRect().bottom:0, gt&&!gt.hidden?gt.getBoundingClientRect().bottom:0);
   let alvo=null;
   for(const tb of document.querySelectorAll('table.t')){ const w=tb.closest('.tbl-wrap'); if(!w||!tb.tHead||!tb.offsetParent) continue;
     if(w.scrollHeight>w.clientHeight+4) continue; // tabela com rolagem própria: o título já fica preso dentro dela

@@ -131,3 +131,13 @@ cabeçalhos repetidos em cada página, linhas de GRUPO/SUB-GRUPO e colunas deslo
 - Resultado: "Só itens já contados" (ligado por padrão enquanto o inventário está aberto) — KPIs, financeiro e tabelas consideram só o que já foi bipado; atualiza a cada lançamento. Item ainda sem a 2ª contagem mostra a diferença parcial com * (última contagem − estoque). Os arquivos para o ERP e os relatórios continuam usando o inventário inteiro.
 - Todas as tabelas do sistema ordenam clicando no título da coluna (▲/▼); a ordem se mantém quando a tela atualiza.
 - Cabeçalho das tabelas fica fixo abaixo da barra do topo ao rolar a página (e acompanha a rolagem lateral).
+
+## Código do fornecedor (v3.9.7)
+- Campo opcional na importação ("Cód. Fornecedor", "Código Fornecedor", "Cod Forn", "Ref. Fornecedor" são reconhecidos sozinhos; outro título → escolher em "Conferir colunas"). Zeros da frente são removidos.
+- Bipar/digitar o código do fornecedor ou o código interno, com ou sem zeros na frente, acha o produto (ex.: etiqueta 000000011802 → produto 11802). A busca por texto também acha pelo código do fornecedor.
+- Aparece como "Forn. 610101324" na linha do produto; está no "Completar cadastro", nos itens de consulta (reserva) e é atualizado no modo "Atualizar" da planilha.
+
+## Painel do gestor em abas (v3.9.8)
+- Barra de abas fixa abaixo do topo: Painel · Contagem × estoque (ou Confronto 1ª × 2ª) · Resultado · Lançamentos · Produtos · Atividades · Códigos de barras · Planilha. Trocar de aba não empilha telas: "voltar" sai do gestor.
+- Painel: indicadores clicáveis (abrem a aba já filtrada), cartões das contagens e "Encerrar inventário". Os 8 cartões de navegação saíram.
+- Encerrar contagem com menos de 90% da base contada mostra aviso: os não contados valem zero e, na conferência, entram na lista.
